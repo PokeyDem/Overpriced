@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour{
 
     [SerializeField] private float _moveSpeed = 2.0f;
-    
+    [SerializeField] private float _rotationSpeed = 10.0f;
+
     private void Update(){
         
         Vector2 input = new Vector2(0, 0);
@@ -30,6 +31,17 @@ public class PlayerControl : MonoBehaviour{
         input = input.normalized;
 
         Vector3 moveDir = new Vector3(input.x, 0f, input.y);
-        transform.position += moveDir * (_moveSpeed * Time.deltaTime);
+        
+        // Debug.Log(_playerDirection);
+        
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * _rotationSpeed);
+
+        float playerSize = 0.5f;
+        float offset = 0.5f;
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y - offset, transform.position.z);
+        Debug.DrawRay(pos, moveDir * (playerSize * 2f), Color.red);
+        bool canMove =! Physics.Raycast(pos, moveDir, playerSize);
+        if (canMove) 
+            transform.position += moveDir * (_moveSpeed * Time.deltaTime);
     }
 }
