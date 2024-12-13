@@ -397,6 +397,8 @@ MonoBehaviour:
   _prefabPreview: {fileID: 1177213045093167928, guid: db49cd6067b4d92489480c5b18c57685, type: 3}
   _gridSize: 1
   _gridDeadZone: 1
+  _min: {x: -3, y: 0, z: -5}
+  _max: {x: 5, y: 5.1, z: 5}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
