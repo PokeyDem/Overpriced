@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour{
         float offset = 0.5f;
         Vector3 pos = new Vector3(transform.position.x, transform.position.y - offset, transform.position.z);
         Debug.DrawRay(pos, moveDir * (playerSize * 2f), Color.red);
-        bool canMove =! Physics.Raycast(pos, moveDir, playerSize);
+        bool canMove =! Physics.Raycast(pos, moveDir, playerSize * 0.8f);
         if (canMove) 
             transform.position += moveDir * (_moveSpeed * Time.deltaTime);
     }

@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour{
     [SerializeField] LayerMask _placementLayerMask;
     private Vector3 _lastPosition;
 
-    public event Action OnClicked, OnSwitch;
+    public event Action OnClicked, OnSwitch, OnInteraction;
 
     private void Awake(){
         _placementLayerMask = LayerMask.GetMask("Grid");
@@ -18,9 +18,10 @@ public class InputManager : MonoBehaviour{
     private void Update(){
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
-        if (Input.GetKeyDown(KeyCode.F)){
+        if (Input.GetKeyDown(KeyCode.F))
             OnSwitch?.Invoke();
-        }
+        if (Input.GetKeyDown(KeyCode.E))
+            OnInteraction?.Invoke();
     }
 
     public bool IsPointerOverUI()

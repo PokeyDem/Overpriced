@@ -17,3 +17,7 @@ MonoBehaviour:
     <ID>k__BackingField: 0
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 4080261629171514356, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+  - <Name>k__BackingField: TestDoubleDisplay
+    <ID>k__BackingField: 1
+    <Size>k__BackingField: {x: 1, y: 2}
+    <Prefab>k__BackingField: {fileID: 387961423696181792, guid: cf20f012e220c9f4fbf878215b4812b9, type: 3}
