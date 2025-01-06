@@ -11,8 +11,8 @@ public class MoneyManager : MonoBehaviour {
     
     public void Awake() {
         if (MoneyManagerInstance == null) {
-            MoneyManagerInstance = new MoneyManager();
-            DontDestroyOnLoad(MoneyManagerInstance);
+            MoneyManagerInstance = this;
+            DontDestroyOnLoad(this);
                 
         }
     }
