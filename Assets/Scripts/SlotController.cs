@@ -7,7 +7,7 @@ public class SlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
-    private int _itemId;
+    private int _itemId = -1;
     private bool _isOccupied;
 
     private void Update(){
@@ -52,5 +52,9 @@ public class SlotController : MonoBehaviour{
         _itemPrefab = null;
         _isOccupied = false;
         _itemId = -1;
+    }
+
+    public int GetItemId(){
+        return _itemId;
     }
 }
