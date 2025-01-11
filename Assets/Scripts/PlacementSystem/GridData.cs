@@ -25,14 +25,15 @@ public class GridData{
                 returnValues.Add(gridPosition + new Vector3Int(x, 0, y));
             }
         }
-
         return returnValues;
     }
 
-    public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize){
+    public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize, Vector3Int _playerPosition){
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
         foreach (var pos in positionToOccupy){
-            if (placedObject.ContainsKey(pos)){
+            Debug.ClearDeveloperConsole();
+            Debug.Log("PosToOcc: " + pos + "\nPlayerPos: " + _playerPosition);
+            if (placedObject.ContainsKey(pos) || (pos.x == _playerPosition.x && pos.z == _playerPosition.z)){
                 return false;
             }
         }

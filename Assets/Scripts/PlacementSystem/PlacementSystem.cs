@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlacementSystem : MonoBehaviour{
     [SerializeField] InputManager _inputManager;
@@ -11,6 +12,9 @@ public class PlacementSystem : MonoBehaviour{
     [SerializeField] private GameObject _gridVisualization;
     [SerializeField] private Canvas _uiPanel;
     [SerializeField] PreviewSystem _previewSystem;
+    [SerializeField] private GameObject _player;
+    private Vector3 _playerPosition;
+    private Vector3Int _playerGridPosition;
     private int _selectedObjectIndex = -1;
     private bool _IsInMode = false;
     private GridData _objectsData;
@@ -65,7 +69,7 @@ public class PlacementSystem : MonoBehaviour{
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex){
         GridData selectedData = _objectsData;
-        return selectedData.CanPlaceObjectAt(gridPosition, _objectsDatabase._objectsData[selectedObjectIndex].Size);
+        return selectedData.CanPlaceObjectAt(gridPosition, _objectsDatabase._objectsData[selectedObjectIndex].Size, _playerGridPosition);
     }
 
     private void StopPlacement(){
@@ -92,6 +96,8 @@ public class PlacementSystem : MonoBehaviour{
     private void Update(){
         if (_selectedObjectIndex == -1)
             return;
+        _playerPosition = _player.transform.position;
+        _playerGridPosition = _grid.WorldToCell(_playerPosition);
         Vector3 mousePosition = _inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = _grid.WorldToCell(mousePosition);
 
