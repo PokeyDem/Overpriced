@@ -16,6 +16,7 @@ public class PlayerDisplayInteraction : MonoBehaviour{
 
     private void Update(){
         DetectNearestSlot();
+        _inventoryManager.SetNearestSlot(_nearestSlotController);
         _inputManager.OnInteraction += EnableInventory;
     }
 
@@ -53,6 +54,6 @@ public class PlayerDisplayInteraction : MonoBehaviour{
 
     private void EnableInventory(){
         if (!_nearestSlot) return;
-        _inventoryManager.EnableInventory(_nearestSlotController);
+        _inventoryManager.EnableInventory();
     }
 }

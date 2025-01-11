@@ -16,16 +16,39 @@ public class InventoryManager : MonoBehaviour{
         
     }
 
-    public void EnableInventory(SlotController slot){
+    public void SetNearestSlot(SlotController nearestSlot){
+        _currentDisplaySlot = nearestSlot;
+    }
+
+    public void EnableInventory(){
         _inventoryUI.enabled = true;
-        _currentDisplaySlot = slot;
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
         var inventorySlotItemId = _inventorySlots[_selectedInventorySlotId].GetComponent<InventorySlot>().GetItemId();
-        if (inventorySlotItemId != -1){
+        if (inventorySlotItemId != -1 && _currentDisplaySlot.GetItemId() == -1){
             var selectedItemIndex = _itemsDatabase._itemsData.FindIndex(data => data.ID == inventorySlotItemId);
             _currentDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex].Prefab, inventorySlotItemId);
+            RemoveItemFromInventory();
+        }
+    }
+
+    public void RemoveItemFromInventory(){
+        _inventorySlots[_selectedInventorySlotId].GetComponent<InventorySlot>().RemoveItem();
+        
+        InventorySlot currentInventorySlot;
+        InventorySlot previousInventorySlot = null;
+
+        for (int i = 0; i < _inventorySlots.Length; i++){
+            currentInventorySlot = _inventorySlots[i].GetComponent<InventorySlot>();
+            if (i != 0)
+                previousInventorySlot = _inventorySlots[i - 1].GetComponent<InventorySlot>();
+                
+            if (i != 0 && currentInventorySlot.GetItemId() != -1 &&
+                previousInventorySlot.GetItemId() == -1){
+                previousInventorySlot.AddItem(currentInventorySlot.GetItemId(), currentInventorySlot.GetImage().sprite);
+                currentInventorySlot.RemoveItem();
+            }
         }
     }
 
@@ -38,7 +61,9 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void RemoveItemFromDisplaySlot(){
+        int itemId = _currentDisplaySlot.GetItemId();
         _currentDisplaySlot.RemoveItem();
+        AddItemToInventory(itemId);
     }
 
     public void AddItemToInventory(int itemId){

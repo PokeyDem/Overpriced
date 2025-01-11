@@ -18,13 +18,17 @@ public class InventorySlot : MonoBehaviour{
         _image.sprite = image;
     }
 
-    public void RemoveItem(int itemId){
+    public void RemoveItem(){
         _itemId = -1;
         _image.sprite = null;
     }
 
     public int GetItemId(){
         return _itemId;
+    }
+
+    public Image GetImage(){
+        return _image;
     }
 
     public bool IsEmpty(){
