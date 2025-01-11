@@ -8,7 +8,7 @@ public class MoneyManager : MonoBehaviour {
 
     public static MoneyManager MoneyManagerInstance;
     
-    [SerializeField]private int _money;
+    [SerializeField]private int money;
 
     public UnityEvent changeEvent;
     
@@ -16,28 +16,27 @@ public class MoneyManager : MonoBehaviour {
         if (MoneyManagerInstance == null) {
             MoneyManagerInstance = this;
             DontDestroyOnLoad(this);
-                
         }
     }
 
     public int GetCurrentMoney() {
-        return _money;
+        return money;
     }
 
     public void PutMoney(int amount) {
-        _money += amount;
+        money += amount;
         changeEvent.Invoke();
     }
     
     public void ReduceMoney(int amount) {
-        if (_money >= amount) {
-            _money -= amount;
+        if (money >= amount) {
+            money -= amount;
             changeEvent.Invoke();
         }
     } 
 
     public int GetAmountOfMoney(int amount) {
-        if (_money >= amount) {
+        if (money >= amount) {
             ReduceMoney(amount);
             return amount;
         }
