@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotController : MonoBehaviour{
+public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;

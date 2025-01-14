@@ -13,7 +13,6 @@ public class MoneyManager : MonoBehaviour {
         if (MoneyManagerInstance == null) {
             MoneyManagerInstance = this;
             DontDestroyOnLoad(this);
-                
         }
     }
 

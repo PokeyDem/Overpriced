@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour{
     [SerializeField] private Canvas _inventoryUI;
     [SerializeField] private ItemsDatabaseSO _itemsDatabase;
     [SerializeField] private GameObject[] _inventorySlots;
-    private SlotController _currentDisplaySlot; // todo refactor and delete later
+    private DisplaySlotController _currentDisplayDisplaySlot; // todo refactor and delete later
     private int _selectedInventorySlotId;
     
     private void Awake(){
@@ -16,8 +16,8 @@ public class InventoryManager : MonoBehaviour{
         
     }
 
-    public void SetNearestSlot(SlotController nearestSlot){
-        _currentDisplaySlot = nearestSlot;
+    public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
+        _currentDisplayDisplaySlot = nearestDisplaySlot;
     }
 
     public void EnableInventory(){
@@ -26,9 +26,9 @@ public class InventoryManager : MonoBehaviour{
 
     public void AddItemToDisplaySlot(){ //On AddButton click
         var inventorySlotItemId = _inventorySlots[_selectedInventorySlotId].GetComponent<InventorySlot>().GetItemId();
-        if (inventorySlotItemId != -1 && _currentDisplaySlot.GetItemId() == -1){
+        if (inventorySlotItemId != -1 && _currentDisplayDisplaySlot.GetItemId() == -1){
             var selectedItemIndex = _itemsDatabase._itemsData.FindIndex(data => data.ID == inventorySlotItemId);
-            _currentDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex].Prefab, inventorySlotItemId);
+            _currentDisplayDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex].Prefab, inventorySlotItemId);
             RemoveItemFromInventory();
         }
     }
@@ -61,8 +61,8 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void RemoveItemFromDisplaySlot(){
-        int itemId = _currentDisplaySlot.GetItemId();
-        _currentDisplaySlot.RemoveItem();
+        int itemId = _currentDisplayDisplaySlot.GetItemId();
+        _currentDisplayDisplaySlot.RemoveItem();
         AddItemToInventory(itemId);
     }
 
