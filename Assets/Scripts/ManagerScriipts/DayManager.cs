@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ public class DayManager : MonoBehaviour {
         
     [SerializeField] private int dayCount=1;
     [SerializeField] private PartOfDay currentPartOfDay=PartOfDay.Morning;
-    public UnityEvent partOfDayChange;
-    public UnityEvent dayChange;
+    public UnityEvent<string> partOfDayChange;
+    public UnityEvent<string> dayChange;
         
     public enum PartOfDay {
         Morning, Noon, Evening, Dusk
@@ -22,6 +23,11 @@ public class DayManager : MonoBehaviour {
             DayManagerInstance = this;
             DontDestroyOnLoad(this);
         }
+    }
+
+    public void Start() {
+        dayChange.Invoke(dayCount.ToString());
+        partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
 
     public int GetDay() {
@@ -38,9 +44,9 @@ public class DayManager : MonoBehaviour {
         }else {
             currentPartOfDay = PartOfDay.Morning;
             dayCount++;
-            dayChange.Invoke();
+            dayChange.Invoke(dayCount.ToString());
         }
-        partOfDayChange.Invoke();
+        partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
 
     public void SkipPartsOfTheDay(int amount) {
@@ -57,7 +63,7 @@ public class DayManager : MonoBehaviour {
     public void SkipDay() {
         dayCount++;
         currentPartOfDay = PartOfDay.Morning;
-        dayChange.Invoke();
+        dayChange.Invoke(dayCount.ToString());
     } 
 
 }

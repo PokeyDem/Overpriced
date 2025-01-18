@@ -10,7 +10,7 @@ public class MoneyManager : MonoBehaviour {
     
     [SerializeField]private int money;
 
-    public UnityEvent changeEvent;
+    public UnityEvent<string> changeEvent;
     
     public void Awake() {
         if (MoneyManagerInstance == null) {
@@ -19,19 +19,23 @@ public class MoneyManager : MonoBehaviour {
         }
     }
 
+    public void Start() {
+        changeEvent.Invoke(money.ToString());
+    }
+
     public int GetCurrentMoney() {
         return money;
     }
 
     public void PutMoney(int amount) {
         money += amount;
-        changeEvent.Invoke();
+        changeEvent.Invoke(money.ToString());
     }
     
     public void ReduceMoney(int amount) {
         if (money >= amount) {
             money -= amount;
-            changeEvent.Invoke();
+            changeEvent.Invoke(money.ToString());
         }
     } 
 

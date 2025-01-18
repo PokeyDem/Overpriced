@@ -6,7 +6,7 @@ public class PlayerDisplayInteraction : MonoBehaviour{
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private InputManager _inputManager;
     private LayerMask _slotsLayer;
-    private SlotController _nearestSlotController;
+    private DisplaySlotController _nearestDisplaySlotController;
     private GameObject _nearestSlot;
     private GameObject _lastNearestSlot;
 
@@ -16,37 +16,39 @@ public class PlayerDisplayInteraction : MonoBehaviour{
 
     private void Update(){
         DetectNearestSlot();
-        _inventoryManager.SetNearestSlot(_nearestSlotController);
+        _inventoryManager.SetNearestSlot(_nearestDisplaySlotController);
         _inputManager.OnInteraction += EnableInventory;
     }
 
     private void DetectNearestSlot(){
         Collider[] slots = Physics.OverlapSphere(transform.position, _interactionRange, _slotsLayer);
-        float distance;
+        float distance = -1;
         _nearestSlot = null;
         
         float closestDistance = float.MaxValue;
         foreach (var slot in slots){
-            distance = Vector3.Distance(transform.position, slot.transform.position);
-            if (distance < closestDistance && distance < _interactionRange){
+            distance = Mathf.Abs(Vector3.Distance(transform.position, slot.transform.position));
+            if (distance < closestDistance ){
                 closestDistance = distance;
                 _nearestSlot = slot.gameObject; // not sure if it is getting right gameobject
             }
             
         }
         
+        
         if (_nearestSlot){
             if (_lastNearestSlot) 
-                _lastNearestSlot.GetComponent<SlotController>().DisableMarker();
+                _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
             _lastNearestSlot = _nearestSlot;
-            _nearestSlotController = _nearestSlot.GetComponent<SlotController>();
-            _nearestSlotController.EnableMarker();
+            _nearestDisplaySlotController = _nearestSlot.GetComponent<DisplaySlotController>();
+          
+            _nearestDisplaySlotController.EnableMarker();
         }
 
         if (_lastNearestSlot){ 
-            distance = Vector3.Distance(transform.position, _lastNearestSlot.transform.position);
+            distance = Mathf.Abs(Vector3.Distance(transform.position, _lastNearestSlot.transform.position));
             if (distance > _interactionRange)
-                _lastNearestSlot.GetComponent<SlotController>().DisableMarker();
+                _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
         }
 
     }

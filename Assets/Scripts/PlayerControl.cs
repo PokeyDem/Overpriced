@@ -40,7 +40,10 @@ public class PlayerControl : MonoBehaviour{
         float offset = 0.5f;
         Vector3 pos = new Vector3(transform.position.x, transform.position.y - offset, transform.position.z);
         Debug.DrawRay(pos, moveDir * (playerSize * 2f), Color.red);
-        bool canMove =! Physics.Raycast(pos, moveDir, playerSize * 0.8f);
+        RaycastHit hit;
+        Ray ray = new Ray(pos, moveDir);
+        // bool canMove =! Physics.Raycast(pos, moveDir, playerSize * 0.8f);
+        bool canMove = !Physics.Raycast(ray, out hit, playerSize * 0.8f) || hit.collider.isTrigger;
         if (canMove) 
             transform.position += moveDir * (_moveSpeed * Time.deltaTime);
     }

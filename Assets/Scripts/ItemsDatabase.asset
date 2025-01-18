@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: ItemsDatabase
   m_EditorClassIdentifier: 
   _itemsData:
-  - <Name>k__BackingField: TestItem
+  - <Name>k__BackingField: Sword
     <ID>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    <Price>k__BackingField: 100
+    <Description>k__BackingField: That's a sword, I guess

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class UpdatableDisplay : MonoBehaviour
+public class DynamicDisplay : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textField;
 
-    public abstract void UpdateText();
+    public void UpdateText(string text) {
+        textField.text = text;
+    }
 }
