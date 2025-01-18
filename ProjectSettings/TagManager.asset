@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Display
+  - DisplayItemSlot
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -18,9 +21,9 @@ TagManager:
   - Player
   - Grid
   - Slots
-  - 
-  - 
-  - 
+  - Npc
+  - Triggers
+  - Background
   - 
   - 
   - 

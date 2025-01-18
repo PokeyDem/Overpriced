@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour{
@@ -16,11 +17,12 @@ public class PreviewSystem : MonoBehaviour{
          previewMaterialInstance = new Material(_previewMaterialPrefab);
          _cellIndicator.SetActive(false);
          _cellIndicatorRenderer = _cellIndicator.GetComponentInChildren<Renderer>();
+         Physics.IgnoreLayerCollision(8, 9, true);
      }
 
      public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size){
          _previewObject = Instantiate(prefab);
-         _previewObject.GetComponentInChildren<BoxCollider>().enabled = false;
+         _previewObject.layer = 8;
          PreparePreview();
          PrepareCursor(size);
          _cellIndicator.SetActive(true);
@@ -36,6 +38,10 @@ public class PreviewSystem : MonoBehaviour{
              }
 
              renderer.materials = materials;
+         }
+         Collider[] colliders = _previewObject.GetComponentsInChildren<Collider>();
+         foreach (var collider in colliders){
+             collider.gameObject.layer = 8;
          }
      }
 
