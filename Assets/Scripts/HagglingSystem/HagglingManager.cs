@@ -66,7 +66,7 @@ public class HagglingManager : MonoBehaviour{
         points += _currentPrice - _basePrice;
         int random = UnityEngine.Random.Range(0, 20);
         if (random > points){
-            //Money manager logic
+            MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
             _resulField.color = Color.green;
             _resulField.text = "Sold";
             _npcBehaviour.GetDisplay().GetComponentInChildren<DisplaySlotController>().RemoveItem();
