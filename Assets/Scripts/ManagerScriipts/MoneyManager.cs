@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MoneyManager : MonoBehaviour {
 
     public static MoneyManager MoneyManagerInstance;
     
-    private int _money;
+    [SerializeField]private int money;
+
+    public UnityEvent<string> changeEvent;
     
     public void Awake() {
         if (MoneyManagerInstance == null) {
@@ -16,17 +19,29 @@ public class MoneyManager : MonoBehaviour {
         }
     }
 
+    public void Start() {
+        changeEvent.Invoke(money.ToString());
+    }
+
     public int GetCurrentMoney() {
-        return _money;
+        return money;
     }
 
     public void PutMoney(int amount) {
-        _money += amount;
+        money += amount;
+        changeEvent.Invoke(money.ToString());
     }
+    
+    public void ReduceMoney(int amount) {
+        if (money >= amount) {
+            money -= amount;
+            changeEvent.Invoke(money.ToString());
+        }
+    } 
 
     public int GetAmountOfMoney(int amount) {
-        if (_money >= amount) {
-            _money -= amount;
+        if (money >= amount) {
+            ReduceMoney(amount);
             return amount;
         }
 
