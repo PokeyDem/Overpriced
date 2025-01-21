@@ -16,6 +16,7 @@ public class NpcManager : MonoBehaviour{
     [SerializeField] private Transform _counterPos;
     [SerializeField] private float _minDelay;//Todo move to config;
     [SerializeField] private float _maxDelay;//Todo move to config
+    [SerializeField] private bool debugSpawn;
     private GameObject[] _npcs;
     private int _npcsCount;
 
@@ -27,7 +28,7 @@ public class NpcManager : MonoBehaviour{
         // if (_npcsCount == 0)
         //     StartCoroutine(SpawnNpcDelay()); TODO !!!COMMENTED FOR DEBUG 
 
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space) && debugSpawn){
             SpawnNpc();
         }
     }
@@ -40,7 +41,7 @@ public class NpcManager : MonoBehaviour{
     }
 
     private void SpawnNpc(){
-        ItemData item = _itemsDatabase._itemsData[0]; //Todo make it random when there is more items
+        ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items
         var npc = Instantiate(_npcPrefab, _spawnPoint.position, Quaternion.identity);
         npc.GetComponent<NpcBehaviour>().Initialize(item, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
         _npcsCount++;
@@ -57,8 +58,17 @@ public class NpcManager : MonoBehaviour{
         _npcsCount--;
     }
 
-    private IEnumerator SpawnNpcDelay(){
-        yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
-        SpawnNpc();
+    public void StartSpawnRandomNPC() {
+        StartCoroutine(SpawnNpcDelay());
+    }
+
+    private IEnumerator SpawnNpcDelay() {
+        int count = Random.Range(1, 4);
+        Debug.Log("customer number"+count);
+        while (count!=0) {
+            SpawnNpc();
+            count--;
+            yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
+        }
     }
 }
