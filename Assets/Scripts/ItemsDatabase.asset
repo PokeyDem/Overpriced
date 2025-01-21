@@ -19,3 +19,15 @@ MonoBehaviour:
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     <Price>k__BackingField: 100
     <Description>k__BackingField: That's a sword, I guess
+  - <Name>k__BackingField: Wood Sword
+    <ID>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    <Price>k__BackingField: 50
+    <Description>k__BackingField: That's a sword?
+  - <Name>k__BackingField: Swordoinator
+    <ID>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    <Price>k__BackingField: 150
+    <Description>k__BackingField: That's a sword, but it have auto-destruction button.
