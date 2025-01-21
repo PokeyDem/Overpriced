@@ -34,7 +34,7 @@ public class NpcBehaviour : MonoBehaviour{
             Debug.Log("Npc destination: DespawnPoint");
         }
         else{
-            GoToDisplay();
+            StartCoroutine(GoToCheckout()); //Changed For tests
         }
     }
 

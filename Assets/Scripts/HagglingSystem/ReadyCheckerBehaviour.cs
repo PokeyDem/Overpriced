@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class ReadyCheckerBehaviour : MonoBehaviour{
    [SerializeField] private string _tag;
    [SerializeField] private HagglingManager _hagglingManager;
+   [SerializeField] private TextMeshPro _text;
 
    private void OnTriggerEnter(Collider other){
       if (_tag.Equals("Player") && other.CompareTag("Player")){
@@ -12,6 +14,7 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
          _hagglingManager.SetNpcReadiness(true);
          _hagglingManager.SetNpc(other.GetComponent<NpcBehaviour>());
+         _text.gameObject.SetActive(true);
       }
       
    }
@@ -21,6 +24,7 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
          _hagglingManager.SetPlayerReadiness(false);
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
          _hagglingManager.SetNpcReadiness(false);
+         _text.gameObject.SetActive(false);
       }
    }
 }

@@ -21,31 +21,30 @@ public class NpcManager : MonoBehaviour{
     private int _npcsCount;
 
     private void Start(){
-        // SpawnNpc();  TODO !!!COMMENTED FOR DEBUG 
+        StartCoroutine(SpawnNpcDelay());
     }
 
     private void Update(){
-        // if (_npcsCount == 0)
-        //     StartCoroutine(SpawnNpcDelay()); TODO !!!COMMENTED FOR DEBUG 
+        if (_npcsCount == 0){
+            StartCoroutine(SpawnNpcDelay());
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && debugSpawn){
             SpawnNpc();
         }
     }
 
-    private void OnTriggerEnter(Collider other){
-        if (other.CompareTag("NPC")){
-            Destroy(other.gameObject);
-            _npcsCount--;
-        }
-    }
+    // private void OnTriggerEnter(Collider other){
+    //     if (other.CompareTag("NPC")){
+    //         Destroy(other.gameObject);
+    //         _npcsCount--;
+    //     }
+    // }
 
     private void SpawnNpc(){
         ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items
         var npc = Instantiate(_npcPrefab, _spawnPoint.position, Quaternion.identity);
         npc.GetComponent<NpcBehaviour>().Initialize(item, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
-        _npcsCount++;
-        Debug.Log("Npc created | Item: " + item.ID + ", " + item.Name);
     }
 
     public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject display){
@@ -59,16 +58,12 @@ public class NpcManager : MonoBehaviour{
     }
 
     public void StartSpawnRandomNPC() {
-        StartCoroutine(SpawnNpcDelay());
+        // StartCoroutine(SpawnNpcDelay());
     }
 
-    private IEnumerator SpawnNpcDelay() {
-        int count = Random.Range(1, 4);
-        Debug.Log("customer number"+count);
-        while (count!=0) {
-            SpawnNpc();
-            count--;
-            yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
-        }
+    private IEnumerator SpawnNpcDelay(){
+        _npcsCount++;
+        yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
+        SpawnNpc();
     }
 }
