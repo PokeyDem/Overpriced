@@ -10,18 +10,13 @@ public class InventoryManager : MonoBehaviour{
     [SerializeField] private GameObject[] _inventorySlots;
     private DisplaySlotController _currentDisplayDisplaySlot; // todo refactor and delete later
     private int _selectedInventorySlotId;
-    
-    private void Awake(){
-        _inventoryUI.enabled = false;
-        
-    }
 
     public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
         _currentDisplayDisplaySlot = nearestDisplaySlot;
     }
 
     public void EnableInventory(){
-        _inventoryUI.enabled = true;
+        _inventoryUI.gameObject.SetActive(true);
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
@@ -53,7 +48,7 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void Exit(){ //On ExitButton click
-        _inventoryUI.enabled = false;
+        _inventoryUI.gameObject.SetActive(false);
     }
 
     public void SelectSlot(int selectedSlotId){ //On inventory slot button click

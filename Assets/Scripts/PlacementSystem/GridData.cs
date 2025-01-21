@@ -9,8 +9,8 @@ public class GridData{
     public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex){
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
         PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex);
-        
-        foreach (var pos in positionToOccupy){
+      
+        foreach (Vector3Int pos in positionToOccupy){
             if (placedObject.ContainsKey(pos)){
                 throw new Exception($"Dictionary already contains this cell position{pos}");
             }
