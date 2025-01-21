@@ -7174,7 +7174,7 @@ MonoBehaviour:
   _placementLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _isPlacementEnabled: 0
+  _isPlacementEnabled: 1
 --- !u!4 &1281258491
 Transform:
   m_ObjectHideFlags: 0
