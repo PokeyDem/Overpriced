@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class NpcBehaviour : MonoBehaviour{
 
-    [SerializeField] private int _tolerance;
+    private int _tolerance = 2;
     private NavMeshAgent _agent;
     private ItemData _itemToBuy; //Set by NpcManager
     private Transform _despawnPointPos;

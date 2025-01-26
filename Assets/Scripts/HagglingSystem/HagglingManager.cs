@@ -62,26 +62,48 @@ public class HagglingManager : MonoBehaviour{
     }
 
     public void TryToSell(){
-        int points = 10 + _npcBehaviour.GetTolerance();
-        points += _currentPrice - _basePrice;
-        int random = UnityEngine.Random.Range(0, 20);
-        if (random > points){
-            MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
-            _resulField.color = Color.green;
-            _resulField.text = "Sold";
-            _npcBehaviour.GetDisplay().GetComponentInChildren<DisplaySlotController>().RemoveItem();
+        int markupPoints = (_currentPrice - _basePrice) / 10;
+        
+
+        if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
+            Debug.Log("Sold on stage 1 | MarkupPoints: " + markupPoints);
+            SellItem();
         }
         else{
-            _resulField.color = Color.red;
-            _resulField.text = "Failed";
+            int successPoints = 10 + markupPoints - _npcBehaviour.GetTolerance();
+            int random = Random.Range(1, 20); //TODO for debug purposes move to if later
+            if (random >= successPoints){
+                Debug.Log("Sold on stage 2 | successPoints: " + successPoints + " | Random: " + random);
+                SellItem();
+            }
+            else{
+                Debug.Log("Sell failed | successPoints: " + successPoints + " | Random: " + random);
+                DenySell();
+            }
         }
+        
+        EndHaggling();
+        
+    }
 
+    private void SellItem(){
+        MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
+        _resulField.color = Color.green;
+        _resulField.text = "Sold";
+        _npcBehaviour.GetDisplay().GetComponentInChildren<DisplaySlotController>().RemoveItem();
+    }
+
+    private void DenySell(){
+        _resulField.color = Color.red;
+        _resulField.text = "Failed";
+    }
+
+    private void EndHaggling(){
         _npcBehaviour.GoToExit();
-
-        Debug.Log("Sell review: " + "\nPoints: " + points + "\nRandom: " + random);
-
         StartCoroutine(DisableUiDelay());
     }
+    
+    
 
     private IEnumerator DisableUiDelay(){
         yield return new WaitForSeconds(1);
