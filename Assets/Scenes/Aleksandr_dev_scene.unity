@@ -191,7 +191,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: abfebaa030ce9a04e956e08130d8b21d, type: 3}
+  m_Mesh: {fileID: -3522239342463774832, guid: 20b97fd933079f74aac551e653734030, type: 3}
 --- !u!208 &30091161
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30091158}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.020000001, y: 0.042000003, z: 0.010000001}
@@ -10314,8 +10314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491424e5b9dd82546bc8fb91001bc1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
-  _inertiaDecay: 10
+  _moveSpeed: 4.5
+  _inertiaDecay: 11
   _rotationSpeed: 12
 --- !u!1 &1408135038
 GameObject:
@@ -12341,10 +12341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bb98dd61e41784bac529473605b729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridPos: {x: 0, y: 4.33, z: -6.8}
-  _counterPos: {x: 0, y: 4.33, z: -9}
-  _camera: {fileID: 963194227}
-  _transitionSpeed: 2
 --- !u!54 &1759383849
 Rigidbody:
   m_ObjectHideFlags: 0
