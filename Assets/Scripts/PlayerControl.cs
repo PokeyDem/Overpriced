@@ -2,49 +2,54 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour{
 
-    [SerializeField] private float _moveSpeed = 2.0f;
-    [SerializeField] private float _rotationSpeed = 10.0f;
+    [SerializeField] private float _moveSpeed = 5f; 
+    [SerializeField] private float _inertiaDecay = 2f;
+    [SerializeField] private float _rotationSpeed = 10f;
+    private Rigidbody _rb;
+    private Vector3 _movementVector;
+    private Vector3 _currentVelocity;
+    private float _yPos;
 
-    private void Update(){
-        
-        Vector2 input = new Vector2(0, 0);
-
-        if (Input.GetKey(KeyCode.W)){
-            input.y += 1;
-        }
-
-        if (Input.GetKey(KeyCode.S)){
-            input.y -= 1;
-        }
-
-        if (Input.GetKey(KeyCode.A)){
-            input.x -= 1;
-        }
-
-        if (Input.GetKey(KeyCode.D)){
-            input.x += 1;
-        }
-
-        input = input.normalized;
-
-        Vector3 moveDir = new Vector3(input.x, 0f, input.y);
-        
-        // Debug.Log(_playerDirection);
-        
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * _rotationSpeed);
-
-        float playerSize = 0.5f;
-        float offset = 0.5f;
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y - offset, transform.position.z);
-        Debug.DrawRay(pos, moveDir * (playerSize * 2f), Color.red);
-        RaycastHit hit;
-        Ray ray = new Ray(pos, moveDir);
-        // bool canMove =! Physics.Raycast(pos, moveDir, playerSize * 0.8f);
-        bool canMove = !Physics.Raycast(ray, out hit, playerSize * 0.8f) || hit.collider.isTrigger;
-        if (canMove) 
-            transform.position += moveDir * (_moveSpeed * Time.deltaTime);
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _yPos = transform.position.y;
     }
+
+    void Update()
+    {
+       
+        float horizontalInput = Input.GetAxisRaw("Horizontal"); 
+        float verticalInput = Input.GetAxisRaw("Vertical");    
+        
+        _movementVector = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        
+        if (_movementVector != Vector3.zero)
+        {
+            _currentVelocity = _movementVector * _moveSpeed;
+        }
+        else
+        {
+            _currentVelocity = Vector3.Lerp(_currentVelocity, Vector3.zero, Time.deltaTime * _inertiaDecay);
+        }
+        
+        if (_currentVelocity != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(_currentVelocity, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, Time.deltaTime * _rotationSpeed);
+        }
+        
+
+    }
+
+    void FixedUpdate(){
+        Vector3 newPos = _rb.position + _currentVelocity * Time.fixedDeltaTime;
+        newPos.y = _yPos;
+        _rb.MovePosition(newPos);
+    }
+    
 }
