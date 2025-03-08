@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 5187530694760140006}
   - component: {fileID: 5081294809896751061}
   - component: {fileID: 524587001898824491}
-  - component: {fileID: 2883185477279126296}
+  - component: {fileID: 717772791555071388}
   - component: {fileID: 5196044724863255334}
   - component: {fileID: 3066310839602576973}
   m_Layer: 12
-  m_Name: Npc
+  m_Name: Commoner
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2883185477279126296
+--- !u!114 &717772791555071388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,9 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8701716767278798441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
+  m_Script: {fileID: 11500000, guid: ec01afbc1fc3e4a43b1d4a89a374bbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tolerance: 0
+  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0

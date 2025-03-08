@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 public class NpcManager : MonoBehaviour{
-    [SerializeField] GameObject _npcPrefab;
+    [SerializeField] List<GameObject> _npcPrefabs;
     [SerializeField] private int _number;
     [SerializeField] ItemsDatabaseSO _itemsDatabase;
     [SerializeField] Transform _spawnPoint;
@@ -42,13 +43,15 @@ public class NpcManager : MonoBehaviour{
     // }
 
     private void SpawnNpc(){
-        ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items
-        var npc = Instantiate(_npcPrefab, _spawnPoint.position, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(item, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
+        //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
+        GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
+        var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
+        npc.GetComponent<NpcBehaviour>().Initialize(null, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
     }
 
-    public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject display){
-        var npc = Instantiate(_npcPrefab, spawnPoint, Quaternion.identity);
+    public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject display, string npcType){
+        GameObject npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
+        var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
         npc.GetComponent<NpcBehaviour>().Initialize(item, true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, display, _counterPos);
     }
 
