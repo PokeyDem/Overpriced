@@ -17,8 +17,7 @@ public class DayManager : MonoBehaviour {
     }
     
     // Start is called before the first frame update
-    public void Awake()
-    {
+    public void Awake() {
         if (DayManagerInstance == null) {
             DayManagerInstance = this;
             DontDestroyOnLoad(this);

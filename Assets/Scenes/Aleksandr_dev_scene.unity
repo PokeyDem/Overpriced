@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &118787913
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3375,6 +3375,7 @@ Transform:
   - {fileID: 887063823}
   - {fileID: 348915136}
   - {fileID: 1947892077}
+  - {fileID: 1921716270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586864209
@@ -10618,6 +10619,71 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 629152718}
   m_SourcePrefab: {fileID: 100100000, guid: b019ff89d1ad69d4797caca20a30df9b, type: 3}
+--- !u!1 &1921716269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921716270}
+  - component: {fileID: 1921716271}
+  m_Layer: 0
+  m_Name: ShopStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1921716270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921716269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 565410483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1921716271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921716269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cbd4ac9e40753469518c25c2a9b4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  shopWosOpen:
+    m_PersistentCalls:
+      m_Calls: []
+  shopWosClose:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1947892078}
+        m_TargetAssemblyTypeName: DayManager, Assembly-CSharp
+        m_MethodName: NextPartOfTheDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1935531515
 PrefabInstance:
   m_ObjectHideFlags: 0
