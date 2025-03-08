@@ -32,9 +32,7 @@ public class PlayerDisplayInteraction : MonoBehaviour{
                 closestDistance = distance;
                 _nearestSlot = slot.gameObject; // not sure if it is getting right gameobject
             }
-            
         }
-        
         
         if (_nearestSlot){
             if (_lastNearestSlot) 
@@ -50,10 +48,8 @@ public class PlayerDisplayInteraction : MonoBehaviour{
             if (distance > _interactionRange)
                 _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
         }
-
     }
     
-
     private void EnableInventory(){
         if (!_nearestSlot) return;
         _inventoryManager.EnableInventory();

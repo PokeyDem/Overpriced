@@ -54,7 +54,7 @@ public class HagglingManager : MonoBehaviour{
     }
 
     public void StartHaggling(){
-        _basePrice = _npcBehaviour.GetItemToBuy().Price;
+        _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
         _itemDescField.text = new string("Item name:\n" + _npcBehaviour.GetItemToBuy().Name + "\nDescription:\n" + _npcBehaviour.GetItemToBuy().Description + "\nBase price:\n" + _basePrice);
         _currentPrice = _basePrice;
         _counterField.text = _basePrice.ToString();
@@ -63,21 +63,17 @@ public class HagglingManager : MonoBehaviour{
 
     public void TryToSell(){
         int markupPoints = (_currentPrice - _basePrice) / 10;
-        
 
         if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
-            Debug.Log("Sold on stage 1 | MarkupPoints: " + markupPoints);
+            
             SellItem();
         }
         else{
             int successPoints = 10 + markupPoints - _npcBehaviour.GetTolerance();
-            int random = Random.Range(1, 21); //TODO for debug purposes move to if later
-            if (random >= successPoints){
-                Debug.Log("Sold on stage 2 | successPoints: " + successPoints + " | Random: " + random);
+            if (Random.Range(1,21) >= successPoints){
                 SellItem();
             }
             else{
-                Debug.Log("Sell failed | successPoints: " + successPoints + " | Random: " + random);
                 DenySell();
             }
         }
@@ -103,11 +99,8 @@ public class HagglingManager : MonoBehaviour{
         StartCoroutine(DisableUiDelay());
     }
     
-    
-
     private IEnumerator DisableUiDelay(){
         yield return new WaitForSeconds(1);
         _hagglingUI.gameObject.SetActive(false);
     }
-
 }

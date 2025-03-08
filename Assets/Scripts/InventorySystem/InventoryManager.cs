@@ -68,7 +68,8 @@ public class InventoryManager : MonoBehaviour{
     public string GetItemInfo(int index){
         ItemData currentItemData = _itemsDatabase._itemsData.Find(data => data.ID == index);
         return "Name: " + currentItemData.Name
-            + "\nPrice: " + currentItemData.Price
+            + "\nPrice: " + currentItemData.FinalPrice
+            + "\nRarity: " + currentItemData.Rarity
             + "\nDescription: " + currentItemData.Description;
     }
     public void RemoveItemFromDisplaySlot(){
@@ -120,6 +121,4 @@ public class InventoryManager : MonoBehaviour{
             counter++;
         }
     }
-    
-    
 }

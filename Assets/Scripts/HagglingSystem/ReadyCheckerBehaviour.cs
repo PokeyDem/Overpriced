@@ -5,7 +5,7 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
    [SerializeField] private string _tag;
    [SerializeField] private HagglingManager _hagglingManager;
    [SerializeField] private TextMeshPro _text;
-
+   
    private void OnTriggerEnter(Collider other){
       if (_tag.Equals("Player") && other.CompareTag("Player")){
          _hagglingManager.SetPlayerReadiness(true);
@@ -16,7 +16,6 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
          _hagglingManager.SetNpc(other.GetComponent<NpcBehaviour>());
          _text.gameObject.SetActive(true);
       }
-      
    }
 
    private void OnTriggerExit(Collider other){
