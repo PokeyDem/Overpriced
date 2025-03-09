@@ -29,7 +29,7 @@ public class NpcManager : MonoBehaviour{
     }
 
     private void SpawnNpc(){
-        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() || !debugSpawn ) {
+        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() && !debugSpawn ) {
             return;
         }
         //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
