@@ -1,31 +1,52 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 
 public class InventoryManager : MonoBehaviour{
     [SerializeField] private Canvas _inventoryUI;
     [SerializeField] private ItemsDatabaseSO _itemsDatabase;
-    [SerializeField] private GameObject[] _inventorySlots;
-    [SerializeField] private Image _inventorySlotIndicator;
     [SerializeField] private GameObject _itemInfoPanel;
+    [SerializeField] private GameObject _itemSlotPrefab;
+    [SerializeField] private GameObject _inventorySlotsContainer;
+    private List<GameObject> _inventorySlots;
     private DisplaySlotController _currentDisplayDisplaySlot; // todo refactor and delete later
-    private int _selectedInventorySlotId;
-    
+    private InventorySlot _selectedInventorySlot;
+
+    public void Awake(){
+        _inventorySlots = new List<GameObject>();
+        AddSlots(15);
+    }
 
     public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
         _currentDisplayDisplaySlot = nearestDisplaySlot;
     }
 
+    public void AddSlot(){
+        GameObject slot = Instantiate(_itemSlotPrefab, _inventorySlotsContainer.transform);
+        _inventorySlots.Add(slot);
+        int slotIndex = _inventorySlots.Count - 1;
+        slot.GetComponentInChildren<Button>().onClick.AddListener(() => SelectSlot(slotIndex));
+    }
+
+    private void AddSlots(int amount){
+        for (int i = 0; i < amount; i++){
+            AddSlot();
+        }
+    }
+
     public void EnableInventory(){
         _inventoryUI.gameObject.SetActive(true);
         SelectSlot(0);
-        _inventorySlotIndicator.gameObject.SetActive(true);
+        _selectedInventorySlot.EnableOutline();
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
-        var inventorySlotItemId = _inventorySlots[_selectedInventorySlotId].GetComponent<InventorySlot>().GetItemId();
+        var inventorySlotItemId = _selectedInventorySlot.GetItemId();
+        
         if (inventorySlotItemId != -1 && _currentDisplayDisplaySlot.GetItemId() == -1){
             var selectedItemIndex = _itemsDatabase._itemsData.FindIndex(data => data.ID == inventorySlotItemId);
             _currentDisplayDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex].Prefab, inventorySlotItemId);
@@ -35,15 +56,13 @@ public class InventoryManager : MonoBehaviour{
 
     public void RemoveItemFromInventory(){
         
-        InventorySlot inventorySlot = _inventorySlots[_selectedInventorySlotId].GetComponent<InventorySlot>();
-        
-        if (inventorySlot.IsEmpty())
+        if (_selectedInventorySlot.IsEmpty())
             return;
         
-        if (inventorySlot.GetItemQuantity() > 1)
-            inventorySlot.DecreaseQuantity();
+        if (_selectedInventorySlot.GetItemQuantity() > 1)
+            _selectedInventorySlot.DecreaseQuantity();
         else
-            inventorySlot.RemoveItem();
+            _selectedInventorySlot.RemoveItem();
             
     }
 
@@ -52,12 +71,17 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void SelectSlot(int selectedSlotId){ //On inventory slot button click
-        _selectedInventorySlotId = selectedSlotId;
-        _inventorySlotIndicator.transform.position = _inventorySlots[selectedSlotId].transform.position;
+        
+        if (_selectedInventorySlot) 
+            _selectedInventorySlot.DisableOutline();
+        
+        _selectedInventorySlot = _inventorySlots[selectedSlotId].GetComponent<InventorySlot>();
+        _selectedInventorySlot.EnableOutline();
 
         int currentItemId = _inventorySlots[selectedSlotId].GetComponent<InventorySlot>().GetItemId();
         if (currentItemId != -1){
             _itemInfoPanel.SetActive(true);
+            Debug.Log(GetItemInfo(currentItemId));
             _itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItemId);
         }
         else{
@@ -86,6 +110,10 @@ public class InventoryManager : MonoBehaviour{
         }
         else if ((slotIndex = FindFreePosition()) != -1)
             _inventorySlots[slotIndex].GetComponent<InventorySlot>().AddItem(itemId, _itemsDatabase._itemsData[itemId].PreviewImage);
+        else{
+            AddSlots(5);
+            AddItemToInventory(itemId);
+        }
     }
 
     private int FindExistingItem(int index){

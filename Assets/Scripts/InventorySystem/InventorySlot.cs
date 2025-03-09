@@ -10,10 +10,13 @@ public class InventorySlot : MonoBehaviour{
     private int _itemId = -1;
     private Image _image;
     private TextMeshProUGUI _quantityDisplay;
+    private Image _outline;
     private int _quantity;
+    private bool _isOutlineEnabled;
 
     private void Awake(){
-        _image = GetComponent<Image>();
+        _image = gameObject.transform.Find("ItemImage").GetComponent<Image>();
+        _outline = gameObject.transform.Find("Outline").GetComponent<Image>();
         _quantityDisplay = GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -22,6 +25,14 @@ public class InventorySlot : MonoBehaviour{
         _image.sprite = image;
         _quantity = 1;
         _quantityDisplay.text = _quantity.ToString();
+    }
+
+    public void EnableOutline(){
+        _outline.gameObject.SetActive(true);
+    }
+
+    public void DisableOutline(){
+        _outline.gameObject.SetActive(false);
     }
 
     public void RemoveItem(){
