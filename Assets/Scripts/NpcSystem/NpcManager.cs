@@ -20,29 +20,18 @@ public class NpcManager : MonoBehaviour{
     [SerializeField] private bool debugSpawn;
     private GameObject[] _npcs;
     private int _npcsCount;
-
-    private void Start(){
-        StartCoroutine(SpawnNpcDelay());
-    }
-
+    private bool _spawnCoroutineChecker;
+    
     private void Update(){
-        if (_npcsCount == 0){
-            StartCoroutine(SpawnNpcDelay());
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) && debugSpawn){
             SpawnNpc();
         }
     }
 
-    // private void OnTriggerEnter(Collider other){
-    //     if (other.CompareTag("NPC")){
-    //         Destroy(other.gameObject);
-    //         _npcsCount--;
-    //     }
-    // }
-
     private void SpawnNpc(){
+        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() || !debugSpawn ) {
+            return;
+        }
         //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
         GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
         var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
@@ -61,12 +50,19 @@ public class NpcManager : MonoBehaviour{
     }
 
     public void StartSpawnRandomNPC() {
-        // StartCoroutine(SpawnNpcDelay());
+        _spawnCoroutineChecker = true;
+        StartCoroutine(SpawnNpcDelay());
+    }
+    
+    public void StopSpawnRandomNPC() {
+        _spawnCoroutineChecker = false;
     }
 
     private IEnumerator SpawnNpcDelay(){
-        _npcsCount++;
-        yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
-        SpawnNpc();
+        while (_spawnCoroutineChecker) {
+            _npcsCount++;
+            SpawnNpc();
+            yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
+        }
     }
 }
