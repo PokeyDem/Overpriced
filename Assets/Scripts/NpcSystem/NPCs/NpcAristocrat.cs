@@ -8,7 +8,7 @@ public class NpcAristocrat : NpcBehaviour
     public override ItemData ChooseItem()
     {
         ItemData item = null;
-        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.Price >= 75);
+        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.FinalPrice >= 75);
         if (itemsToBuy.Count > 0)
         {
             item = itemsToBuy[Random.Range(0, itemsToBuy.Count)];

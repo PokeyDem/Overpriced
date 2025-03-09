@@ -8,7 +8,7 @@ public class NpcCitizen : NpcBehaviour
     public override ItemData ChooseItem()
     {
         ItemData item = null;
-        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.Price > 50 && x.Price<100);
+        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.FinalPrice > 50 && x.FinalPrice<100);
         if (itemsToBuy.Count > 0)
         {
             item = itemsToBuy[Random.Range(0, itemsToBuy.Count)];

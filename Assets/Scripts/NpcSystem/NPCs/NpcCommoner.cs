@@ -8,7 +8,7 @@ public class NpcCommoner : NpcBehaviour
     public override ItemData ChooseItem()
     {
         ItemData item = null;
-        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.Price <= 50);
+        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.FinalPrice <= 50);
         if (itemsToBuy.Count > 0)
         {
             item = itemsToBuy[Random.Range(0, itemsToBuy.Count)];
