@@ -12,8 +12,8 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
       }
 
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
+         _hagglingManager.SetNpc(other.GetComponent<NpcBehaviour>()); //changed order of methods
          _hagglingManager.SetNpcReadiness(true);
-         _hagglingManager.SetNpc(other.GetComponent<NpcBehaviour>());
          _text.gameObject.SetActive(true);
       }
    }
