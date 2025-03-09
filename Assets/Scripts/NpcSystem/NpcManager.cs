@@ -29,13 +29,14 @@ public class NpcManager : MonoBehaviour{
     }
 
     private void SpawnNpc(){
-        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() && !debugSpawn ) {
+        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() || _npcsCount>0) {
             return;
         }
         //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
         GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
         var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
         npc.GetComponent<NpcBehaviour>().Initialize(null, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
+        _npcsCount++;
     }
 
     public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject display, string npcType){
@@ -60,7 +61,6 @@ public class NpcManager : MonoBehaviour{
 
     private IEnumerator SpawnNpcDelay(){
         while (_spawnCoroutineChecker) {
-            _npcsCount++;
             SpawnNpc();
             yield return new WaitForSeconds(Random.Range(_minDelay, _maxDelay));
         }
