@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2f60d03adb9ea24dace1447192f6a61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,6 +123,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tolerance: 0
+  _itemToBuy:
+    <Name>k__BackingField: 
+    <ID>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 0}
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <Price>k__BackingField: 0
+    <Description>k__BackingField: 
   _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!195 &5196044724863255334
 NavMeshAgent:
