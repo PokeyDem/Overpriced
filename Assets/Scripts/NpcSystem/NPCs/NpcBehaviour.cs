@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcBehaviour : MonoBehaviour{
+public abstract class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private int _tolerance;
     private NavMeshAgent _agent;
-    private ItemData _itemToBuy; //Set by NpcManager
+    [SerializeField] private ItemData _itemToBuy; //Set by ChooseItem
     private Transform _despawnPointPos;
     private Transform _windowPos; 
     private Transform _doorPos;
@@ -16,9 +16,15 @@ public class NpcBehaviour : MonoBehaviour{
     private GameObject _display;
     private Transform _counterPos;
     private bool _isInShop;
+    private string _npcType;
 
     public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject display, Transform counterPos){
-        _itemToBuy = item;
+        if (item == null)
+        {
+            _itemToBuy = ChooseItem();
+        }
+        else _itemToBuy = item;
+        _npcType = GetNpcType();
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
@@ -27,6 +33,9 @@ public class NpcBehaviour : MonoBehaviour{
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
     }
+
+    public abstract ItemData ChooseItem();
+    public abstract string GetNpcType();
     private void Start(){
         _agent = GetComponent<NavMeshAgent>();
         if (!_isInShop){
@@ -45,17 +54,24 @@ public class NpcBehaviour : MonoBehaviour{
     }
 
     public void CheckItemsOnDisplays(){
-        _agent.SetDestination(_windowPos.position);
-        foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display")){
-            foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>()){
-                if (slotController.GetItemId() == _itemToBuy.ID){
-                    Debug.Log("Item matched");
-                    _display = display;
-                    break;
+        if (_itemToBuy != null)
+        {
+            _agent.SetDestination(_windowPos.position);
+            Debug.Log($"{_npcType} looking for: {_itemToBuy.Name}");
+            foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display"))
+            {
+                foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>())
+                {
+                    if (slotController.GetItemId() == _itemToBuy.ID)
+                    {
+                        Debug.Log("Item matched");
+                        _display = display;
+                        break;
+                    }
                 }
+                if (_display)
+                    break;
             }
-            if (_display)
-                break;
         }
 
         StartCoroutine(LookingDelay());
@@ -92,6 +108,10 @@ public class NpcBehaviour : MonoBehaviour{
 
     public int GetTolerance(){
         return _tolerance;
+    }
+    public void SetShopCheck(bool isInShop)
+    {
+        _isInShop = isInShop;
     }
 
     public void GoToExit(){

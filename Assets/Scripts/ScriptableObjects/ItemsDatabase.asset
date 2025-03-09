@@ -17,17 +17,27 @@ MonoBehaviour:
     <ID>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    <Price>k__BackingField: 100
+    <BasePrice>k__BackingField: 100
     <Description>k__BackingField: That's a sword, I guess
+    <Rarity>k__BackingField: 0
   - <Name>k__BackingField: Potion
     <ID>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    <Price>k__BackingField: 75
+    <BasePrice>k__BackingField: 75
     <Description>k__BackingField: Weird red liquid that will heal you
+    <Rarity>k__BackingField: 0
   - <Name>k__BackingField: Apple
     <ID>k__BackingField: 2
     <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    <Price>k__BackingField: 50
+    <BasePrice>k__BackingField: 50
     <Description>k__BackingField: Just apple, thats it
+    <Rarity>k__BackingField: 0
+  - <Name>k__BackingField: Apple
+    <ID>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    <BasePrice>k__BackingField: 50
+    <Description>k__BackingField: JUst apple, but rare
+    <Rarity>k__BackingField: 2
