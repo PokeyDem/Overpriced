@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour{
         _image = gameObject.transform.Find("ItemImage").GetComponent<Image>();
         _outline = gameObject.transform.Find("Outline").GetComponent<Image>();
         _quantityDisplay = GetComponentInChildren<TextMeshProUGUI>();
+        DisableOutline();
     }
 
     public void AddItem(int itemId, Sprite image){
