@@ -28,11 +28,15 @@ public class InventorySlot : MonoBehaviour{
     }
 
     public void EnableOutline(){
-        _outline.gameObject.SetActive(true);
+        Color color = _outline.color;
+        color.a = 1f; 
+        _outline.color = color;
     }
 
     public void DisableOutline(){
-        _outline.gameObject.SetActive(false);
+        Color color = _outline.color;
+        color.a = 0f; 
+        _outline.color = color;
     }
 
     public void RemoveItem(){
