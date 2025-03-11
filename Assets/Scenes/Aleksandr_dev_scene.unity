@@ -854,7 +854,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sword \n(100 Gold)"
+  m_text: 'Random
+
+    Weapon'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1016,24 +1018,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 343164882}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: AddItemToInventory
-        m_Mode: 3
+        m_MethodName: AddRandomWeaponToInventory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1346806260}
-        m_TargetAssemblyTypeName: MoneyManager, Assembly-CSharp
-        m_MethodName: ReduceMoney
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 50
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1323,6 +1313,7 @@ MonoBehaviour:
   _itemInfoPanel: {fileID: 1990108292}
   _itemSlotPrefab: {fileID: 4196557659919706290, guid: 656a82443d4239e49be67ce3e518f078, type: 3}
   _inventorySlotsContainer: {fileID: 1507226815}
+  _moneyManager: {fileID: 1346806260}
 --- !u!4 &343164883
 Transform:
   m_ObjectHideFlags: 0
@@ -4430,24 +4421,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 343164882}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: AddItemToInventory
-        m_Mode: 3
+        m_MethodName: AddRandomPotionToInventory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1346806260}
-        m_TargetAssemblyTypeName: MoneyManager, Assembly-CSharp
-        m_MethodName: ReduceMoney
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8015,9 +7994,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Potion
+  m_text: 'Random
 
-    (50 Gold)'
+    Food'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9640,9 +9619,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Potion
+  m_text: 'Random
 
-    (75 Gold)'
+    Potion'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10940,24 +10919,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 343164882}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
-        m_MethodName: AddItemToInventory
-        m_Mode: 3
+        m_MethodName: AddRandomFoodToInventory
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1346806260}
-        m_TargetAssemblyTypeName: MoneyManager, Assembly-CSharp
-        m_MethodName: ReduceMoney
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 150
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

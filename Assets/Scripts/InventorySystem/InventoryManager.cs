@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class InventoryManager : MonoBehaviour{
     [SerializeField] private GameObject _itemInfoPanel;
     [SerializeField] private GameObject _itemSlotPrefab;
     [SerializeField] private GameObject _inventorySlotsContainer;
+    [SerializeField] private MoneyManager _moneyManager; //todo delete when merchants guild is created
     private List<GameObject> _inventorySlots;
     private DisplaySlotController _currentDisplayDisplaySlot; // todo refactor and delete later
     private InventorySlot _selectedInventorySlot;
@@ -81,7 +83,6 @@ public class InventoryManager : MonoBehaviour{
         int currentItemId = _inventorySlots[selectedSlotId].GetComponent<InventorySlot>().GetItemId();
         if (currentItemId != -1){
             _itemInfoPanel.SetActive(true);
-            Debug.Log(GetItemInfo(currentItemId));
             _itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItemId);
         }
         else{
@@ -93,7 +94,7 @@ public class InventoryManager : MonoBehaviour{
         ItemData currentItemData = _itemsDatabase._itemsData.Find(data => data.ID == index);
         return "Name: " + currentItemData.Name
             + "\nPrice: " + currentItemData.FinalPrice
-            + "\nRarity: " + currentItemData.Rarity
+            + "\nRarity: " + new string(Convert.ToChar("*"), currentItemData.Rarity)
             + "\nDescription: " + currentItemData.Description;
     }
     public void RemoveItemFromDisplaySlot(){
@@ -104,16 +105,37 @@ public class InventoryManager : MonoBehaviour{
 
     public void AddItemToInventory(int itemId){
         int slotIndex = -1;
-        if ((slotIndex = FindExistingItem(itemId)) != -1){
+        ItemData itemToAdd = _itemsDatabase._itemsData.Find(data => data.ID == itemId);
+        if ((slotIndex = FindExistingItem(itemId)) != -1)
             _inventorySlots[slotIndex].GetComponent<InventorySlot>().IncreaseQuantity();
-            Debug.Log("Found Same Item");
-        }
         else if ((slotIndex = FindFreePosition()) != -1)
-            _inventorySlots[slotIndex].GetComponent<InventorySlot>().AddItem(itemId, _itemsDatabase._itemsData[itemId].PreviewImage);
+            _inventorySlots[slotIndex].GetComponent<InventorySlot>().AddItem(itemId,
+                itemToAdd.PreviewImage, itemToAdd.Rarity);
         else{
             AddSlots(5);
             AddItemToInventory(itemId);
         }
+    }
+
+    private void AddRandomRarityItemToInventory(ItemType itemType){
+        List<ItemData> matchedItems = _itemsDatabase._itemsData.FindAll(data => data.ItemType.Equals(itemType));
+        ItemData randomItem = matchedItems[UnityEngine.Random.Range(0, matchedItems.Count)];
+        if (_moneyManager.GetCurrentMoney() >= randomItem.FinalPrice){
+            AddItemToInventory(randomItem.ID);
+            _moneyManager.ReduceMoney(randomItem.FinalPrice);
+        }
+    }
+
+    public void AddRandomWeaponToInventory(){
+        AddRandomRarityItemToInventory(ItemType.Weapon);
+    }
+
+    public void AddRandomPotionToInventory(){
+        AddRandomRarityItemToInventory(ItemType.Potion);
+    }
+
+    public void AddRandomFoodToInventory(){
+        AddRandomRarityItemToInventory(ItemType.Food);
     }
 
     private int FindExistingItem(int index){
@@ -138,11 +160,7 @@ public class InventoryManager : MonoBehaviour{
         return -1;
     }
 
-    public void AddSwordToInventory(){ //Method for tests, on addSwordButton click
-        AddItemToInventory(0);
-    }
-
-    public void GetSlotsData(){ //for debug - shows items ids for every inventory slot on the console
+    public void GetSlotsData(){ //for debug - shows items id for every inventory slot on the console
         int counter = 0;
         foreach (var inventorySlot in _inventorySlots){
             Debug.Log(counter + ": " + inventorySlot.GetComponent<InventorySlot>().GetItemId());

@@ -47,12 +47,6 @@ public abstract class NpcBehaviour : MonoBehaviour{
         }
     }
 
-    private void Update(){
-        // if (_agent.remainingDistance <= _agent.stoppingDistance){
-        //     _agent.ResetPath();
-        // }
-    }
-
     public void CheckItemsOnDisplays(){
         if (_itemToBuy != null)
         {

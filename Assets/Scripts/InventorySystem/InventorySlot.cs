@@ -13,19 +13,22 @@ public class InventorySlot : MonoBehaviour{
     private Image _outline;
     private int _quantity;
     private bool _isOutlineEnabled;
+    private TextMeshProUGUI _rarityDisplay;
 
     private void Awake(){
         _image = gameObject.transform.Find("ItemImage").GetComponent<Image>();
         _outline = gameObject.transform.Find("Outline").GetComponent<Image>();
+        _rarityDisplay = gameObject.transform.Find("Rarity").GetComponent<TextMeshProUGUI>();
         _quantityDisplay = GetComponentInChildren<TextMeshProUGUI>();
         DisableOutline();
     }
 
-    public void AddItem(int itemId, Sprite image){
+    public void AddItem(int itemId, Sprite image, int rarity){
         _itemId = itemId;
         _image.sprite = image;
         _quantity = 1;
         _quantityDisplay.text = _quantity.ToString();
+        _rarityDisplay.text = new string('*', rarity);
     }
 
     public void EnableOutline(){
@@ -44,6 +47,7 @@ public class InventorySlot : MonoBehaviour{
         _itemId = -1;
         _image.sprite = null;
         _quantityDisplay.text = "";
+        _rarityDisplay.text = "";
     }
 
     public int GetItemId(){
