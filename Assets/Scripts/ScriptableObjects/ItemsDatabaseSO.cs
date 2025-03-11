@@ -14,14 +14,18 @@ public class ItemsDatabaseSO : ScriptableObject{
         List<ItemData> baseItems = new List<ItemData>();
         foreach (ItemData item in _itemsData){
             if (item.Rarity == 0){
-                baseItems.Add(new ItemData(item.Name, item.ItemType, item.ID, item.Prefab, item.PreviewImage, item.BasePrice, item.Description));
+                baseItems.Add(new ItemData(
+                    item.Name, item.ItemType, 
+                    item.ID, item.Prefab, 
+                    item.PreviewImage, 
+                    item.BasePrice, item.Description));
             }
         }
         _itemsData.Clear();
-        int id = baseItems.Count;
+        int id = baseItems.Count - 1;
         foreach (var item in baseItems){
             _itemsData.Add(item);
-            for (int rarity = 1; rarity <= 5; rarity++){ //TODO move max rarity level to config (current 5)
+            for (int rarity = 1; rarity <= 5; rarity++){
                 _itemsData.Add(
                     new ItemData(item, rarity, id++));
             }
