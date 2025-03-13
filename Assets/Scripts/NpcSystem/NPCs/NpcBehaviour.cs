@@ -16,9 +16,10 @@ public class NpcBehaviour : MonoBehaviour{
     private Transform _windowPos; 
     private Transform _doorPos;
     private Transform _despawnInShop;
-    private GameObject _display;
+    private GameObject _displayItemSlot;
     private Transform _counterPos;
     private bool _isInShop;
+    private bool _lookingForItem;
     private IItemSelector _itemSelector;
     private List<ItemData> _desiredItems;
 
@@ -29,9 +30,10 @@ public class NpcBehaviour : MonoBehaviour{
         {
             _desiredItems = _itemSelector.SelectDesiredItems();
         }
+        _lookingForItem = true;
     }
 
-    public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject display, Transform counterPos){
+    public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject displayItemSlot, Transform counterPos){
         if (item == null)
         {
         }
@@ -39,7 +41,7 @@ public class NpcBehaviour : MonoBehaviour{
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
-        _display = display;
+        _displayItemSlot = displayItemSlot;
         _isInShop = isInShop;
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
@@ -68,32 +70,47 @@ public class NpcBehaviour : MonoBehaviour{
             Debug.Log($"{_NPCType} looking for: {itemNames}");
             foreach (ItemData i in _desiredItems) 
             {
-                foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display"))
+                foreach (GameObject displayItemSlot in GameObject.FindGameObjectsWithTag("DisplayItemSlot"))
                 {
-                    foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>())
+                    DisplaySlotController slotController = displayItemSlot.GetComponent<DisplaySlotController>();
+                    if (slotController.GetItemId() == i.ID)
                     {
-                        if (slotController.GetItemId() == i.ID)
-                        {
                             Debug.Log($"Item matched, ID: {i.ID}");
-                            _display = display;
+                            _displayItemSlot = displayItemSlot;
                             _itemToBuy = _desiredItems.Find(x=>x.ID==slotController.GetItemId());//first desired item found
                             break;
-                        }
                     }
-                    if (_display)
-                        break;
                 }
-                if (_display)
+                if (_displayItemSlot)
                     break;
             }
         }
         Debug.Log(_itemToBuy.Name);
         StartCoroutine(LookingDelay());
     }
+    public void CheckItemOnDisplay(GameObject displayItemSlot)
+    {
+        if (_desiredItems != null)
+        {
+            ItemData itemOnDisplay=_desiredItems.Find(item => item.ID== displayItemSlot.GetComponent<DisplaySlotController>().GetItemId());
+            if(itemOnDisplay != null)
+            {
+                float randomValue = UnityEngine.Random.Range(0f, 100f);
+                float buyChance = 90;
+                if (randomValue < buyChance)
+                {
+                    _displayItemSlot = displayItemSlot;
+                    _itemToBuy = itemOnDisplay;
+                    _lookingForItem = false;
+                }
+            }
+        }
+    }
 
     private IEnumerator LookingDelay(){
         yield return new WaitForSeconds(2);
-        if (_display){
+        if (_displayItemSlot)
+        {
             _agent.SetDestination(_doorPos.position);
         }
         else{
@@ -103,22 +120,25 @@ public class NpcBehaviour : MonoBehaviour{
     }
 
     public void GoToDisplay(){
-        _agent.SetDestination(new Vector3(_display.transform.position.x + 1.5f, _display.transform.position.y, _display.transform.position.z));
-        _display.GetComponentInChildren<DisplayTrigger>().SetIsEnabled(true);
+        _agent.SetDestination(new Vector3(_displayItemSlot.transform.position.x + 1.5f, _displayItemSlot.transform.position.y, _displayItemSlot.transform.position.z));
+        _displayItemSlot.GetComponentInChildren<DisplayTrigger>().SetIsEnabled(true);
         Debug.Log("Npc destination: Display");
     }
 
     public IEnumerator GoToCheckout(){
-        yield return new WaitForSeconds(2);
-        _display.GetComponentInChildren<DisplayTrigger>().SetIsEnabled(false);
+        //yield return new WaitForSeconds(0);
+        //_display.GetComponentInChildren<DisplayTrigger>().SetIsEnabled(false);
         _agent.SetDestination(_counterPos.position);
+        _agent.speed = 1;
+        yield return new WaitForSeconds(1);
+        _agent.isStopped=true;
     }
 
     public ItemData GetItemToBuy(){
         return _itemToBuy;
     }
     
-    public GameObject GetDisplay(){return _display;}
+    public GameObject GetDisplayItemSlot(){return _displayItemSlot; }
 
     public int GetTolerance(){
         return _tolerance;

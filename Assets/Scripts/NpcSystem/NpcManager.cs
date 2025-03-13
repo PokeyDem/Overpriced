@@ -40,10 +40,10 @@ public class NpcManager : MonoBehaviour{
         _npcsCount++;
     }
 
-    public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject display, NPCType npcType){
+    public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject displayItemSlot, NPCType npcType){
         GameObject npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
         var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(item, true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, display, _counterPos);
+        npc.GetComponent<NpcBehaviour>().Initialize(item, true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displayItemSlot, _counterPos);
     }
 
     public void DespawnNpc(GameObject npc){

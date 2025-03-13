@@ -11,7 +11,7 @@ public class DoorTriggerBeahviour : MonoBehaviour{
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPC")){
             NpcBehaviour npcBehaviour = other.gameObject.GetComponent<NpcBehaviour>();
-            _npcManager.SpawnNpcInsideShop(_doorSpawnPoint.position, npcBehaviour.GetItemToBuy(), npcBehaviour.GetDisplay(), npcBehaviour.GetNpcType());
+            _npcManager.SpawnNpcInsideShop(_doorSpawnPoint.position, npcBehaviour.GetItemToBuy(), npcBehaviour.GetDisplayItemSlot(), npcBehaviour.GetNpcType());
             Destroy(other.gameObject);
         }
     }
