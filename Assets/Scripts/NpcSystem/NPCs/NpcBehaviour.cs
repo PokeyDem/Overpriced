@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public abstract class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private int _tolerance;
+    [SerializeField] private NPCType _NPCType;
     private NavMeshAgent _agent;
     [SerializeField] private ItemData _itemToBuy; //Set by ChooseItem
     private Transform _despawnPointPos;
@@ -16,7 +17,6 @@ public abstract class NpcBehaviour : MonoBehaviour{
     private GameObject _display;
     private Transform _counterPos;
     private bool _isInShop;
-    private string _npcType;
 
     public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject display, Transform counterPos){
         if (item == null)
@@ -24,7 +24,6 @@ public abstract class NpcBehaviour : MonoBehaviour{
             _itemToBuy = ChooseItem();
         }
         else _itemToBuy = item;
-        _npcType = GetNpcType();
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
@@ -35,7 +34,10 @@ public abstract class NpcBehaviour : MonoBehaviour{
     }
 
     public abstract ItemData ChooseItem();
-    public abstract string GetNpcType();
+    public NPCType GetNpcType()
+    { 
+        return _NPCType; 
+    }
     private void Start(){
         _agent = GetComponent<NavMeshAgent>();
         if (!_isInShop){
@@ -51,7 +53,7 @@ public abstract class NpcBehaviour : MonoBehaviour{
         if (_itemToBuy != null)
         {
             _agent.SetDestination(_windowPos.position);
-            Debug.Log($"{_npcType} looking for: {_itemToBuy.Name}");
+            Debug.Log($"{_NPCType} looking for: {_itemToBuy.Name}");
             foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display"))
             {
                 foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>())

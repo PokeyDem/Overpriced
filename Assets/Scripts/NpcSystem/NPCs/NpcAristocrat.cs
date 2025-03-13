@@ -16,8 +16,4 @@ public class NpcAristocrat : NpcBehaviour
         return item;
     }
 
-    public override string GetNpcType()
-    {
-        return "Aristocrat";
-    }
 }

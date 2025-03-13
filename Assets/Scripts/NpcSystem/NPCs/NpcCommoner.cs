@@ -16,8 +16,4 @@ public class NpcCommoner : NpcBehaviour
         return item;
     }
 
-    public override string GetNpcType()
-    {
-        return "Commoner";
-    }
 }

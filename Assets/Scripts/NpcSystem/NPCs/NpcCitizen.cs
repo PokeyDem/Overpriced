@@ -16,8 +16,4 @@ public class NpcCitizen : NpcBehaviour
         return item;
     }
 
-    public override string GetNpcType()
-    {
-        return "Citizen";
-    }
 }

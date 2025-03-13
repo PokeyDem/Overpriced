@@ -1,5 +1,5 @@
 
-public enum CustomerType
+public enum NPCType
 {
     Commoner,
     Citizen,

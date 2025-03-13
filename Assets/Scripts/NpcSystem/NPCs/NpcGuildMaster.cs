@@ -8,7 +8,7 @@ public class NpcGuildMaster : NpcBehaviour
     public override ItemData ChooseItem()
     {
         ItemData item = null;
-        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.Name=="Sword");
+        List<ItemData> itemsToBuy = _itemsDatabase._itemsData.FindAll(x => x.Name.Contains("Sword"));
         if (itemsToBuy.Count > 0)
         {
             item = itemsToBuy[Random.Range(0, itemsToBuy.Count)];
@@ -16,8 +16,4 @@ public class NpcGuildMaster : NpcBehaviour
         return item;
     }
 
-    public override string GetNpcType()
-    {
-        return "Guild Master";
-    }
 }

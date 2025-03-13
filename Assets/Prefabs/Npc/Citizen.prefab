@@ -123,12 +123,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tolerance: 0
+  _NPCType: 1
   _itemToBuy:
     <Name>k__BackingField: 
+    <ItemType>k__BackingField: 0
     <ID>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 0}
     <PreviewImage>k__BackingField: {fileID: 0}
-    <Price>k__BackingField: 0
+    <BasePrice>k__BackingField: 0
     <Description>k__BackingField: 
   _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!195 &5196044724863255334
