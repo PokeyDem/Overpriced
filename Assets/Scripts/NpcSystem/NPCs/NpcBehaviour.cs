@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class NpcBehaviour : MonoBehaviour{
+public class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private int _tolerance;
     [SerializeField] private NPCType _NPCType;
@@ -17,11 +19,21 @@ public abstract class NpcBehaviour : MonoBehaviour{
     private GameObject _display;
     private Transform _counterPos;
     private bool _isInShop;
+    private IItemSelector _itemSelector;
+    private List<ItemData> _desiredItems;
+
+    private void Awake()
+    {
+        _itemSelector = GetComponent<IItemSelector>();
+        if (_itemSelector != null)
+        {
+            _desiredItems = _itemSelector.SelectDesiredItems();
+        }
+    }
 
     public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject display, Transform counterPos){
         if (item == null)
         {
-            _itemToBuy = ChooseItem();
         }
         else _itemToBuy = item;
         _despawnPointPos = despawnPointPos;
@@ -33,7 +45,6 @@ public abstract class NpcBehaviour : MonoBehaviour{
         _despawnInShop = despawnInShop;
     }
 
-    public abstract ItemData ChooseItem();
     public NPCType GetNpcType()
     { 
         return _NPCType; 
@@ -50,26 +61,33 @@ public abstract class NpcBehaviour : MonoBehaviour{
     }
 
     public void CheckItemsOnDisplays(){
-        if (_itemToBuy != null)
+        if (_desiredItems != null)
         {
             _agent.SetDestination(_windowPos.position);
-            Debug.Log($"{_NPCType} looking for: {_itemToBuy.Name}");
-            foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display"))
+            string itemNames = String.Join(", ", _desiredItems.Select(p => p.Name));//delete Linq library if delete this
+            Debug.Log($"{_NPCType} looking for: {itemNames}");
+            foreach (ItemData i in _desiredItems) 
             {
-                foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>())
+                foreach (GameObject display in GameObject.FindGameObjectsWithTag("Display"))
                 {
-                    if (slotController.GetItemId() == _itemToBuy.ID)
+                    foreach (var slotController in display.GetComponentsInChildren<DisplaySlotController>())
                     {
-                        Debug.Log("Item matched");
-                        _display = display;
-                        break;
+                        if (slotController.GetItemId() == i.ID)
+                        {
+                            Debug.Log($"Item matched, ID: {i.ID}");
+                            _display = display;
+                            _itemToBuy = _desiredItems.Find(x=>x.ID==slotController.GetItemId());//first desired item found
+                            break;
+                        }
                     }
+                    if (_display)
+                        break;
                 }
                 if (_display)
                     break;
             }
         }
-
+        Debug.Log(_itemToBuy.Name);
         StartCoroutine(LookingDelay());
     }
 
