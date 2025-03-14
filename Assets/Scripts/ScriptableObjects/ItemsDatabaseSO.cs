@@ -13,7 +13,7 @@ public class ItemsDatabaseSO : ScriptableObject{
     private void OnEnable(){
         List<ItemData> baseItems = new List<ItemData>();
         foreach (ItemData item in _itemsData){
-            if (item.Rarity == 0){
+            if (!item.Name.Contains("*")){
                 baseItems.Add(new ItemData(
                     item.Name, item.ItemType, 
                     item.ID, item.Prefab, 
@@ -23,6 +23,7 @@ public class ItemsDatabaseSO : ScriptableObject{
         }
         _itemsData.Clear();
         int id = baseItems.Count - 1;
+        
         foreach (var item in baseItems){
             _itemsData.Add(item);
             for (int rarity = 1; rarity <= 5; rarity++){
