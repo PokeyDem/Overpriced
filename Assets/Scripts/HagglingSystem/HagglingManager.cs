@@ -86,7 +86,7 @@ public class HagglingManager : MonoBehaviour{
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
         _resulField.color = Color.green;
         _resulField.text = "Sold";
-        _npcBehaviour.GetDisplay().GetComponentInChildren<DisplaySlotController>().RemoveItem();
+        _npcBehaviour.GetDisplayItemSlot().GetComponentInChildren<DisplaySlotController>().RemoveItem();
     }
 
     private void DenySell(){
