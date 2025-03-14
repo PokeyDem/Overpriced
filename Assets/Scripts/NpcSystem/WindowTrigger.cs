@@ -8,5 +8,6 @@ public class WindowTrigger : MonoBehaviour{
         Debug.Log("triggered");
         if (other.CompareTag("NPC"))
             other.GetComponent<NpcBehaviour>().CheckItemsOnDisplays();
+            //other.GetComponent<NpcBehaviour>().FindDesiredItemsInShop();
     }
 }
