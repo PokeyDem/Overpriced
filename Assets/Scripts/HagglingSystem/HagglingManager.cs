@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class HagglingManager : MonoBehaviour{
@@ -62,7 +64,10 @@ public class HagglingManager : MonoBehaviour{
     }
 
     public void TryToSell(){
-        int markupPoints = (_currentPrice - _basePrice) / 10;
+        _currentPrice = Int32.Parse(_counterField.text);
+        Debug.Log(_currentPrice);
+        Debug.Log(_basePrice);
+        int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
 
         if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
             
