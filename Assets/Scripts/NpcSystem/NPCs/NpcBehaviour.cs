@@ -20,10 +20,12 @@ public class NpcBehaviour : MonoBehaviour{
     private Transform _counterPos;
 
     [SerializeField] private bool _isInShop;
-    private bool _lookingForItem;
+    private bool _browsingForItem;
     private IItemSelector _itemSelector;
     private List<ItemData> _desiredItems;
     private Dictionary<GameObject, ItemData> _desiredItemsOnDisplays = new Dictionary<GameObject, ItemData>();//keys are displays, values items on the display
+    private List<GameObject> _occupiedDisplays = new List<GameObject>();
+    [SerializeField] private ItemsDatabaseSO _itemDatabaseSO;
 
     private void Awake()
     {
@@ -32,10 +34,9 @@ public class NpcBehaviour : MonoBehaviour{
         {
             _desiredItems = _itemSelector.SelectDesiredItems();
         }
-        _lookingForItem = true;
     }
 
-    public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject displayItemSlot, Transform counterPos, Dictionary<GameObject, ItemData> desiredItemsOnDisplays){
+    public void Initialize(ItemData item, bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, GameObject displayItemSlot, Transform counterPos, Dictionary<GameObject, ItemData> desiredItemsOnDisplays, List<GameObject> occupiedDisplays){
         if (item == null)
         {
         }
@@ -48,6 +49,7 @@ public class NpcBehaviour : MonoBehaviour{
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
         _desiredItemsOnDisplays = desiredItemsOnDisplays;
+        _occupiedDisplays = occupiedDisplays;
     }
 
     private void Start(){
@@ -58,10 +60,11 @@ public class NpcBehaviour : MonoBehaviour{
         }
         else{
             Debug.Log("Spawned in shop");
-            StartCoroutine(GoToCheckout()); //Changed For tests
-            //StartCoroutine(BrowseDisplays());
+            //StartCoroutine(GoToCheckout()); //Changed For tests
+            StartCoroutine(BrowseDisplays());
         }
     }
+
 
     public void CheckItemsOnDisplays(){
         if (_desiredItems != null)
@@ -89,23 +92,32 @@ public class NpcBehaviour : MonoBehaviour{
         Debug.Log(_itemToBuy.Name);
         StartCoroutine(LookingDelay());
     }
-    public void FindDesiredItemsInShop()
+    public void FindDesiredItemsInShop()//changing into find every item in shop to see the effect
     {
         _agent.SetDestination(_windowPos.position);
         _desiredItemsOnDisplays =new Dictionary<GameObject, ItemData>();
-        foreach (ItemData i in _desiredItems)
+        //foreach (ItemData i in _desiredItems)
+        //{
+        //    foreach (GameObject displayItemSlot in GameObject.FindGameObjectsWithTag("DisplayItemSlot"))
+        //    {
+        //        DisplaySlotController slotController = displayItemSlot.GetComponent<DisplaySlotController>();
+        //        if (slotController.GetItemId() == i.ID)
+        //        {
+        //            Debug.Log($"Item matched, ID: {i.ID}");
+        //            _desiredItemsOnDisplays.Add(displayItemSlot, i);
+        //        }
+        //    }
+        //}
+        _occupiedDisplays = new List<GameObject>();
+        foreach (GameObject displayItemSlot in GameObject.FindGameObjectsWithTag("DisplayItemSlot"))
         {
-            foreach (GameObject displayItemSlot in GameObject.FindGameObjectsWithTag("DisplayItemSlot"))
+            DisplaySlotController slotController = displayItemSlot.GetComponent<DisplaySlotController>();
+            if(slotController.GetItemId()!=-1)
             {
-                DisplaySlotController slotController = displayItemSlot.GetComponent<DisplaySlotController>();
-                if (slotController.GetItemId() == i.ID)
-                {
-                    Debug.Log($"Item matched, ID: {i.ID}");
-                    _desiredItemsOnDisplays.Add(displayItemSlot, i);
-                }
+                _occupiedDisplays.Add(displayItemSlot);
             }
         }
-        StartCoroutine(LookingDelay2());
+            StartCoroutine(LookingDelay2());
     }
 
     private IEnumerator LookingDelay(){
@@ -120,10 +132,11 @@ public class NpcBehaviour : MonoBehaviour{
         }
     }
 
-    private IEnumerator LookingDelay2()
+    private IEnumerator LookingDelay2()//changing into find every item in shop to see the effect
     {
         yield return new WaitForSeconds(2);
-        if (_desiredItemsOnDisplays.Count != 0)
+        //if (_desiredItemsOnDisplays.Count != 0)
+        if (_occupiedDisplays.Count != 0)
         {
             _agent.SetDestination(_doorPos.position);
         }
@@ -133,23 +146,52 @@ public class NpcBehaviour : MonoBehaviour{
             Debug.Log("Item wasn't found, Npc destination: DespawnPoint");
         }
     }
-    public IEnumerator BrowseDisplays()
+    public IEnumerator BrowseDisplays()//changing into browse every item in shop to see the effect
     {
-        Debug.Log($"BrowseDisplays started, {_desiredItemsOnDisplays.Count}");
-        foreach (var itemOnDisplay in _desiredItemsOnDisplays)
+        //Debug.Log($"BrowseDisplays started, {_desiredItemsOnDisplays.Count}");
+        //foreach (var itemOnDisplay in _desiredItemsOnDisplays)
+        //{
+        //    _agent.speed = 2;
+        //    _agent.stoppingDistance = 0.1f;
+        //    _agent.SetDestination(itemOnDisplay.Key.transform.position);
+        //    Debug.Log($"Going to: {itemOnDisplay.Key.transform.position}");
+        //    yield return new WaitUntil(() => !_agent.pathPending && 
+        //                                        _agent.remainingDistance <= _agent.stoppingDistance);
+        //    yield return new WaitForSeconds(3);
+        //    if (IsInterestedInBuying())
+        //    {
+        //        Debug.Log($"Wants {itemOnDisplay.Value.Name}");
+        //        _itemToBuy = itemOnDisplay.Value;
+        //        _displayItemSlot = itemOnDisplay.Key;
+        //        _agent.stoppingDistance = 0f;
+        //        StartCoroutine(GoToCheckout());
+        //        yield break;
+        //    } else Debug.Log($"Doesnt want {itemOnDisplay.Value.Name}");
+        //}
+        Debug.Log($"BrowseDisplays started, {_occupiedDisplays.Count}");
+        foreach (var displaySlot in _occupiedDisplays)
         {
-            _agent.SetDestination(itemOnDisplay.Key.transform.position);
-            Debug.Log($"Going to: {itemOnDisplay.Key.transform.position}");
+            _agent.speed = 2;
+            _agent.stoppingDistance = 0.1f;
+            _agent.SetDestination(displaySlot.transform.position);
+            Debug.Log($"Going to: {displaySlot.transform.position}");
+            yield return new WaitUntil(() => !_agent.pathPending &&
+                                                _agent.remainingDistance <= _agent.stoppingDistance);
             yield return new WaitForSeconds(3);
-            //_agent.isStopped = true;
-            if (IsInterestedInBuying())
+            DisplaySlotController displaySlotController = displaySlot.GetComponent<DisplaySlotController>();
+            ItemData item= _itemDatabaseSO._itemsData.Find(item => item.ID == displaySlotController.GetItemId());
+            if (IsInterestedInBuying(item))
             {
-                Debug.Log($"Wants {itemOnDisplay.Value.Name}");
-                _itemToBuy = itemOnDisplay.Value;
+                Debug.Log($"Wants {item.Name}");
+                _itemToBuy = item;
+                _displayItemSlot = displaySlot;
+                _agent.stoppingDistance = 0f;
                 StartCoroutine(GoToCheckout());
                 yield break;
-            } else Debug.Log($"Doesnt want {itemOnDisplay.Value.Name}");
+            }
+            else Debug.Log($"Doesnt want {item.Name}");
         }
+        GoToExit();
     }
 
     public void GoToDisplay(){
@@ -164,12 +206,17 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.SetDestination(_counterPos.position);
     }
 
-    private bool IsInterestedInBuying()
+    private bool IsInterestedInBuying(ItemData item)////changing into every item in shop to see the effect
     {
         bool isInterested = false;
-        int chanceToBuy = 10;
+        int chanceToBuy = 0;
+        if (_desiredItems.Contains(item))
+        {
+            chanceToBuy = 90;
+        }
+        else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);
-        Debug.Log($"{random}");
+        Debug.Log($"Chance to buy: {chanceToBuy}, random: {random}");
         if (random < chanceToBuy)
         {
             isInterested = true;
@@ -193,6 +240,7 @@ public class NpcBehaviour : MonoBehaviour{
     }
 
     public void GoToExit(){
+        _agent.speed = 3.5f;
         _agent.SetDestination(_despawnInShop.position);
     }
 
@@ -203,6 +251,10 @@ public class NpcBehaviour : MonoBehaviour{
     public Dictionary<GameObject, ItemData> GetDesiredItemsOnDisplays()
     {
         return _desiredItemsOnDisplays;
+    }
+    public List<GameObject> GetOccupiedDisplays()
+    {
+        return _occupiedDisplays;
     }
     public void StopNavMeshAgent()
     {

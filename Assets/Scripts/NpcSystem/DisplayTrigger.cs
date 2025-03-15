@@ -6,6 +6,7 @@ using UnityEngine;
 public class DisplayTrigger : MonoBehaviour{
     
     private Collider _collider;
+    private bool _isTarget;
 
     private void Awake(){
         _collider = GetComponent<Collider>();
@@ -13,12 +14,16 @@ public class DisplayTrigger : MonoBehaviour{
     }
 
     private void OnTriggerEnter(Collider other){
-        if (other.CompareTag("NPC")){
-            StartCoroutine(other.GetComponent<NpcBehaviour>().GoToCheckout());
+        if (other.CompareTag("NPC") && _isTarget){
+            //StartCoroutine(other.GetComponent<NpcBehaviour>().GoToCheckout());
         }
     }
 
     public void SetIsEnabled(bool isEnabled){
         _collider.enabled = isEnabled;
+    }
+    public void SetIsTarget(bool isTarget)
+    {
+        _isTarget = isTarget;
     }
 }

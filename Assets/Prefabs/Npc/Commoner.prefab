@@ -133,6 +133,8 @@ MonoBehaviour:
     <PreviewImage>k__BackingField: {fileID: 0}
     <BasePrice>k__BackingField: 0
     <Description>k__BackingField: 
+  _isInShop: 0
+  _itemDatabaseSO: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!114 &8247432451957772815
 MonoBehaviour:
   m_ObjectHideFlags: 0
