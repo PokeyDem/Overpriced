@@ -65,8 +65,6 @@ public class HagglingManager : MonoBehaviour{
 
     public void TryToSell(){
         _currentPrice = Int32.Parse(_counterField.text);
-        Debug.Log(_currentPrice);
-        Debug.Log(_basePrice);
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
 
         if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
@@ -84,7 +82,6 @@ public class HagglingManager : MonoBehaviour{
         }
         
         EndHaggling();
-        
     }
 
     private void SellItem(){

@@ -69,6 +69,7 @@ public class ItemData{
 }
 
 public enum ItemType{
+    All,
     Weapon,
     Food,
     Potion
