@@ -94,11 +94,6 @@ public class InventoryManager : MonoBehaviour{
             if (_categoryToSortBy != ItemType.All)
                 _selectedInventorySlot.gameObject.SetActive(false);
         }
-
-        foreach (var VARIABLE in _inventorySlotsDictionary){
-            Debug.Log(VARIABLE.Key + " : " + VARIABLE.Value);
-        }
-            
     }
 
     public void Exit(){ //On ExitButton click
