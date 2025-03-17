@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour{
     [SerializeField] private GameObject _itemSlotPrefab;
     [SerializeField] private GameObject _inventorySlotsContainer;
     [SerializeField] private MoneyManager _moneyManager; //todo delete when merchants guild is created
+    [SerializeField] private RectTransform _contentPanelTransform;
     
     private List<GameObject> _inventorySlots;
     private Dictionary<int, int> _inventorySlotsDictionary; //<itemId, inventorySlotIndex>
@@ -151,6 +152,7 @@ public class InventoryManager : MonoBehaviour{
         }
         else{
             AddSlots(5);
+            IncreaseContentPanelSize();
             AddItemToInventory(itemId);
         }
         
@@ -243,5 +245,11 @@ public class InventoryManager : MonoBehaviour{
             Debug.Log(counter + ": " + inventorySlot.GetComponent<InventorySlot>().GetItemId());
             counter++;
         }
+    }
+
+    private void IncreaseContentPanelSize(){
+        var delta = _contentPanelTransform.sizeDelta;
+        delta.y += 30;
+        _contentPanelTransform.sizeDelta = delta;
     }
 }
