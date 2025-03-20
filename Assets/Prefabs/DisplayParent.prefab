@@ -354,6 +354,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marker: {fileID: 4186020680990089367}
+  _item:
+    <Name>k__BackingField: 
+    <ItemType>k__BackingField: 0
+    <ID>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 0}
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <BasePrice>k__BackingField: 0
+    <Description>k__BackingField: 
+  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
 --- !u!1001 &403089855157078210
 PrefabInstance:
   m_ObjectHideFlags: 0

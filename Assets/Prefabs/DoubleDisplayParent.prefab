@@ -333,6 +333,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marker: {fileID: 7445513187988587349}
+  _item:
+    <Name>k__BackingField: 
+    <ItemType>k__BackingField: 0
+    <ID>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 0}
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <BasePrice>k__BackingField: 0
+    <Description>k__BackingField: 
+  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
 --- !u!1 &4073596828894886115
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +409,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marker: {fileID: 3615404353695368882}
+  _item:
+    <Name>k__BackingField: 
+    <ItemType>k__BackingField: 0
+    <ID>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 0}
+    <PreviewImage>k__BackingField: {fileID: 0}
+    <BasePrice>k__BackingField: 0
+    <Description>k__BackingField: 
+  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
 --- !u!1 &7445513187988587349
 GameObject:
   m_ObjectHideFlags: 0

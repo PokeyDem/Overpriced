@@ -8,6 +8,7 @@ public class DisplaySlotController : MonoBehaviour{
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
     private int _itemId = -1;
+    [SerializeField] private ItemData _item;
     private bool _isOccupied;
 
     private void Update(){
@@ -38,23 +39,31 @@ public class DisplaySlotController : MonoBehaviour{
         _marker.SetActive(false);
     }
 
-    public void PlaceItem(GameObject item, int itemId){
-        if (_itemPrefab != null && _itemId == itemId){
+    public void PlaceItem(ItemData item){
+        if (_itemPrefab != null && _itemId == item.ID){
             Destroy(_itemPrefab);
         }
-        _itemPrefab = Instantiate(item, _marker.transform.position, Quaternion.identity);
+        _itemPrefab = Instantiate(item.Prefab, _marker.transform.position, Quaternion.identity);
         _isOccupied = true;
-        _itemId = itemId;
+        _itemId = item.ID;
+        _item = item;
+        DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(this);
     }
 
     public void RemoveItem(){
         Destroy(_itemPrefab);
         _itemPrefab = null;
+        _item = null;
         _isOccupied = false;
         _itemId = -1;
+        DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(this);
     }
 
     public int GetItemId(){
         return _itemId;
+    }
+    public ItemData GetItem()
+    {
+        return _item;
     }
 }

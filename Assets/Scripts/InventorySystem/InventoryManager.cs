@@ -74,7 +74,7 @@ public class InventoryManager : MonoBehaviour{
         
         if (inventorySlotItemId != -1 && _currentDisplayDisplaySlot.GetItemId() == -1){
             var selectedItemIndex = _itemsDatabase._itemsData.FindIndex(data => data.ID == inventorySlotItemId);
-            _currentDisplayDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex].Prefab, inventorySlotItemId);
+            _currentDisplayDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex]);
             RemoveItemFromInventory();
         }
     }

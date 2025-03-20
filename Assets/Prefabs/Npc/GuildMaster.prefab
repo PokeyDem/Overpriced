@@ -134,6 +134,7 @@ MonoBehaviour:
     <BasePrice>k__BackingField: 0
     <Description>k__BackingField: 
   _isInShop: 0
+  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
   _itemDatabaseSO: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!114 &8260071527111653220
 MonoBehaviour:

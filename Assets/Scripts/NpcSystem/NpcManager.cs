@@ -35,15 +35,15 @@ public class NpcManager : MonoBehaviour{
         //GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
         GameObject npcPrefab = _npcPrefabs[3];
         var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(null, false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos, new Dictionary<GameObject, ItemData>(), new List<GameObject>());
+        npc.GetComponent<NpcBehaviour>().Initialize(false, _despawnPointPos, _despawnInShop,_windowPos, _doorPos, null, _counterPos);
         _npcsCount++;
     }
 
-    public void SpawnNpcInsideShop(Vector3 spawnPoint, ItemData item, GameObject displayItemSlot, NPCType npcType, Dictionary<GameObject, ItemData> desiredItemsOnDisplays, List<GameObject> occupiedDisplays)
+    public void SpawnNpcInsideShop(Vector3 spawnPoint, DisplaySlotController displaySlotController, NPCType npcType)
     {
         GameObject npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
         var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(item, true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displayItemSlot, _counterPos, desiredItemsOnDisplays, occupiedDisplays);
+        npc.GetComponent<NpcBehaviour>().Initialize(true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos);
     }
 
     public void DespawnNpc(GameObject npc){

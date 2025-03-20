@@ -6,6 +6,8 @@ using UnityEngine;
 public class WindowTrigger : MonoBehaviour{
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPC"))
-            other.GetComponent<NpcBehaviour>().FindDisplaysWithItems();
+        {
+            //other.GetComponent<NpcBehaviour>().FindDisplaysWithItems();
+        }
     }
 }
