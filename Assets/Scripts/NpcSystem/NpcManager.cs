@@ -18,7 +18,6 @@ public class NpcManager : MonoBehaviour{
     [SerializeField] private float _minDelay;//Todo move to config;
     [SerializeField] private float _maxDelay;//Todo move to config
     [SerializeField] private bool debugSpawn;
-    private GameObject[] _npcs;
     private int _npcsCount;
     private bool _spawnCoroutineChecker;
     
