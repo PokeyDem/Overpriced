@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tolerance: 0
+  _tolerance: 2
   _NPCType: 1
   _itemToBuy:
     <Name>k__BackingField: 
