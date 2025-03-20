@@ -8,7 +8,7 @@ public class GuildMasterDesiredItemsSO : NPCDesiredItemsSO
 
     public override List<ItemData> SelectDesiredItems()
     {
-        List<ItemData> itemsToBuy = GetItemsDatabase()._itemsData.FindAll(x => x.Name.Contains("Sword"));
+        List<ItemData> itemsToBuy = GetItemsDatabase()._itemsData.FindAll(x => x.ItemType == ItemType.Weapon);
         return itemsToBuy;
     }
 
