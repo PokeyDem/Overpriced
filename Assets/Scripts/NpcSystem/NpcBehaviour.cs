@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Progress;
 
 public class NpcBehaviour : MonoBehaviour{
 
@@ -18,16 +19,10 @@ public class NpcBehaviour : MonoBehaviour{
     private Transform _counterPos;
 
     [SerializeField] private bool _isInShop;
-    private IItemSelector _itemSelector;
-    private List<ItemData> _desiredItems;
+    [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
 
     private void Awake()
     {
-        _itemSelector = GetComponent<IItemSelector>();
-        if (_itemSelector != null)
-        {
-            _desiredItems = _itemSelector.SelectDesiredItems();
-        }
     }
 
     public void Initialize(bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, Transform counterPos){
@@ -108,7 +103,7 @@ public class NpcBehaviour : MonoBehaviour{
     {
         bool isInterested = false;
         int chanceToBuy = 0;
-        if (_desiredItems.Contains(item))
+        if (_desiredItemsSO.GetDesiredItems().Exists(i=>i.ID==item.ID))
         {
             chanceToBuy = 90;
         }
