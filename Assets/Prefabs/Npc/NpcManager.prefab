@@ -60,4 +60,47 @@ MonoBehaviour:
   _minDelay: 3
   _maxDelay: 5
   debugSpawn: 0
-  _dailyNpcSpawns: []
+  _dailyNpcSpawns:
+  - _dayNr: 1
+    _morningScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 3
+    _afternoonScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 3
+  - _dayNr: 2
+    _morningScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 2
+    - _npcPrefab: {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 2
+    _afternoonScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 3
+    - _npcPrefab: {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 1
+  - _dayNr: 3
+    _morningScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: f7658534b5a6cdf4980564f709cb4e19, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 1
+    _afternoonScenario:
+    - _npcPrefab: {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
+      _spawnCount: 1
+    - _npcPrefab: {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
+      _spawnCount: 3
+    - _npcPrefab: {fileID: 8701716767278798441, guid: f5d81a7b495a6e64080044b557b5c883, type: 3}
+      _spawnCount: 1
