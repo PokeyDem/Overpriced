@@ -23,7 +23,6 @@ public class ItemShopTriggerBehaviour : MonoBehaviour{ //Only for tests
 
    private void EnableUI(){
       _ShopUI.gameObject.SetActive(true);
-      _InventoryUI.gameObject.SetActive(true);
       foreach (Button button in _buttonsToDisable){
          button.gameObject.SetActive(false);
       }

@@ -7,7 +7,7 @@ public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
-    private int _itemId = -1;
+    private int _itemId = -1; //todo: przerobić tą klasę by operowała na ItemData zamiast na surowym ItemID
     private bool _isOccupied;
 
     private void Update(){
