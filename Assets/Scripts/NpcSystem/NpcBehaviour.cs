@@ -65,7 +65,7 @@ public class NpcBehaviour : MonoBehaviour{
     public IEnumerator BrowseDisplays()
     {
         Debug.Log($"BrowseDisplays started");
-        List < DisplaySlotController > displaySlotsWithItems = DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems();
+        List < DisplaySlotController > displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         foreach (var displaySlot in displaySlotsWithItems)
         {
             if (displaySlot==null) {
