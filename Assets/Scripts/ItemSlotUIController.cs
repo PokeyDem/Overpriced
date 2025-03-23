@@ -13,7 +13,7 @@ namespace DefaultNamespace {
         private bool _isOutlineEnabled;
         private TextMeshProUGUI _rarityDisplay;
         
-        private void CreateRef(){
+        private void Initiate(){
             _image = gameObject.transform.Find("ItemImage").GetComponent<Image>();
             _outline = gameObject.transform.Find("Outline").GetComponent<Image>();
             _rarityDisplay = gameObject.transform.Find("Rarity").GetComponent<TextMeshProUGUI>();
@@ -29,7 +29,7 @@ namespace DefaultNamespace {
                 return;
             }
 
-            CreateRef();
+            Initiate();
             _item = item;
             _quantity=1;
             _image.sprite = item.PreviewImage;

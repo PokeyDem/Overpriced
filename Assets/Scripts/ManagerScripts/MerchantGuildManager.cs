@@ -26,12 +26,11 @@ namespace ManagerScripts {
         }
 
         private void Start() {
-            AddShopPositions();
+            AddShopPositions(1);
         }
 
-        private void AddShopPositions() {
-            var itemList = itemPool.GetItemsData();
-            //Debug.Log(itemList.Count);
+        private void AddShopPositions(int day) {
+            var itemList = itemPool.GetItemsData(day);
             for (int i = 0; i < itemList.Count; i++) {
                 int index = FindExistingItem(itemList[i]);
                 if (index != -1) {
@@ -49,7 +48,6 @@ namespace ManagerScripts {
         }
 
         public void SelectSlot(int selectedSlotId) {
-            //On inventory slot button click
 
             if (_selectedItemSlot)
                 _selectedItemSlot.DisableOutline();
@@ -110,6 +108,18 @@ namespace ManagerScripts {
             }
         }
 
+        public void RestockOffer(string day) {
+            int tmpDay = 0;
+            if (!int.TryParse(day,out tmpDay)) {
+                return;
+            }
+            while( 0<_shopPositions.Count ) {
+                var tmp = _shopPositions[0];
+                _shopPositions.Remove(tmp);
+                Destroy(tmp);
+            }
 
+            AddShopPositions(tmpDay);
+        }
     }
 }

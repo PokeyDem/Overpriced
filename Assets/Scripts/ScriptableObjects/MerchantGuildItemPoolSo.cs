@@ -8,18 +8,24 @@ namespace ScriptableObjects {
     [CreateAssetMenu(fileName = "MerchantGuildItemPool", menuName = "MerchantGuildItemPool", order = 0)]
     public class MerchantGuildItemPoolSo : ScriptableObject {
         public ItemsDatabaseSO database;
-        public List<ItemPoolPosition> itemsPool = new();
+        public List<ItemPoolDay> itemsPool = new();
 
-        public List<ItemData> GetItemsData() {
+        public List<ItemData> GetItemsData(int day) {
+            if (day <= 0) {
+                day = 1;
+            }
+            day--;
+            day = day%itemsPool.Count;
             List<ItemData> itemDataList = new List<ItemData>();
-            for (int i = 0; i < itemsPool.Count; i++) {
-                if (itemsPool[i].IsNotGuaranteed) {
-                    if (Random.Range(0f, 1f) <= itemsPool[i].Probability) {
+            
+            for (int i = 0; i < itemsPool[day].DayItemPool.Count; i++) {
+                if (itemsPool[day].DayItemPool[i].IsNotGuaranteed) {
+                    if (Random.Range(0, 100) <= itemsPool[day].DayItemPool[i].Probability) {
                         continue;
                     }
                 }
-                var item = database._itemsData.Find(data => data.ID == itemsPool[i].Id);
-                AddItemData(itemDataList,item, itemsPool[i].Amount);
+                var item = database._itemsData.Find(data => data.ID == itemsPool[day].DayItemPool[i].Id);
+                AddItemData(itemDataList,item, itemsPool[day].DayItemPool[i].Amount);
             }
             return itemDataList;
         }
@@ -30,13 +36,18 @@ namespace ScriptableObjects {
             }
         }
     }
+
+    [Serializable]
+    public class ItemPoolDay {
+        [field: SerializeField] public List<ItemPoolPosition> DayItemPool{ get; private set; }
+    }
     
     [Serializable]
     public class ItemPoolPosition {
         [field: SerializeField] public int Id { get; private set; }
         [field: SerializeField] public int Amount { get; private set; }
         [field: SerializeField] public bool IsNotGuaranteed { get; private set; }
-        [field: SerializeField] public float Probability { get; private set; }
+        [field: SerializeField] public int Probability { get; private set; }
         
     }
 }
