@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5081294809896751061}
   - component: {fileID: 524587001898824491}
   - component: {fileID: 4614631884500528308}
-  - component: {fileID: 8387473690705313349}
   - component: {fileID: 5196044724863255334}
   - component: {fileID: 3066310839602576973}
   m_Layer: 12
@@ -123,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tolerance: 0
+  _tolerance: 4
   _NPCType: 2
   _itemToBuy:
     <Name>k__BackingField: 
@@ -134,20 +133,7 @@ MonoBehaviour:
     <BasePrice>k__BackingField: 0
     <Description>k__BackingField: 
   _isInShop: 0
-  _itemDatabaseSO: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
---- !u!114 &8387473690705313349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701716767278798441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c07da6aedc1405b45bea0b1c7a26a9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
+  _desiredItemsSO: {fileID: 11400000, guid: 27f2eb7d771806b499ca82987dc21372, type: 2}
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0
