@@ -51,14 +51,14 @@ public class ShopStateManager : MonoBehaviour
     private bool _timeStop=false;
     
     private void Update() {
-        if (_timeStop) {
-            return;
-        }
-        if (_openTimeCounter>0) {
-            _openTimeCounter -= Time.deltaTime;
-        }else if(_currentShopState==ShopState.Open) {
-            CloseShop();
-        }
+        //if (_timeStop) {
+        //    return;
+        //}
+        //if (_openTimeCounter>0) {
+        //    _openTimeCounter -= Time.deltaTime;
+        //}else if(_currentShopState==ShopState.Open) {
+        //    CloseShop();
+        //}
     }
 
     public void StopTime() {

@@ -13,7 +13,7 @@ public class DayManager : MonoBehaviour {
     public UnityEvent<string> dayChange;
         
     public enum PartOfDay {
-        Morning, Noon, Evening, Dusk
+        Morning=0, Noon=1, Evening=2, Dusk=3
     }
     
     // Start is called before the first frame update
