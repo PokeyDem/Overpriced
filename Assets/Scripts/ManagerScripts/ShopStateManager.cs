@@ -16,6 +16,19 @@ public class ShopStateManager : MonoBehaviour
     public enum ShopState {
         Open, Close
     }
+
+    public ShopStateData GetShopStateData(){
+        return new ShopStateData(_currentShopState, openShopTimeSeconds);
+    }
+
+    public void LoadShopState(ShopStateData shopStateData){
+        if (_currentShopState != shopStateData.ShopState){
+            if (shopStateData.ShopState == ShopState.Close)
+                CloseShop();
+            else
+                OpenShop();
+        }
+    }
     
     public void Awake() {
         if (ShopStateManagerInstance == null) {

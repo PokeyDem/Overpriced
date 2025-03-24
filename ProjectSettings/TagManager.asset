@@ -8,6 +8,7 @@ TagManager:
   - Display
   - DisplayItemSlot
   - NPC
+  - Item
   layers:
   - Default
   - TransparentFX

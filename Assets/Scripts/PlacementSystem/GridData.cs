@@ -18,6 +18,12 @@ public class GridData{
         }
     }
 
+    public void ShowData(){
+        foreach (var VARIABLE in placedObject){
+            Debug.Log(VARIABLE.ToString());
+        }
+    }
+
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize){
         List<Vector3Int> returnValues = new List<Vector3Int>();
         for (int x = 0; x < objectSize.x; x++){
@@ -28,6 +34,10 @@ public class GridData{
         return returnValues;
     }
 
+    public void ClearPlacedObjects(){
+        placedObject = new Dictionary<Vector3Int, PlacementData>();
+    }
+    
     public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize, Vector3Int _playerPosition){
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
         foreach (var pos in positionToOccupy){

@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
+    private int _displayTypeID;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
     private int _itemId = -1;
     private bool _isOccupied;
+    private Vector3 _position;
 
     private void Update(){
         if (_itemPrefab)
@@ -56,5 +58,21 @@ public class DisplaySlotController : MonoBehaviour{
 
     public int GetItemId(){
         return _itemId;
+    }
+
+    public void SetDisplayTypeId(int id){
+        _displayTypeID = id;
+    }
+
+    public int GetDisplayTypeId(){
+        return _displayTypeID;
+    }
+
+    public void SetPosition(Vector3 position){
+        _position = position;
+    }
+
+    public Vector3 GetPosition(){
+        return _position;
     }
 }
