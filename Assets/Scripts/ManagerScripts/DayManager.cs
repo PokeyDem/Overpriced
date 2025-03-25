@@ -13,7 +13,7 @@ public class DayManager : MonoBehaviour {
     public UnityEvent<string> dayChange;
         
     public enum PartOfDay {
-        Morning=0, Noon=1, Evening=2, Dusk=3
+        Morning=0, Noon=1
     }
     
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class DayManager : MonoBehaviour {
     }
     
     public void NextPartOfTheDay() {
-        if (currentPartOfDay != PartOfDay.Dusk) {
+        if (currentPartOfDay != PartOfDay.Noon) {
             currentPartOfDay++;
         }else {
             currentPartOfDay = PartOfDay.Morning;
