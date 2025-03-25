@@ -29,12 +29,15 @@ public class DayManager : MonoBehaviour {
         partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
 
-    public int GetDay() {
-        return dayCount;
+    public DayData GetDayData(){
+        return new DayData(dayCount, currentPartOfDay);
     }
 
-    public PartOfDay GetPartOfDay() {
-        return currentPartOfDay;
+    public void LoadDayData(DayData dayData){
+        dayCount = dayData.DayCount;
+        currentPartOfDay = dayData.DayPart;
+        dayChange.Invoke(dayCount.ToString());
+        partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
     
     public void NextPartOfTheDay() {

@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour{
     private Vector3 _movementVector;
     private Vector3 _currentVelocity;
     private float _yPos;
+    private IDataService _dataService = new JsonDataService();
 
     void Start()
     {
@@ -51,5 +52,14 @@ public class PlayerControl : MonoBehaviour{
         newPos.y = _yPos;
         _rb.MovePosition(newPos);
     }
-    
+
+    public PlayerData GetPlayerData(){
+        return new PlayerData(transform.position.x, transform.position.y, transform.position.z);
+    }
+
+    public void LoadPlayer(PlayerData playerData){
+        Vector3 savedPosition = new Vector3(playerData.x, playerData.y, playerData.z);
+        transform.position = savedPosition;
+    }
+
 }
