@@ -33,6 +33,14 @@ public class DayManager : MonoBehaviour {
         return new DayData(dayCount, currentPartOfDay);
     }
 
+    public int GetDay(){
+        return dayCount;
+    }
+
+    public PartOfDay GetPartOfDay(){
+        return currentPartOfDay;
+    }
+
     public void LoadDayData(DayData dayData){
         dayCount = dayData.DayCount;
         currentPartOfDay = dayData.DayPart;
