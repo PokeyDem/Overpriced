@@ -10,6 +10,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private DayManager dayManager;
     [SerializeField] private ShopStateManager shopStateManager;
     [SerializeField] private MoneyManager moneyManager;
+    [SerializeField] private ExperienceManager experienceManager;
     private IDataService _dataService = new JsonDataService();
 
     public void SaveGame()
@@ -20,9 +21,10 @@ public class SaveManager : MonoBehaviour
         DayData dayData = dayManager.GetDayData();
         ShopStateData shopStateData = shopStateManager.GetShopStateData();
         MoneyData moneyData = moneyManager.GetMoneyData();
+        ExperienceData experienceData = experienceManager.GetExperienceData();
         
         SaveData saveData = new SaveData(playerData, displayData, 
-            inventoryData, dayData, shopStateData, moneyData);
+            inventoryData, dayData, shopStateData, moneyData, experienceData);
         
         _dataService.SaveData("/save.json", saveData, true);
     }
@@ -35,6 +37,7 @@ public class SaveManager : MonoBehaviour
         dayManager.LoadDayData(saveData.DayData);
         shopStateManager.LoadShopState(saveData.ShopStateData);
         moneyManager.LoadMoneyData(saveData.MoneyData);
+        experienceManager.LoadExperienceData(saveData.ExperienceData);
     }
 
     // public void LoadGame()

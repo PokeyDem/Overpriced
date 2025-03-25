@@ -40,16 +40,19 @@ public class SaveData{
     public DayData DayData;
     public ShopStateData ShopStateData;
     public MoneyData MoneyData;
+    public ExperienceData ExperienceData;
 
     public SaveData(PlayerData playerData, List<DisplayData> displayData, 
         InventoryData inventoryData, DayData dayData,
-        ShopStateData shopStateData, MoneyData moneyData){
+        ShopStateData shopStateData, MoneyData moneyData,
+        ExperienceData experienceData){
         PlayerData = playerData;
         DisplayData = displayData;
         InventoryData = inventoryData;
         DayData = dayData;
         ShopStateData = shopStateData;
         MoneyData = moneyData;
+        ExperienceData = experienceData;
     }
 }
 
@@ -78,5 +81,15 @@ public class MoneyData{
 
     public MoneyData(int money){
         Money = money;
+    }
+}
+
+public class ExperienceData{
+    public int Level;
+    public float CurrentExp;
+
+    public ExperienceData(int level, float currentExp){
+        Level = level;
+        CurrentExp = currentExp;
     }
 }

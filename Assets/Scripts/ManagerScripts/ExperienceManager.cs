@@ -6,6 +6,12 @@ using UnityEngine.Events;
 
 public class ExperienceManager : MonoBehaviour {
     public static ExperienceManager ExperienceManagerInstance;
+    [SerializeField]private int maxLevel=5;
+    private int _level=1;
+    private float _currentExp=0;
+    private int _nextLvlExp;
+    public UnityEvent<String> levelUpEvent;
+    public UnityEvent<float> currentExpEvent;
     
     public void Awake() {
         if (ExperienceManagerInstance == null) {
@@ -19,12 +25,16 @@ public class ExperienceManager : MonoBehaviour {
         levelUpEvent.Invoke(_level.ToString());
     }
 
-    [SerializeField]private int maxLevel=5;
-    private int _level=1;
-    private float _currentExp=0;
-    private int _nextLvlExp;
-    public UnityEvent<String> levelUpEvent;
-    public UnityEvent<float> currentExpEvent;
+    public ExperienceData GetExperienceData(){
+        return new ExperienceData(_level, _currentExp);
+    }
+
+    public void LoadExperienceData(ExperienceData data){
+        _level = data.Level;
+        _currentExp = data.CurrentExp;
+        currentExpEvent.Invoke(_currentExp);
+        levelUpEvent.Invoke(_level.ToString());
+    }
 
     public void GiveExp(float exp) {
         if (_level == maxLevel) {
