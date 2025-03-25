@@ -40,6 +40,16 @@ public class InventoryManager : MonoBehaviour{
         _itemCategoryText.text = ItemType.All.ToString();
     }
 
+    private void ClearInventory(){
+        foreach (var slot in _inventorySlots){
+            if (slot.GetComponent<InventorySlot>().GetItemId() != -1) 
+                slot.GetComponent<InventorySlot>().RemoveItem();
+        }
+        _inventorySlotsDictionary = new Dictionary<int, int>();
+        _itemTypesDictionary = new Dictionary<ItemType, List<int>>();
+        InitItemTypesDictionary();
+    }
+
     public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
         _currentDisplayDisplaySlot = nearestDisplaySlot;
     }
@@ -67,6 +77,10 @@ public class InventoryManager : MonoBehaviour{
         _inventoryUI.gameObject.SetActive(true);
         SelectSlot(0);
         _selectedInventorySlot.EnableOutline();
+    }
+
+    public void DisableInventory(){
+        _inventoryUI.gameObject.SetActive(false);
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
@@ -181,9 +195,13 @@ public class InventoryManager : MonoBehaviour{
     }
 
     private int FindExistingItem(int index){
-        if (_inventorySlotsDictionary.ContainsKey(index))
-            return _inventorySlotsDictionary[index];
-        
+        int counter = 0;
+        foreach (var inventorySlot in _inventorySlots){
+            if (inventorySlot.GetComponent<InventorySlot>().GetItemId().Equals(index)){
+                return counter;
+            }
+            counter++;
+        }
         return -1;
     }
 
@@ -251,5 +269,16 @@ public class InventoryManager : MonoBehaviour{
         var delta = _contentPanelTransform.sizeDelta;
         delta.y += 30;
         _contentPanelTransform.sizeDelta = delta;
+    }
+
+    public InventoryData GetInventoryData(){
+        return new InventoryData(_inventorySlotsDictionary);
+    }
+
+    public void LoadInventoryData(Dictionary<int, int> inventoryData){
+        ClearInventory();
+        foreach (var itemData in inventoryData){
+            AddItemToInventory(itemData.Key);
+        }
     }
 }

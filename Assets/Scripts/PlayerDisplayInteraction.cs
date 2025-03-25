@@ -12,12 +12,12 @@ public class PlayerDisplayInteraction : MonoBehaviour{
 
     private void Awake(){
         _slotsLayer = LayerMask.GetMask("Slots");
+        _inputManager.OnInteraction += EnableInventory;
     }
 
     private void Update(){
         DetectNearestSlot();
         _inventoryManager.SetNearestSlot(_nearestDisplaySlotController);
-        _inputManager.OnInteraction += EnableInventory;
     }
 
     private void DetectNearestSlot(){
@@ -47,6 +47,8 @@ public class PlayerDisplayInteraction : MonoBehaviour{
             distance = Mathf.Abs(Vector3.Distance(transform.position, _lastNearestSlot.transform.position));
             if (distance > _interactionRange)
                 _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
+            if (!_nearestSlot)
+                _inventoryManager.DisableInventory();
         }
     }
     

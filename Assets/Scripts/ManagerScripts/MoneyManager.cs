@@ -19,6 +19,15 @@ public class MoneyManager : MonoBehaviour {
         }
     }
 
+    public MoneyData GetMoneyData(){
+        return new MoneyData(money);
+    }
+
+    public void LoadMoneyData(MoneyData moneyData){
+        money = moneyData.Money;
+        changeEvent.Invoke(money.ToString());
+    }
+
     public void Start() {
         changeEvent.Invoke(money.ToString());
     }
