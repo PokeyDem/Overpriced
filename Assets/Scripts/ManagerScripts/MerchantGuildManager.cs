@@ -25,10 +25,6 @@ namespace ManagerScripts {
             buyCommunicat.text = "";
         }
 
-        private void Start() {
-            AddShopPositions(1);
-        }
-
         private void AddShopPositions(int day) {
             var itemList = itemPool.GetItemsData(day);
             for (int i = 0; i < itemList.Count; i++) {
@@ -108,18 +104,13 @@ namespace ManagerScripts {
             }
         }
 
-        public void RestockOffer(string day) {
-            int tmpDay = 0;
-            if (!int.TryParse(day,out tmpDay)) {
-                return;
-            }
+        public void RestockOffer(int day) {
             while( 0<_shopPositions.Count ) {
                 var tmp = _shopPositions[0];
                 _shopPositions.Remove(tmp);
                 Destroy(tmp);
             }
-
-            AddShopPositions(tmpDay);
+            AddShopPositions(day);
         }
     }
 }
