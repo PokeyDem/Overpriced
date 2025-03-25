@@ -88,11 +88,11 @@ namespace ManagerScripts {
 
         public void TryBuyItem() {
             if (_selectedItemSlot==null) {
-                buyCommunicat.text = "Not chosen item";
+                buyCommunicat.text = "No item selected";
                 return;
             }
             if (_selectedItemSlot.GetItemQuantity() <= 0) {
-                buyCommunicat.text = "Don't enough stock";
+                buyCommunicat.text = "Out of stock";
                 return;
             }
             if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.MoneyManagerInstance.GetCurrentMoney()) {
