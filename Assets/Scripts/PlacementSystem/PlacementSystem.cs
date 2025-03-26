@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class PlacementSystem : MonoBehaviour{
     [SerializeField] InputManager _inputManager;

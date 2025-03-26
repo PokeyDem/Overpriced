@@ -11,4 +11,8 @@ public class DynamicDisplay : MonoBehaviour
     public void UpdateText(string text) {
         textField.text = text;
     }
+    
+    public void UpdateText(int number) {
+        textField.text = number.ToString();
+    }
 }
