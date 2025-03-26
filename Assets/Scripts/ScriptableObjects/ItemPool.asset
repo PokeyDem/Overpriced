@@ -35,56 +35,11 @@ MonoBehaviour:
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 2
+    - <Id>k__BackingField: 8
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 2
-      <Amount>k__BackingField: 5
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 13
-      <Amount>k__BackingField: 4
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 50
-    - <Id>k__BackingField: 14
-      <Amount>k__BackingField: 3
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 25
-    - <Id>k__BackingField: 15
-      <Amount>k__BackingField: 2
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 10
-    - <Id>k__BackingField: 16
-      <Amount>k__BackingField: 4
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 1
-  - <DayItemPool>k__BackingField:
-    - <Id>k__BackingField: 1
-      <Amount>k__BackingField: 10
-      <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 0
-    - <Id>k__BackingField: 2
-      <Amount>k__BackingField: 10
-      <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 0
-    - <Id>k__BackingField: 0
-      <Amount>k__BackingField: 10
-      <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 0
-    - <Id>k__BackingField: 7
-      <Amount>k__BackingField: 5
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 12
-      <Amount>k__BackingField: 5
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 2
-      <Amount>k__BackingField: 5
-      <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 2
+    - <Id>k__BackingField: 9
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
@@ -125,11 +80,56 @@ MonoBehaviour:
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
-    - <Id>k__BackingField: 2
+    - <Id>k__BackingField: 8
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
+    - <Id>k__BackingField: 9
+      <Amount>k__BackingField: 5
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 75
+    - <Id>k__BackingField: 13
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 50
+    - <Id>k__BackingField: 14
+      <Amount>k__BackingField: 3
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 25
+    - <Id>k__BackingField: 15
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <Id>k__BackingField: 16
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 1
+  - <DayItemPool>k__BackingField:
+    - <Id>k__BackingField: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
     - <Id>k__BackingField: 2
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <Id>k__BackingField: 0
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <Id>k__BackingField: 7
+      <Amount>k__BackingField: 5
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 75
+    - <Id>k__BackingField: 12
+      <Amount>k__BackingField: 5
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 75
+    - <Id>k__BackingField: 8
+      <Amount>k__BackingField: 5
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 75
+    - <Id>k__BackingField: 9
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 75
