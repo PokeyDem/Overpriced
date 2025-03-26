@@ -44,7 +44,7 @@ public class DayManager : MonoBehaviour {
     public void LoadDayData(DayData dayData){
         dayCount = dayData.DayCount;
         currentPartOfDay = dayData.DayPart;
-        dayChange.Invoke(dayCount.ToString());
+        dayChange.Invoke(dayCount);
         partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
     

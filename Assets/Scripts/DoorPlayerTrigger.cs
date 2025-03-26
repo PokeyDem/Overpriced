@@ -9,7 +9,7 @@ public class DoorPlayerTrigger : MonoBehaviour{
    public UnityEvent goOutsideEvent;
 
    private void OnTriggerEnter(Collider other){
-      if (other.CompareTag("Player")){
+      if (other.CompareTag("Player") && ShopStateManager.ShopStateManagerInstance.ShopIsClose()){
          goOutsideEvent.Invoke();
       }
    }
