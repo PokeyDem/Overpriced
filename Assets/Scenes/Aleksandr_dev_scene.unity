@@ -13376,7 +13376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChange.m_PersistentCalls.m_Calls.Array.size
@@ -13387,15 +13387,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosOpen.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
@@ -13405,13 +13413,17 @@ PrefabInstance:
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1947892078}
+      objectReference: {fileID: 1443291892}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1443291892}
+      objectReference: {fileID: 1640915182}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1947892078}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1640915182}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
@@ -13447,20 +13459,44 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosOpen.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartSpawnRandomNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChanger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 652325773}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
-      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StopSpawnRandomNPC
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
-      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: NextPartOfTheDay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1947892078}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -13487,19 +13523,55 @@ PrefabInstance:
       value: UpdateText
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextPartOfTheDay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosOpen.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: NpcManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
-      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: NpcManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
-      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: DayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1443291892}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1640915182}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
@@ -13515,8 +13587,28 @@ PrefabInstance:
       value: DynamicDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopSpawnRandomNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NpcManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopWosOpen.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -13531,6 +13623,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: shopWosClose.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -13540,6 +13636,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
       propertyPath: shopStateChanger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: changePartOfTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381646708998592786, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}
+      propertyPath: closeShopWithoutChangingTheDay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4542404855881592434, guid: 6dedaa776ecfb6647ac3f7fe99204055, type: 3}

@@ -39,24 +39,4 @@ public class SaveManager : MonoBehaviour
         moneyManager.LoadMoneyData(saveData.MoneyData);
         experienceManager.LoadExperienceData(saveData.ExperienceData);
     }
-
-    // public void LoadGame()
-    // {
-    //     GameData data = saveSystem.LoadGame();
-    //     if (data != null)
-    //     {
-    //         // Load player data
-    //         player.LoadPlayerData(data.player);
-    //
-    //         // Load display data
-    //         foreach (Display display in displays)
-    //         {
-    //             DisplayData savedDisplay = data.displays.Find(d => d.displayID == display.displayID);
-    //             if (savedDisplay != null)
-    //             {
-    //                 display.LoadDisplayData(savedDisplay);
-    //             }
-    //         }
-    //     }
-    // }
 }

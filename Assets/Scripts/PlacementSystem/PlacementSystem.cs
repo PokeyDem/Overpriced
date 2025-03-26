@@ -180,7 +180,6 @@ public class PlacementSystem : MonoBehaviour{
                 .transform.parent.GetComponentsInChildren<DisplaySlotController>();
             
             if (itemsId.Count > 1){
-                Debug.Log($"displays: {displaySlotControllers.Length} | items: {itemsId.Count}");
                 int counter = 0;
                 
                 for (int i = 0; i < displaySlotControllers.Length; i++){

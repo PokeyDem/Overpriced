@@ -12,6 +12,7 @@ public class ShopStateManager : MonoBehaviour
     public UnityEvent<string> shopStateChange;
     public UnityEvent shopWosOpen;
     public UnityEvent shopWosClose;
+    public UnityEvent changePartOfTheDay; //Moved it to the separate event, to be able to implement load method correctly
 
     public enum ShopState {
         Open, Close
@@ -23,8 +24,11 @@ public class ShopStateManager : MonoBehaviour
 
     public void LoadShopState(ShopStateData shopStateData){
         if (_currentShopState != shopStateData.ShopState){
-            if (shopStateData.ShopState == ShopState.Close)
-                CloseShop();
+            if (shopStateData.ShopState == ShopState.Close){
+                _currentShopState = ShopState.Close;
+                shopStateChange.Invoke(_currentShopState.ToString());
+                shopWosClose.Invoke();
+            }
             else
                 OpenShop();
         }
@@ -59,6 +63,7 @@ public class ShopStateManager : MonoBehaviour
         _currentShopState = ShopState.Close;
         shopStateChange.Invoke(_currentShopState.ToString());
         shopWosClose.Invoke();
+        changePartOfTheDay.Invoke();
     }
 
     private bool _timeStop=false;
