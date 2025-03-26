@@ -15,7 +15,7 @@ public class ShopStateManager : MonoBehaviour
     public UnityEvent changePartOfTheDay; //Moved it to the separate event, to be able to implement load method correctly
 
     public enum ShopState {
-        Open, Close
+        Open, Closed
     }
 
     public ShopStateData GetShopStateData(){
@@ -24,10 +24,13 @@ public class ShopStateManager : MonoBehaviour
 
     public void LoadShopState(ShopStateData shopStateData){
         if (_currentShopState != shopStateData.ShopState){
-            if (shopStateData.ShopState == ShopState.Close){
-                _currentShopState = ShopState.Close;
+            if (shopStateData.ShopState == ShopState.Closed){
+                _currentShopState = ShopState.Closed;
                 shopStateChange.Invoke(_currentShopState.ToString());
                 shopWosClose.Invoke();
+                foreach (var npc in GameObject.FindGameObjectsWithTag("NPC")){
+                    Destroy(npc);
+                }
             }
             else
                 OpenShop();
@@ -42,7 +45,7 @@ public class ShopStateManager : MonoBehaviour
     }
     
     void Start() {
-        _currentShopState = ShopState.Close;
+        _currentShopState = ShopState.Closed;
         shopStateChange.Invoke(_currentShopState.ToString());
     }
     
@@ -56,11 +59,11 @@ public class ShopStateManager : MonoBehaviour
     }
 
     public bool ShopIsClose() {
-        return _currentShopState == ShopState.Close;
+        return _currentShopState == ShopState.Closed;
     }
     
     public void CloseShop() {
-        _currentShopState = ShopState.Close;
+        _currentShopState = ShopState.Closed;
         shopStateChange.Invoke(_currentShopState.ToString());
         shopWosClose.Invoke();
         changePartOfTheDay.Invoke();
