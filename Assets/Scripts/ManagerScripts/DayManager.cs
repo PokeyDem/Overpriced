@@ -10,7 +10,7 @@ public class DayManager : MonoBehaviour {
     [SerializeField] private int dayCount=1;
     [SerializeField] private PartOfDay currentPartOfDay=PartOfDay.Morning;
     public UnityEvent<string> partOfDayChange;
-    public UnityEvent<string> dayChange;
+    public UnityEvent<int> dayChange;
         
     public enum PartOfDay {
         Morning=0, Noon=1
@@ -25,7 +25,7 @@ public class DayManager : MonoBehaviour {
     }
 
     public void Start() {
-        dayChange.Invoke(dayCount.ToString());
+        dayChange.Invoke(dayCount);
         partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
 
@@ -44,7 +44,7 @@ public class DayManager : MonoBehaviour {
     public void LoadDayData(DayData dayData){
         dayCount = dayData.DayCount;
         currentPartOfDay = dayData.DayPart;
-        dayChange.Invoke(dayCount.ToString());
+        dayChange.Invoke(dayCount);
         partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
     
@@ -54,7 +54,7 @@ public class DayManager : MonoBehaviour {
         }else {
             currentPartOfDay = PartOfDay.Morning;
             dayCount++;
-            dayChange.Invoke(dayCount.ToString());
+            dayChange.Invoke(dayCount);
         }
         partOfDayChange.Invoke(currentPartOfDay.ToString());
     }
@@ -73,7 +73,7 @@ public class DayManager : MonoBehaviour {
     public void SkipDay() {
         dayCount++;
         currentPartOfDay = PartOfDay.Morning;
-        dayChange.Invoke(dayCount.ToString());
+        dayChange.Invoke(dayCount);
     } 
 
 }
