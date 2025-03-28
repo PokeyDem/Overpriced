@@ -20,8 +20,16 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
 
+    public event Action BrowsingStarted;
+    public event Action DecidingStarted;
+    public event Action ItemRejected;
+    public event Action ItemSelected;
+    [SerializeField] private UpdateText _updateText;
+    private NPCEmotePresenter _presenter;
+
     private void Awake()
     {
+        _presenter=new NPCEmotePresenter(this,_updateText);
     }
 
     public void Initialize(bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, Transform counterPos){
@@ -64,6 +72,7 @@ public class NpcBehaviour : MonoBehaviour{
     public IEnumerator BrowseDisplays()
     {
         Debug.Log($"BrowseDisplays started");
+        BrowsingStarted?.Invoke();
         List < DisplaySlotController > displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         foreach (var displaySlot in displaySlotsWithItems)
         {
@@ -79,17 +88,22 @@ public class NpcBehaviour : MonoBehaviour{
             Debug.Log($"Going to: {displaySlot.transform.position}, item: {item.Name}");
             yield return new WaitUntil(() => !_agent.pathPending &&
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
-            yield return new WaitForSeconds(3);
-
+            yield return new WaitForSeconds(0.3f);
+            DecidingStarted?.Invoke();
+            yield return new WaitForSeconds(2.7f);
             if (IsInterestedInBuying(item))
             {
                 Debug.Log($"Wants {item.Name}");
                 _displaySlotController = displaySlotController;
                 _itemToBuy = displaySlotController.GetItem();
+                ItemSelected?.Invoke();
                 GoToCheckout();
                 yield break;
             }
-            else Debug.Log($"Doesnt want {item.Name}");
+            else {
+                ItemRejected?.Invoke();
+                Debug.Log($"Doesnt want {item.Name}"); 
+            }
         }
         GoToExit();
     }
@@ -98,7 +112,7 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.SetDestination(_counterPos.position);
     }
 
-    private bool IsInterestedInBuying(ItemData item)
+    public bool IsInterestedInBuying(ItemData item)
     {
         bool isInterested = false;
         int chanceToBuy = 0;

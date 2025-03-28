@@ -11,7 +11,6 @@ public class PartOfDayScenarioDrawer : PropertyDrawer
 
         int index = GetElementIndex(property);
         Array enumValues = Enum.GetValues(typeof(PartOfDay));
-        PartOfDay partOfDay;
         string displayName="";
         if (Enum.IsDefined(typeof(PartOfDay), index))
         {
