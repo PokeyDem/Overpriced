@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public struct NPCGroupSpawn
 {
-    [SerializeField] private GameObject _npcPrefab;
+    [SerializeField] private NPCType _npcType;
     [SerializeField] private int _spawnCount;
 
-    public GameObject NpcPrefab
+    public NPCType NpcType
     {
-        get { return _npcPrefab; }
-        private set { _npcPrefab = value; }
+        get { return _npcType; }
+        private set { _npcType = value; }
     }
     public int SpawnCount
     {
