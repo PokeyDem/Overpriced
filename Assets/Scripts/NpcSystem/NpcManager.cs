@@ -93,7 +93,7 @@ public class NpcManager : MonoBehaviour
         foreach (NPCGroupSpawn npcGroupSpawn in npcGroupSpawns)
         {
             for (int i = 0; i < npcGroupSpawn.SpawnCount; i++) {
-                SpawnNpc(npcGroupSpawn.NpcPrefab);
+                SpawnNpc(_npcPrefabs[(int)npcGroupSpawn.NpcType]);
                 yield return new WaitUntil(() => _npcsCount == 0);
             }
         }
