@@ -74,7 +74,7 @@ MonoBehaviour:
         _spawnCount: 3
     - scenario:
       - _npcType: 0
-        _spawnCount: 3
+        _spawnCount: 6
   - _dayNr: 2
     _partOfDayScenario:
     - scenario:

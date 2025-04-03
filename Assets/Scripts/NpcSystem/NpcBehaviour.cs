@@ -172,11 +172,11 @@ public class NpcBehaviour : MonoBehaviour{
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
             if (currentPosInLine>0)
             {
-                yield return new WaitUntil(() => !NpcManager.counterTaken[currentPosInLine - 1]);
+                yield return new WaitUntil(() => !NpcManager.counterTaken[currentPosInLine - 1]);//if in line wait till next in line is open
             }
             else
             {
-                yield return new WaitUntil(() => !NpcManager.counterTaken[_counterPos.Count-1]);
+                yield return new WaitUntil(() => !NpcManager.counterTaken[_counterPos.Count-1]);//if not in line wait till last in line is open
             }
         }
     }
@@ -216,7 +216,9 @@ public class NpcBehaviour : MonoBehaviour{
 
     public void GoToExit()
     {
+        _displaySlotController.isChosen = false;
         NpcManager.counterTaken[0] = false;
+        Debug.Log("test");
         _agent.speed = 3.5f;
         _agent.SetDestination(_despawnInShop.position);
     }
