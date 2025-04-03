@@ -47,8 +47,8 @@ MonoBehaviour:
   _npcPrefabs:
   - {fileID: 8701716767278798441, guid: e9453fc26310ae1419fe0d4e0ab8053b, type: 3}
   - {fileID: 8701716767278798441, guid: 570bcf660e67d8a4786f97150d109118, type: 3}
-  - {fileID: 8701716767278798441, guid: f7658534b5a6cdf4980564f709cb4e19, type: 3}
   - {fileID: 8701716767278798441, guid: f5d81a7b495a6e64080044b557b5c883, type: 3}
+  - {fileID: 8701716767278798441, guid: f7658534b5a6cdf4980564f709cb4e19, type: 3}
   _number: 0
   _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   _spawnPoint: {fileID: 0}
@@ -109,3 +109,91 @@ MonoBehaviour:
         _spawnCount: 3
       - _npcType: 2
         _spawnCount: 1
+  - _dayNr: 4
+    _partOfDayScenario:
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 4
+      - _npcType: 1
+        _spawnCount: 1
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+  - _dayNr: 5
+    _partOfDayScenario:
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 1
+    - scenario:
+      - _npcType: 0
+        _spawnCount: 3
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 3
+        _spawnCount: 1
+  - _dayNr: 6
+    _partOfDayScenario:
+    - scenario:
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 3
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 2
+    - scenario:
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 3
+      - _npcType: 1
+        _spawnCount: 1
+  - _dayNr: 7
+    _partOfDayScenario:
+    - scenario:
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 3
+      - _npcType: 1
+        _spawnCount: 1
+    - scenario:
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 3
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 2
