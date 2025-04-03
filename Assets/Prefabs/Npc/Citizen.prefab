@@ -398,7 +398,7 @@ MonoBehaviour:
     <Description>k__BackingField: 
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 78776df46d2cbe44ba3e1c07089c6859, type: 2}
-  _updateText: {fileID: 0}
+  _updateText: {fileID: 7506852189580195177}
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ NavMeshAgent:
   m_Height: 1.9999999
   m_BaseOffset: 0.99999994
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &3066310839602576973
 Rigidbody:
   m_ObjectHideFlags: 0

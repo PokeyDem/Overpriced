@@ -56,7 +56,11 @@ MonoBehaviour:
   _windowPos: {fileID: 0}
   _doorPos: {fileID: 0}
   _despawnInShop: {fileID: 0}
-  _counterPos: {fileID: 0}
+  _counterPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _minDelay: 3
   _maxDelay: 5
   debugSpawn: 0

@@ -14,7 +14,8 @@ public class NpcManager : MonoBehaviour
     [SerializeField] Transform _windowPos;
     [SerializeField] Transform _doorPos;
     [SerializeField] private Transform _despawnInShop;
-    [SerializeField] private Transform _counterPos;
+    [SerializeField] private List<Transform> _counterPos;
+    public static List<bool> counterTaken = new List<bool>();  
     [SerializeField] private float _minDelay;//Todo move to config;
     [SerializeField] private float _maxDelay;//Todo move to config
     [SerializeField] private bool debugSpawn;
@@ -22,6 +23,17 @@ public class NpcManager : MonoBehaviour
     private int _npcsCount;
     private bool _spawnCoroutineChecker;
 
+    private void Awake()
+    {
+        if (_counterPos.Count!=0)
+        {
+            for(int i=0; i< _counterPos.Count; i++)
+            {
+                counterTaken.Add(false);
+            }
+        }
+        
+    }
 
     private void Update(){
         if (Input.GetKeyDown(KeyCode.Space) && debugSpawn){
@@ -94,10 +106,11 @@ public class NpcManager : MonoBehaviour
         {
             for (int i = 0; i < npcGroupSpawn.SpawnCount; i++) {
                 SpawnNpc(_npcPrefabs[(int)npcGroupSpawn.NpcType]);
-                yield return new WaitUntil(() => _npcsCount == 0);
+                //yield return new WaitUntil(() => _npcsCount == 0);
+                yield return new WaitForSeconds(1);
             }
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitUntil(() => _npcsCount == 0);
         ShopStateManager.ShopStateManagerInstance.CloseShop();
     }
 }

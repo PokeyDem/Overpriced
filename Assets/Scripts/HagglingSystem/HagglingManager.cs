@@ -98,7 +98,8 @@ public class HagglingManager : MonoBehaviour{
 
     private void EndHaggling(){
         _npcBehaviour.GoToExit();
-        StartCoroutine(DisableUiDelay());
+        _hagglingUI.gameObject.SetActive(false);
+        // StartCoroutine(DisableUiDelay());
     }
     
     private IEnumerator DisableUiDelay(){
