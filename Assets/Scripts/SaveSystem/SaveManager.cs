@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
 {
     [SerializeField] private PlayerControl player;
     [SerializeField] private PlacementSystem placementSystem;
@@ -13,8 +13,11 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private ExperienceManager experienceManager;
     private IDataService _dataService = new JsonDataService();
 
-    public void SaveGame()
-    {
+    private new void Awake(){
+        base.Awake();
+    }
+    public void SaveGame(int slotId){
+        string path = $"/save_slot_{slotId}.json";
         PlayerData playerData = player.GetPlayerData();
         List<DisplayData> displayData = placementSystem.GetDisplayData();
         InventoryData inventoryData = inventoryManager.GetInventoryData();
@@ -26,11 +29,12 @@ public class SaveManager : MonoBehaviour
         SaveData saveData = new SaveData(playerData, displayData, 
             inventoryData, dayData, shopStateData, moneyData, experienceData);
         
-        _dataService.SaveData("/save.json", saveData, true);
+        _dataService.SaveData(path, saveData, true);
     }
 
-    public void LoadGame(){
-        SaveData saveData = _dataService.LoadData<SaveData>("/save.json", true);
+    public void LoadGame(int slotID){
+        string path = $"/save_slot_{slotID}.json";
+        SaveData saveData = _dataService.LoadData<SaveData>(path, true);
         player.LoadPlayer(saveData.PlayerData);
         placementSystem.LoadDisplayData(saveData.DisplayData);
         inventoryManager.LoadInventoryData(saveData.InventoryData.InventoryItemsData);
@@ -38,5 +42,6 @@ public class SaveManager : MonoBehaviour
         shopStateManager.LoadShopState(saveData.ShopStateData);
         moneyManager.LoadMoneyData(saveData.MoneyData);
         experienceManager.LoadExperienceData(saveData.ExperienceData);
+        PauseMenuManager.Instance.Resume();
     }
 }

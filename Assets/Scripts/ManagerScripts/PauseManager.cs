@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenuManager : MonoBehaviour{
+public class PauseMenuManager : SingletonDontDestroyOnLoad<PauseMenuManager>{
     
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] private GameObject _mainView;
-    private bool _isPaused = false;
-
+    [SerializeField] private GameObject _Hud;
+    private bool _isPaused;
+    
+    private new void Awake(){
+        base.Awake();
+    }
+    
     private void Update(){
         if (Input.GetKeyDown(KeyCode.Escape)){
             EscPressed();
@@ -24,13 +29,19 @@ public class PauseMenuManager : MonoBehaviour{
     }
 
     public void Pause(){
+        _Hud.SetActive(false);
         _pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
     }
 
     public void Resume(){
+        if (SaveUIManager.Instance.gameObject.activeInHierarchy)
+            SaveUIManager.Instance.DisableUI();
+        
         _pauseMenu.SetActive(false);
+        _Hud.SetActive(true);
+        
         Time.timeScale = 1f;
         _isPaused = false;
     }

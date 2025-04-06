@@ -44,7 +44,7 @@ public class PlacementSystem : MonoBehaviour{
         _previewSystem.StartShowingPlacementPreview(
             _objectsDatabase._objectsData[_selectedObjectIndex].Prefab, 
             _objectsDatabase._objectsData[_selectedObjectIndex].Size);
-        _inputManager.OnClicked += PlaceStructure;
+        _inputManager.OnRmbClick += PlaceStructure;
         _lastDetectedPosition = Vector3Int.zero;
     }
 
@@ -97,7 +97,7 @@ public class PlacementSystem : MonoBehaviour{
         _selectedObjectIndex = -1;
         _gridVisualization.SetActive(false);
         _previewSystem.StopShowingPreview();
-        _inputManager.OnClicked -= PlaceStructure;
+        _inputManager.OnRmbClick -= PlaceStructure;
     }
 
     public void SwitchMode(){
