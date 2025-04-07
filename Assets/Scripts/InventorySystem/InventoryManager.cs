@@ -250,10 +250,10 @@ public class InventoryManager : MonoBehaviour{
         return new InventoryData(_inventorySlotsDictionary);
     }
 
-    public void LoadInventoryData(Dictionary<int, int> inventoryData){
+    public void LoadInventoryData(List<ItemData> inventoryData){
         ClearInventory();
-        /*foreach (var itemData in inventoryData){
-            AddItemToInventory(itemData.Key);
-        }*/
+        foreach (var itemData in inventoryData){
+            AddItemToInventory(itemData);
+        }
     }
 }

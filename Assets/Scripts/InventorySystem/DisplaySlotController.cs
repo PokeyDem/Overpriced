@@ -59,6 +59,9 @@ public class DisplaySlotController : MonoBehaviour{
     }
 
     public int GetItemId(){
+        if (_item==null) {
+            return -1;
+        }
         return _item.ID;
     }
     public ItemData GetItem()
