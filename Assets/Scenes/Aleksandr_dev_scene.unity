@@ -1116,7 +1116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryUI: {fileID: 1116002994}
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   _itemInfoPanel: {fileID: 1990108292}
   _itemSlotPrefab: {fileID: 4196557659919706290, guid: 656a82443d4239e49be67ce3e518f078, type: 3}
   _inventorySlotsContainer: {fileID: 1507226815}
