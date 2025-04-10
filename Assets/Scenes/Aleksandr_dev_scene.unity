@@ -5119,6 +5119,7 @@ MonoBehaviour:
   shopStateManager: {fileID: 444324990}
   moneyManager: {fileID: 1346806260}
   experienceManager: {fileID: 1061662098}
+  itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!114 &1061662098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7441627990209729258, guid: 39610f17139469049befa495eeb0d80b, type: 3}
