@@ -78,14 +78,16 @@ public class NpcBehaviour : MonoBehaviour{
         //foreach (var displaySlot in displaySlotsWithItems)
         for (int i=0;i<displaySlotsWithItems.Count;i++)
         {
+            if (displaySlotsWithItems[i].GetItem()==null)
+            {
+                continue;
+            }
             DisplaySlotController displaySlot = displaySlotsWithItems[i];
             if (displaySlot==null) {
                 Debug.Log($"test1");
                 continue;
             }
             DisplaySlotController displaySlotController = displaySlot;
-
-            ItemData item = displaySlotController.GetItem();
 
             if (displaySlotController.isChosen)
             {
@@ -111,6 +113,7 @@ public class NpcBehaviour : MonoBehaviour{
             }
             _agent.speed = 2;
             _agent.SetDestination(displaySlot.transform.position);
+            ItemData item = displaySlotController.GetItem();
             Debug.Log($"Going to: {displaySlot.transform.position}, item: {item.Name}");
             yield return new WaitUntil(() => !_agent.pathPending &&
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
@@ -168,8 +171,6 @@ public class NpcBehaviour : MonoBehaviour{
             }
             _agent.SetDestination(destination.position);
             Debug.Log($"Going to: {destination.position}, Line");
-            yield return new WaitUntil(() => !_agent.pathPending &&
-                                                _agent.remainingDistance <= _agent.stoppingDistance);
             if (currentPosInLine>0)
             {
                 yield return new WaitUntil(() => !NpcManager.counterTaken[currentPosInLine - 1]);//if in line wait till next in line is open
