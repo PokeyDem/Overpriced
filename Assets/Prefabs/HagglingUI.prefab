@@ -1179,13 +1179,15 @@ GameObject:
   - component: {fileID: 170273658134825863}
   - component: {fileID: 5891971709487578594}
   - component: {fileID: 7486742127065827460}
+  - component: {fileID: -1927598453062842994}
+  - component: {fileID: -6374062749301553803}
   m_Layer: 0
   m_Name: HagglingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2590456833228453362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1275,6 +1277,32 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-1927598453062842994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003572100073532234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78909654e0cc5dc498560eb06e5c38f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 0}
+  _view: {fileID: -6374062749301553803}
+--- !u!114 &-6374062749301553803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003572100073532234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c748cd8e0e12fa4a8def6967edbdeed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6533630031724204666
 GameObject:
   m_ObjectHideFlags: 0
