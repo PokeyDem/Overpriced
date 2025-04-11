@@ -3978,7 +3978,6 @@ MonoBehaviour:
   _hagglingManager: {fileID: 2072193982}
   _text: {fileID: 756000487}
   _playerTrigger: {fileID: 678709537}
-  _interactUI: {fileID: 0}
 --- !u!54 &705871760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7534,6 +7533,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 639730634189380657, guid: dddc1577cfcb01641b778dc28bd54859, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536463782}
+    - targetCorrespondingSourceObject: {fileID: 639730634189380657, guid: dddc1577cfcb01641b778dc28bd54859, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536463787}
+    - targetCorrespondingSourceObject: {fileID: 639730634189380657, guid: dddc1577cfcb01641b778dc28bd54859, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536463786}
   m_SourcePrefab: {fileID: 100100000, guid: dddc1577cfcb01641b778dc28bd54859, type: 3}
 --- !u!1 &1444331015
 GameObject:
@@ -8092,6 +8097,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.004747761, y: 0.019999996, z: 0.040642835}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1536463786
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536463777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04, y: 0.03, z: 0.040642835}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1536463787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536463777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0106e218ff8ca144e99404f1a9a6c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactUI: {fileID: 1403951746}
+  _interactUIText: {fileID: 259883186}
+  _interactableGameObject: {fileID: 1536463777}
 --- !u!1 &1547463342
 GameObject:
   m_ObjectHideFlags: 0

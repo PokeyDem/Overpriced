@@ -43,6 +43,9 @@ public class InteractableTrigger : MonoBehaviour
     }
     private void OnDisable()
     {
-        _interactUI.SetActive(false);
+        if(_interactUI != null)
+        {
+            _interactUI.SetActive(false);
+        }
     }
 }

@@ -6,7 +6,7 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
     [SerializeField] private HagglingManager _hagglingManager;
     [SerializeField] private TextMeshPro _text;
     [SerializeField] private GameObject _playerTrigger;
-    [SerializeField] private GameObject _interactUI;
+
 
     private void OnTriggerEnter(Collider other){
       if (_tag.Equals("Player") && other.CompareTag("Player")){
