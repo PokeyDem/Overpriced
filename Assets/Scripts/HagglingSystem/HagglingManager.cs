@@ -10,16 +10,16 @@ public class HagglingManager : MonoBehaviour, IInteractable
     [SerializeField] private bool _isPlayerReady;
     [SerializeField] private bool _isNpcReady;
     private NpcBehaviour _npcBehaviour;
-    [SerializeField] private Canvas _hagglingUI;
-    [SerializeField] TextMeshProUGUI _counterField;
-    [SerializeField] TextMeshProUGUI _itemDescField;
-    [SerializeField] TextMeshProUGUI _resulField;
     private int _currentPrice;
     private int _basePrice;
 
-    private void Awake(){
-        _hagglingUI.gameObject.SetActive(false);
-    }
+    public event Action HagglingInitiated;
+    public event Action HagglingEnded;
+    public event Action PriceChanged;
+
+    public event Action ItemSold;
+    public event Action ItemDenied;
+
 
     public void SetPlayerReadiness(bool isPlayerReady){
         _isPlayerReady = isPlayerReady;
@@ -31,7 +31,6 @@ public class HagglingManager : MonoBehaviour, IInteractable
 
     private void CheckReadiness(){
         if (_isNpcReady){
-            _hagglingUI.gameObject.SetActive(true);
             StartHaggling();
         }
     }
@@ -43,27 +42,24 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public void IncreaseCounter(){
         if (_currentPrice < _basePrice * 2){
             _currentPrice += 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void DecreaseCounter(){
         if (_currentPrice > 10){
             _currentPrice -= 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void StartHaggling(){
+        HagglingInitiated?.Invoke();
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
-        _itemDescField.text = new string("Item name:\n" + _npcBehaviour.GetItemToBuy().Name + "\nDescription:\n" + _npcBehaviour.GetItemToBuy().Description + "\nBase price:\n" + _basePrice);
-        _currentPrice = _basePrice;
-        _counterField.text = _basePrice.ToString();
-        _resulField.text = "";
+        _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
     }
 
     public void TryToSell(){
-        _currentPrice = Int32.Parse(_counterField.text);
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
 
         if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
@@ -85,26 +81,20 @@ public class HagglingManager : MonoBehaviour, IInteractable
 
     private void SellItem(){
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
-        _resulField.color = Color.green;
-        _resulField.text = "Sold";
+        ItemSold?.Invoke();
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
     }
 
     private void DenySell(){
-        _resulField.color = Color.red;
-        _resulField.text = "Failed";
+        ItemDenied?.Invoke();
     }
 
     private void EndHaggling(){
         _npcBehaviour.GoToExit();
-        _hagglingUI.gameObject.SetActive(false);
+        HagglingEnded?.Invoke();
         // StartCoroutine(DisableUiDelay());
     }
-    
-    private IEnumerator DisableUiDelay(){
-        yield return new WaitForSeconds(1);
-        _hagglingUI.gameObject.SetActive(false);
-    }
+   
 
     public void Interact()
     {
@@ -114,5 +104,19 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public string TriggerInteractPrompt()
     {
         return "Start Haggling";
+    }
+
+    public int getCurrentPrice()
+    {
+        return _currentPrice;
+    }
+    public ItemData getItem()
+    {
+        return _npcBehaviour.GetItemToBuy();
+    }
+    public void setCurrentPrice(int price)
+    {
+        _currentPrice = price;
+        PriceChanged?.Invoke();
     }
 }
