@@ -219,7 +219,6 @@ public class NpcBehaviour : MonoBehaviour{
     {
         _displaySlotController.isChosen = false;
         NpcManager.counterTaken[0] = false;
-        Debug.Log("test");
         _agent.speed = 3.5f;
         _agent.SetDestination(_despawnInShop.position);
     }
