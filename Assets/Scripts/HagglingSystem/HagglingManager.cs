@@ -5,9 +5,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class HagglingManager : MonoBehaviour{
-    private bool _isPlayerReady;
-    private bool _isNpcReady;
+public class HagglingManager : MonoBehaviour, IInteractable
+{
+    [SerializeField] private bool _isPlayerReady;
+    [SerializeField] private bool _isNpcReady;
     private NpcBehaviour _npcBehaviour;
     [SerializeField] private Canvas _hagglingUI;
     [SerializeField] TextMeshProUGUI _counterField;
@@ -22,16 +23,14 @@ public class HagglingManager : MonoBehaviour{
 
     public void SetPlayerReadiness(bool isPlayerReady){
         _isPlayerReady = isPlayerReady;
-        CheckReadiness();
     }
 
     public void SetNpcReadiness(bool isNpcReady){
         _isNpcReady = isNpcReady;
-        CheckReadiness();
     }
 
     private void CheckReadiness(){
-        if (_isPlayerReady && _isNpcReady){
+        if (_isNpcReady){
             _hagglingUI.gameObject.SetActive(true);
             StartHaggling();
         }
@@ -105,5 +104,15 @@ public class HagglingManager : MonoBehaviour{
     private IEnumerator DisableUiDelay(){
         yield return new WaitForSeconds(1);
         _hagglingUI.gameObject.SetActive(false);
+    }
+
+    public void Interact()
+    {
+        CheckReadiness();
+    }
+
+    public string TriggerInteractPrompt()
+    {
+        return "Start Haggling";
     }
 }
