@@ -27,6 +27,7 @@ public class NpcBehaviour : MonoBehaviour{
     public event Action ItemSelected;
     [SerializeField] private UpdateText _updateText;
     private NPCEmotePresenter _presenter;
+    [SerializeField]private int _minChanceToBuy = 0;
 
     private void Awake()
     {
@@ -45,6 +46,8 @@ public class NpcBehaviour : MonoBehaviour{
 
     private void Start(){
         _agent = GetComponent<NavMeshAgent>();
+        float random = UnityEngine.Random.Range(100,300);
+        _agent.speed = random / 100;
         if (!_isInShop){
             _agent.SetDestination(_windowPos.position);
             StartCoroutine(LookingDelay());
@@ -75,20 +78,19 @@ public class NpcBehaviour : MonoBehaviour{
         Debug.Log($"BrowseDisplays started");
         BrowsingStarted?.Invoke();
         List < DisplaySlotController > displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
+        //Queue<DisplaySlotController> displaySlotsWithItems = new Queue<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //foreach (var displaySlot in displaySlotsWithItems)
-        for (int i=0;i<displaySlotsWithItems.Count;i++)
+        //for (int i=0;i<displaySlotsWithItems.Count;i++)
+        while (displaySlotsWithItems.Count > 0)
         {
-            if (displaySlotsWithItems[i].GetItem()==null)
+            int nrOfPreferredItemsOnDisplay = displaySlotsWithItems.FindAll(ds =>!ds.isChosen && _desiredItemsSO.GetDesiredItems().Contains(ds.GetItem())).Count;
+            DisplaySlotController displaySlotController = displaySlotsWithItems[0];
+            displaySlotsWithItems.RemoveAt(0);
+            ItemData item = displaySlotController.GetItem();
+            if (item==null|| displaySlotController == null)
             {
                 continue;
             }
-            DisplaySlotController displaySlot = displaySlotsWithItems[i];
-            if (displaySlot==null) {
-                Debug.Log($"test1");
-                continue;
-            }
-            DisplaySlotController displaySlotController = displaySlot;
-
             if (displaySlotController.isChosen)
             {
                 Debug.Log($"Chosen");
@@ -97,7 +99,8 @@ public class NpcBehaviour : MonoBehaviour{
             if (!displaySlotController.isOccupied)
             {
                 displaySlotController.isOccupied = true;
-            } else
+            } 
+            else
             {
                 Debug.Log($"Occupied");
                 if (displaySlotsWithItems.Find(ds => ds.isOccupied) != null)
@@ -108,31 +111,39 @@ public class NpcBehaviour : MonoBehaviour{
                 }
                 else
                 {
-                    yield return new WaitUntil(() => !displaySlotController.isOccupied);
+                    yield return new WaitUntil(() => !displaySlotController.isOccupied || displaySlotController.isChosen);
                 }
             }
-            _agent.speed = 2;
-            _agent.SetDestination(displaySlot.transform.position);
-            ItemData item = displaySlotController.GetItem();
-            Debug.Log($"Going to: {displaySlot.transform.position}, item: {item.Name}");
+
+            if (displaySlotController.isChosen)
+            {
+                Debug.Log($"Chosen");
+                continue;
+            }
+            //_agent.speed = 2;
+            _agent.SetDestination(displaySlotController.transform.position);
+            Debug.Log($"Going to: {displaySlotController.transform.position}, item: {item.Name}");
             yield return new WaitUntil(() => !_agent.pathPending &&
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
-            yield return new WaitForSeconds(1.8f);
+            float random = UnityEngine.Random.Range(200, 1500);
+            random = random / 100;
+            yield return new WaitForSeconds(random);
+            _minChanceToBuy = 100 - (10 * nrOfPreferredItemsOnDisplay);
             if (IsInterestedInBuying(item))
             {
                 Debug.Log($"Wants {item.Name}");
                 _displaySlotController = displaySlotController;
                 _itemToBuy = displaySlotController.GetItem();
-                displaySlotController.isOccupied = false;
+                displaySlotController.isOccupied = true;
                 displaySlotController.isChosen = true;
                 ItemSelected?.Invoke();
                 GoToCheckout();
                 yield break;
             }
             else {
-                displaySlotController.isOccupied = false;
+                displaySlotController.isOccupied = true;
                 ItemRejected?.Invoke();
                 Debug.Log($"Doesnt want {item.Name}"); 
             }
@@ -188,7 +199,7 @@ public class NpcBehaviour : MonoBehaviour{
         int chanceToBuy = 0;
         if (_desiredItemsSO.GetDesiredItems().Exists(i=>i.ID==item.ID))
         {
-            chanceToBuy = 90;
+            chanceToBuy = _minChanceToBuy;
         }
         else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);

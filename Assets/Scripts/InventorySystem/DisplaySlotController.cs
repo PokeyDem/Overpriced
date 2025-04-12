@@ -50,6 +50,8 @@ public class DisplaySlotController : MonoBehaviour{
         _itemPrefab = Instantiate(item.Prefab, _marker.transform.position, Quaternion.identity);
         _itemId = item.ID;
         _item = item;
+        isChosen = false;
+        isOccupied = false;
         DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(this);
     }
 

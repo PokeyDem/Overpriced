@@ -54,6 +54,10 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     public void StartHaggling(){
+        if(_npcBehaviour.GetDisplaySlotController().GetItem()==null)
+        {
+            return;
+        }
         HagglingInitiated?.Invoke();
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
         _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
