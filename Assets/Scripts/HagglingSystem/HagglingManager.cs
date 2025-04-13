@@ -54,8 +54,9 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     public void StartHaggling(){
-        if(_npcBehaviour.GetDisplaySlotController().GetItem()==null)
+        if(_npcBehaviour==null || _npcBehaviour.GetDisplaySlotController().GetItem()==null)
         {
+            _npcBehaviour.GoToExitWithoutItem();
             return;
         }
         HagglingInitiated?.Invoke();

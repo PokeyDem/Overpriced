@@ -9,7 +9,7 @@ public class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private int _tolerance;
     [SerializeField] private NPCType _NPCType;
-    private NavMeshAgent _agent;
+    public NavMeshAgent _agent;
     [SerializeField] private ItemData _itemToBuy; //Set by ChooseItem
     private Transform _despawnPointPos;
     private Transform _windowPos; 
@@ -90,7 +90,7 @@ public class NpcBehaviour : MonoBehaviour{
         //for (int i=0;i<displaySlotsWithItems.Count;i++)
         while (displaySlotsWithItems.Count > 0)
         {
-            int nrOfPreferredItemsOnDisplay = displaySlotsWithItems.FindAll(ds =>!ds.isChosen && _desiredItemsSO.GetDesiredItems().Contains(ds.GetItem())).Count;
+            int nrOfPreferredItemsOnDisplay = displaySlotsWithItems.FindAll(ds => ds.GetItem() != null&&!ds.isChosen && _desiredItemsSO.GetDesiredItems().Exists(i => i.ID == ds.GetItem().ID)).Count;
             DisplaySlotController displaySlotController = displaySlotsWithItems[0];
             displaySlotsWithItems.RemoveAt(0);
             ItemData item = displaySlotController.GetItem();
@@ -112,7 +112,6 @@ public class NpcBehaviour : MonoBehaviour{
                 Debug.Log($"Occupied");
                 if (displaySlotsWithItems.Find(ds => !ds.isOccupied) != null)
                 {
-                    Debug.Log($"Occupied2");
                     displaySlotsWithItems.Add(displaySlotController);
                     yield return new WaitForSeconds(0.1f);
                     continue;
@@ -135,7 +134,7 @@ public class NpcBehaviour : MonoBehaviour{
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
-            yield return new WaitForSeconds(WaitRandomAmount(200, 1500));
+            yield return new WaitForSeconds(WaitRandomAmount(200, 1000));
             _minChanceToBuy = 100 - (10 * nrOfPreferredItemsOnDisplay);
             if (IsInterestedInBuying(item))
             {
@@ -149,7 +148,7 @@ public class NpcBehaviour : MonoBehaviour{
                 yield break;
             }
             else {
-                displaySlotController.isOccupied = true;
+                displaySlotController.isOccupied = false;
                 ItemRejected?.Invoke();
                 Debug.Log($"Doesnt want {item.Name}"); 
             }
@@ -164,8 +163,12 @@ public class NpcBehaviour : MonoBehaviour{
 
     private IEnumerator StandInLine()
     {
-        Transform destination = this.transform;
         int currentPosInLine=-1;
+        _agent.SetDestination(_counterPos[0].position);
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitUntil(() => _agent.remainingDistance < 2.5f);
+        _agent.speed = 1.5f;
+        Transform destination = this.transform;
         while (destination != _counterPos[0])
         {
             for (int i = 0; i < _counterPos.Count; i++)
@@ -211,7 +214,7 @@ public class NpcBehaviour : MonoBehaviour{
         int chanceToBuy = 0;
         if (_desiredItemsSO.GetDesiredItems().Exists(i=>i.ID==item.ID))
         {
-            chanceToBuy = _minChanceToBuy;
+            chanceToBuy = Math.Max(_minChanceToBuy,60);
         }
         else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);

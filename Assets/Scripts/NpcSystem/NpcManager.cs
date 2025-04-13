@@ -107,8 +107,8 @@ public class NpcManager : MonoBehaviour
             for (int i = 0; i < npcGroupSpawn.SpawnCount; i++) {
                 SpawnNpc(_npcPrefabs[(int)npcGroupSpawn.NpcType]);
                 //yield return new WaitUntil(() => _npcsCount == 0);
-                float random = Random.Range(60, 300);
-                random /= 60;
+                float random = Random.Range(50, 1000);
+                random /= 100;
                 yield return new WaitForSeconds(random);
             }
         }
