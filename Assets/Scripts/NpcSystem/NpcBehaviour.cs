@@ -9,7 +9,7 @@ public class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private int _tolerance;
     [SerializeField] private NPCType _NPCType;
-    public NavMeshAgent _agent;
+    private NavMeshAgent _agent;
     [SerializeField] private ItemData _itemToBuy; //Set by ChooseItem
     private Transform _despawnPointPos;
     private Transform _windowPos; 

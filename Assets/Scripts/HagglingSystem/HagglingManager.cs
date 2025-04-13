@@ -12,6 +12,8 @@ public class HagglingManager : MonoBehaviour, IInteractable
     private NpcBehaviour _npcBehaviour;
     private int _currentPrice;
     private int _basePrice;
+    [SerializeField] private int _nrOfChancesLeft=2;
+    [SerializeField] private bool _hagglingInProgress = false;
 
     public event Action HagglingInitiated;
     public event Action HagglingEnded;
@@ -30,7 +32,8 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     private void CheckReadiness(){
-        if (_isNpcReady){
+        if (_isNpcReady&&!_hagglingInProgress)
+        {
             StartHaggling();
         }
     }
@@ -59,6 +62,8 @@ public class HagglingManager : MonoBehaviour, IInteractable
             _npcBehaviour.GoToExitWithoutItem();
             return;
         }
+        _hagglingInProgress = true;
+        _nrOfChancesLeft = 2;
         HagglingInitiated?.Invoke();
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
         _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
@@ -76,27 +81,33 @@ public class HagglingManager : MonoBehaviour, IInteractable
             if (Random.Range(1,21) >= successPoints){
                 SellItem();
             }
+            else if (_nrOfChancesLeft>0)
+            {
+                _nrOfChancesLeft--;
+            }
             else{
                 DenySell();
             }
         }
         
-        EndHaggling();
     }
 
     private void SellItem(){
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
+        EndHaggling();
     }
 
     private void DenySell(){
         ItemDenied?.Invoke();
+        EndHaggling();
     }
 
     private void EndHaggling(){
         _npcBehaviour.GoToExit();
         HagglingEnded?.Invoke();
+        _hagglingInProgress = false;
         // StartCoroutine(DisableUiDelay());
     }
    
