@@ -39,14 +39,14 @@ public class ShopStateManager : MonoBehaviour
     
     void Start() {
         _currentShopState = ShopState.Closed;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        shopStateChange.Invoke("Shop "+_currentShopState.ToString());
     }
     
     private float _openTimeCounter;
     
     public void OpenShop() {
         _currentShopState = ShopState.Open;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        shopStateChange.Invoke("Shop " + _currentShopState.ToString());
         shopWosOpen.Invoke();
         _openTimeCounter = openShopTimeSeconds;
     }
@@ -57,7 +57,7 @@ public class ShopStateManager : MonoBehaviour
     
     public void CloseShop() {
         _currentShopState = ShopState.Closed;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        shopStateChange.Invoke("Shop " + _currentShopState.ToString());
         shopWosClose.Invoke();
     }
 
