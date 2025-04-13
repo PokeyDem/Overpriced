@@ -14,7 +14,7 @@ public class ShopStateManager : MonoBehaviour
     public UnityEvent shopWosClose;
 
     public enum ShopState {
-        Open, Close
+        Open, Closed
     }
 
     public ShopStateData GetShopStateData(){
