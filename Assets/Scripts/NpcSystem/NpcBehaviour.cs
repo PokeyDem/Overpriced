@@ -49,8 +49,7 @@ public class NpcBehaviour : MonoBehaviour{
         float random = UnityEngine.Random.Range(100,300);
         _agent.speed = random / 100;
         if (!_isInShop){
-            _agent.SetDestination(_windowPos.position);
-            StartCoroutine(LookingDelay());
+            StartCoroutine(CheckItemsThroughWindow());
         }
         else{
             Debug.Log("Spawned in shop");
@@ -59,9 +58,17 @@ public class NpcBehaviour : MonoBehaviour{
     }
 
 
-    private IEnumerator LookingDelay()
+    private IEnumerator CheckItemsThroughWindow()
     {
-        yield return new WaitForSeconds(4);
+        float randomX=UnityEngine.Random.Range(-100,100);
+        randomX = randomX / 100;
+        float randomZ= UnityEngine.Random.Range(-10, 60);
+        randomZ = randomZ / 100;
+        Vector3 deviation=new Vector3(randomX,0,randomZ);
+        _agent.SetDestination(_windowPos.position+deviation);
+        yield return new WaitUntil(() => !_agent.pathPending &&
+                                    _agent.remainingDistance <= _agent.stoppingDistance);
+        yield return new WaitForSeconds(WaitRandomAmount(200, 600));
         if (DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems().Count != 0)
         {
             _agent.SetDestination(_doorPos.position);
@@ -103,8 +110,9 @@ public class NpcBehaviour : MonoBehaviour{
             else
             {
                 Debug.Log($"Occupied");
-                if (displaySlotsWithItems.Find(ds => ds.isOccupied) != null)
+                if (displaySlotsWithItems.Find(ds => !ds.isOccupied) != null)
                 {
+                    Debug.Log($"Occupied2");
                     displaySlotsWithItems.Add(displaySlotController);
                     yield return new WaitForSeconds(0.1f);
                     continue;
@@ -127,9 +135,7 @@ public class NpcBehaviour : MonoBehaviour{
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
-            float random = UnityEngine.Random.Range(200, 1500);
-            random = random / 100;
-            yield return new WaitForSeconds(random);
+            yield return new WaitForSeconds(WaitRandomAmount(200, 1500));
             _minChanceToBuy = 100 - (10 * nrOfPreferredItemsOnDisplay);
             if (IsInterestedInBuying(item))
             {
@@ -191,6 +197,12 @@ public class NpcBehaviour : MonoBehaviour{
                 yield return new WaitUntil(() => !NpcManager.counterTaken[_counterPos.Count-1]);//if not in line wait till last in line is open
             }
         }
+    }
+    private float WaitRandomAmount(int min,int max)//min and max in milliseconds
+    {
+        float random = UnityEngine.Random.Range(min, max);
+        random = random / 100;
+        return random;
     }
 
     public bool IsInterestedInBuying(ItemData item)
