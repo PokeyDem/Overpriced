@@ -17,12 +17,20 @@ public class HagglingUIPresenter : MonoBehaviour
 
     private void OnHagglingInitiated()
     {
-        _view.UpdateItemInfo(_model.getItem());
+        _view.UpdateItemInfo(_model.GetItem());
+        _view.UpdateSlider(0, _model.GetBasePrice() * _model.MaxPriceMultiplier);
+        _view.UpdateSliderValue(_model.GetCurrentPrice());
+        _view.UpdatePriceField(_model.GetCurrentPrice());
+        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
         _view.SetActiveHagglingUI(true);
     }
 
-    private void OnPriceChanged() =>
-        _view.UpdatePriceField(_model.getCurrentPrice());
+    private void OnPriceChanged()
+    {
+        _view.UpdatePriceField(_model.GetCurrentPrice());
+        _view.UpdateSliderValue(_model.GetCurrentPrice());
+        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+    }
     private void OnItemSold() =>
         _view.UpdateResultField("Sold",Color.green);
     private void OnItemDenied() =>
@@ -30,4 +38,19 @@ public class HagglingUIPresenter : MonoBehaviour
 
     private void OnHagglingEnded() =>
         _view.SetActiveHagglingUI(false);
+
+    public void OnSliderValueChanged()
+    {
+        _model.SetCurrentPrice(_view.GetSliderValue());
+        _view.UpdatePriceField(_model.GetCurrentPrice());
+        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+    }
+    public void OnInputValueChanged()
+    {
+        int value = Mathf.Clamp(_view.GetInputValue(_model.GetCurrentPrice()), 0, _model.GetBasePrice() * _model.MaxPriceMultiplier);
+        _view.UpdatePriceField(value);
+        _model.SetCurrentPrice(value);
+        _view.UpdateSliderValue(_model.GetCurrentPrice());
+        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+    }
 }

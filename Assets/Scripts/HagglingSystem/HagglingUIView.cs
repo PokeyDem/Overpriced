@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HagglingUIView : MonoBehaviour
 {
     [SerializeField] private GameObject _hagglingUI;
-    [SerializeField] TextMeshProUGUI _counterField;
-    [SerializeField] TextMeshProUGUI _itemDescField;
-    [SerializeField] TextMeshProUGUI _resulField;
+    [SerializeField] private TextMeshProUGUI _itemDescField;
+    [SerializeField] private TextMeshProUGUI _resulField;
+    [SerializeField] private Slider _amountSlider;
+    [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private TextMeshProUGUI _procentField;
 
     public void SetActiveHagglingUI(bool isActive)
     {
@@ -17,7 +20,7 @@ public class HagglingUIView : MonoBehaviour
     }
     public void UpdatePriceField(int price)
     {
-        _counterField.text = price.ToString();
+        _inputField.text = price.ToString();
     }
     public void UpdateItemInfo(ItemData item)
     {
@@ -29,5 +32,35 @@ public class HagglingUIView : MonoBehaviour
     {
         _resulField.color = color;
         _resulField.text = text;
+    }
+    public void UpdateSlider(int min, int max)
+    {
+        _amountSlider.minValue = min;
+        _amountSlider.maxValue = max;
+    }
+    public void UpdateSliderValue(int value)
+    {
+        _amountSlider.value = value;
+    }
+    public int GetSliderValue()
+    {
+        return (int) _amountSlider.value;
+    }
+    public int GetInputValue(int currentValue)
+    {
+        int price;
+        if (_inputField.text.Equals(""))
+        {
+            return 0;
+        }
+        if (int.TryParse(_inputField.text, out price))
+        {
+            return price;
+        }
+        return currentValue;
+    }
+    public void UpdateProcentField(int baseValue,int currentValue)
+    {
+        _procentField.text = (((double)currentValue / baseValue) * 100).ToString("0")+"%";
     }
 }

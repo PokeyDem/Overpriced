@@ -22,6 +22,8 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public event Action ItemSold;
     public event Action ItemDenied;
 
+    public readonly int MaxPriceMultiplier = 3;
+
 
     public void SetPlayerReadiness(bool isPlayerReady){
         _isPlayerReady = isPlayerReady;
@@ -64,9 +66,9 @@ public class HagglingManager : MonoBehaviour, IInteractable
         }
         _hagglingInProgress = true;
         _nrOfChancesLeft = 2;
-        HagglingInitiated?.Invoke();
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
         _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
+        HagglingInitiated?.Invoke();
     }
 
     public void TryToSell(){
@@ -122,17 +124,24 @@ public class HagglingManager : MonoBehaviour, IInteractable
         return "Start Haggling";
     }
 
-    public int getCurrentPrice()
+    public int GetCurrentPrice()
     {
         return _currentPrice;
     }
-    public ItemData getItem()
+    public int GetBasePrice()
+    {
+        return _basePrice;
+    }
+    public ItemData GetItem()
     {
         return _npcBehaviour.GetItemToBuy();
     }
-    public void setCurrentPrice(int price)
+    public void SetCurrentPrice(int price)
     {
         _currentPrice = price;
-        PriceChanged?.Invoke();
+    }
+    public NpcBehaviour GetNpc()
+    {
+        return _npcBehaviour;
     }
 }
