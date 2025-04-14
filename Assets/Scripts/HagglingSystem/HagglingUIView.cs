@@ -8,11 +8,18 @@ using UnityEngine.UI;
 public class HagglingUIView : MonoBehaviour
 {
     [SerializeField] private GameObject _hagglingUI;
+
     [SerializeField] private TextMeshProUGUI _itemDescField;
     [SerializeField] private TextMeshProUGUI _resulField;
+    [SerializeField] private TextMeshProUGUI _procentField;
+    [SerializeField] private TextMeshProUGUI _chancesLeftField;
+    [SerializeField] private TextMeshProUGUI _npcOffer;
+
     [SerializeField] private Slider _amountSlider;
     [SerializeField] private TMP_InputField _inputField;
-    [SerializeField] private TextMeshProUGUI _procentField;
+    [SerializeField] private Button _sellButton;
+
+
 
     public void SetActiveHagglingUI(bool isActive)
     {
@@ -62,5 +69,19 @@ public class HagglingUIView : MonoBehaviour
     public void UpdateProcentField(int baseValue,int currentValue)
     {
         _procentField.text = (((double)currentValue / baseValue) * 100).ToString("0")+"%";
+    }
+    public void UpdateChancesLeftField(int chances)
+    {
+        _chancesLeftField.text=chances.ToString()+"/3";
+    }
+    public void UpdateUIInteraction(bool isActive)
+    {
+        _sellButton.interactable = isActive;
+        _amountSlider.interactable=isActive;
+        _inputField.interactable=isActive;
+    }
+    public void UpdateNpcOffer(int value)
+    {
+        _npcOffer.text= value.ToString();
     }
 }

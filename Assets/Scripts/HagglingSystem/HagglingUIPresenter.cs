@@ -13,6 +13,8 @@ public class HagglingUIPresenter : MonoBehaviour
         _model.ItemSold += OnItemSold;
         _model.ItemDenied += OnItemDenied;
         _model.HagglingEnded += OnHagglingEnded;
+        _model.NrOfChancesChanged += OnNrOfChancesChanged;
+        _model.UIDisabled += OnUIDisabled;
     }
 
     private void OnHagglingInitiated()
@@ -22,6 +24,9 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.UpdateSliderValue(_model.GetCurrentPrice());
         _view.UpdatePriceField(_model.GetCurrentPrice());
         _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+        _view.UpdateChancesLeftField(_model.GetNrOfChancesLeft());
+        _view.UpdateNpcOffer(_model.GetNpcOffer());
+        _view.UpdateUIInteraction(true);
         _view.SetActiveHagglingUI(true);
     }
 
@@ -52,5 +57,14 @@ public class HagglingUIPresenter : MonoBehaviour
         _model.SetCurrentPrice(value);
         _view.UpdateSliderValue(_model.GetCurrentPrice());
         _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+    }
+    private void OnNrOfChancesChanged()
+    {
+        _view.UpdateChancesLeftField(_model.GetNrOfChancesLeft());
+        _view.UpdateNpcOffer(_model.GetNpcOffer());
+    }
+    private void OnUIDisabled()
+    {
+        _view.UpdateUIInteraction(false);
     }
 }
