@@ -5,34 +5,46 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class HagglingManager : MonoBehaviour{
-    private bool _isPlayerReady;
-    private bool _isNpcReady;
+public class HagglingManager : MonoBehaviour, IInteractable
+{
+    [SerializeField] private bool _isPlayerReady;
+    [SerializeField] private bool _isNpcReady;
     private NpcBehaviour _npcBehaviour;
-    [SerializeField] private Canvas _hagglingUI;
-    [SerializeField] TextMeshProUGUI _counterField;
-    [SerializeField] TextMeshProUGUI _itemDescField;
-    [SerializeField] TextMeshProUGUI _resulField;
     private int _currentPrice;
     private int _basePrice;
+    [SerializeField] private int _nrOfChancesLeft=3;
+    [SerializeField] private bool _hagglingInProgress = false;
+    [SerializeField] private int _npcOffer = 0;
 
-    private void Awake(){
-        _hagglingUI.gameObject.SetActive(false);
-    }
+    public event Action HagglingInitiated;
+    public event Action HagglingEnded;
+    public event Action PriceChanged;
+    public event Action NrOfChancesChanged;
+    public event Action UIDisabled;
+
+    public event Action ItemSold;
+    public event Action ItemDenied;
+
+    private float _toleranceDecimal;
+    private float _randomDeviation;
+    private float _maxThreshold;
+    private float _successChance;
+
+
+    public readonly int MaxPriceMultiplier = 3;
+
 
     public void SetPlayerReadiness(bool isPlayerReady){
         _isPlayerReady = isPlayerReady;
-        CheckReadiness();
     }
 
     public void SetNpcReadiness(bool isNpcReady){
         _isNpcReady = isNpcReady;
-        CheckReadiness();
     }
 
     private void CheckReadiness(){
-        if (_isPlayerReady && _isNpcReady){
-            _hagglingUI.gameObject.SetActive(true);
+        if (_isNpcReady&&!_hagglingInProgress)
+        {
             StartHaggling();
         }
     }
@@ -44,65 +56,129 @@ public class HagglingManager : MonoBehaviour{
     public void IncreaseCounter(){
         if (_currentPrice < _basePrice * 2){
             _currentPrice += 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void DecreaseCounter(){
         if (_currentPrice > 10){
             _currentPrice -= 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void StartHaggling(){
+        if(_npcBehaviour==null || _npcBehaviour.GetDisplaySlotController().GetItem()==null)
+        {
+            _npcBehaviour.GoToExitWithoutItem();
+            return;
+        }
+        _hagglingInProgress = true;
+        _nrOfChancesLeft = 3;
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
-        _itemDescField.text = new string("Item name:\n" + _npcBehaviour.GetItemToBuy().Name + "\nDescription:\n" + _npcBehaviour.GetItemToBuy().Description + "\nBase price:\n" + _basePrice);
         _currentPrice = _basePrice;
-        _counterField.text = _basePrice.ToString();
-        _resulField.text = "";
+        _npcOffer = _basePrice;
+
+        _toleranceDecimal = _npcBehaviour.GetToleranceDecimal();
+        _randomDeviation = Random.Range(350, 480);
+        _randomDeviation = _randomDeviation / 100;
+        _maxThreshold = (int)(_basePrice + _basePrice * _toleranceDecimal * _randomDeviation);
+        float random = Random.value;
+        //float bias = random * random;
+        _successChance = Mathf.Lerp(_toleranceDecimal, _toleranceDecimal * 2.5f, random);
+
+        HagglingInitiated?.Invoke();
     }
 
     public void TryToSell(){
-        _currentPrice = Int32.Parse(_counterField.text);
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
+        float percentageIncreaseDecimal = (float)_currentPrice / _basePrice - 1f;
 
-        if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
-            
+
+        if (percentageIncreaseDecimal <= _toleranceDecimal)
+        {
             SellItem();
         }
-        else{
-            int successPoints = 10 + markupPoints - _npcBehaviour.GetTolerance();
-            if (Random.Range(1,21) >= successPoints){
+        else
+        {
+            Debug.Log("chance: "+_successChance+", increase: "+percentageIncreaseDecimal);
+            if (percentageIncreaseDecimal <= _successChance)
+            {
                 SellItem();
+            }
+            else if (_nrOfChancesLeft>1 && _currentPrice<= _maxThreshold)
+            {
+                _nrOfChancesLeft--;
+                _npcOffer = (int)(_basePrice + Mathf.Round(_basePrice* 0.05f*(3-_nrOfChancesLeft)));
+                NrOfChancesChanged?.Invoke();
             }
             else{
                 DenySell();
             }
         }
         
-        EndHaggling();
     }
 
     private void SellItem(){
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
-        _resulField.color = Color.green;
-        _resulField.text = "Sold";
+        ItemSold?.Invoke();
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
+        StartCoroutine(EndHaggling(true));
     }
 
     private void DenySell(){
-        _resulField.color = Color.red;
-        _resulField.text = "Failed";
+        ItemDenied?.Invoke();
+        StartCoroutine(EndHaggling(false));
     }
 
-    private void EndHaggling(){
-        _npcBehaviour.GoToExit();
-        StartCoroutine(DisableUiDelay());
-    }
-    
-    private IEnumerator DisableUiDelay(){
+    private IEnumerator EndHaggling(bool itemSold){
+        _nrOfChancesLeft=0;
+        NrOfChancesChanged?.Invoke();
+        UIDisabled?.Invoke();
         yield return new WaitForSeconds(1);
-        _hagglingUI.gameObject.SetActive(false);
+        _npcBehaviour.GoToExit(itemSold);
+        HagglingEnded?.Invoke();
+        _hagglingInProgress = false;
+        // StartCoroutine(DisableUiDelay());
+    }
+   
+
+    public void Interact()
+    {
+        CheckReadiness();
+    }
+
+    public string TriggerInteractPrompt()
+    {
+        return "Start Haggling";
+    }
+
+    public int GetCurrentPrice()
+    {
+        return _currentPrice;
+    }
+    public int GetBasePrice()
+    {
+        return _basePrice;
+    }
+    public ItemData GetItem()
+    {
+        return _npcBehaviour.GetItemToBuy();
+    }
+    public void SetCurrentPrice(int price)
+    {
+        _currentPrice = price;
+    }
+    public NpcBehaviour GetNpc()
+    {
+        return _npcBehaviour;
+    }
+    public int GetNrOfChancesLeft()
+    {
+        return _nrOfChancesLeft;
+    }
+    public int GetNpcOffer()
+    {
+        return _npcOffer;
     }
 }

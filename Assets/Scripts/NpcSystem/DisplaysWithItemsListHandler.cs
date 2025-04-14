@@ -14,7 +14,7 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     public void AddDisplaySlotWithItem(DisplaySlotController displaySlot)
     {
         _displaySlotsWithItems.Add(displaySlot);
-        SwapLastWithRandom();
+        //SwapLastWithRandom();
     }
 
     public void RemoveDisplaySlotWithItem(DisplaySlotController displaySlot)
@@ -24,6 +24,7 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
 
     public List<DisplaySlotController> GetDisplaySlotsWithItems()
     {
+        Shuffle();
         return _displaySlotsWithItems;
     }
 
@@ -33,5 +34,17 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
         DisplaySlotController temp = _displaySlotsWithItems[random];
         _displaySlotsWithItems[random] = _displaySlotsWithItems[_displaySlotsWithItems.Count - 1];
         _displaySlotsWithItems[_displaySlotsWithItems.Count - 1] = temp;
+    }
+    void Shuffle()
+    {
+        int n = _displaySlotsWithItems.Count;
+        while (n > 1)
+        {
+            n--;
+            int random = Random.Range(0, n+1);
+            DisplaySlotController value = _displaySlotsWithItems[random];
+            _displaySlotsWithItems[random] = _displaySlotsWithItems[n];
+            _displaySlotsWithItems[n] = value;
+        }
     }
 }

@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tolerance: 2
+  _toleranceDecimal: 0.3
   _NPCType: 1
   _itemToBuy:
     <Name>k__BackingField: 
@@ -398,7 +399,9 @@ MonoBehaviour:
     <Description>k__BackingField: 
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 78776df46d2cbe44ba3e1c07089c6859, type: 2}
-  _updateText: {fileID: 0}
+  _updateText: {fileID: 7506852189580195177}
+  _minChanceToBuy: 0
+  _displaySlotsWithItems: []
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -420,7 +423,7 @@ NavMeshAgent:
   m_Height: 1.9999999
   m_BaseOffset: 0.99999994
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &3066310839602576973
 Rigidbody:
   m_ObjectHideFlags: 0

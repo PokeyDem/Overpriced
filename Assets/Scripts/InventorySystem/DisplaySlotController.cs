@@ -10,8 +10,10 @@ public class DisplaySlotController : MonoBehaviour{
     private GameObject _itemPrefab;
     private int _itemId = -1;
     [SerializeField] private ItemData _item;
-    private bool _isOccupied;
+    public bool isOccupied=false;//by npc
+    public bool isChosen=false;
     private Vector3 _position;
+
 
     private void Update(){
         if (_itemPrefab)
@@ -46,9 +48,10 @@ public class DisplaySlotController : MonoBehaviour{
             Destroy(_itemPrefab);
         }
         _itemPrefab = Instantiate(item.Prefab, _marker.transform.position, Quaternion.identity);
-        _isOccupied = true;
         _itemId = item.ID;
         _item = item;
+        isChosen = false;
+        isOccupied = false;
         DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(this);
     }
 
@@ -56,7 +59,6 @@ public class DisplaySlotController : MonoBehaviour{
         Destroy(_itemPrefab);
         _itemPrefab = null;
         _item = null;
-        _isOccupied = false;
         _itemId = -1;
         DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(this);
     }
