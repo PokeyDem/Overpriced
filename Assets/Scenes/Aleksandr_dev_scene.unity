@@ -1116,7 +1116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryUI: {fileID: 1116002994}
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   _itemInfoPanel: {fileID: 1990108292}
   _itemSlotPrefab: {fileID: 4196557659919706290, guid: 656a82443d4239e49be67ce3e518f078, type: 3}
   _inventorySlotsContainer: {fileID: 1507226815}
@@ -4898,6 +4897,7 @@ MonoBehaviour:
   shopStateManager: {fileID: 444324990}
   moneyManager: {fileID: 1346806260}
   experienceManager: {fileID: 1061662098}
+  itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
 --- !u!114 &1061662098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7441627990209729258, guid: 39610f17139469049befa495eeb0d80b, type: 3}
@@ -10194,6 +10194,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPlayerReady: 0
   _isNpcReady: 0
+  _nrOfChancesLeft: 3
+  _hagglingInProgress: 0
+  _npcOffer: 0
 --- !u!1 &2078474930
 GameObject:
   m_ObjectHideFlags: 0
@@ -10668,7 +10671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2907174728120728697}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8900001, y: 3.45, z: -4.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

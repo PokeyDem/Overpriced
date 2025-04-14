@@ -55,7 +55,7 @@ public class NpcBehaviour : MonoBehaviour{
             StartCoroutine(CheckItemsThroughWindow());
         }
         else{
-            Debug.Log("Spawned in shop");
+            //Debug.Log("Spawned in shop");
             StartCoroutine(BrowseDisplays());
         }
     }
@@ -71,6 +71,7 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.SetDestination(_windowPos.position+deviation);
         yield return new WaitUntil(() => !_agent.pathPending &&
                                     _agent.remainingDistance <= _agent.stoppingDistance);
+        StartCoroutine(LerpRotation( 90));
         yield return new WaitForSeconds(WaitRandomAmount(200, 600));
         if (DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems().Count != 0)
         {
@@ -79,13 +80,23 @@ public class NpcBehaviour : MonoBehaviour{
         else
         {
             _agent.SetDestination(_despawnPointPos.position);
-            Debug.Log("Item wasn't found, Npc destination: DespawnPoint");
+            //Debug.Log("Item wasn't found, Npc destination: DespawnPoint");
+        }
+    }
+
+    private IEnumerator LerpRotation( float angle) {
+        //Debug.Log("Angle: " +angle);
+        float time = 0.0f;
+        while (time < 1) {
+            transform.Rotate(Vector3.up, angle * Time.deltaTime);
+            time += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 
     public IEnumerator BrowseDisplays()
     {
-        Debug.Log($"BrowseDisplays started");
+        //Debug.Log($"BrowseDisplays started");
         BrowsingStarted?.Invoke();
         _displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //Queue<DisplaySlotController> displaySlotsWithItems = new Queue<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
@@ -103,7 +114,7 @@ public class NpcBehaviour : MonoBehaviour{
             }
             if (displaySlotController.isChosen)
             {
-                Debug.Log($"Chosen");
+                //Debug.Log($"Chosen");
                 continue;
             }
             if (!displaySlotController.isOccupied)
@@ -112,7 +123,7 @@ public class NpcBehaviour : MonoBehaviour{
             } 
             else
             {
-                Debug.Log($"Occupied");
+                //Debug.Log($"Occupied");
                 if (_displaySlotsWithItems.Find(ds => !ds.isOccupied) != null)
                 {
                     _displaySlotsWithItems.Add(displaySlotController);
@@ -127,14 +138,16 @@ public class NpcBehaviour : MonoBehaviour{
 
             if (displaySlotController.isChosen)
             {
-                Debug.Log($"Chosen");
+                //Debug.Log($"Chosen");
                 continue;
             }
             //_agent.speed = 2;
             _agent.SetDestination(displaySlotController.transform.position);
-            Debug.Log($"Going to: {displaySlotController.transform.position}, item: {item.Name}");
+            //Debug.Log($"Going to: {displaySlotController.transform.position}, item: {item.Name}");
             yield return new WaitUntil(() => !_agent.pathPending &&
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
+            //StartCoroutine(LerpRotation(Vector3.Angle(transform.position, displaySlotController.transform.position)));
+            transform.LookAt(displaySlotController.transform.position);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
             yield return new WaitForSeconds(WaitRandomAmount(200, 1000));
@@ -143,7 +156,7 @@ public class NpcBehaviour : MonoBehaviour{
             {
                 if (IsInterestedInBuying(item))
                 {
-                    Debug.Log($"Wants {item.Name}");
+                    //Debug.Log($"Wants {item.Name}");
                     _displaySlotController = displaySlotController;
                     _itemToBuy = displaySlotController.GetItem();
                     displaySlotController.isOccupied = true;
@@ -155,7 +168,7 @@ public class NpcBehaviour : MonoBehaviour{
                 else {
                     displaySlotController.isOccupied = false;
                     ItemRejected?.Invoke();
-                    Debug.Log($"Doesnt want {item.Name}"); 
+                    //Debug.Log($"Doesnt want {item.Name}"); 
                 }
             }
         }
@@ -196,13 +209,15 @@ public class NpcBehaviour : MonoBehaviour{
                 }
             }
             _agent.SetDestination(destination.position);
-            Debug.Log($"Going to: {destination.position}, Line");
-            if (currentPosInLine>0)
-            {
+            
+            //Debug.Log($"Going to: {destination.position}, Line");
+            if (currentPosInLine == 0) {
+                yield return new WaitUntil(() => !_agent.pathPending &&
+                                                 _agent.remainingDistance <= _agent.stoppingDistance);
+                StartCoroutine(LerpRotation(Vector3.Angle(transform.position, destination.position)));
+            }else if (currentPosInLine>0) {
                 yield return new WaitUntil(() => !NpcManager.counterTaken[currentPosInLine - 1]);//if in line wait till next in line is open
-            }
-            else
-            {
+            }else {
                 yield return new WaitUntil(() => !NpcManager.counterTaken[_counterPos.Count-1]);//if not in line wait till last in line is open
             }
         }
@@ -224,7 +239,7 @@ public class NpcBehaviour : MonoBehaviour{
         }
         else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);
-        Debug.Log($"Chance to buy: {chanceToBuy}, random: {random}");
+        //Debug.Log($"Chance to buy: {chanceToBuy}, random: {random}");
         if (random < chanceToBuy)
         {
             isInterested = true;

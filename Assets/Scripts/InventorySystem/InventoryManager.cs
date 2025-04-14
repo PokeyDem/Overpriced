@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,6 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour{
     [SerializeField] private Canvas _inventoryUI;
-    [SerializeField] private ItemsDatabaseSO _itemsDatabase;
     [SerializeField] private GameObject _itemInfoPanel;
     [SerializeField] private GameObject _itemSlotPrefab;
     [SerializeField] private GameObject _inventorySlotsContainer;
@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour{
     private Dictionary<ItemType, List<int>> _itemTypesDictionary; 
     
     private DisplaySlotController _currentDisplayDisplaySlot; // todo refactor and delete later
-    private InventorySlot _selectedInventorySlot;
+    private ItemSlotUIController _selectedInventorySlot;
     private int _selectedSlotId;
 
     private ItemType _categoryToSortBy = ItemType.All;
@@ -42,8 +42,8 @@ public class InventoryManager : MonoBehaviour{
 
     private void ClearInventory(){
         foreach (var slot in _inventorySlots){
-            if (slot.GetComponent<InventorySlot>().GetItemId() != -1) 
-                slot.GetComponent<InventorySlot>().RemoveItem();
+            if (slot.GetComponent<ItemSlotUIController>().GetItem() != null) 
+                slot.GetComponent<ItemSlotUIController>().RemoveItem();
         }
         _inventorySlotsDictionary = new Dictionary<int, int>();
         _itemTypesDictionary = new Dictionary<ItemType, List<int>>();
@@ -84,28 +84,25 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
-        var inventorySlotItemId = _selectedInventorySlot.GetItemId();
+        var inventorySlotItem = _selectedInventorySlot.GetItem();
         
-        if (inventorySlotItemId != -1 && _currentDisplayDisplaySlot.GetItemId() == -1){
-            var selectedItemIndex = _itemsDatabase._itemsData.FindIndex(data => data.ID == inventorySlotItemId);
-            _currentDisplayDisplaySlot.PlaceItem(_itemsDatabase._itemsData[selectedItemIndex]);
+        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() == null){
+            _currentDisplayDisplaySlot.PlaceItem(inventorySlotItem);
             RemoveItemFromInventory();
         }
     }
 
     public void RemoveItemFromInventory(){
-        ItemData itemToRemove = _itemsDatabase._itemsData[_selectedInventorySlot.GetItemId()];
-        
-        if (_selectedInventorySlot.IsEmpty())
+        if (_selectedInventorySlot.IsEmpty()) {
             return;
+        }
 
         if (_selectedInventorySlot.GetItemQuantity() > 1){
             _selectedInventorySlot.DecreaseQuantity();
         }
         else{
-            _inventorySlotsDictionary.Remove(_selectedInventorySlot.GetItemId());
-            _itemTypesDictionary[itemToRemove.ItemType].Remove(_selectedSlotId);
-            _selectedInventorySlot.RemoveItem();
+            _inventorySlotsDictionary.Remove(_selectedInventorySlot.GetItemID());
+            _itemTypesDictionary[_selectedInventorySlot.RemoveItem().ItemType].Remove(_selectedSlotId);
             if (_categoryToSortBy != ItemType.All)
                 _selectedInventorySlot.gameObject.SetActive(false);
         }
@@ -122,82 +119,60 @@ public class InventoryManager : MonoBehaviour{
         if (_selectedInventorySlot) 
             _selectedInventorySlot.DisableOutline();
         
-        _selectedInventorySlot = _inventorySlots[selectedSlotId].GetComponent<InventorySlot>();
+        _selectedInventorySlot = _inventorySlots[selectedSlotId].GetComponent<ItemSlotUIController>();
         _selectedInventorySlot.EnableOutline();
 
-        int currentItemId = _inventorySlots[selectedSlotId].GetComponent<InventorySlot>().GetItemId();
-        if (currentItemId != -1){
+        ItemData currentItem = _inventorySlots[selectedSlotId].GetComponent<ItemSlotUIController>().GetItem();
+        if (currentItem != null){
             _itemInfoPanel.SetActive(true);
-            _itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItemId);
+            _itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
         }
         else{
             _itemInfoPanel.SetActive(false);
         }
     }
 
-    public string GetItemInfo(int index){
-        ItemData currentItemData = _itemsDatabase._itemsData.Find(data => data.ID == index);
+    public string GetItemInfo(ItemData currentItemData){
         return "Name: " + currentItemData.Name
             + "\nPrice: " + currentItemData.FinalPrice
             + "\nRarity: " + new string(Convert.ToChar("*"), currentItemData.Rarity)
             + "\nDescription: " + currentItemData.Description;
     }
     public void RemoveItemFromDisplaySlot(){
-        int itemId = _currentDisplayDisplaySlot.GetItemId();
+        ItemData item = _currentDisplayDisplaySlot.GetItem();
         
-        if (itemId == -1) return;
+        if (item == null) return;
         
         _currentDisplayDisplaySlot.RemoveItem();
-        AddItemToInventory(itemId);
+        AddItemToInventory(item);
     }
 
-    public void AddItemToInventory(int itemId){
+    public void AddItemToInventory(ItemData item){
         int slotIndex = -1;
-        ItemData itemToAdd = _itemsDatabase._itemsData.Find(data => data.ID == itemId);
 
-        if ((slotIndex = FindExistingItem(itemId)) != -1){
-            _inventorySlots[slotIndex].GetComponent<InventorySlot>().IncreaseQuantity();
-            _itemTypesDictionary[itemToAdd.ItemType].Add(slotIndex);
+        if ((slotIndex = FindExistingItem(item)) != -1){
+            _inventorySlots[slotIndex].GetComponent<ItemSlotUIController>().IncreaseQuantity();
+            _itemTypesDictionary[item.ItemType].Add(slotIndex);
         }
         else if ((slotIndex = FindFreePosition()) != -1){
-            _inventorySlots[slotIndex].GetComponent<InventorySlot>().AddItem(itemId, itemToAdd.PreviewImage, itemToAdd.Rarity);
-            _inventorySlotsDictionary[itemToAdd.ID] = slotIndex;
-            _itemTypesDictionary[itemToAdd.ItemType].Add(slotIndex);
+            _inventorySlots[slotIndex].GetComponent<ItemSlotUIController>().AddItem(item);
+            _inventorySlotsDictionary[item.ID] = slotIndex;
+            _itemTypesDictionary[item.ItemType].Add(slotIndex);
         }
         else{
             AddSlots(5);
             IncreaseContentPanelSize();
-            AddItemToInventory(itemId);
+            AddItemToInventory(item);
         }
         
         EnableSlotsForSpecificCategory(_categoryToSortBy);
     }
 
-    private void AddRandomRarityItemToInventory(ItemType itemType){
-        List<ItemData> matchedItems = _itemsDatabase._itemsData.FindAll(data => data.ItemType.Equals(itemType));
-        ItemData randomItem = matchedItems[UnityEngine.Random.Range(0, matchedItems.Count)];
-        if (_moneyManager.GetCurrentMoney() >= randomItem.FinalPrice){
-            AddItemToInventory(randomItem.ID);
-            _moneyManager.ReduceMoney(randomItem.FinalPrice);
-        }
-    }
-
-    public void AddRandomWeaponToInventory(){
-        AddRandomRarityItemToInventory(ItemType.Weapon);
-    }
-
-    public void AddRandomPotionToInventory(){
-        AddRandomRarityItemToInventory(ItemType.Potion);
-    }
-
-    public void AddRandomFoodToInventory(){
-        AddRandomRarityItemToInventory(ItemType.Food);
-    }
-
-    private int FindExistingItem(int index){
+    private int FindExistingItem(ItemData index){
         int counter = 0;
-        foreach (var inventorySlot in _inventorySlots){
-            if (inventorySlot.GetComponent<InventorySlot>().GetItemId().Equals(index)){
+        foreach (var inventorySlot in _inventorySlots) {
+            ItemData itemData = inventorySlot.GetComponent<ItemSlotUIController>().GetItem();
+            if (itemData!=null && itemData.ID.Equals(index.ID)){
                 return counter;
             }
             counter++;
@@ -208,7 +183,7 @@ public class InventoryManager : MonoBehaviour{
     private int FindFreePosition(){
         int counter = 0;
         foreach (var inventorySlot in _inventorySlots){
-            if (inventorySlot.GetComponent<InventorySlot>().IsEmpty()){
+            if (inventorySlot.GetComponent<ItemSlotUIController>().IsEmpty()){
                 return counter;
             }
             counter++;
@@ -260,7 +235,7 @@ public class InventoryManager : MonoBehaviour{
     public void GetSlotsData(){ //for debug - shows items id for every inventory slot on the console
         int counter = 0;
         foreach (var inventorySlot in _inventorySlots){
-            Debug.Log(counter + ": " + inventorySlot.GetComponent<InventorySlot>().GetItemId());
+            Debug.Log(counter + ": " + inventorySlot.GetComponent<ItemSlotUIController>().GetItem().ID);
             counter++;
         }
     }
@@ -275,10 +250,10 @@ public class InventoryManager : MonoBehaviour{
         return new InventoryData(_inventorySlotsDictionary);
     }
 
-    public void LoadInventoryData(Dictionary<int, int> inventoryData){
+    public void LoadInventoryData(List<ItemData> inventoryData){
         ClearInventory();
         foreach (var itemData in inventoryData){
-            AddItemToInventory(itemData.Key);
+            AddItemToInventory(itemData);
         }
     }
 }
