@@ -5,34 +5,37 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class HagglingManager : MonoBehaviour{
-    private bool _isPlayerReady;
-    private bool _isNpcReady;
+public class HagglingManager : MonoBehaviour, IInteractable
+{
+    [SerializeField] private bool _isPlayerReady;
+    [SerializeField] private bool _isNpcReady;
     private NpcBehaviour _npcBehaviour;
-    [SerializeField] private Canvas _hagglingUI;
-    [SerializeField] TextMeshProUGUI _counterField;
-    [SerializeField] TextMeshProUGUI _itemDescField;
-    [SerializeField] TextMeshProUGUI _resulField;
     private int _currentPrice;
     private int _basePrice;
+    [SerializeField] private int _nrOfChancesLeft=2;
+    [SerializeField] private bool _hagglingInProgress = false;
 
-    private void Awake(){
-        _hagglingUI.gameObject.SetActive(false);
-    }
+    public event Action HagglingInitiated;
+    public event Action HagglingEnded;
+    public event Action PriceChanged;
+
+    public event Action ItemSold;
+    public event Action ItemDenied;
+
+    public readonly int MaxPriceMultiplier = 3;
+
 
     public void SetPlayerReadiness(bool isPlayerReady){
         _isPlayerReady = isPlayerReady;
-        CheckReadiness();
     }
 
     public void SetNpcReadiness(bool isNpcReady){
         _isNpcReady = isNpcReady;
-        CheckReadiness();
     }
 
     private void CheckReadiness(){
-        if (_isPlayerReady && _isNpcReady){
-            _hagglingUI.gameObject.SetActive(true);
+        if (_isNpcReady&&!_hagglingInProgress)
+        {
             StartHaggling();
         }
     }
@@ -44,27 +47,31 @@ public class HagglingManager : MonoBehaviour{
     public void IncreaseCounter(){
         if (_currentPrice < _basePrice * 2){
             _currentPrice += 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void DecreaseCounter(){
         if (_currentPrice > 10){
             _currentPrice -= 10;
-            _counterField.text = _currentPrice.ToString();
+            PriceChanged?.Invoke();
         }
     }
 
     public void StartHaggling(){
+        if(_npcBehaviour==null || _npcBehaviour.GetDisplaySlotController().GetItem()==null)
+        {
+            _npcBehaviour.GoToExitWithoutItem();
+            return;
+        }
+        _hagglingInProgress = true;
+        _nrOfChancesLeft = 2;
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
-        _itemDescField.text = new string("Item name:\n" + _npcBehaviour.GetItemToBuy().Name + "\nDescription:\n" + _npcBehaviour.GetItemToBuy().Description + "\nBase price:\n" + _basePrice);
-        _currentPrice = _basePrice;
-        _counterField.text = _basePrice.ToString();
-        _resulField.text = "";
+        _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
+        HagglingInitiated?.Invoke();
     }
 
     public void TryToSell(){
-        _currentPrice = Int32.Parse(_counterField.text);
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
 
         if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
@@ -76,34 +83,65 @@ public class HagglingManager : MonoBehaviour{
             if (Random.Range(1,21) >= successPoints){
                 SellItem();
             }
+            else if (_nrOfChancesLeft>0)
+            {
+                _nrOfChancesLeft--;
+            }
             else{
                 DenySell();
             }
         }
         
-        EndHaggling();
     }
 
     private void SellItem(){
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
-        _resulField.color = Color.green;
-        _resulField.text = "Sold";
+        ItemSold?.Invoke();
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
+        EndHaggling();
     }
 
     private void DenySell(){
-        _resulField.color = Color.red;
-        _resulField.text = "Failed";
+        ItemDenied?.Invoke();
+        EndHaggling();
     }
 
     private void EndHaggling(){
         _npcBehaviour.GoToExit();
-        _hagglingUI.gameObject.SetActive(false);
+        HagglingEnded?.Invoke();
+        _hagglingInProgress = false;
         // StartCoroutine(DisableUiDelay());
     }
-    
-    private IEnumerator DisableUiDelay(){
-        yield return new WaitForSeconds(1);
-        _hagglingUI.gameObject.SetActive(false);
+   
+
+    public void Interact()
+    {
+        CheckReadiness();
+    }
+
+    public string TriggerInteractPrompt()
+    {
+        return "Start Haggling";
+    }
+
+    public int GetCurrentPrice()
+    {
+        return _currentPrice;
+    }
+    public int GetBasePrice()
+    {
+        return _basePrice;
+    }
+    public ItemData GetItem()
+    {
+        return _npcBehaviour.GetItemToBuy();
+    }
+    public void SetCurrentPrice(int price)
+    {
+        _currentPrice = price;
+    }
+    public NpcBehaviour GetNpc()
+    {
+        return _npcBehaviour;
     }
 }

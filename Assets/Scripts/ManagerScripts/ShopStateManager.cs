@@ -14,7 +14,7 @@ public class ShopStateManager : MonoBehaviour
     public UnityEvent shopWosClose;
 
     public enum ShopState {
-        Open, Close
+        Open, Closed
     }
 
     public ShopStateData GetShopStateData(){
@@ -23,7 +23,7 @@ public class ShopStateManager : MonoBehaviour
 
     public void LoadShopState(ShopStateData shopStateData){
         if (_currentShopState != shopStateData.ShopState){
-            if (shopStateData.ShopState == ShopState.Close)
+            if (shopStateData.ShopState == ShopState.Closed)
                 CloseShop();
             else
                 OpenShop();
@@ -38,26 +38,26 @@ public class ShopStateManager : MonoBehaviour
     }
     
     void Start() {
-        _currentShopState = ShopState.Close;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        _currentShopState = ShopState.Closed;
+        shopStateChange.Invoke("Shop "+_currentShopState.ToString());
     }
     
     private float _openTimeCounter;
     
     public void OpenShop() {
         _currentShopState = ShopState.Open;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        shopStateChange.Invoke("Shop " + _currentShopState.ToString());
         shopWosOpen.Invoke();
         _openTimeCounter = openShopTimeSeconds;
     }
 
     public bool ShopIsClose() {
-        return _currentShopState == ShopState.Close;
+        return _currentShopState == ShopState.Closed;
     }
     
     public void CloseShop() {
-        _currentShopState = ShopState.Close;
-        shopStateChange.Invoke(_currentShopState.ToString());
+        _currentShopState = ShopState.Closed;
+        shopStateChange.Invoke("Shop " + _currentShopState.ToString());
         shopWosClose.Invoke();
     }
 
