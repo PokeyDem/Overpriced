@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tolerance: 2
+  _toleranceDecimal: 0.3
   _NPCType: 1
   _itemToBuy:
     <Name>k__BackingField: 
@@ -400,6 +401,8 @@ MonoBehaviour:
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 78776df46d2cbe44ba3e1c07089c6859, type: 2}
   _updateText: {fileID: 7506852189580195177}
+  _minChanceToBuy: 0
+  _displaySlotsWithItems: []
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0

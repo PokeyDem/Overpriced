@@ -12,15 +12,24 @@ public class HagglingManager : MonoBehaviour, IInteractable
     private NpcBehaviour _npcBehaviour;
     private int _currentPrice;
     private int _basePrice;
-    [SerializeField] private int _nrOfChancesLeft=2;
+    [SerializeField] private int _nrOfChancesLeft=3;
     [SerializeField] private bool _hagglingInProgress = false;
+    [SerializeField] private int _npcOffer = 0;
 
     public event Action HagglingInitiated;
     public event Action HagglingEnded;
     public event Action PriceChanged;
+    public event Action NrOfChancesChanged;
+    public event Action UIDisabled;
 
     public event Action ItemSold;
     public event Action ItemDenied;
+
+    private float _toleranceDecimal;
+    private float _randomDeviation;
+    private float _maxThreshold;
+    private float _successChance;
+
 
     public readonly int MaxPriceMultiplier = 3;
 
@@ -65,27 +74,43 @@ public class HagglingManager : MonoBehaviour, IInteractable
             return;
         }
         _hagglingInProgress = true;
-        _nrOfChancesLeft = 2;
+        _nrOfChancesLeft = 3;
         _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
-        _currentPrice = _npcBehaviour.GetItemToBuy().FinalPrice;
+        _currentPrice = _basePrice;
+        _npcOffer = _basePrice;
+
+        _toleranceDecimal = _npcBehaviour.GetToleranceDecimal();
+        _randomDeviation = Random.Range(350, 480);
+        _randomDeviation = _randomDeviation / 100;
+        _maxThreshold = (int)(_basePrice + _basePrice * _toleranceDecimal * _randomDeviation);
+        float random = Random.value;
+        //float bias = random * random;
+        _successChance = Mathf.Lerp(_toleranceDecimal, _toleranceDecimal * 2.5f, random);
+
         HagglingInitiated?.Invoke();
     }
 
     public void TryToSell(){
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
+        float percentageIncreaseDecimal = (float)_currentPrice / _basePrice - 1f;
 
-        if (markupPoints < 0 || markupPoints <= _npcBehaviour.GetTolerance()){
-            
+
+        if (percentageIncreaseDecimal <= _toleranceDecimal)
+        {
             SellItem();
         }
-        else{
-            int successPoints = 10 + markupPoints - _npcBehaviour.GetTolerance();
-            if (Random.Range(1,21) >= successPoints){
+        else
+        {
+            Debug.Log("chance: "+_successChance+", increase: "+percentageIncreaseDecimal);
+            if (percentageIncreaseDecimal <= _successChance)
+            {
                 SellItem();
             }
-            else if (_nrOfChancesLeft>0)
+            else if (_nrOfChancesLeft>1 && _currentPrice<= _maxThreshold)
             {
                 _nrOfChancesLeft--;
+                _npcOffer = (int)(_basePrice + Mathf.Round(_basePrice* 0.05f*(3-_nrOfChancesLeft)));
+                NrOfChancesChanged?.Invoke();
             }
             else{
                 DenySell();
@@ -98,16 +123,20 @@ public class HagglingManager : MonoBehaviour, IInteractable
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
-        EndHaggling();
+        StartCoroutine(EndHaggling(true));
     }
 
     private void DenySell(){
         ItemDenied?.Invoke();
-        EndHaggling();
+        StartCoroutine(EndHaggling(false));
     }
 
-    private void EndHaggling(){
-        _npcBehaviour.GoToExit();
+    private IEnumerator EndHaggling(bool itemSold){
+        _nrOfChancesLeft=0;
+        NrOfChancesChanged?.Invoke();
+        UIDisabled?.Invoke();
+        yield return new WaitForSeconds(1);
+        _npcBehaviour.GoToExit(itemSold);
         HagglingEnded?.Invoke();
         _hagglingInProgress = false;
         // StartCoroutine(DisableUiDelay());
@@ -143,5 +172,13 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public NpcBehaviour GetNpc()
     {
         return _npcBehaviour;
+    }
+    public int GetNrOfChancesLeft()
+    {
+        return _nrOfChancesLeft;
+    }
+    public int GetNpcOffer()
+    {
+        return _npcOffer;
     }
 }
