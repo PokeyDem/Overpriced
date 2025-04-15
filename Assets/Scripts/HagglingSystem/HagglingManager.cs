@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 
@@ -23,6 +24,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public event Action UIDisabled;
 
     public event Action ItemSold;
+    public UnityEvent<float> onItemSold;
     public event Action ItemDenied;
 
     private float _toleranceDecimal;
@@ -122,6 +124,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     private void SellItem(){
         MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
+        onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
         StartCoroutine(EndHaggling(true));
     }

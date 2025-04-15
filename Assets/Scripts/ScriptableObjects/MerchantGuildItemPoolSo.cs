@@ -11,9 +11,9 @@ namespace ScriptableObjects {
         public List<ItemPoolDay> itemsPool = new();
 
         public List<ItemData> GetItemsData(int day) {
-            if (day <= 0) {
+            /*if (day <= 0) {
                 day = 1;
-            }
+            }*/
             day--;
             day = day%itemsPool.Count;
             List<ItemData> itemDataList = new List<ItemData>();
@@ -25,7 +25,9 @@ namespace ScriptableObjects {
                     }
                 }
                 var item = database._itemsData.Find(data => data.ID == itemsPool[day].DayItemPool[i].Id);
-                AddItemData(itemDataList,item, itemsPool[day].DayItemPool[i].Amount);
+                if (item.Rarity<=ExperienceManager.ExperienceManagerInstance.GetLevel()) {
+                    AddItemData(itemDataList,item, itemsPool[day].DayItemPool[i].Amount);
+                }
             }
             return itemDataList;
         }
