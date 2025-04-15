@@ -15,15 +15,15 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   itemsPool:
   - <DayItemPool>k__BackingField:
+    - <Id>k__BackingField: 0
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
     - <Id>k__BackingField: 1
       <Amount>k__BackingField: 10
       <IsNotGuaranteed>k__BackingField: 0
       <Probability>k__BackingField: 0
     - <Id>k__BackingField: 2
-      <Amount>k__BackingField: 10
-      <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 0
-    - <Id>k__BackingField: 0
       <Amount>k__BackingField: 10
       <IsNotGuaranteed>k__BackingField: 0
       <Probability>k__BackingField: 0

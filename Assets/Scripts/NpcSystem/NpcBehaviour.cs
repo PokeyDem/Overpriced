@@ -85,7 +85,6 @@ public class NpcBehaviour : MonoBehaviour{
     }
 
     private IEnumerator LerpRotation( float angle) {
-        //Debug.Log("Angle: " +angle);
         float time = 0.0f;
         while (time < 1) {
             transform.Rotate(Vector3.up, angle * Time.deltaTime);

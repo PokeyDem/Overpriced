@@ -22,7 +22,7 @@ public class ItemsDatabaseSO : ScriptableObject{
             }
         }
         _itemsData.Clear();
-        int id = baseItems.Count - 1;
+        int id = baseItems.Count;
         
         foreach (var item in baseItems){
             _itemsData.Add(item);
