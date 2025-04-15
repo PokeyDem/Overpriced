@@ -9,9 +9,12 @@ public class SaveSlot : MonoBehaviour{
     private int _id;
 
     private void Awake(){
+       InitializeButton();
+    }
+
+    public void InitializeButton(){
         _textField = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         _outline = transform.Find("Outline").GetComponentInChildren<Image>();
-        
     }
 
     public void SetId(int id){
@@ -22,8 +25,18 @@ public class SaveSlot : MonoBehaviour{
         return _id;
     }
 
-    public void SetSaveInfo(){
-        _textField.text = $"Save {_id}\n" 
+    public void SetSaveInfo(){ //TODO refactor this later
+        Debug.Log(_id);
+        if (_id == 6)
+            _textField.text = "QuickSave\n"
+                              + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
+                              + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n";
+        else if (_id == 7)
+            _textField.text = "AutoSave\n"
+                              + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
+                              + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n";
+        else
+            _textField.text = $"Save {_id}\n" 
                           + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
                           + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n"
                           + $"Save time: {DateTime.Now:HH:mm}\n"

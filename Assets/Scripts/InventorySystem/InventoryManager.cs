@@ -74,6 +74,7 @@ public class InventoryManager : MonoBehaviour{
     }
 
     public void EnableInventory(){
+        AudioManager.PlaySound(SoundType.INTERACT, 0.2f);
         _inventoryUI.gameObject.SetActive(true);
         SelectSlot(0);
         _selectedInventorySlot.EnableOutline();

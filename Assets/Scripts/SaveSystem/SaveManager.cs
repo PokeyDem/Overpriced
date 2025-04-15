@@ -16,8 +16,7 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     private new void Awake(){
         base.Awake();
     }
-    public void SaveGame(int slotId){
-        string path = $"/save_slot_{slotId}.json";
+    public void SaveGameInFile(string path){
         PlayerData playerData = player.GetPlayerData();
         List<DisplayData> displayData = placementSystem.GetDisplayData();
         InventoryData inventoryData = inventoryManager.GetInventoryData();
@@ -32,8 +31,7 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         _dataService.SaveData(path, saveData, true);
     }
 
-    public void LoadGame(int slotID){
-        string path = $"/save_slot_{slotID}.json";
+    public void LoadGameFromFile(string path){
         SaveData saveData = _dataService.LoadData<SaveData>(path, true);
         player.LoadPlayer(saveData.PlayerData);
         placementSystem.LoadDisplayData(saveData.DisplayData);
@@ -43,5 +41,23 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         moneyManager.LoadMoneyData(saveData.MoneyData);
         experienceManager.LoadExperienceData(saveData.ExperienceData);
         PauseMenuManager.Instance.Resume();
+    }
+
+    public void SaveGame(int slotID){
+        if (slotID == 6)
+            SaveGameInFile($"/quick_save.json");
+        else if (slotID == 7)
+            SaveGameInFile("/auto_save.json");
+        else
+            SaveGameInFile($"/save_slot_{slotID}.json");
+    }
+
+    public void LoadGame(int slotID){
+        if (slotID == 6)
+            LoadGameFromFile($"/quick_save.json");
+        else if (slotID == 7)
+            LoadGameFromFile("/auto_save.json");
+        else
+            LoadGameFromFile($"/save_slot_{slotID}.json");
     }
 }

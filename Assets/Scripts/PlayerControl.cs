@@ -53,6 +53,10 @@ public class PlayerControl : MonoBehaviour{
         _rb.MovePosition(newPos);
     }
 
+    public bool IsMoving(){
+        return _movementVector != Vector3.zero;
+    }
+
     public PlayerData GetPlayerData(){
         return new PlayerData(transform.position.x, transform.position.y, transform.position.z);
     }
