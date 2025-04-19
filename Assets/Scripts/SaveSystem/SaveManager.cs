@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,22 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     [SerializeField] private ShopStateManager shopStateManager;
     [SerializeField] private MoneyManager moneyManager;
     [SerializeField] private ExperienceManager experienceManager;
+    [SerializeField] private SaveUIManager saveUIManager;
     private IDataService _dataService = new JsonDataService();
+    private String QUICK_SAVE_PATH = "/quick_save.json";
+    private String AUTO_SAVE_PATH = "/auto_save.json";
+    private String SAVE_INFO_PATH = "/save_info.json";
 
     private new void Awake(){
         base.Awake();
     }
-    public void SaveGameInFile(string path){
+
+    private void Start(){
+        Debug.Log("Started");
+        LoadSlotsInfo();
+    }
+
+    public void SaveGameToFile(string path){
         PlayerData playerData = player.GetPlayerData();
         List<DisplayData> displayData = placementSystem.GetDisplayData();
         InventoryData inventoryData = inventoryManager.GetInventoryData();
@@ -29,9 +40,13 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
             inventoryData, dayData, shopStateData, moneyData, experienceData);
         
         _dataService.SaveData(path, saveData, true);
+        SaveSlotsInfo();
     }
 
     public void LoadGameFromFile(string path){
+        if (!_dataService.IsFileExists(path))
+            return;
+        
         SaveData saveData = _dataService.LoadData<SaveData>(path, true);
         player.LoadPlayer(saveData.PlayerData);
         placementSystem.LoadDisplayData(saveData.DisplayData);
@@ -45,19 +60,35 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
 
     public void SaveGame(int slotID){
         if (slotID == 6)
-            SaveGameInFile($"/quick_save.json");
+            SaveGameToFile(QUICK_SAVE_PATH);
         else if (slotID == 7)
-            SaveGameInFile("/auto_save.json");
+            SaveGameToFile(AUTO_SAVE_PATH);
         else
-            SaveGameInFile($"/save_slot_{slotID}.json");
+            SaveGameToFile($"/save_slot_{slotID}.json");
     }
 
     public void LoadGame(int slotID){
         if (slotID == 6)
-            LoadGameFromFile($"/quick_save.json");
+            LoadGameFromFile(QUICK_SAVE_PATH);
         else if (slotID == 7)
-            LoadGameFromFile("/auto_save.json");
+            LoadGameFromFile(AUTO_SAVE_PATH);
         else
             LoadGameFromFile($"/save_slot_{slotID}.json");
+    }
+
+    public void SaveSlotsInfo(){
+        SaveSlotsData saveSlotsData = SaveUIManager.Instance.GetSaveSlotsData();
+        _dataService.SaveData(SAVE_INFO_PATH, saveSlotsData, true);
+    }
+
+    public void LoadSlotsInfo(){
+        if (!_dataService.IsFileExists(SAVE_INFO_PATH)){
+            Debug.Log("No save file found");
+            return;
+        }
+        
+        SaveSlotsData saveSlotsData =  _dataService.LoadData<SaveSlotsData>(SAVE_INFO_PATH, true);
+        SaveUIManager.Instance.LoadSaveSlotsData(saveSlotsData);
+        Debug.Log(saveSlotsData.SlotsData);
     }
 }

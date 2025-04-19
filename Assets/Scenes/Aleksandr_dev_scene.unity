@@ -7654,6 +7654,7 @@ MonoBehaviour:
   shopStateManager: {fileID: 444324990}
   moneyManager: {fileID: 1346806260}
   experienceManager: {fileID: 1061662098}
+  saveUIManager: {fileID: 1030446190}
 --- !u!114 &1030446190
 MonoBehaviour:
   m_ObjectHideFlags: 0

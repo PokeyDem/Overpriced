@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -41,6 +42,7 @@ public class SaveData{
     public ShopStateData ShopStateData;
     public MoneyData MoneyData;
     public ExperienceData ExperienceData;
+    public SaveSlotsData SaveSlotsData;
 
     public SaveData(PlayerData playerData, List<DisplayData> displayData, 
         InventoryData inventoryData, DayData dayData,
@@ -91,5 +93,13 @@ public class ExperienceData{
     public ExperienceData(int level, float currentExp){
         Level = level;
         CurrentExp = currentExp;
+    }
+}
+
+public class SaveSlotsData{
+    public List<String> SlotsData;
+
+    public SaveSlotsData(List<String> slotsData){
+        SlotsData = slotsData;
     }
 }

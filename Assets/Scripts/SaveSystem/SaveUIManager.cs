@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,14 +24,31 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
         _saveSlots.Add(_quickSaveSlot.GetComponent<SaveSlot>());
         _saveSlots.Add(_autoSaveSlot.GetComponent<SaveSlot>());
         int buttonID = 0;
-        foreach (var button  in _saveSlots){
+        foreach (var button in _saveSlots){
             var id = buttonID;
             button.GetComponent<Button>().onClick.AddListener(() => SetSelectedSaveSlotId(id));
             button.GetComponent<Button>().onClick.AddListener(EnableSelectedSlotOutline);
             button.SetId(id);
             buttonID++;
         }
+    }
+
+    public SaveSlotsData GetSaveSlotsData(){
+        List<String> data = new List<string>();
+
+        foreach (var slot in _saveSlots){
+            data.Add(slot.GetSaveInfo());
+        }
         
+        return new SaveSlotsData(data);
+    }
+
+    public void LoadSaveSlotsData(SaveSlotsData data){
+        for (int i = 0; i < _saveSlots.Count; i++){
+            _saveSlots[i].InitializeButton();
+            _saveSlots[i].SetSaveInfo(data.SlotsData[i]);
+            Debug.Log(_saveSlots[i].GetId() + " | " + data.SlotsData[i]);
+        }
     }
 
     public void EnableUI(){
@@ -42,8 +60,8 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
     }
 
     public void OnSaveButtonClick(){
-        SaveManager.Instance.SaveGame(_selectedSaveSlot);
         _saveSlots[_selectedSaveSlot].SetSaveInfo();
+        SaveManager.Instance.SaveGame(_selectedSaveSlot);
     }
 
     public void OnQuickSaveButtonClick(){

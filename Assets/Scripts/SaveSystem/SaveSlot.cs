@@ -43,6 +43,14 @@ public class SaveSlot : MonoBehaviour{
                           + $"Save date: {DateTime.Now:dd-MM-yyyy}";
     }
 
+    public void SetSaveInfo(String info){
+        _textField.text = info;
+    }
+
+    public String GetSaveInfo(){
+        return _textField.text;
+    }
+
     public bool IsEmpty(){
         return _textField.text.Length == 0;
     }

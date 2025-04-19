@@ -43,4 +43,8 @@ public class JsonDataService : IDataService
             throw e;
         }
     }
+
+    public bool IsFileExists(String relativePath){
+        return File.Exists(Application.persistentDataPath + relativePath);
+    }
 }
