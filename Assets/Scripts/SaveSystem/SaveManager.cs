@@ -37,7 +37,7 @@ public class SaveManager : MonoBehaviour
         
         List<ItemData> itemDataList = new List<ItemData>();
         foreach (var item in saveData.InventoryData.InventoryItemsData) {
-            itemDataList.Add(itemsDatabase._itemsData.Find(data => data.ID==item.Key));
+            itemDataList.Add(itemsDatabase.Find(data => data.ID==item.Key));
         }
         inventoryManager.LoadInventoryData(itemDataList);
         

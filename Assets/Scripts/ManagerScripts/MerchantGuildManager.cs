@@ -51,22 +51,21 @@ namespace ManagerScripts {
             _selectedItemSlot = _shopPositions[selectedSlotId].GetComponent<ItemSlotUIController>();
             _selectedItemSlot.EnableOutline();
 
-            int currentItemId = _selectedItemSlot.GetItem().ID;
-            if (currentItemId != -1) {
+            ItemData currentItem = _selectedItemSlot.GetItem();
+            if (currentItem != null) {
                 itemInfoPanel.SetActive(true);
-                itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItemId);
+                itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
             }
             else {
                 itemInfoPanel.SetActive(false);
             }
         }
 
-        public string GetItemInfo(int index) {
-            ItemData currentItemData = itemPool.database._itemsData.Find(data => data.ID == index);
-            return "Name: " + currentItemData.Name
-                            + "\nPrice: " + currentItemData.FinalPrice
-                            + "\nRarity: " + new string(Convert.ToChar("*"), currentItemData.Rarity)
-                            + "\nDescription: " + currentItemData.Description;
+        public string GetItemInfo(ItemData index) {
+            return "Name: " + index.Name
+                            + "\nPrice: " + index.FinalPrice
+                            + "\nRarity: " + new string(Convert.ToChar("*"), index.Rarity)
+                            + "\nDescription: " + index.Description;
         }
 
         private int FindExistingItem(ItemData item) {
