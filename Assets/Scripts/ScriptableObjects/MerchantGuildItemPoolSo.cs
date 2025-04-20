@@ -11,23 +11,23 @@ namespace ScriptableObjects {
         public List<ItemPoolDay> itemsPool = new();
 
         public List<ItemData> GetItemsData(int day) {
-            /*if (day <= 0) {
-                day = 1;
-            }*/
             day--;
             day = day%itemsPool.Count;
             List<ItemData> itemDataList = new List<ItemData>();
             
-            for (int i = 0; i < itemsPool[day].DayItemPool.Count; i++) {
-                if (itemsPool[day].DayItemPool[i].IsNotGuaranteed) {
-                    if (Random.Range(0, 100) <= itemsPool[day].DayItemPool[i].Probability) {
+            foreach (var itemPoolPosition in itemsPool[day].DayItemPool) {
+                if (itemPoolPosition.IsNotGuaranteed) {
+                    if (Random.Range(0, 100) <= itemPoolPosition.Probability) {
                         continue;
                     }
                 }
-                var item = database._itemsData.Find(data => data.ID == itemsPool[day].DayItemPool[i].Id);
-                if (item.Rarity<=ExperienceManager.ExperienceManagerInstance.GetLevel()) {
-                    AddItemData(itemDataList,item, itemsPool[day].DayItemPool[i].Amount);
+
+                if (itemPoolPosition.rarity > ExperienceManager.ExperienceManagerInstance.GetLevel()) {
+                    continue;
                 }
+                var item = database.GetRandomItemData(itemPoolPosition.ItemType,
+                    itemPoolPosition.rarity);
+                AddItemData(itemDataList, item, itemPoolPosition.Amount);
             }
             return itemDataList;
         }
@@ -46,7 +46,8 @@ namespace ScriptableObjects {
     
     [Serializable]
     public class ItemPoolPosition {
-        [field: SerializeField] public int Id { get; private set; }
+        [field: SerializeField] public ItemType ItemType { get; private set; }
+        [SerializeField] public int rarity;
         [field: SerializeField] public int Amount { get; private set; }
         [field: SerializeField] public bool IsNotGuaranteed { get; private set; }
         [field: SerializeField] public int Probability { get; private set; }
