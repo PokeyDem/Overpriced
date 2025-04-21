@@ -31,9 +31,9 @@ public class HagglingUIPresenter : MonoBehaviour
     {
         _view.UpdateItemInfo(_model.GetItem());
         _view.UpdateSlider(0, _model.GetBasePrice() * _model.MaxPriceMultiplier);
-        _view.UpdateSliderValue(_model.GetCurrentPrice());
-        _view.UpdatePriceField(_model.GetCurrentPrice());
-        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
+        _view.UpdateSliderValue(_model.GetBasePrice());
+        _view.UpdatePriceField(_model.GetBasePrice());
+        _view.UpdateProcentField(_model.GetBasePrice(), _model.GetBasePrice());
         _view.UpdateAttemptsLeftField(_model.GetNrOfAttemptsLeft());
         _view.UpdateNpcOffer(_model.GetNpcOffer());
         _view.ToggleHaggleWindow(true);
