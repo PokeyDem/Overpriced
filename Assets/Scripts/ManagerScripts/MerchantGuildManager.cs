@@ -15,7 +15,7 @@ namespace ManagerScripts {
         [SerializeField] private GameObject itemSlotPrefab;
         [SerializeField] private GameObject itemGrid;
         [SerializeField] private TextMeshProUGUI buyCommunicat;
-        public UnityEvent<int> buyItemEvent;
+        public UnityEvent<ItemData> buyItemEvent;
         public UnityEvent<int> spendMoneyEvent;
         private List<GameObject> _shopPositions;
         private ItemSlotUIController _selectedItemSlot;
@@ -51,22 +51,21 @@ namespace ManagerScripts {
             _selectedItemSlot = _shopPositions[selectedSlotId].GetComponent<ItemSlotUIController>();
             _selectedItemSlot.EnableOutline();
 
-            int currentItemId = _selectedItemSlot.GetItem().ID;
-            if (currentItemId != -1) {
+            ItemData currentItem = _selectedItemSlot.GetItem();
+            if (currentItem != null) {
                 itemInfoPanel.SetActive(true);
-                itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItemId);
+                itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
             }
             else {
                 itemInfoPanel.SetActive(false);
             }
         }
 
-        public string GetItemInfo(int index) {
-            ItemData currentItemData = itemPool.database._itemsData.Find(data => data.ID == index);
-            return "Name: " + currentItemData.Name
-                            + "\nPrice: " + currentItemData.FinalPrice
-                            + "\nRarity: " + new string(Convert.ToChar("*"), currentItemData.Rarity)
-                            + "\nDescription: " + currentItemData.Description;
+        public string GetItemInfo(ItemData index) {
+            return "Name: " + index.Name
+                            + "\nPrice: " + index.FinalPrice
+                            + "\nRarity: " + new string(Convert.ToChar("*"), index.Rarity)
+                            + "\nDescription: " + index.Description;
         }
 
         private int FindExistingItem(ItemData item) {
@@ -92,7 +91,7 @@ namespace ManagerScripts {
                 return;
             }
             if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.MoneyManagerInstance.GetCurrentMoney()) {
-                buyItemEvent.Invoke(_selectedItemSlot.GetItem().ID);
+                buyItemEvent.Invoke(_selectedItemSlot.GetItem());
                 spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().FinalPrice);
                 _selectedItemSlot.DecreaseQuantity();
             }else {

@@ -1,0 +1,863 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee4ede20e5b9644ea7d7d1fae55de48, type: 3}
+  m_Name: ItemPool
+  m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
+  itemsPool:
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 1
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 0
+    - <ItemType>k__BackingField: 1
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 1
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 1
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 1
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 2
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 2
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 2
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 2
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 2
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 0
+      <Amount>k__BackingField: 15
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 10
+    - <ItemType>k__BackingField: 4
+      rarity: 1
+      <Amount>k__BackingField: 10
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 80
+    - <ItemType>k__BackingField: 4
+      rarity: 2
+      <Amount>k__BackingField: 8
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 60
+    - <ItemType>k__BackingField: 4
+      rarity: 3
+      <Amount>k__BackingField: 6
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 4
+      rarity: 4
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 20
+    - <ItemType>k__BackingField: 4
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 10

@@ -180,14 +180,14 @@ public class PlacementSystem : MonoBehaviour{
                 
                 for (int i = 0; i < displaySlotControllers.Length; i++){
                     if (itemsId[i] != -1) 
-                        displaySlotControllers[i].PlaceItem(_itemsDatabase._itemsData[itemsId[i]]);
+                        displaySlotControllers[i].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[i]));
                 }
                 
                
             }
             else if (itemsId.Count == 1){ 
                 if (itemsId[0] != -1) 
-                    displaySlotControllers[0].PlaceItem(_itemsDatabase._itemsData[itemsId[0]]);
+                    displaySlotControllers[0].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[0]));
             }
                 
 

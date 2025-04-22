@@ -17,6 +17,8 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     private String QUICK_SAVE_PATH = "/quick_save.json";
     private String AUTO_SAVE_PATH = "/auto_save.json";
     private String SAVE_INFO_PATH = "/save_info.json";
+    [SerializeField] private ItemsDatabaseSO itemsDatabase;
+     private IDataService _dataService = new JsonDataService();
 
     private new void Awake(){
         base.Awake();
@@ -50,7 +52,13 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         SaveData saveData = _dataService.LoadData<SaveData>(path, true);
         player.LoadPlayer(saveData.PlayerData);
         placementSystem.LoadDisplayData(saveData.DisplayData);
-        inventoryManager.LoadInventoryData(saveData.InventoryData.InventoryItemsData);
+        
+        List<ItemData> itemDataList = new List<ItemData>();
+        foreach (var item in saveData.InventoryData.InventoryItemsData) {
+            itemDataList.Add(itemsDatabase.Find(data => data.ID==item.Key));
+        }
+        inventoryManager.LoadInventoryData(itemDataList);
+        
         dayManager.LoadDayData(saveData.DayData);
         shopStateManager.LoadShopState(saveData.ShopStateData);
         moneyManager.LoadMoneyData(saveData.MoneyData);

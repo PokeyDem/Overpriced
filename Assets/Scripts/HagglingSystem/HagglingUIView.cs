@@ -12,15 +12,23 @@ public class HagglingUIView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemDescField;
     [SerializeField] private TextMeshProUGUI _resulField;
     [SerializeField] private TextMeshProUGUI _procentField;
-    [SerializeField] private TextMeshProUGUI _chancesLeftField;
+    [SerializeField] private TextMeshProUGUI _attemptsLeftField;
     [SerializeField] private TextMeshProUGUI _npcOffer;
 
     [SerializeField] private Slider _amountSlider;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button _sellButton;
+    [SerializeField] private Button _acceptOfferButton;
+    [SerializeField] private Button _denyOfferButton;
+
+    [SerializeField] private GameObject _haggleWindow;
+    [SerializeField] private GameObject _acceptDenyWindow;
 
 
+    private void Start()
+    {
 
+    }
     public void SetActiveHagglingUI(bool isActive)
     {
         _hagglingUI.SetActive(isActive);
@@ -70,18 +78,33 @@ public class HagglingUIView : MonoBehaviour
     {
         _procentField.text = (((double)currentValue / baseValue) * 100).ToString("0")+"%";
     }
-    public void UpdateChancesLeftField(int chances)
+    public void UpdateAttemptsLeftField(int attempts)
     {
-        _chancesLeftField.text=chances.ToString()+"/3";
+        _attemptsLeftField.text=attempts.ToString()+"/3";
     }
     public void UpdateUIInteraction(bool isActive)
     {
         _sellButton.interactable = isActive;
         _amountSlider.interactable=isActive;
         _inputField.interactable=isActive;
+        _acceptOfferButton.interactable=isActive;
+        _denyOfferButton.interactable=isActive;
+    }
+    public void TogglePriceInteraction(bool isActive)
+    {
+        _amountSlider.interactable = isActive;
+        _inputField.interactable = isActive;
     }
     public void UpdateNpcOffer(int value)
     {
         _npcOffer.text= value.ToString();
+    }
+    public void ToggleAcceptDenyOfferWindow(bool isActive)
+    {
+        _acceptDenyWindow.SetActive(isActive);
+    }
+    public void ToggleHaggleWindow(bool isActive)
+    {
+        _haggleWindow.SetActive(isActive);
     }
 }
