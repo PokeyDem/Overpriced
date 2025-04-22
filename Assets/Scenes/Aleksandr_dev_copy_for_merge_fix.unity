@@ -1813,7 +1813,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryUI: {fileID: 1116002994}
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   _itemInfoPanel: {fileID: 1990108292}
   _itemSlotPrefab: {fileID: 4196557659919706290, guid: 656a82443d4239e49be67ce3e518f078, type: 3}
   _inventorySlotsContainer: {fileID: 1507226815}
@@ -6152,7 +6151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1905155194691201527, guid: 74fc807b292e6704a9235b2df37ea7a9, type: 3}
       propertyPath: m_Name
-      value: SaveMenu
+      value: SaveMenu2
       objectReference: {fileID: 0}
     - target: {fileID: 1905155194691201527, guid: 74fc807b292e6704a9235b2df37ea7a9, type: 3}
       propertyPath: m_IsActive
@@ -7655,6 +7654,7 @@ MonoBehaviour:
   moneyManager: {fileID: 1346806260}
   experienceManager: {fileID: 1061662098}
   saveUIManager: {fileID: 1030446190}
+  itemsDatabase: {fileID: 0}
 --- !u!114 &1030446190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13677,7 +13677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5348309618045433131, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
       propertyPath: m_Name
-      value: PauseMenu
+      value: PauseMenu2
       objectReference: {fileID: 0}
     - target: {fileID: 5348309618045433131, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
       propertyPath: m_IsActive
@@ -14844,9 +14844,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPlayerReady: 0
   _isNpcReady: 0
-  _nrOfChancesLeft: 3
+  _nrOfAttemptsLeft: 3
   _hagglingInProgress: 0
   _npcOffer: 0
+  onItemSold:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2078474930
 GameObject:
   m_ObjectHideFlags: 0

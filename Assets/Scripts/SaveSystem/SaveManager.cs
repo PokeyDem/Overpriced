@@ -13,12 +13,11 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     [SerializeField] private MoneyManager moneyManager;
     [SerializeField] private ExperienceManager experienceManager;
     [SerializeField] private SaveUIManager saveUIManager;
+    [SerializeField] private ItemsDatabaseSO itemsDatabase;
     private IDataService _dataService = new JsonDataService();
     private String QUICK_SAVE_PATH = "/quick_save.json";
     private String AUTO_SAVE_PATH = "/auto_save.json";
     private String SAVE_INFO_PATH = "/save_info.json";
-    [SerializeField] private ItemsDatabaseSO itemsDatabase;
-     private IDataService _dataService = new JsonDataService();
 
     private new void Awake(){
         base.Awake();
