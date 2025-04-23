@@ -46,7 +46,7 @@ public class ItemsDatabaseSO : ScriptableObject{
         return tmp;
     }
     
-    private void OnValidate() {
+    private void OnEnable() {
         for (int i=0; i<_itemsDataFamilys.Count; i++) {
             _itemsDataFamilys[i].Init(i);
         }
