@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/old_Aleksandr_dev_scene.unity
-    guid: a469a480c3a70be42b1df5994e50b836
+    path: Assets/Scenes/Aleksandr_dev_scene.unity
+    guid: 82d8a11324bcd0749846b5f659ead9f2
   m_configObjects: {}

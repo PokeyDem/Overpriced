@@ -62,6 +62,7 @@ public class NpcManager : MonoBehaviour
 
     public void SpawnNpcInsideShop(Vector3 spawnPoint, DisplaySlotController displaySlotController, NPCType npcType)
     {
+        AudioManager.PlayRandomDoorBellSound();
         GameObject npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
         var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
         npc.GetComponent<NpcBehaviour>().Initialize(true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos);
