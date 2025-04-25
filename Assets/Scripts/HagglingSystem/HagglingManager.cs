@@ -16,6 +16,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     [SerializeField] private int _nrOfAttemptsLeft=3;
     [SerializeField] private bool _hagglingInProgress = false;
     [SerializeField] private int _npcOffer = 0;
+    [SerializeField] private PlayerControl _playerControl;
 
     public event Action HagglingInitiated;
     public event Action HagglingEnded;
@@ -90,7 +91,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
         float random = Random.value;
         //float bias = random * random;
         _maxAcceptableMarkup = Mathf.Lerp(_toleranceDecimal, _toleranceDecimal * 2.5f, random);
-
+        _playerControl.enabled = false;
         HagglingInitiated?.Invoke();
     }
 
@@ -149,6 +150,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
         _npcBehaviour.GoToExit(itemSold);
         HagglingEnded?.Invoke();
         _hagglingInProgress = false;
+        _playerControl.enabled = true;
         // StartCoroutine(DisableUiDelay());
     }
    

@@ -14909,6 +14909,7 @@ MonoBehaviour:
   _nrOfAttemptsLeft: 3
   _hagglingInProgress: 0
   _npcOffer: 0
+  _playerControl: {fileID: 1403015345}
   onItemSold:
     m_PersistentCalls:
       m_Calls:
