@@ -75,6 +75,9 @@ MonoBehaviour:
     - scenario:
       - _npcType: 0
         _spawnCount: 3
+    - scenario:
+      - _npcType: 0
+        _spawnCount: 3
   - _dayNr: 2
     _partOfDayScenario:
     - scenario:
@@ -91,6 +94,13 @@ MonoBehaviour:
         _spawnCount: 1
       - _npcType: 0
         _spawnCount: 1
+    - scenario:
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
   - _dayNr: 3
     _partOfDayScenario:
     - scenario:
@@ -113,6 +123,15 @@ MonoBehaviour:
         _spawnCount: 3
       - _npcType: 2
         _spawnCount: 1
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 1
   - _dayNr: 4
     _partOfDayScenario:
     - scenario:
@@ -131,6 +150,15 @@ MonoBehaviour:
         _spawnCount: 1
       - _npcType: 0
         _spawnCount: 2
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 3
   - _dayNr: 5
     _partOfDayScenario:
     - scenario:
@@ -157,6 +185,19 @@ MonoBehaviour:
         _spawnCount: 1
       - _npcType: 3
         _spawnCount: 1
+    - scenario:
+      - _npcType: 1
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 1
   - _dayNr: 6
     _partOfDayScenario:
     - scenario:
@@ -179,8 +220,30 @@ MonoBehaviour:
         _spawnCount: 3
       - _npcType: 1
         _spawnCount: 1
+    - scenario:
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 3
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 2
   - _dayNr: 7
     _partOfDayScenario:
+    - scenario:
+      - _npcType: 2
+        _spawnCount: 1
+      - _npcType: 0
+        _spawnCount: 2
+      - _npcType: 3
+        _spawnCount: 1
+      - _npcType: 1
+        _spawnCount: 2
+      - _npcType: 0
+        _spawnCount: 2
     - scenario:
       - _npcType: 0
         _spawnCount: 2
