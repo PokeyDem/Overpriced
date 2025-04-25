@@ -17,6 +17,7 @@ public class NpcBehaviour : MonoBehaviour{
     private Transform _despawnInShop;
     private DisplaySlotController _displaySlotController;
     private List<Transform> _counterPos;
+    private bool _itemIsDesired;
 
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
@@ -102,7 +103,8 @@ public class NpcBehaviour : MonoBehaviour{
         //for (int i=0;i<displaySlotsWithItems.Count;i++)
         while (_displaySlotsWithItems.Count > 0)
         {
-            int nrOfPreferredItemsOnDisplay = _displaySlotsWithItems.FindAll(ds => ds.GetItem() != null&&!ds.isChosen && _desiredItemsSO.GetDesiredItems().Exists(i => i.ID == ds.GetItem().ID)).Count;
+            _itemIsDesired = false;
+            //int nrOfPreferredItemsOnDisplay = _displaySlotsWithItems.FindAll(ds => ds.GetItem() != null&&!ds.isChosen && _desiredItemsSO.GetDesiredItems().Exists(i => i.ID == ds.GetItem().ID)).Count;
             DisplaySlotController displaySlotController = _displaySlotsWithItems[0];
             _displaySlotsWithItems.RemoveAt(0);
             ItemData item = displaySlotController.GetItem();
@@ -148,8 +150,13 @@ public class NpcBehaviour : MonoBehaviour{
             transform.LookAt(displaySlotController.transform.position);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
-            yield return new WaitForSeconds(WaitRandomAmount(200, 1000));
-            _minChanceToBuy = 100 - (10 * nrOfPreferredItemsOnDisplay);
+            _itemIsDesired = _desiredItemsSO.GetDesiredItems().Exists(i => i.ID == item.ID);
+            if (!_itemIsDesired)
+            {
+                yield return new WaitForSeconds(2);
+            } else 
+                yield return new WaitForSeconds(WaitRandomAmount(500, 1000));
+            //_minChanceToBuy = 100 - (10 * nrOfPreferredItemsOnDisplay);
             if(!displaySlotController.isChosen)
             {
                 if (IsInterestedInBuying(item))
@@ -231,9 +238,9 @@ public class NpcBehaviour : MonoBehaviour{
     {
         bool isInterested = false;
         int chanceToBuy = 0;
-        if (_desiredItemsSO.GetDesiredItems().Exists(i=>i.ID==item.ID))
+        if (_itemIsDesired)
         {
-            chanceToBuy = Math.Max(_minChanceToBuy,60);
+            chanceToBuy = 90;//Math.Max(_minChanceToBuy,60);
         }
         else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);

@@ -8,7 +8,7 @@ public class CitizenDesiredItemsSO : NPCDesiredItemsSO
 
     public override List<ItemData> SelectDesiredItems()
     {
-        List<ItemData> itemsToBuy = GetItemsDatabase().FindAll(x => x.ItemType!=ItemType.Weapon);
+        List<ItemData> itemsToBuy = GetItemsDatabase().FindAll(x => x.FinalPrice>50);
         return itemsToBuy;
     }
 

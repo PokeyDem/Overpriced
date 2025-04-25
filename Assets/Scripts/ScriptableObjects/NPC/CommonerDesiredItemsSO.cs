@@ -8,7 +8,7 @@ public class CommonerDesiredItemsSO : NPCDesiredItemsSO
 
     public override List<ItemData> SelectDesiredItems()
     {
-        List<ItemData> itemsToBuy = GetItemsDatabase().FindAll(x => x.Rarity<3);
+        List<ItemData> itemsToBuy = GetItemsDatabase().FindAll(x => x.FinalPrice<100);
         return itemsToBuy;
     }
 
