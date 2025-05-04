@@ -16917,6 +16917,14 @@ PrefabInstance:
       propertyPath: _counterPos.Array.data[3]
       value: 
       objectReference: {fileID: 6982015268312991948}
+    - target: {fileID: 2434742783692004546, guid: 27e4ad78f7b34a34190720bacf440662, type: 3}
+      propertyPath: _dailyNpcSpawns.Array.data[2]._partOfDayScenario.Array.data[0].scenario.Array.data[2]._npcType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434742783692004546, guid: 27e4ad78f7b34a34190720bacf440662, type: 3}
+      propertyPath: _dailyNpcSpawns.Array.data[2]._partOfDayScenario.Array.data[0].scenario.Array.data[2]._spawnCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8569442174958692884, guid: 27e4ad78f7b34a34190720bacf440662, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
