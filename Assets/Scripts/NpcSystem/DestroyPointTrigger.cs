@@ -9,7 +9,7 @@ public class DestroyPointTrigger : MonoBehaviour{
     [FormerlySerializedAs("_npcSpawner")] [SerializeField] private NpcManager npcManager;
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPC")){
-            npcManager.DespawnNpc(other.gameObject);
+            npcManager.DespawnNpc(other.gameObject.GetComponent<NpcBehaviour>());
         }
     }
 }

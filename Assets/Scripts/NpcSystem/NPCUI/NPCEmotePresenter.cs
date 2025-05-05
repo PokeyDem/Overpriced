@@ -10,13 +10,13 @@ public class NPCEmotePresenter
     {
         _npcBehaviour = npcBehaviour;
         _updateText = updateText;
-        _npcBehaviour.BrowsingStarted += OnBrowsingStarted;
+        _npcBehaviour.Initialized += OnInitialized;
         _npcBehaviour.DecidingStarted += OnDecidingStarted;
         _npcBehaviour.ItemSelected += OnItemSelected;
         _npcBehaviour.ItemRejected += OnItemRejected;
     }
 
-    private void OnBrowsingStarted() 
+    private void OnInitialized() 
     {
         _updateText.UpdateTextMesh("",Color.white);
         _updateText.SetActive(true);

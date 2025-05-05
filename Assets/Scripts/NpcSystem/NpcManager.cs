@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class NpcManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> _npcPrefabs;
+    [SerializeField] List<NpcBehaviour> _npcPrefabs;
     [SerializeField] private int _number;
     [SerializeField] ItemsDatabaseSO _itemsDatabase;
     [SerializeField] Transform _spawnPoint;
@@ -23,6 +25,10 @@ public class NpcManager : MonoBehaviour
     private int _npcsCount;
     private bool _spawnCoroutineChecker;
 
+    private List<IObjectPool<NpcBehaviour>> _objectPools;
+    [SerializeField] private int _DefaultCapacity = 20;
+    [SerializeField] private int _MaxSize = 100;
+
     private void Awake()
     {
         if (_counterPos.Count!=0)
@@ -32,7 +38,13 @@ public class NpcManager : MonoBehaviour
                 counterTaken.Add(false);
             }
         }
-        
+        _objectPools=new List<IObjectPool<NpcBehaviour>>();
+        foreach(NpcBehaviour prefab in _npcPrefabs)
+        {
+            _objectPools.Add(new ObjectPool<NpcBehaviour>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
+                            OnDestroyPooledObject, true, _DefaultCapacity, _MaxSize));
+        }
+
     }
 
     private void Update(){
@@ -48,28 +60,35 @@ public class NpcManager : MonoBehaviour
         }
         //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
         //GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
-        GameObject npcPrefab = _npcPrefabs[3];
-        var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(false, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos);
+        NpcBehaviour npcPrefab = _npcPrefabs[3];
+
+        var npc=_objectPools[(int)npcPrefab.GetNpcType()].Get();
+        npc.transform.position = _spawnPoint.position;
+        //var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[3] );
         _npcsCount++;
     }
-    private void SpawnNpc(GameObject npcPrefab)
+    private void SpawnNpc(NpcBehaviour npcPrefab)
     {
-        var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(false, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos);
+        var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
+        //var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
+        //var npcBehaviour = npc.GetComponent<NpcBehaviour>();
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
 
     public void SpawnNpcInsideShop(Vector3 spawnPoint, DisplaySlotController displaySlotController, NPCType npcType)
     {
         AudioManager.PlayRandomDoorBellSound();
-        GameObject npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
-        var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
-        npc.GetComponent<NpcBehaviour>().Initialize(true, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos);
+        NpcBehaviour npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
+        var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
+        //var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
+        //var npcBehaviour=npc.GetComponent<NpcBehaviour>();
+        npc.Initialize(true,spawnPoint, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos, _objectPools[(int)npcType]);
     }
 
-    public void DespawnNpc(GameObject npc){
-        Destroy(npc);
+    public void DespawnNpc(NpcBehaviour npc){
+        npc.ReturnToPool();
         _npcsCount--;
     }
 
@@ -115,5 +134,25 @@ public class NpcManager : MonoBehaviour
         }
         yield return new WaitUntil(() => _npcsCount == 0);
         ShopStateManager.ShopStateManagerInstance.CloseShop();
+    }
+    public NpcBehaviour CreateNpc(NpcBehaviour prefab)
+    {
+        NpcBehaviour npcBehaviour = Instantiate(prefab,_spawnPoint.position,Quaternion.identity);
+
+        return npcBehaviour;
+    }
+    private void OnReleaseToPool(NpcBehaviour pooledObject)
+    {
+        pooledObject.gameObject.SetActive(false);
+    }
+
+    private void OnGetFromPool(NpcBehaviour pooledObject)
+    {
+        pooledObject.gameObject.SetActive(true);
+    }
+
+    private void OnDestroyPooledObject(NpcBehaviour pooledObject)
+    {
+        Destroy(pooledObject.gameObject);
     }
 }

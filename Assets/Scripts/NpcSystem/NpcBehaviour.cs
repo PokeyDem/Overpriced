@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 
 public class NpcBehaviour : MonoBehaviour{
 
@@ -22,7 +23,7 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
 
-    public event Action BrowsingStarted;
+    public event Action Initialized;
     public event Action DecidingStarted;
     public event Action ItemRejected;
     public event Action ItemSelected;
@@ -32,12 +33,14 @@ public class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private List<DisplaySlotController> _displaySlotsWithItems;
 
+    private IObjectPool<NpcBehaviour> _pool;
+
     private void Awake()
     {
         _presenter=new NPCEmotePresenter(this,_updateText);
     }
 
-    public void Initialize(bool isInShop, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, List<Transform> counterPos){
+    public void Initialize(bool isInShop,Vector3 spawnPoint, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, List<Transform> counterPos, IObjectPool<NpcBehaviour> pool){
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
@@ -45,20 +48,30 @@ public class NpcBehaviour : MonoBehaviour{
         _isInShop = isInShop;
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
-    }
+        _pool = pool;
 
-    private void Start(){
         _agent = GetComponent<NavMeshAgent>();
-        float random = UnityEngine.Random.Range(100,300);
+        float random = UnityEngine.Random.Range(100, 300);
         _agent.speed = random / 100;
-        if (!_isInShop){
+        //_agent.Warp(spawnPoint);
+        _agent.enabled = false;
+        transform.position = spawnPoint;
+        transform.rotation = Quaternion.identity;
+        _agent.enabled = true;
+
+        Initialized?.Invoke();
+
+        if (!_isInShop)
+        {
             StartCoroutine(CheckItemsThroughWindow());
         }
-        else{
+        else
+        {
             //Debug.Log("Spawned in shop");
             StartCoroutine(BrowseDisplays());
         }
     }
+
 
 
     private IEnumerator CheckItemsThroughWindow()
@@ -96,7 +109,6 @@ public class NpcBehaviour : MonoBehaviour{
     public IEnumerator BrowseDisplays()
     {
         //Debug.Log($"BrowseDisplays started");
-        BrowsingStarted?.Invoke();
         _displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //Queue<DisplaySlotController> displaySlotsWithItems = new Queue<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //foreach (var displaySlot in displaySlotsWithItems)
@@ -293,5 +305,21 @@ public class NpcBehaviour : MonoBehaviour{
         public NPCType GetNpcType()
     {
         return _NPCType;
+    }
+
+    public void ReturnToPool()
+    {
+        if (_pool != null)
+        {
+            _pool.Release(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public NavMeshAgent GetAgent()
+    {
+        return _agent;
     }
 }
