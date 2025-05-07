@@ -5674,9 +5674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0106e218ff8ca144e99404f1a9a6c12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactUI: {fileID: 1403951746}
-  _interactUIText: {fileID: 259883186}
   _interactableGameObject: {fileID: 2072193980}
+  _playerControl: {fileID: 1403015345}
 --- !u!1 &681386126
 GameObject:
   m_ObjectHideFlags: 0
@@ -7021,7 +7020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &817625270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10703,6 +10702,7 @@ MonoBehaviour:
   _interactionRange: 1.2
   _inventoryManager: {fileID: 343164882}
   _inputManager: {fileID: 1281258490}
+  _playerControl: {fileID: 1403015345}
 --- !u!114 &1403015345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10715,9 +10715,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491424e5b9dd82546bc8fb91001bc1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4.5
+  _moveSpeed: 4
   _inertiaDecay: 11
   _rotationSpeed: 12
+  _disableControls: 0
+  _interactUI: {fileID: 1403951748}
 --- !u!114 &1403015346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10756,13 +10758,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403951747}
+  - component: {fileID: 1403951748}
   m_Layer: 0
   m_Name: InteractUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1403951747
 Transform:
   m_ObjectHideFlags: 0
@@ -10779,6 +10782,20 @@ Transform:
   - {fileID: 817625270}
   m_Father: {fileID: 1887819138}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403951748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403951746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e0d182d41d9b0448a2cc579fbe7856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactUICanvas: {fileID: 817625269}
+  _interactUIText: {fileID: 259883186}
 --- !u!1 &1419191580
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class InteractableTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject _interactUI;
-    [SerializeField] private TextMeshProUGUI _interactUIText;
     [SerializeField] private GameObject _interactableGameObject;
     [SerializeField] private IInteractable _interactable;
+    [SerializeField] private PlayerControl _playerControl;
 
     private void Awake()
     {
@@ -22,30 +21,35 @@ public class InteractableTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player")&&_interactable!=null)
         {
-            _interactUIText.text = _interactable.TriggerInteractPrompt();
-            _interactUI.SetActive(true);
+            _playerControl.SetInteractable(_interactable);
+
         }
     }
     private void OnTriggerExit(Collider other) 
     {
         if (other.CompareTag("Player") && _interactable != null)
         {
-            _interactUI.SetActive(false);
+            if(_playerControl.GetInteractable()==_interactable)
+            {
+                _playerControl.SetInteractable(null);
+            }
+
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player")&& Input.GetKey(KeyCode.E) && _interactable != null)
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.E) && _interactable != null && _playerControl.GetInteractable()!=_interactable)
         {
             Debug.Log("Interact");
-            _interactable.Interact();
+            _playerControl.SetInteractable(_interactable);
         }
     }
     private void OnDisable()
     {
-        if(_interactUI != null)
+
+        if (_playerControl.GetInteractable() == _interactable)
         {
-            _interactUI.SetActive(false);
+            _playerControl.SetInteractable(null);
         }
     }
 }

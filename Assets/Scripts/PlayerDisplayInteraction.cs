@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class PlayerDisplayInteraction : MonoBehaviour{
+public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
+{
 
     [SerializeField] private float _interactionRange;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private PlayerControl _playerControl;
+    //[SerializeField] private InteractUI _interactUI;
     private LayerMask _slotsLayer;
     private DisplaySlotController _nearestDisplaySlotController;
     private GameObject _nearestSlot;
@@ -12,7 +15,7 @@ public class PlayerDisplayInteraction : MonoBehaviour{
 
     private void Awake(){
         _slotsLayer = LayerMask.GetMask("Slots");
-        _inputManager.OnInteraction += EnableInventory;
+        //_inputManager.OnInteraction += EnableInventory;
     }
 
     private void Update(){
@@ -39,8 +42,13 @@ public class PlayerDisplayInteraction : MonoBehaviour{
                 _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
             _lastNearestSlot = _nearestSlot;
             _nearestDisplaySlotController = _nearestSlot.GetComponent<DisplaySlotController>();
-          
             _nearestDisplaySlotController.EnableMarker();
+            if (_playerControl.GetInteractable() != this as IInteractable)
+            {
+                _playerControl.SetInteractable(this);
+                //_interactUI.UpdateText(TriggerInteractPrompt());
+                //_interactUI.ToggleUI(true);
+            }
         }
 
         if (_lastNearestSlot){ 
@@ -48,12 +56,29 @@ public class PlayerDisplayInteraction : MonoBehaviour{
             if (distance > _interactionRange)
                 _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
             if (!_nearestSlot)
+            {
                 _inventoryManager.DisableInventory();
+                if (_playerControl.GetInteractable() == this as IInteractable)
+                {
+                    //_interactUI.ToggleUI(false);
+                    _playerControl.SetInteractable(null);
+                }
+            }
         }
     }
     
     private void EnableInventory(){
         if (!_nearestSlot) return;
         _inventoryManager.EnableInventory();
+    }
+
+    public void Interact()
+    {
+        EnableInventory();
+    }
+
+    public string TriggerInteractPrompt()
+    {
+        return "Open Inventory";
     }
 }
