@@ -6,13 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class InventoryManager : MonoBehaviour{
+public class InventoryManager : MonoBehaviour, IInteractable
+{
     [SerializeField] private Canvas _inventoryUI;
     [SerializeField] private GameObject _itemInfoPanel;
     [SerializeField] private GameObject _itemSlotPrefab;
     [SerializeField] private GameObject _inventorySlotsContainer;
     [SerializeField] private MoneyManager _moneyManager; //todo delete when merchants guild is created
     [SerializeField] private RectTransform _contentPanelTransform;
+    [SerializeField] private PlayerControl _playerControl;
     
     private List<GameObject> _inventorySlots;
     private Dictionary<int, int> _inventorySlotsDictionary; //<itemId, inventorySlotIndex>
@@ -81,10 +83,13 @@ public class InventoryManager : MonoBehaviour{
         _inventoryUI.gameObject.SetActive(true);
         SelectSlot(0);
         _selectedInventorySlot.EnableOutline();
+        _playerControl.SetInteractable(this);
     }
 
     public void DisableInventory(){
         _inventoryUI.gameObject.SetActive(false);
+        if(_playerControl.GetInteractable() == this as IInteractable)
+            _playerControl.SetInteractable(null);
     }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
@@ -114,6 +119,7 @@ public class InventoryManager : MonoBehaviour{
 
     public void Exit(){ //On ExitButton click
         _inventoryUI.gameObject.SetActive(false);
+        _playerControl.SetInteractable(null);
     }
 
     public void SelectSlot(int selectedSlotId){ //On inventory slot button click
@@ -259,5 +265,16 @@ public class InventoryManager : MonoBehaviour{
         foreach (var itemData in inventoryData){
             AddItemToInventory(itemData);
         }
+    }
+
+    public void Interact()
+    {
+        AddItemToDisplaySlot();
+    }
+
+    public string TriggerInteractPrompt()
+    {
+        if (_selectedInventorySlot.GetItem() == null) { return "No Item Selected"; }
+        return $"Put {_selectedInventorySlot.GetItem().Name} on Display";
     }
 }

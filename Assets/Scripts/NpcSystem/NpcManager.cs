@@ -58,21 +58,16 @@ public class NpcManager : MonoBehaviour
         {
             return;
         }
-        //ItemData item = _itemsDatabase._itemsData[Random.Range(0,_itemsDatabase._itemsData.Count)]; //Todo make it random when there is more items (moved to Npc{npctype}.cs)
-        //GameObject npcPrefab = _npcPrefabs[Random.Range(0, _npcPrefabs.Count)];
         NpcBehaviour npcPrefab = _npcPrefabs[3];
 
         var npc=_objectPools[(int)npcPrefab.GetNpcType()].Get();
         npc.transform.position = _spawnPoint.position;
-        //var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
         npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[3] );
         _npcsCount++;
     }
     private void SpawnNpc(NpcBehaviour npcPrefab)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        //var npc = Instantiate(npcPrefab, _spawnPoint.position, Quaternion.identity);
-        //var npcBehaviour = npc.GetComponent<NpcBehaviour>();
         npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
@@ -82,8 +77,6 @@ public class NpcManager : MonoBehaviour
         AudioManager.PlayRandomDoorBellSound();
         NpcBehaviour npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        //var npc = Instantiate(npcPrefab, spawnPoint, Quaternion.identity);
-        //var npcBehaviour=npc.GetComponent<NpcBehaviour>();
         npc.Initialize(true,spawnPoint, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos, _objectPools[(int)npcType]);
     }
 
@@ -126,7 +119,6 @@ public class NpcManager : MonoBehaviour
         {
             for (int i = 0; i < npcGroupSpawn.SpawnCount; i++) {
                 SpawnNpc(_npcPrefabs[(int)npcGroupSpawn.NpcType]);
-                //yield return new WaitUntil(() => _npcsCount == 0);
                 float random = Random.Range(50, 1000);
                 random /= 100;
                 yield return new WaitForSeconds(random);

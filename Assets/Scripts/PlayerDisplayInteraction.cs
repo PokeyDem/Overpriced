@@ -7,7 +7,6 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private PlayerControl _playerControl;
-    //[SerializeField] private InteractUI _interactUI;
     private LayerMask _slotsLayer;
     private DisplaySlotController _nearestDisplaySlotController;
     private GameObject _nearestSlot;
@@ -36,33 +35,34 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
                 _nearestSlot = slot.gameObject; // not sure if it is getting right gameobject
             }
         }
-        
+       
+        if (_lastNearestSlot) //changed order with if(_nearestSlot), somehow works better -K
+        {
+            distance = Mathf.Abs(Vector3.Distance(transform.position, _lastNearestSlot.transform.position));
+            if (distance > _interactionRange)
+            {
+                _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
+            }
+
+            if (!_nearestSlot)
+            {
+                _inventoryManager.DisableInventory();
+                if (_playerControl.GetInteractable() == this as IInteractable)
+                {
+                    _playerControl.SetInteractable(null);
+                }
+            }
+        }
+
         if (_nearestSlot){
             if (_lastNearestSlot) 
                 _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
             _lastNearestSlot = _nearestSlot;
             _nearestDisplaySlotController = _nearestSlot.GetComponent<DisplaySlotController>();
             _nearestDisplaySlotController.EnableMarker();
-            if (_playerControl.GetInteractable() != this as IInteractable)
+            if (_playerControl.GetInteractable() != this as IInteractable && _playerControl.GetInteractable() != _inventoryManager as IInteractable)
             {
                 _playerControl.SetInteractable(this);
-                //_interactUI.UpdateText(TriggerInteractPrompt());
-                //_interactUI.ToggleUI(true);
-            }
-        }
-
-        if (_lastNearestSlot){ 
-            distance = Mathf.Abs(Vector3.Distance(transform.position, _lastNearestSlot.transform.position));
-            if (distance > _interactionRange)
-                _lastNearestSlot.GetComponent<DisplaySlotController>().DisableMarker();
-            if (!_nearestSlot)
-            {
-                _inventoryManager.DisableInventory();
-                if (_playerControl.GetInteractable() == this as IInteractable)
-                {
-                    //_interactUI.ToggleUI(false);
-                    _playerControl.SetInteractable(null);
-                }
             }
         }
     }

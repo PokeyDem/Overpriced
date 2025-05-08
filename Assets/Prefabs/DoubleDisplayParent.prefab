@@ -333,15 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marker: {fileID: 7445513187988587349}
-  _item:
-    <Name>k__BackingField: 
-    <ItemType>k__BackingField: 0
-    <ID>k__BackingField: 0
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-    <BasePrice>k__BackingField: 0
-    <Description>k__BackingField: 
-  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
+  isOccupied: 0
+  isChosen: 0
 --- !u!1 &4073596828894886115
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,15 +402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marker: {fileID: 3615404353695368882}
-  _item:
-    <Name>k__BackingField: 
-    <ItemType>k__BackingField: 0
-    <ID>k__BackingField: 0
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-    <BasePrice>k__BackingField: 0
-    <Description>k__BackingField: 
-  _itemsOnDisplaysDatabase: {fileID: 2973418190561205284, guid: 3d6fb29d37b8d534e8ebb58e87e31845, type: 3}
+  isOccupied: 0
+  isChosen: 0
 --- !u!1 &7445513187988587349
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +539,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.491, y: 0.502, z: 1.009}
-  m_LocalScale: {x: 1.61, y: 1, z: 2.4}
+  m_LocalScale: {x: 1.6, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7788628199534724403}
