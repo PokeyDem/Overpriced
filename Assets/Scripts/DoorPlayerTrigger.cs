@@ -10,7 +10,7 @@ public class DoorPlayerTrigger : MonoBehaviour, IInteractable{
 
     public void Interact()
     {
-        goOutsideEvent.Invoke();
+        goOutsideEvent?.Invoke();
     }
 
     public string TriggerInteractPrompt()
