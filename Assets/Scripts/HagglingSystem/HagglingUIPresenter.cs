@@ -14,14 +14,14 @@ public class HagglingUIPresenter : MonoBehaviour
 
     private void Awake()
     {
-        _model.HagglingInitiated += OnHagglingInitiated;
-        _model.PriceChanged += OnPriceChanged;
-        _model.ItemSold += OnItemSold;
-        _model.ItemDenied += OnItemDenied;
-        _model.HagglingEnded += OnHagglingEnded;
-        _model.NrOfAttemptsChanged += OnNrOfAttemptsChanged;
-        _model.UIDisabled += OnUIDisabled;
-        _model.AttemptsDepleted += OnAttemptsDepleted;
+        _model.HagglingInitiated.AddListener(OnHagglingInitiated);
+        _model.PriceChanged.AddListener(OnPriceChanged);
+        _model.ItemSold.AddListener(OnItemSold);
+        _model.ItemDenied.AddListener(OnItemDenied);
+        _model.HagglingEnded.AddListener(OnHagglingEnded);
+        _model.NrOfAttemptsChanged.AddListener(OnNrOfAttemptsChanged);
+        _model.UIDisabled.AddListener(OnUIDisabled);
+        _model.AttemptsDepleted.AddListener(OnAttemptsDepleted);
 
         _acceptOfferButton.onClick.AddListener(_model.SellItem);
         _denyOfferButton.onClick.AddListener(_model.DenySell);

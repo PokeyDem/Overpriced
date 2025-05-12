@@ -13,7 +13,10 @@ public class InteractUI : MonoBehaviour
     }
     public void SetActive(bool isActive)
     {
-        _interactUICanvas.SetActive(isActive);
+        if(_interactUICanvas != null)
+        {
+            _interactUICanvas.SetActive(isActive);
+        }
     }
 }
 

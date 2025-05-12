@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithItemsListHandler>
 {
     [SerializeField] private List<DisplaySlotController> _displaySlotsWithItems= new List<DisplaySlotController>();
+
+    public UnityEvent itemPlaced;
 
     private new void Awake()
     {
@@ -14,6 +17,7 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     public void AddDisplaySlotWithItem(DisplaySlotController displaySlot)
     {
         _displaySlotsWithItems.Add(displaySlot);
+        itemPlaced?.Invoke();
         //SwapLastWithRandom();
     }
 
