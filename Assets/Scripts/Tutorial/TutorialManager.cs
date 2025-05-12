@@ -17,6 +17,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     [SerializeField] private Button _merchantGuildBuyButton;
     [SerializeField] private Button _merchantGuildExitButton;
     [SerializeField] private Button _openShopButton;
+    [SerializeField] private ReadyCheckerBehaviour _npcReadyToHaggleTrigger;
+    [SerializeField] private HagglingManager _hagglingManager;
     #endregion
     #region UITutorialTexts
     [Header("UITutorialTexts")]
@@ -25,6 +27,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     [SerializeField] private GameObject _buyItemsText;
     [SerializeField] private GameObject _exitGuildMerchantText;
     [SerializeField] private GameObject _putItemOnDisplayText;
+    [SerializeField] private GameObject _openShopText;
+    [SerializeField] private GameObject _startHagglingText;
     #endregion
     #region Properties
     public PlayerDisplayInteraction PlayerDisplayInteraction => _playerDisplayInteraction;
@@ -32,6 +36,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     public Button MerchantGuildBuyButton => _merchantGuildBuyButton;
     public Button MerchantGuildExitButton => _merchantGuildExitButton;
     public Button OpenShopButton => _openShopButton;
+    public ReadyCheckerBehaviour NpcReadyToHaggleTrigger => _npcReadyToHaggleTrigger;
+    public HagglingManager HagglingManager => _hagglingManager;
 
 
     public GameObject GoToShopText => _goToShopText;
@@ -39,6 +45,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     public GameObject BuyItemsText => _buyItemsText;
     public GameObject ExitGuildMerchantText => _exitGuildMerchantText;
     public GameObject PutItemOnDisplayText => _putItemOnDisplayText;
+    public GameObject OpenShopText => _openShopText;
+    public GameObject StartHagglingText => _startHagglingText;
     #endregion
     private new void Awake()
     {
@@ -73,11 +81,29 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     {
         _merchantGuildExitButton.onClick.RemoveListener(TransitionToStepPutItemOnDisplay);
         _stateMachine.TransitionTo(_stateMachine.state05_PutItemOnDisplay);
-        DisplaysWithItemsListHandler.Instance.itemPlaced.AddListener(TransitionToStepEnd);
+        DisplaysWithItemsListHandler.Instance.itemPlaced.AddListener(TransitionToStepOpenShop);
+    }
+    private void TransitionToStepOpenShop()
+    {
+        DisplaysWithItemsListHandler.Instance.itemPlaced.RemoveListener(TransitionToStepOpenShop);
+        _stateMachine.TransitionTo(_stateMachine.state06_OpenShop);
+        OpenShopButton.onClick.AddListener(TransitionToStepWaitForBuyer);
+    }
+    private void TransitionToStepWaitForBuyer()
+    {
+        DisplaysWithItemsListHandler.Instance.itemPlaced.RemoveListener(TransitionToStepOpenShop);
+        _stateMachine.TransitionTo(_stateMachine.state07_WaitForBuyer);
+        NpcReadyToHaggleTrigger.readyToHaggle.AddListener(TransitionToStepStartHaggling);
+    }
+    private void TransitionToStepStartHaggling()
+    {
+        NpcReadyToHaggleTrigger.readyToHaggle.RemoveListener(TransitionToStepStartHaggling);
+        _stateMachine.TransitionTo(_stateMachine.state08_StartHaggling);
+        HagglingManager.HagglingInitiated += TransitionToStepEnd;
     }
     private void TransitionToStepEnd()
     {
-        DisplaysWithItemsListHandler.Instance.itemPlaced.RemoveListener(TransitionToStepEnd);
+        HagglingManager.HagglingInitiated -= TransitionToStepEnd;
         _stateMachine.TransitionTo(_stateMachine.state01_Start);
     }
 }
