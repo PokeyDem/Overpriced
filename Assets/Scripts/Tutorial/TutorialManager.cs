@@ -19,6 +19,7 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     [SerializeField] private Button _openShopButton;
     [SerializeField] private ReadyCheckerBehaviour _npcReadyToHaggleTrigger;
     [SerializeField] private HagglingManager _hagglingManager;
+    [SerializeField] private Button _sellButton;
     #endregion
     #region UITutorialTexts
     [Header("UITutorialTexts")]
@@ -29,6 +30,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     [SerializeField] private GameObject _putItemOnDisplayText;
     [SerializeField] private GameObject _openShopText;
     [SerializeField] private GameObject _startHagglingText;
+    [SerializeField] private GameObject _changePriceValueText;
+    [SerializeField] private GameObject _tryToSellText;
     #endregion
 
     #region Tutorial Step Commands
@@ -40,6 +43,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private TutorialNextStepCommand _state06_Command;
     private TutorialNextStepCommand _state07_Command;
     private TutorialNextStepCommand _state08_Command;
+    private TutorialNextStepCommand _state09_Command;
+    private TutorialNextStepCommand _state10_Command;
     #endregion
     #region Properties
     public PlayerDisplayInteraction PlayerDisplayInteraction => _playerDisplayInteraction;
@@ -49,6 +54,7 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     public Button OpenShopButton => _openShopButton;
     public ReadyCheckerBehaviour NpcReadyToHaggleTrigger => _npcReadyToHaggleTrigger;
     public HagglingManager HagglingManager => _hagglingManager;
+    public Button SellButton => _sellButton;
 
 
     public GameObject GoToShopText => _goToShopText;
@@ -58,6 +64,8 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     public GameObject PutItemOnDisplayText => _putItemOnDisplayText;
     public GameObject OpenShopText => _openShopText;
     public GameObject StartHagglingText => _startHagglingText;
+    public GameObject ChangePriceValueText => _changePriceValueText;
+    public GameObject TryToSellText => _tryToSellText;
     #endregion
     private new void Awake()
     {
@@ -66,22 +74,16 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private void Start()
     {
         _stateMachine = new TutorialStateMachine(this);
-        _state01_Command = new TutorialNextStepCommand(_merchantGuildTrigger.goOutsideEvent, _stateMachine.state02_GoToShop, _stateMachine);
-        _state02_Command = new TutorialNextStepCommand(_merchantGuildManager.buyItemEventTutorial, _stateMachine.state03_BuyItems, _stateMachine);
-        _state03_Command = new TutorialNextStepCommand(_merchantGuildExitButton.onClick, _stateMachine.state04_ExitMerchantGuild, _stateMachine);
-        _state04_Command = new TutorialNextStepCommand(DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.state05_PutItemOnDisplay, _stateMachine);
-        _state05_Command = new TutorialNextStepCommand(OpenShopButton.onClick, _stateMachine.state06_OpenShop, _stateMachine);
-        _state06_Command = new TutorialNextStepCommand(NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.state07_WaitForBuyer, _stateMachine);
-        _state07_Command = new TutorialNextStepCommand(HagglingManager.HagglingInitiated, _stateMachine.state08_StartHaggling, _stateMachine);
-        _state08_Command = new TutorialNextStepCommand(null, _stateMachine.state01_Start, _stateMachine);
-
-        _state01_Command.NextCommand = _state02_Command;
-        _state02_Command.NextCommand = _state03_Command;
-        _state03_Command.NextCommand = _state04_Command;
-        _state04_Command.NextCommand = _state05_Command;
-        _state05_Command.NextCommand = _state06_Command;
-        _state06_Command.NextCommand = _state07_Command;
-        _state07_Command.NextCommand = _state08_Command;
+        _state01_Command = new TutorialNextStepCommand(null,_merchantGuildTrigger.goOutsideEvent, _stateMachine.state02_GoToShop, _stateMachine);
+        _state02_Command = new TutorialNextStepCommand(_state01_Command,_merchantGuildManager.buyItemEventTutorial, _stateMachine.state03_BuyItems, _stateMachine);
+        _state03_Command = new TutorialNextStepCommand(_state02_Command,_merchantGuildExitButton.onClick, _stateMachine.state04_ExitMerchantGuild, _stateMachine);
+        _state04_Command = new TutorialNextStepCommand(_state03_Command, DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.state05_PutItemOnDisplay, _stateMachine);
+        _state05_Command = new TutorialNextStepCommand(_state04_Command, OpenShopButton.onClick, _stateMachine.state06_OpenShop, _stateMachine);
+        _state06_Command = new TutorialNextStepCommand(_state05_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.state07_WaitForBuyer, _stateMachine);
+        _state07_Command = new TutorialNextStepCommand(_state06_Command, HagglingManager.HagglingInitiated, _stateMachine.state08_StartHaggling, _stateMachine);
+        _state08_Command = new TutorialNextStepCommand(_state07_Command, HagglingManager.PriceChanged, _stateMachine.state09_ChangePriceValue, _stateMachine);
+        _state09_Command = new TutorialNextStepCommand(_state08_Command, SellButton.onClick, _stateMachine.state10_TrySell, _stateMachine);
+        _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.state01_Start, _stateMachine);
 
         _stateMachine.Initialize(_stateMachine.state01_Start);
         _state01_Command.Execute();

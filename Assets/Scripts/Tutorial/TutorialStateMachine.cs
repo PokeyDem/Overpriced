@@ -11,6 +11,8 @@ public class TutorialStateMachine
     public State06_OpenShop state06_OpenShop;
     public State07_WaitForBuyer state07_WaitForBuyer;
     public State08_StartHaggling state08_StartHaggling;
+    public State09_ChangePriceValue state09_ChangePriceValue;
+    public State10_TrySell state10_TrySell;
 
     public event Action<BaseTutorialState> StateChanged;
     public TutorialStateMachine(TutorialManager manager)
@@ -23,6 +25,8 @@ public class TutorialStateMachine
         state06_OpenShop = new State06_OpenShop(manager);
         state07_WaitForBuyer = new State07_WaitForBuyer(manager);
         state08_StartHaggling = new State08_StartHaggling(manager);
+        state09_ChangePriceValue = new State09_ChangePriceValue(manager);
+        state10_TrySell = new State10_TrySell(manager);
     }
     public void Initialize(BaseTutorialState state)
     {

@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class TutorialNextStepCommand : ICommand
 {
     private UnityEvent _previousEvent;
+    private TutorialNextStepCommand _previousCommand;
 
     private UnityEvent _nextEvent;
     private TutorialNextStepCommand _nextCommand;
@@ -22,14 +23,19 @@ public class TutorialNextStepCommand : ICommand
         get { return _nextCommand;} 
         set {
             _nextCommand = value;
-            _nextCommand.PreviousEvent = _nextEvent;
         }
     }
-    public TutorialNextStepCommand(UnityEvent nextEvent, BaseTutorialState state, TutorialStateMachine stateMachine) 
+    public TutorialNextStepCommand(TutorialNextStepCommand previousCommand,UnityEvent nextEvent, BaseTutorialState state, TutorialStateMachine stateMachine) 
     {
+        this._previousCommand = previousCommand;
         this._nextEvent = nextEvent;
         this._state = state;
         this._stateMachine = stateMachine;
+        if(previousCommand != null)
+        {
+            this._previousEvent = previousCommand.NextEvent;
+            previousCommand.NextCommand = this;
+        }
     }
     public void Execute()
     {

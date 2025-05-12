@@ -19,15 +19,15 @@ public class HagglingManager : MonoBehaviour, IInteractable
     [SerializeField] private PlayerControl _playerControl;
 
     public UnityEvent HagglingInitiated;
-    public event Action HagglingEnded;
-    public event Action PriceChanged;
-    public event Action NrOfAttemptsChanged;
-    public event Action UIDisabled;
+    public UnityEvent HagglingEnded;
+    public UnityEvent PriceChanged;
+    public UnityEvent NrOfAttemptsChanged;
+    public UnityEvent UIDisabled;
 
-    public event Action ItemSold;
+    public UnityEvent ItemSold;
     public UnityEvent<float> onItemSold;
-    public event Action ItemDenied;
-    public event Action AttemptsDepleted;
+    public UnityEvent ItemDenied;
+    public UnityEvent AttemptsDepleted;
 
 
     private float _toleranceDecimal;
@@ -57,7 +57,10 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public void SetNpc(NpcBehaviour npcBehaviour){
         _npcBehaviour = npcBehaviour;
     }
-
+    public void PriceChange()
+    {
+        PriceChanged?.Invoke();
+    }
     public void IncreaseCounter(){
         if (_currentPrice < _basePrice * 2){
             _currentPrice += 10;
