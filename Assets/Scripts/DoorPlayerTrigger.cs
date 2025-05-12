@@ -7,7 +7,11 @@ using UnityEngine.UI;
 
 public class DoorPlayerTrigger : MonoBehaviour, IInteractable{
    public UnityEvent goOutsideEvent;
-
+    public bool isActive;
+    private void Awake()
+    {
+        isActive = true;
+    }
     public void Interact()
     {
         goOutsideEvent?.Invoke();
@@ -20,12 +24,15 @@ public class DoorPlayerTrigger : MonoBehaviour, IInteractable{
 
     private void OnTriggerStay(Collider other){
       if (other.gameObject.CompareTag("Player") && ShopStateManager.ShopStateManagerInstance.ShopIsClose()){
-            other.gameObject.GetComponent<PlayerControl>().SetInteractable(this);
-      }
+            if (isActive)
+            {
+                other.gameObject.GetComponent<PlayerControl>().SetInteractable(this);
+            } else other.gameObject.GetComponent<PlayerControl>().SetInteractable(null);
+        }
    }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && ShopStateManager.ShopStateManagerInstance.ShopIsClose())
+        if (other.gameObject.CompareTag("Player") && ShopStateManager.ShopStateManagerInstance.ShopIsClose()&&isActive)
         {
             PlayerControl playerControl=other.gameObject.GetComponent<PlayerControl>();
             if(playerControl.GetInteractable() == this as IInteractable)
