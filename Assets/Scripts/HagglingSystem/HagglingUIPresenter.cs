@@ -14,7 +14,7 @@ public class HagglingUIPresenter : MonoBehaviour
 
     private void Awake()
     {
-        _model.HagglingInitiated += OnHagglingInitiated;
+        _model.HagglingInitiated.AddListener(OnHagglingInitiated);
         _model.PriceChanged += OnPriceChanged;
         _model.ItemSold += OnItemSold;
         _model.ItemDenied += OnItemDenied;

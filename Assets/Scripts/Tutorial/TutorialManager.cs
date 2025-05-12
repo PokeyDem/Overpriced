@@ -30,6 +30,17 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     [SerializeField] private GameObject _openShopText;
     [SerializeField] private GameObject _startHagglingText;
     #endregion
+
+    #region Tutorial Step Commands
+    private TutorialNextStepCommand _state01_Command;
+    private TutorialNextStepCommand _state02_Command;
+    private TutorialNextStepCommand _state03_Command;
+    private TutorialNextStepCommand _state04_Command;
+    private TutorialNextStepCommand _state05_Command;
+    private TutorialNextStepCommand _state06_Command;
+    private TutorialNextStepCommand _state07_Command;
+    private TutorialNextStepCommand _state08_Command;
+    #endregion
     #region Properties
     public PlayerDisplayInteraction PlayerDisplayInteraction => _playerDisplayInteraction;
     public DoorPlayerTrigger MerchantGuildTrigger => _merchantGuildTrigger;
@@ -51,59 +62,32 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private new void Awake()
     {
         base.Awake();
-        _stateMachine = new TutorialStateMachine(this);
     }
     private void Start()
     {
-        _stateMachine.Initialize(_stateMachine.state01_Start);
-        _stateMachine.TransitionTo(_stateMachine.state02_GoToShop);//pointless
+        _stateMachine = new TutorialStateMachine(this);
+        _state01_Command = new TutorialNextStepCommand(_merchantGuildTrigger.goOutsideEvent, _stateMachine.state02_GoToShop, _stateMachine);
+        _state02_Command = new TutorialNextStepCommand(_merchantGuildManager.buyItemEventTutorial, _stateMachine.state03_BuyItems, _stateMachine);
+        _state03_Command = new TutorialNextStepCommand(_merchantGuildExitButton.onClick, _stateMachine.state04_ExitMerchantGuild, _stateMachine);
+        _state04_Command = new TutorialNextStepCommand(DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.state05_PutItemOnDisplay, _stateMachine);
+        _state05_Command = new TutorialNextStepCommand(OpenShopButton.onClick, _stateMachine.state06_OpenShop, _stateMachine);
+        _state06_Command = new TutorialNextStepCommand(NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.state07_WaitForBuyer, _stateMachine);
+        _state07_Command = new TutorialNextStepCommand(HagglingManager.HagglingInitiated, _stateMachine.state08_StartHaggling, _stateMachine);
+        _state08_Command = new TutorialNextStepCommand(null, _stateMachine.state01_Start, _stateMachine);
 
-        _merchantGuildTrigger.goOutsideEvent.AddListener(TransitionToStepBuyItems);
+        _state01_Command.NextCommand = _state02_Command;
+        _state02_Command.NextCommand = _state03_Command;
+        _state03_Command.NextCommand = _state04_Command;
+        _state04_Command.NextCommand = _state05_Command;
+        _state05_Command.NextCommand = _state06_Command;
+        _state06_Command.NextCommand = _state07_Command;
+        _state07_Command.NextCommand = _state08_Command;
+
+        _stateMachine.Initialize(_stateMachine.state01_Start);
+        _state01_Command.Execute();
     }
     private void Update()
     {
         _stateMachine.Update();
-    }
-
-    private void TransitionToStepBuyItems()
-    {
-        _merchantGuildTrigger.goOutsideEvent.RemoveListener(TransitionToStepBuyItems);
-        _stateMachine.TransitionTo(_stateMachine.state03_BuyItems);
-        _merchantGuildManager.buyItemEvent.AddListener(TransitionToStepExitMerchantGuild);
-    }
-    private void TransitionToStepExitMerchantGuild(ItemData item)
-    {
-        _merchantGuildManager.buyItemEvent.RemoveListener(TransitionToStepExitMerchantGuild);
-        _stateMachine.TransitionTo(_stateMachine.state04_ExitMerchantGuild);
-        _merchantGuildExitButton.onClick.AddListener(TransitionToStepPutItemOnDisplay);
-    }
-    private void TransitionToStepPutItemOnDisplay()
-    {
-        _merchantGuildExitButton.onClick.RemoveListener(TransitionToStepPutItemOnDisplay);
-        _stateMachine.TransitionTo(_stateMachine.state05_PutItemOnDisplay);
-        DisplaysWithItemsListHandler.Instance.itemPlaced.AddListener(TransitionToStepOpenShop);
-    }
-    private void TransitionToStepOpenShop()
-    {
-        DisplaysWithItemsListHandler.Instance.itemPlaced.RemoveListener(TransitionToStepOpenShop);
-        _stateMachine.TransitionTo(_stateMachine.state06_OpenShop);
-        OpenShopButton.onClick.AddListener(TransitionToStepWaitForBuyer);
-    }
-    private void TransitionToStepWaitForBuyer()
-    {
-        DisplaysWithItemsListHandler.Instance.itemPlaced.RemoveListener(TransitionToStepOpenShop);
-        _stateMachine.TransitionTo(_stateMachine.state07_WaitForBuyer);
-        NpcReadyToHaggleTrigger.readyToHaggle.AddListener(TransitionToStepStartHaggling);
-    }
-    private void TransitionToStepStartHaggling()
-    {
-        NpcReadyToHaggleTrigger.readyToHaggle.RemoveListener(TransitionToStepStartHaggling);
-        _stateMachine.TransitionTo(_stateMachine.state08_StartHaggling);
-        HagglingManager.HagglingInitiated += TransitionToStepEnd;
-    }
-    private void TransitionToStepEnd()
-    {
-        HagglingManager.HagglingInitiated -= TransitionToStepEnd;
-        _stateMachine.TransitionTo(_stateMachine.state01_Start);
     }
 }

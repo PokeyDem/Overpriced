@@ -18,7 +18,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
 
-    public event Action HagglingInitiated;
+    public UnityEvent HagglingInitiated;
     public event Action HagglingEnded;
     public event Action PriceChanged;
     public event Action NrOfAttemptsChanged;
