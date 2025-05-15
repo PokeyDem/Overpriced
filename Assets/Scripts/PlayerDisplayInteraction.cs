@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
+public class PlayerDisplayInteraction : MonoBehaviour, IInteractable, ITutorialable
 {
 
     [SerializeField] private float _interactionRange;
@@ -11,9 +11,11 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
     private DisplaySlotController _nearestDisplaySlotController;
     private GameObject _nearestSlot;
     private GameObject _lastNearestSlot;
+    private bool _canInteract;
 
     private void Awake(){
         _slotsLayer = LayerMask.GetMask("Slots");
+        _canInteract = true;
         //_inputManager.OnInteraction += EnableInventory;
     }
 
@@ -23,6 +25,10 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
     }
 
     private void DetectNearestSlot(){
+        if (!_canInteract)
+        {
+            return;
+        }
         Collider[] slots = Physics.OverlapSphere(transform.position, _interactionRange, _slotsLayer);
         float distance = -1;
         _nearestSlot = null;
@@ -74,11 +80,19 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        EnableInventory();
+        if(_canInteract)
+        {
+            EnableInventory();
+        }
     }
 
     public string TriggerInteractPrompt()
     {
         return "Open Inventory";
+    }
+
+    public void OnTutorialStateChanged(bool active)
+    {
+        _canInteract = active;
     }
 }

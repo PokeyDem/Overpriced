@@ -47,6 +47,7 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private TutorialNextStepCommand _state10_Command;
     #endregion
     #region Properties
+    public TutorialStateMachine StateMachine => _stateMachine;
     public PlayerDisplayInteraction PlayerDisplayInteraction => _playerDisplayInteraction;
     public DoorPlayerTrigger MerchantGuildTrigger => _merchantGuildTrigger;
     public Button MerchantGuildBuyButton => _merchantGuildBuyButton;
@@ -70,13 +71,15 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private new void Awake()
     {
         base.Awake();
+        _stateMachine = new TutorialStateMachine(this);
+        _stateMachine.Initialize(_stateMachine.stateNothing);
     }
     private void Start()
     {
-        _stateMachine = new TutorialStateMachine(this);
-        _state01_Command = new TutorialNextStepCommand(null,_merchantGuildTrigger.goOutsideEvent, _stateMachine.stateGoToShop, _stateMachine);
-        _state02_Command = new TutorialNextStepCommand(_state01_Command,_merchantGuildManager.buyItemEventTutorial, _stateMachine.stateBuyItems, _stateMachine);
-        _state03_Command = new TutorialNextStepCommand(_state02_Command,_merchantGuildExitButton.onClick, _stateMachine.stateExitMerchantGuild, _stateMachine);
+        Debug.Log("Manager");
+        _state01_Command = new TutorialNextStepCommand(null, _merchantGuildTrigger.goOutsideEvent, _stateMachine.stateGoToShop, _stateMachine);
+        _state02_Command = new TutorialNextStepCommand(_state01_Command, _merchantGuildManager.buyItemEventTutorial, _stateMachine.stateBuyItems, _stateMachine);
+        _state03_Command = new TutorialNextStepCommand(_state02_Command, _merchantGuildExitButton.onClick, _stateMachine.stateExitMerchantGuild, _stateMachine);
         _state04_Command = new TutorialNextStepCommand(_state03_Command, DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.statePutItemOnDisplay, _stateMachine);
         _state05_Command = new TutorialNextStepCommand(_state04_Command, OpenShopButton.onClick, _stateMachine.stateOpenShop, _stateMachine);
         _state06_Command = new TutorialNextStepCommand(_state05_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.stateWaitForBuyer, _stateMachine);
@@ -85,7 +88,6 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
         _state09_Command = new TutorialNextStepCommand(_state08_Command, SellButton.onClick, _stateMachine.stateTrySell, _stateMachine);
         _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.stateNothing, _stateMachine);
 
-        _stateMachine.Initialize(_stateMachine.stateNothing);
         _state01_Command.Execute();
     }
     private void Update()

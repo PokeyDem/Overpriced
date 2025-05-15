@@ -11253,6 +11253,7 @@ GameObject:
   - component: {fileID: 1403015340}
   - component: {fileID: 1403015339}
   - component: {fileID: 1403015343}
+  - component: {fileID: 1403015348}
   - component: {fileID: 1403015344}
   - component: {fileID: 1403015345}
   - component: {fileID: 1403015346}
@@ -11441,6 +11442,20 @@ MonoBehaviour:
   _player: {fileID: 1403015342}
   _inventoryUI: {fileID: 681386127}
   _itemInfoUI: {fileID: 1990108293}
+--- !u!114 &1403015348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403015337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a813946354d16469369f68f7b91f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoBehaviour: {fileID: 1403015344}
+  stateTypes: 01000000
 --- !u!1 &1403951746
 GameObject:
   m_ObjectHideFlags: 0
