@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State08_StartHaggling : BaseTutorialState
+public class StateStartHaggling : BaseTutorialState
 {
-    public State08_StartHaggling(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateStartHaggling(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

@@ -3,30 +3,30 @@ using System;
 public class TutorialStateMachine 
 {
     public BaseTutorialState CurrentState {  get; private set; }
-    public State01_Start state01_Start;
-    public State02_GoToShop state02_GoToShop;
-    public State03_BuyItems state03_BuyItems;
-    public State04_ExitMerchantGuild state04_ExitMerchantGuild;
-    public State05_PutItemOnDisplay state05_PutItemOnDisplay;
-    public State06_OpenShop state06_OpenShop;
-    public State07_WaitForBuyer state07_WaitForBuyer;
-    public State08_StartHaggling state08_StartHaggling;
-    public State09_ChangePriceValue state09_ChangePriceValue;
-    public State10_TrySell state10_TrySell;
+    public StateNothing stateNothing;
+    public StateGoToShop stateGoToShop;
+    public StateBuyItems stateBuyItems;
+    public StateExitMerchantGuild stateExitMerchantGuild;
+    public StatePutItemOnDisplay statePutItemOnDisplay;
+    public StateOpenShop stateOpenShop;
+    public StateWaitForBuyer stateWaitForBuyer;
+    public StateStartHaggling stateStartHaggling;
+    public StateChangePriceValue stateChangePriceValue;
+    public StateTrySell stateTrySell;
 
     public event Action<BaseTutorialState> StateChanged;
     public TutorialStateMachine(TutorialManager manager)
     {
-        state01_Start = new State01_Start(manager);
-        state02_GoToShop = new State02_GoToShop(manager);
-        state03_BuyItems = new State03_BuyItems(manager);
-        state04_ExitMerchantGuild = new State04_ExitMerchantGuild(manager);
-        state05_PutItemOnDisplay = new State05_PutItemOnDisplay(manager);
-        state06_OpenShop = new State06_OpenShop(manager);
-        state07_WaitForBuyer = new State07_WaitForBuyer(manager);
-        state08_StartHaggling = new State08_StartHaggling(manager);
-        state09_ChangePriceValue = new State09_ChangePriceValue(manager);
-        state10_TrySell = new State10_TrySell(manager);
+        stateNothing = new StateNothing(manager);
+        stateGoToShop = new StateGoToShop(manager);
+        stateBuyItems = new StateBuyItems(manager);
+        stateExitMerchantGuild = new StateExitMerchantGuild(manager);
+        statePutItemOnDisplay = new StatePutItemOnDisplay(manager);
+        stateOpenShop = new StateOpenShop(manager);
+        stateWaitForBuyer = new StateWaitForBuyer(manager);
+        stateStartHaggling = new StateStartHaggling(manager);
+        stateChangePriceValue = new StateChangePriceValue(manager);
+        stateTrySell = new StateTrySell(manager);
     }
     public void Initialize(BaseTutorialState state)
     {

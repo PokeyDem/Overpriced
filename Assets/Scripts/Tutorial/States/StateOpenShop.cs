@@ -1,8 +1,8 @@
 
 
-public class State06_OpenShop : BaseTutorialState
+public class StateOpenShop : BaseTutorialState
 {
-    public State06_OpenShop(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateOpenShop(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

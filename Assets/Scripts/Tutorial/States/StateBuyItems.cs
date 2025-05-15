@@ -1,8 +1,8 @@
 
 
-public class State03_BuyItems : BaseTutorialState
+public class StateBuyItems : BaseTutorialState
 {
-    public State03_BuyItems(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateBuyItems(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

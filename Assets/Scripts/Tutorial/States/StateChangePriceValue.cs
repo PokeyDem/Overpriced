@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State09_ChangePriceValue : BaseTutorialState
+public class StateChangePriceValue : BaseTutorialState
 {
-    public State09_ChangePriceValue(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateChangePriceValue(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

@@ -1,8 +1,8 @@
 
 
-public class State04_ExitMerchantGuild : BaseTutorialState
+public class StateExitMerchantGuild : BaseTutorialState
 {
-    public State04_ExitMerchantGuild(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateExitMerchantGuild(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

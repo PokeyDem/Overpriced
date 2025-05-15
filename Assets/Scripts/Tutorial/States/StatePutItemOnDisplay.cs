@@ -1,8 +1,8 @@
 
 
-public class State05_PutItemOnDisplay : BaseTutorialState
+public class StatePutItemOnDisplay : BaseTutorialState
 {
-    public State05_PutItemOnDisplay(TutorialManager tutorialManager) : base(tutorialManager)
+    public StatePutItemOnDisplay(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()

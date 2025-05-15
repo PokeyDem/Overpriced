@@ -74,18 +74,18 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     private void Start()
     {
         _stateMachine = new TutorialStateMachine(this);
-        _state01_Command = new TutorialNextStepCommand(null,_merchantGuildTrigger.goOutsideEvent, _stateMachine.state02_GoToShop, _stateMachine);
-        _state02_Command = new TutorialNextStepCommand(_state01_Command,_merchantGuildManager.buyItemEventTutorial, _stateMachine.state03_BuyItems, _stateMachine);
-        _state03_Command = new TutorialNextStepCommand(_state02_Command,_merchantGuildExitButton.onClick, _stateMachine.state04_ExitMerchantGuild, _stateMachine);
-        _state04_Command = new TutorialNextStepCommand(_state03_Command, DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.state05_PutItemOnDisplay, _stateMachine);
-        _state05_Command = new TutorialNextStepCommand(_state04_Command, OpenShopButton.onClick, _stateMachine.state06_OpenShop, _stateMachine);
-        _state06_Command = new TutorialNextStepCommand(_state05_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.state07_WaitForBuyer, _stateMachine);
-        _state07_Command = new TutorialNextStepCommand(_state06_Command, HagglingManager.HagglingInitiated, _stateMachine.state08_StartHaggling, _stateMachine);
-        _state08_Command = new TutorialNextStepCommand(_state07_Command, HagglingManager.PriceChanged, _stateMachine.state09_ChangePriceValue, _stateMachine);
-        _state09_Command = new TutorialNextStepCommand(_state08_Command, SellButton.onClick, _stateMachine.state10_TrySell, _stateMachine);
-        _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.state01_Start, _stateMachine);
+        _state01_Command = new TutorialNextStepCommand(null,_merchantGuildTrigger.goOutsideEvent, _stateMachine.stateGoToShop, _stateMachine);
+        _state02_Command = new TutorialNextStepCommand(_state01_Command,_merchantGuildManager.buyItemEventTutorial, _stateMachine.stateBuyItems, _stateMachine);
+        _state03_Command = new TutorialNextStepCommand(_state02_Command,_merchantGuildExitButton.onClick, _stateMachine.stateExitMerchantGuild, _stateMachine);
+        _state04_Command = new TutorialNextStepCommand(_state03_Command, DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.statePutItemOnDisplay, _stateMachine);
+        _state05_Command = new TutorialNextStepCommand(_state04_Command, OpenShopButton.onClick, _stateMachine.stateOpenShop, _stateMachine);
+        _state06_Command = new TutorialNextStepCommand(_state05_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.stateWaitForBuyer, _stateMachine);
+        _state07_Command = new TutorialNextStepCommand(_state06_Command, HagglingManager.HagglingInitiated, _stateMachine.stateStartHaggling, _stateMachine);
+        _state08_Command = new TutorialNextStepCommand(_state07_Command, HagglingManager.PriceChanged, _stateMachine.stateChangePriceValue, _stateMachine);
+        _state09_Command = new TutorialNextStepCommand(_state08_Command, SellButton.onClick, _stateMachine.stateTrySell, _stateMachine);
+        _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.stateNothing, _stateMachine);
 
-        _stateMachine.Initialize(_stateMachine.state01_Start);
+        _stateMachine.Initialize(_stateMachine.stateNothing);
         _state01_Command.Execute();
     }
     private void Update()

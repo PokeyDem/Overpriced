@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State10_TrySell : BaseTutorialState
+public class StateTrySell : BaseTutorialState
 {
-    public State10_TrySell(TutorialManager tutorialManager) : base(tutorialManager)
+    public StateTrySell(TutorialManager tutorialManager) : base(tutorialManager)
     {
     }
     public override void Enter()
