@@ -1,5 +1,3 @@
-using OpenCover.Framework.Model;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +8,10 @@ public class DisableInteractable : MonoBehaviour
 
     private void Start()
     {
-        TutorialManager.Instance.StateMachine.StateChanged += SetCanInteract;
+        if(TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.StateMachine.StateChanged += SetCanInteract;
+        }
     }
     private void SetCanInteract(BaseTutorialState state)
     {

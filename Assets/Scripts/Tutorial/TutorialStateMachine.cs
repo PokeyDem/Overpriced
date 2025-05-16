@@ -13,6 +13,7 @@ public class TutorialStateMachine
     public StateStartHaggling stateStartHaggling;
     public StateChangePriceValue stateChangePriceValue;
     public StateTrySell stateTrySell;
+    public StateEnd stateEnd;
 
     public event Action<BaseTutorialState> StateChanged;
     public TutorialStateMachine(TutorialManager manager)
@@ -27,6 +28,7 @@ public class TutorialStateMachine
         stateStartHaggling = new StateStartHaggling(manager);
         stateChangePriceValue = new StateChangePriceValue(manager);
         stateTrySell = new StateTrySell(manager);
+        stateEnd = new StateEnd(manager);
     }
     public void Initialize(BaseTutorialState state)
     {

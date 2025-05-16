@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
+public class TutorialManager : SingletonWithDestroy<TutorialManager>
 {
     private TutorialStateMachine _stateMachine;
+    [SerializeField] private bool _tutorialDone;
+    private TutorialNextStepCommand _currentCommand;
 
     #region Serializable
     [Header("Classes")]
@@ -48,6 +50,7 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     #endregion
     #region Properties
     public TutorialStateMachine StateMachine => _stateMachine;
+    public bool TutorialDone => _tutorialDone;
     public PlayerDisplayInteraction PlayerDisplayInteraction => _playerDisplayInteraction;
     public DoorPlayerTrigger MerchantGuildTrigger => _merchantGuildTrigger;
     public Button MerchantGuildBuyButton => _merchantGuildBuyButton;
@@ -76,7 +79,7 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
     }
     private void Start()
     {
-        Debug.Log("Manager");
+        GameManager.Instance.tutorialManager=this;
         _state01_Command = new TutorialNextStepCommand(null, _merchantGuildTrigger.goOutsideEvent, _stateMachine.stateGoToShop, _stateMachine);
         _state02_Command = new TutorialNextStepCommand(_state01_Command, _merchantGuildManager.buyItemEventTutorial, _stateMachine.stateBuyItems, _stateMachine);
         _state03_Command = new TutorialNextStepCommand(_state02_Command, _merchantGuildExitButton.onClick, _stateMachine.stateExitMerchantGuild, _stateMachine);
@@ -86,12 +89,28 @@ public class TutorialManager : SingletonDontDestroyOnLoad<TutorialManager>
         _state07_Command = new TutorialNextStepCommand(_state06_Command, HagglingManager.HagglingInitiated, _stateMachine.stateStartHaggling, _stateMachine);
         _state08_Command = new TutorialNextStepCommand(_state07_Command, HagglingManager.PriceChanged, _stateMachine.stateChangePriceValue, _stateMachine);
         _state09_Command = new TutorialNextStepCommand(_state08_Command, SellButton.onClick, _stateMachine.stateTrySell, _stateMachine);
-        _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.stateNothing, _stateMachine);
+        _state10_Command = new TutorialNextStepCommand(_state09_Command, null, _stateMachine.stateEnd, _stateMachine);
 
-        _state01_Command.Execute();
+        Initialize();
     }
     private void Update()
     {
         _stateMachine.Update();
+    }
+    public void Initialize()
+    {
+        _tutorialDone = false;
+        _state01_Command.Execute();
+    }
+    public void DisableTutorial()
+    {
+        _tutorialDone=true;
+        this.gameObject.SetActive(false);
+    }
+    public void SetCurrentCommand(TutorialNextStepCommand command)
+    {
+        _currentCommand.RemoveNextListener();
+        _currentCommand = command;
+        _currentCommand.Execute();
     }
 }

@@ -49,4 +49,11 @@ public class TutorialNextStepCommand : ICommand
             _nextEvent.AddListener(_nextCommand.Execute);
         }
     }
+    public void RemoveNextListener()
+    {
+        if (_nextEvent != null && _nextCommand != null)
+        {
+            _nextEvent.RemoveListener(_nextCommand.Execute);
+        }
+    }
 }
