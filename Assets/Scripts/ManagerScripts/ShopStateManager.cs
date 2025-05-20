@@ -53,6 +53,7 @@ public class ShopStateManager : MonoBehaviour
         shopStateChange.Invoke(_currentShopState.ToString());
         shopWosOpen.Invoke();
         _openTimeCounter = openShopTimeSeconds;
+        SaveUIManager.Instance.DisableMainMenuSaveButtons();
     }
 
     public bool ShopIsClose() {
@@ -64,6 +65,7 @@ public class ShopStateManager : MonoBehaviour
         shopStateChange.Invoke(_currentShopState.ToString());
         shopWosClose.Invoke();
         changePartOfTheDay.Invoke();
+        SaveUIManager.Instance.EnableMainMenuSaveButtons();
     }
 
     private bool _timeStop=false;
