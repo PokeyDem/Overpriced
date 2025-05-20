@@ -8888,6 +8888,9 @@ MonoBehaviour:
   _quickSaveSlot: {fileID: 1151620523}
   _autoSaveSlot: {fileID: 258036618}
   _saveButton: {fileID: 1065121725}
+  _mainMenuSaveButtons:
+  - {fileID: 1845656678}
+  - {fileID: 432423964}
 --- !u!114 &1061662098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7441627990209729258, guid: 39610f17139469049befa495eeb0d80b, type: 3}
@@ -17992,6 +17995,10 @@ PrefabInstance:
       propertyPath: _openShopText
       value: 
       objectReference: {fileID: 637665296}
+    - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
+      propertyPath: _tutorialDone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
       propertyPath: _tryToSellText
       value: 

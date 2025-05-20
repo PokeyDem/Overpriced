@@ -1,20 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : SingletonDontDestroyOnLoad<SceneLoader>
-{
-  private Scene _shopScene;
-  private GameObject[] _shopSceneGameObjects;
+public class SceneLoader : SingletonDontDestroyOnLoad<SceneLoader>{
+  private String _sceneName;
 
   public void OnCityEnter(){
-    _shopScene = SceneManager.GetActiveScene();
-    _shopSceneGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+    _sceneName = SceneManager.GetActiveScene().name;
+    SaveManager.Instance.SaveGameInTemporarySlot();
     SceneManager.LoadScene("CityScene");
   }
 
   public void OnCityExit(){
-    SceneManager.LoadScene(_shopScene.name);
+    SceneManager.LoadScene(_sceneName);
+    SaveManager.Instance.LoadGameFromTemporarySlot();
   }
 }
