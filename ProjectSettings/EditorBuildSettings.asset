@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Aleksandr_dev_scene.unity
     guid: 82d8a11324bcd0749846b5f659ead9f2
   - enabled: 1
+    path: Assets/Scenes/City_scene.unity
+    guid: 802c7ce8eb158f640b6b3dd346c9110e
+  - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 0980ad12508596544aedefaf8511f2ec
+  - enabled: 1
+    path: Assets/Scenes/PersistentScene.unity
+    guid: 3905777aad60820499e5b748ea7cd7aa
   m_configObjects: {}

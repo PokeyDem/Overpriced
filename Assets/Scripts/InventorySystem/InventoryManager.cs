@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class InventoryManager : MonoBehaviour, IInteractable
+public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, IInteractable
 {
     [SerializeField] private Canvas _inventoryUI;
     [SerializeField] private GameObject _itemInfoPanel;
@@ -32,7 +32,8 @@ public class InventoryManager : MonoBehaviour, IInteractable
     
     private const int DEFAULT_SLOT_COUNT = 15; //Todo move to config later
 
-    public void Awake(){
+    private new void Awake(){
+        base.Awake();
         _inventorySlots = new List<GameObject>();
         _inventorySlotsDictionary = new Dictionary<int, int>();
         _itemTypesDictionary = new Dictionary<ItemType, List<int>>();
