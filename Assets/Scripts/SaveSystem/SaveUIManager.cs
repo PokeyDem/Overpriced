@@ -46,6 +46,18 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
         }
     }
 
+    public void DisableMainMenuSaveButtons(){
+        foreach (var button in _mainMenuSaveButtons){
+            button.SetActive(false);
+        }
+    }
+    
+    public void EnableMainMenuSaveButtons(){
+        foreach (var button in _mainMenuSaveButtons){
+            button.SetActive(true);
+        }
+    }
+
     public SaveSlotsData GetSaveSlotsData(){
         List<String> data = new List<string>();
 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class TutorialManager : SingletonWithDestroy<TutorialManager>
 {
     private TutorialStateMachine _stateMachine;
-    [SerializeField] private bool _tutorialDone;
+    [SerializeField] private bool _tutorialDone = true;
     private TutorialNextStepCommand _currentCommand;
 
     #region Serializable

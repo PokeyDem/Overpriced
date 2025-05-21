@@ -46,7 +46,12 @@ public class MoneyManager : MonoBehaviour {
             money -= amount;
             changeEvent.Invoke(money.ToString());
         }
-    } 
+    }
+
+    public void SetMoney(int amount){
+        money = amount;
+        changeEvent.Invoke(money.ToString());
+    }
 
     public int GetAmountOfMoney(int amount) {
         if (money >= amount) {

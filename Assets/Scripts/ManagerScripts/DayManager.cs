@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DayManager : MonoBehaviour {
+public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     public static DayManager DayManagerInstance;
         
     [SerializeField] private int dayCount=1;
@@ -17,7 +17,8 @@ public class DayManager : MonoBehaviour {
     }
     
     // Start is called before the first frame update
-    public void Awake() {
+    public new void Awake() {
+        base.Awake();
         if (DayManagerInstance == null) {
             DayManagerInstance = this;
             DontDestroyOnLoad(this);

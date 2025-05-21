@@ -18,6 +18,7 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     private String QUICK_SAVE_PATH = "/quick_save.json";
     private String AUTO_SAVE_PATH = "/auto_save.json";
     private String SAVE_INFO_PATH = "/save_info.json";
+    private String TEMP_SAVE_PATH = "/temp_save.json";
 
     private new void Awake(){
         base.Awake();
@@ -81,6 +82,14 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
             LoadGameFromFile(AUTO_SAVE_PATH);
         else
             LoadGameFromFile($"/save_slot_{slotID}.json");
+    }
+
+    public void SaveGameInTemporarySlot(){
+        SaveGameToFile(TEMP_SAVE_PATH);
+    }
+
+    public void LoadGameFromTemporarySlot(){
+        LoadGameFromFile(TEMP_SAVE_PATH);
     }
 
     public void SaveSlotsInfo(){
