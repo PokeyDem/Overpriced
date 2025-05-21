@@ -9,6 +9,7 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
     [SerializeField] private GameObject _quickSaveSlot;
     [SerializeField] private GameObject _autoSaveSlot;
     [SerializeField] private GameObject _saveButton;
+    [SerializeField] private List<GameObject> _mainMenuSaveButtons;
     private int _selectedSaveSlot;
     private int _quickSaveSlotID = 6;
     private int _autoSaveSlotID = 7;
@@ -30,6 +31,18 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
             button.GetComponent<Button>().onClick.AddListener(EnableSelectedSlotOutline);
             button.SetId(id);
             buttonID++;
+        }
+    }
+    
+    public void DisableMainMenuSaveButtons(){
+        foreach (var button in _mainMenuSaveButtons){
+            button.SetActive(false);
+        }
+    }
+    
+    public void EnableMainMenuSaveButtons(){
+        foreach (var button in _mainMenuSaveButtons){
+            button.SetActive(true);
         }
     }
 
