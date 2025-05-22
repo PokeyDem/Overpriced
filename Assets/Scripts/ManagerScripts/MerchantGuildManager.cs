@@ -15,7 +15,9 @@ namespace ManagerScripts {
         [SerializeField] private GameObject itemSlotPrefab;
         [SerializeField] private GameObject itemGrid;
         [SerializeField] private TextMeshProUGUI buyCommunicat;
+        public UnityEvent<ItemData> buyItemEvent;
         public UnityEvent buyItemEventTutorial;
+        public UnityEvent<int> spendMoneyEvent;
         private List<GameObject> _shopPositions;
         private ItemSlotUIController _selectedItemSlot;
 
@@ -90,9 +92,9 @@ namespace ManagerScripts {
                 return;
             }
             if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.MoneyManagerInstance.GetCurrentMoney()) {
-                DataTransfer.Instance.AddItemToTransferList(_selectedItemSlot.GetItem());
+                buyItemEvent.Invoke(_selectedItemSlot.GetItem());
                 buyItemEventTutorial?.Invoke();
-                MoneyManager.MoneyManagerInstance.ReduceMoney(_selectedItemSlot.GetItem().FinalPrice);
+                spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().FinalPrice);
                 _selectedItemSlot.DecreaseQuantity();
             }else {
                 if (Random.Range(1, 1000) == 1) {
