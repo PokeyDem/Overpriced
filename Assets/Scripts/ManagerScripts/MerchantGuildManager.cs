@@ -22,7 +22,6 @@ namespace ManagerScripts {
         public void Awake() {
             _shopPositions = new List<GameObject>();
             buyCommunicat.text = "";
-            RestockOffer(DayManager.DayManagerInstance.GetDay());
         }
 
         private void AddShopPositions(int day) {
