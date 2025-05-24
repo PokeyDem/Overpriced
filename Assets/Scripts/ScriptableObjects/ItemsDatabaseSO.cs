@@ -10,12 +10,12 @@ using Random = UnityEngine.Random;
 
 [CreateAssetMenu]
 public class ItemsDatabaseSO : ScriptableObject{
-    public List<ItemFamily> _itemsDataFamilys = new();
+    public List<ItemFamily> _itemsDataFamilys;
 
     public ItemData GetRandomItemData(ItemType itemType, int rarity) {
         List<ItemData> tmp = new List<ItemData>();
         foreach (var itemFamily in _itemsDataFamilys) {
-            if (itemFamily.ItemType == itemType) {
+            if (itemFamily.Info.ItemType == itemType) {
                 tmp.Add(itemFamily.ItemsVariants[rarity]);
             }
         }
@@ -52,36 +52,47 @@ public class ItemsDatabaseSO : ScriptableObject{
         }
     }
 }
-
 [Serializable]
-public class ItemFamily{
+public class BaseItemInfo
+{
     public int ID { get; private set; }
     [field: SerializeField] public string Name { get; private set; }
     [field: SerializeField] public ItemType ItemType { get; private set; }
     [field: SerializeField] public int BasePrice { get; private set; }
     [field: SerializeField] public string Description { get; private set; }
+    public void Init(int groupID)
+    {
+        ID= groupID;
+    }
+}
+[Serializable]
+public class ItemFamily{
+    [SerializeField] private BaseItemInfo _info;
+    public BaseItemInfo Info => _info;
     [SerializeField] public ItemData[] ItemsVariants = new ItemData[6];
 
     public void Init(int groupID) {
-        ID = groupID;
+        Info.Init(groupID);
         for (int i = 0; i < 6; i++) {
-            ItemsVariants[i].Init(this,i);
+            ItemsVariants[i].Init(Info, i);
         }
     }
     
 }
 
 [Serializable]
-public class ItemData {
-        private ItemFamily _parent;
-        [field: SerializeField] public GameObject Prefab { get; private set; }
+public class ItemData
+{
+    [SerializeField] public BaseItemInfo _info;
+    public BaseItemInfo Info => _info;
+    [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: SerializeField] public Sprite PreviewImage { get; private set; }
         public int Rarity{ get; private set; }
-        public int BasePrice => _parent.BasePrice;
-        public ItemType ItemType => _parent.ItemType;
+        public int BasePrice => Info.BasePrice;
+        public ItemType ItemType => Info.ItemType;
         public string Name {
             get {
-                string tmp = _parent.Name;
+                string tmp = Info.Name;
                 for (int i = 0; i < Rarity; i++) {
                     tmp += "*";
                 }
@@ -89,12 +100,12 @@ public class ItemData {
             }
         }
 
-        public string Description => _parent.Description;
-        public int ID => _parent.ID * 10 + Rarity;
+        public string Description => Info.Description;
+        public int ID => Info.ID * 10 + Rarity;
         public int FinalPrice =>  BasePrice + (int)(BasePrice / 100.0 * 20 * Rarity);//TODO move price increase percentage to config
 
-        public void Init(ItemFamily parent, int rarity) {
-            _parent = parent;
+        public void Init(BaseItemInfo info, int rarity) {
+            _info = info;
             Rarity = rarity;
         }
 }

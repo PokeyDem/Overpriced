@@ -13,71 +13,195 @@ MonoBehaviour:
   m_Name: ItemsDatabase
   m_EditorClassIdentifier: 
   _itemsDataFamilys:
-  - <Name>k__BackingField: Sword
-    <ItemType>k__BackingField: 1
-    <BasePrice>k__BackingField: 100
-    <Description>k__BackingField: Its Sharp
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
     ItemsVariants:
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
-  - <Name>k__BackingField: Apple
-    <ItemType>k__BackingField: 2
-    <BasePrice>k__BackingField: 25
-    <Description>k__BackingField: Newtons frend
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+    - _info:
+        <Name>k__BackingField: Apple
+        <ItemType>k__BackingField: 2
+        <BasePrice>k__BackingField: 25
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
     ItemsVariants:
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    - <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-  - <Name>k__BackingField: Potion
-    <ItemType>k__BackingField: 3
-    <BasePrice>k__BackingField: 50
-    <Description>k__BackingField: Definitly not wather
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+    - _info:
+        <Name>k__BackingField: Potion
+        <ItemType>k__BackingField: 3
+        <BasePrice>k__BackingField: 50
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+  - _info:
+      <Name>k__BackingField: Sword
+      <ItemType>k__BackingField: 1
+      <BasePrice>k__BackingField: 100
+      <Description>k__BackingField: 
     ItemsVariants:
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-    - <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
-  - <Name>k__BackingField: Armor
-    <ItemType>k__BackingField: 4
-    <BasePrice>k__BackingField: 150
-    <Description>k__BackingField: Its Sharp
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+    - _info:
+        <Name>k__BackingField: Sword
+        <ItemType>k__BackingField: 1
+        <BasePrice>k__BackingField: 100
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
+  - _info:
+      <Name>k__BackingField: Armor
+      <ItemType>k__BackingField: 4
+      <BasePrice>k__BackingField: 150
+      <Description>k__BackingField: 
     ItemsVariants:
-    - <Prefab>k__BackingField: {fileID: 960616705410860333, guid: 5828de4731afd184e97c7702b9356768, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 960616705410860333, guid: 5828de4731afd184e97c7702b9356768, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: b975f49adf87af74da36a13f79fd196e, type: 3}
-    - <Prefab>k__BackingField: {fileID: 5301947763806725639, guid: 411a7413d115c3e4ab505b815a58af72, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 5301947763806725639, guid: 411a7413d115c3e4ab505b815a58af72, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 7520361dd206a774c85194b5d81d21fc, type: 3}
-    - <Prefab>k__BackingField: {fileID: 6624726128274571513, guid: 458f1057d96ce97478056a7a4c4bf976, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 6624726128274571513, guid: 458f1057d96ce97478056a7a4c4bf976, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 4ca21f45a0a9ea8428a0cb9b856e642d, type: 3}
-    - <Prefab>k__BackingField: {fileID: 5973660856396735680, guid: 6a99c22e4c3ce5048a61c07a80ade559, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 5973660856396735680, guid: 6a99c22e4c3ce5048a61c07a80ade559, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 1bcaed9caf64fcf479da17acf5c9d75e, type: 3}
-    - <Prefab>k__BackingField: {fileID: 6964633870292682744, guid: 4a98bc9137b5a8b43bc548ce0f607c7f, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 6964633870292682744, guid: 4a98bc9137b5a8b43bc548ce0f607c7f, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: cac11207a7afbec4cbd81dbe6276d8e8, type: 3}
-    - <Prefab>k__BackingField: {fileID: 7616928403115575848, guid: 27e9ed486421c8c4f8c02e36ce315f2e, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: 
+      <Prefab>k__BackingField: {fileID: 7616928403115575848, guid: 27e9ed486421c8c4f8c02e36ce315f2e, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: ce37eb17b27809d4c9217458ce3341f7, type: 3}

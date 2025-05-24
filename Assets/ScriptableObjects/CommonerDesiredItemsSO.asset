@@ -12,12 +12,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d501b733eb6a5fd428095281502bc567, type: 3}
   m_Name: CommonerDesiredItemsSO
   m_EditorClassIdentifier: 
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
+  _itemsDatabase: {fileID: 11400000, guid: 7df7ddb82b1dcfd4899982cfc714df8b, type: 2}
   _desiredItems:
-  - <Name>k__BackingField: Apple
-    <ItemType>k__BackingField: 2
-    <ID>k__BackingField: 2
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
     <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
-    <BasePrice>k__BackingField: 50
-    <Description>k__BackingField: Just an apple, that's it
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Apple
+      <ItemType>k__BackingField: 2
+      <BasePrice>k__BackingField: 25
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}
+  - _info:
+      <Name>k__BackingField: Potion
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 50
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 3761575677794565390, guid: b5d9b1294c38343439302bc9d6500e43, type: 3}
+    <PreviewImage>k__BackingField: {fileID: 21300000, guid: d7774f27302e0984bab56301cde69b46, type: 3}

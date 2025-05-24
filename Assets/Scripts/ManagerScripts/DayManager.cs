@@ -26,8 +26,8 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     }
 
     public void Start() {
-        dayChange.Invoke(dayCount);
-        partOfDayChange.Invoke(currentPartOfDay.ToString());
+        dayChange?.Invoke(dayCount);
+        partOfDayChange?.Invoke(currentPartOfDay.ToString());
     }
 
     public DayData GetDayData(){

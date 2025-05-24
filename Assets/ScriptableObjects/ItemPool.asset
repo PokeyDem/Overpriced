@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee4ede20e5b9644ea7d7d1fae55de48, type: 3}
   m_Name: ItemPool
   m_EditorClassIdentifier: 
-  database: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
+  database: {fileID: 11400000, guid: 7df7ddb82b1dcfd4899982cfc714df8b, type: 2}
   itemsPool:
   - <DayItemPool>k__BackingField:
     - <ItemType>k__BackingField: 1

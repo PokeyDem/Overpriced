@@ -390,13 +390,13 @@ MonoBehaviour:
   _toleranceDecimal: 0.2
   _NPCType: 0
   _itemToBuy:
-    <Name>k__BackingField: 
-    <ItemType>k__BackingField: 0
-    <ID>k__BackingField: 0
+    _info:
+      <Name>k__BackingField: 
+      <ItemType>k__BackingField: 0
+      <BasePrice>k__BackingField: 0
+      <Description>k__BackingField: 
     <Prefab>k__BackingField: {fileID: 0}
     <PreviewImage>k__BackingField: {fileID: 0}
-    <BasePrice>k__BackingField: 0
-    <Description>k__BackingField: 
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 22bec05f58ee66a4b92b28e5e703ec1c, type: 2}
   _updateText: {fileID: 6237701578833367800}
