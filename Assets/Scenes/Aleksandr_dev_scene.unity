@@ -13058,6 +13058,10 @@ PrefabInstance:
       value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 1628321032760532549, guid: faf32d8f2a3999744a843cecb69ad6d2, type: 3}
+      propertyPath: _moveSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628321032760532549, guid: faf32d8f2a3999744a843cecb69ad6d2, type: 3}
       propertyPath: _interactUI
       value: 
       objectReference: {fileID: 1403951748}
@@ -13112,6 +13116,10 @@ PrefabInstance:
     - target: {fileID: 3731028151691336776, guid: faf32d8f2a3999744a843cecb69ad6d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5097380304061944782, guid: faf32d8f2a3999744a843cecb69ad6d2, type: 3}
+      propertyPath: _stepInterval
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8488229924204345326, guid: faf32d8f2a3999744a843cecb69ad6d2, type: 3}
       propertyPath: _itemInfoUI

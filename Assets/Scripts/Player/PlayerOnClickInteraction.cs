@@ -2,18 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOnClickInteraction : MonoBehaviour
-{
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)){
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit)){
-                IInteractibleOnClick interactible = hit.collider.gameObject.GetComponent<IInteractibleOnClick>();
-                if (interactible != null){
-                    interactible.Interact();
-                }
-            }
+public class PlayerOnClickInteraction : MonoBehaviour{
+    private IInteractibleOnClick _currentInteractible;
+    private IInteractibleOnClick _previousInteractible;
+    void Update(){
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit)){
+           _currentInteractible= hit.collider.gameObject.GetComponent<IInteractibleOnClick>();
         }
+
+
+        if (Input.GetMouseButtonDown(0)){
+            if (_currentInteractible != null)
+                _currentInteractible.Interact();
+        }
+      
+            
+        if (_currentInteractible != _previousInteractible){
+                
+            if (_previousInteractible != null)
+                _previousInteractible.ResetInteractionOnHover();
+                
+            if (_currentInteractible != null)
+                _currentInteractible.InteractOnHover();
+        }
+        
+
+        _previousInteractible = _currentInteractible;
     }
 }

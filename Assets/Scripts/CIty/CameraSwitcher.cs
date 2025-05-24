@@ -21,10 +21,12 @@ public class CameraSwitcher : SingletonDontDestroyOnLoad<CameraSwitcher>{
     public void SwitchToShopCam(){
         _shopCam.enabled = true;
         _cityCam.enabled = false;
+        PlayerControl.Instance.EnableControl();
     }
 
     public void SwitchToCityCam(){
         _cityCam.enabled = true;
         _shopCam.enabled = false;
+        PlayerControl.Instance.DisableControl();
     }
 }

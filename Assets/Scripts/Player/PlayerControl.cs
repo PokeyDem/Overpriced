@@ -131,4 +131,12 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
             Interact();
         }
     }
+
+    public void DisableControl(){
+        _disableControls = true;
+    }
+
+    public void EnableControl(){
+        _disableControls = false;
+    }
 }
