@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class PlayerControl : MonoBehaviour, PlayerInputs.IPlayerActions
+public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerInputs.IPlayerActions
 {
 
     [SerializeField] private float _moveSpeed = 5f; 
@@ -23,8 +23,9 @@ public class PlayerControl : MonoBehaviour, PlayerInputs.IPlayerActions
     [SerializeField] private InteractUI _interactUI;
 
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         PrepareInputSystem();
     }
     void Start()

@@ -6,26 +6,25 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-public class CameraSwitcher : MonoBehaviour{
+public class CameraSwitcher : SingletonDontDestroyOnLoad<CameraSwitcher>{
     private String _shopCamName = "ShopCamera";
     private String _cityCamName = "CityCamera";
     [SerializeField] private Camera _shopCam;
     [SerializeField] private Camera _cityCam;
 
-    private void Awake(){
+    private new void Awake(){
+        base.Awake();
         _shopCam.enabled = true;
         _cityCam.enabled = false;
     }
 
-    private void Update(){
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && _shopCam.enabled == false){
-            _cityCam.enabled = false;
-            _shopCam.enabled = true;
-        }
+    public void SwitchToShopCam(){
+        _shopCam.enabled = true;
+        _cityCam.enabled = false;
+    }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && _cityCam.enabled == false){
-            _shopCam.enabled = false;
-            _cityCam.enabled = true;
-        }
+    public void SwitchToCityCam(){
+        _cityCam.enabled = true;
+        _shopCam.enabled = false;
     }
 }
