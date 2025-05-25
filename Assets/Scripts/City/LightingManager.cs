@@ -39,32 +39,17 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     }
     
     private void SetMorningLighting(){
-        LinearColor linearColor = new LinearColor();
-        linearColor.red = _morningDirectionalColor.r;
-        linearColor.green = _morningDirectionalColor.g;
-        linearColor.blue = _morningDirectionalColor.b;
-        linearColor.intensity = _morningDirectionalIntensity;
-
-        _directionalLight.color = linearColor;
+       _directionalLight.color = _morningDirectionalColor;
+       _directionalLight.intensity = _morningDirectionalIntensity;
     }
 
     private void SetNoonLighting(){
-        LinearColor linearColor = new LinearColor();
-        linearColor.red = _noonDirectionalColor.r;
-        linearColor.green = _noonDirectionalColor.g;
-        linearColor.blue = _noonDirectionalColor.b;
-        linearColor.intensity = _noonDirectionalIntensity;
-
-        _directionalLight.color = linearColor;
+        _directionalLight.color = _noonDirectionalColor;
+        _directionalLight.intensity = _noonDirectionalIntensity;
     }
 
     private void SetEveningLighting(){
-        LinearColor linearColor = new LinearColor();
-        linearColor.red = _eveningDirectionalColor.r;
-        linearColor.green = _eveningDirectionalColor.g;
-        linearColor.blue = _eveningDirectionalColor.b;
-        linearColor.intensity = _eveningDirectionalIntensity;
-
-        _directionalLight.color = linearColor;
+       _directionalLight.color = _eveningDirectionalColor;
+       _directionalLight.intensity = _eveningDirectionalIntensity;
     }
 }
