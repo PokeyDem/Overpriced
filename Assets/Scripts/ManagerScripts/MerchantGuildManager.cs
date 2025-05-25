@@ -26,7 +26,7 @@ namespace ManagerScripts {
             buyCommunicat.text = "";
         }
 
-        private void AddShopPositions(int day) {
+        private void AddShopPositions(int day){
             var itemList = itemPool.GetItemsData(day);
             for (int i = 0; i < itemList.Count; i++) {
                 int index = FindExistingItem(itemList[i]);
@@ -105,8 +105,8 @@ namespace ManagerScripts {
             }
         }
 
-        public void RestockOffer(int day) {
-            while( 0<_shopPositions.Count ) {
+        public void RestockOffer(int day){
+            while(0 < _shopPositions.Count) {
                 var tmp = _shopPositions[0];
                 _shopPositions.Remove(tmp);
                 Destroy(tmp);

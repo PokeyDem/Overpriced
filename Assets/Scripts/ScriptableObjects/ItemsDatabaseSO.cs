@@ -105,7 +105,9 @@ public class ItemData
         public int FinalPrice =>  BasePrice + (int)(BasePrice / 100.0 * 20 * Rarity);//TODO move price increase percentage to config
 
         public void Init(BaseItemInfo info, int rarity) {
-            _info = info;
+            
+            if (_info == null)
+                _info = info;
             Rarity = rarity;
         }
 }

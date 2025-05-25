@@ -861,3 +861,34 @@ MonoBehaviour:
       <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 10
+  - <DayItemPool>k__BackingField:
+    - <ItemType>k__BackingField: 3
+      rarity: 0
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100
+    - <ItemType>k__BackingField: 3
+      rarity: 2
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100
+    - <ItemType>k__BackingField: 3
+      rarity: 3
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100
+    - <ItemType>k__BackingField: 3
+      rarity: 4
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100
+    - <ItemType>k__BackingField: 3
+      rarity: 5
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100
+    - <ItemType>k__BackingField: 3
+      rarity: 1
+      <Amount>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 100

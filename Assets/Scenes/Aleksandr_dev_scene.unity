@@ -2925,6 +2925,7 @@ MonoBehaviour:
   _moneyManager: {fileID: 1346806260}
   _contentPanelTransform: {fileID: 1507226816}
   _playerControl: {fileID: 2060940701}
+  _initItems: {fileID: 11400000, guid: 7df7ddb82b1dcfd4899982cfc714df8b, type: 2}
   _itemCategoryText: {fileID: 862238873}
 --- !u!4 &343164883
 Transform:
@@ -6614,7 +6615,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.70836306, b: 0.2471698, a: 1}
+  m_Color: {r: 0.9924528, g: 0.86037934, b: 0.6497757, a: 1}
   m_Intensity: 0.78
   m_Range: 10
   m_SpotAngle: 30
