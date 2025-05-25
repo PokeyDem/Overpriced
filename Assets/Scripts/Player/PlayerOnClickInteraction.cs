@@ -20,12 +20,20 @@ public class PlayerOnClickInteraction : MonoBehaviour{
       
             
         if (_currentInteractible != _previousInteractible){
-                
-            if (_previousInteractible != null)
+
+            if (_previousInteractible != null){
                 _previousInteractible.ResetInteractionOnHover();
-                
-            if (_currentInteractible != null)
+                UIManager.Instance.DisableBuildingInfoPanel();
+            }
+
+            if (_currentInteractible != null){
                 _currentInteractible.InteractOnHover();
+                UIManager.Instance.EnableBuildingInfoPanel();
+                UIManager.Instance.SetBuildingInfoPanelPosition(new Vector3(Input.mousePosition.x, 
+                    Input.mousePosition.y, 
+                    Input.mousePosition.z));
+                UIManager.Instance.SetBuildingInfo(_currentInteractible.GetBuildingDescription());
+            }
         }
         
 

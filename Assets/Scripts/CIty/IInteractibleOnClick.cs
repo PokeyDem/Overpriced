@@ -4,4 +4,5 @@ public interface IInteractibleOnClick{
    void InteractOnHover();
 
    void ResetInteractionOnHover();
+   string GetBuildingDescription();
 }

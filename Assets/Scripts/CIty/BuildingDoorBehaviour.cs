@@ -12,6 +12,7 @@ public class BuildingDoorBehaviour : MonoBehaviour, IInteractibleOnClick
    private Material _baseMaterial3;
    private Material _baseMaterial4;
    [SerializeField] private Material _selectionMaterial;
+   [SerializeField] private string _buildingDescription;
    private void Awake(){
       _meshRenderer = gameObject.GetComponent<MeshRenderer>();
       _baseMaterial1 = _meshRenderer.materials[0];
@@ -40,5 +41,9 @@ public class BuildingDoorBehaviour : MonoBehaviour, IInteractibleOnClick
       newMaterials[2] = _baseMaterial3;
       newMaterials[3] = _baseMaterial4;
       _meshRenderer.materials = newMaterials;
+   }
+
+   public string GetBuildingDescription(){
+      return _buildingDescription;
    }
 }

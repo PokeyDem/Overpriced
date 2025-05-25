@@ -1,17 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
     [SerializeField] private GameObject _hud;
     [SerializeField] private GameObject _cityUI;
     [SerializeField] private GameObject _interactUI;
     [SerializeField] private GameObject _merchantsGuildUI;
+    [SerializeField] private GameObject _buildingInfoPanel;
+    [SerializeField] private Vector3 _buildingInfoPanelOffset;
 
     private new void Awake(){
         base.Awake();
     }
 
+    public void SetBuildingInfoPanelPosition(Vector3 newPos){
+        _buildingInfoPanel.gameObject.transform.position = new Vector3(newPos.x + _buildingInfoPanelOffset.x,
+            newPos.y + _buildingInfoPanelOffset.y, newPos.z + _buildingInfoPanelOffset.z);
+    }
+    
+    public void SetBuildingInfo(string info){
+        _buildingInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = info;
+    }
+
+    public void EnableBuildingInfoPanel(){
+        _buildingInfoPanel.SetActive(true);
+    }
+
+    public void DisableBuildingInfoPanel(){
+        _buildingInfoPanel.SetActive(false);
+    }
+    
     public void EnableMerchantsGuildUI(){
         _merchantsGuildUI.SetActive(true);
     }

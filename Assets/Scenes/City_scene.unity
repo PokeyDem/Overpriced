@@ -1888,6 +1888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectionMaterial: {fileID: 2100000, guid: 715400d9ae2fc924ab7ae1bfbc45595e, type: 2}
+  _buildingDescription: Merchants guild shop
 --- !u!65 &1206583659
 BoxCollider:
   m_ObjectHideFlags: 0
