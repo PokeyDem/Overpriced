@@ -58,6 +58,7 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
             dayChange.Invoke(dayCount);
         }
         partOfDayChange.Invoke(currentPartOfDay.ToString());
+        LightingManager.Instance.SetLighting(currentPartOfDay);
     }
 
     public void SkipPartsOfTheDay(int amount) {
