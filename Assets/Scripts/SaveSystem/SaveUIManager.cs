@@ -60,7 +60,6 @@ public class SaveUIManager : SingletonDontDestroyOnLoad<SaveUIManager>{
         for (int i = 0; i < _saveSlots.Count; i++){
             _saveSlots[i].InitializeButton();
             _saveSlots[i].SetSaveInfo(data.SlotsData[i]);
-            Debug.Log(_saveSlots[i].GetId() + " | " + data.SlotsData[i]);
         }
     }
 

@@ -26,7 +26,7 @@ namespace DefaultNamespace {
         }
         public void AddItem(ItemData item){
             if (_item != null && _item != item) {
-                throw new Exception("item confilict Exeption");
+                throw new Exception("Item conflict exception");
             }
             if (_item == item) {
                 IncreaseQuantity();
@@ -47,8 +47,8 @@ namespace DefaultNamespace {
             ItemData tmpItem = _item;
             _item = null;
             _image.sprite = null;
-            _quantityDisplay.text ="";
-            _rarityDisplay.text ="";
+            _quantityDisplay.text = "";
+            _rarityDisplay.text = "";
             return tmpItem;
         }
         

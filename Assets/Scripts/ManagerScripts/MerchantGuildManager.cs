@@ -28,8 +28,11 @@ namespace ManagerScripts {
 
         private void AddShopPositions(int day){
             var itemList = itemPool.GetItemsData(day);
+            
             for (int i = 0; i < itemList.Count; i++) {
+                
                 int index = FindExistingItem(itemList[i]);
+                
                 if (index != -1) {
                     _shopPositions[index].GetComponent<ItemSlotUIController>().AddItem(itemList[i]);
                     continue;
@@ -53,6 +56,7 @@ namespace ManagerScripts {
             _selectedItemSlot.EnableOutline();
 
             ItemData currentItem = _selectedItemSlot.GetItem();
+            
             if (currentItem != null) {
                 itemInfoPanel.SetActive(true);
                 itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);

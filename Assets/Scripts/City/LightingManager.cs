@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.Serialization;
+
 
 public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [SerializeField] private GameObject _directionalLightObject;
@@ -16,12 +13,29 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [SerializeField] private Color _eveningDirectionalColor;
     [SerializeField] private float _eveningDirectionalIntensity;
 
+    private MeshRenderer _lanternLeft;
+    private MeshRenderer _lanternRight;
+    
+    [SerializeField] private Material _lanternTurnedOnMaterial;
+    [SerializeField] private Material _lanternTurnedOffMaterial;
+
+    [SerializeField] private GameObject _lanternLeftPointLight;
+    [SerializeField] private GameObject _lanternRightPointLight;
+    
+    
+  
+
     private Light _directionalLight;
 
     public new void Awake(){
         base.Awake();
         _directionalLight = _directionalLightObject.GetComponent<Light>();
         SetMorningLighting();
+    }
+
+    private void Start(){
+        _lanternLeft = GameObject.Find("LanternLeft").GetComponent<MeshRenderer>();
+        _lanternRight = GameObject.Find("LanternRight").GetComponent<MeshRenderer>();
     }
 
     public void SetLighting(DayManager.PartOfDay partOfDay){
@@ -51,5 +65,23 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     private void SetEveningLighting(){
        _directionalLight.color = _eveningDirectionalColor;
        _directionalLight.intensity = _eveningDirectionalIntensity;
+    }
+
+    private void ChangeLanternsState(bool turnOn){
+        Material[] materials = _lanternLeft.materials;
+
+        if (turnOn){
+            materials[6] = _lanternTurnedOnMaterial;
+            _lanternLeftPointLight.SetActive(true);
+            _lanternRightPointLight.SetActive(true);
+        }
+        else{
+            materials[6] = _lanternTurnedOffMaterial;
+            _lanternLeftPointLight.SetActive(false);
+            _lanternRightPointLight.SetActive(false);
+        }
+        
+        _lanternLeft.materials = materials;
+        _lanternRight.materials = materials;
     }
 }

@@ -25,7 +25,6 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
     }
 
     private void Start(){
-        Debug.Log("Started");
         LoadSlotsInfo();
     }
 
@@ -105,6 +104,5 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         
         SaveSlotsData saveSlotsData =  _dataService.LoadData<SaveSlotsData>(SAVE_INFO_PATH, true);
         SaveUIManager.Instance.LoadSaveSlotsData(saveSlotsData);
-        Debug.Log(saveSlotsData.SlotsData);
     }
 }
