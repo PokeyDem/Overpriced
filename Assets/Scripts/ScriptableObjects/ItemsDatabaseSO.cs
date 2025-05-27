@@ -106,8 +106,7 @@ public class ItemData
 
         public void Init(BaseItemInfo info, int rarity) {
             
-            if (_info == null)
-                _info = info;
+            _info = info;
             Rarity = rarity;
         }
 }
