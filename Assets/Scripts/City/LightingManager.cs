@@ -110,10 +110,17 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
             Material[] materials = building.materials;
 
             if (turnOn){
-                materials[3] = _windowsWithLightOnMaterial;
+                if (building.name == "Building_3")
+                    materials[4] = _windowsWithLightOnMaterial;
+                else
+                    materials[3] = _windowsWithLightOnMaterial;
             }
-            else
-                materials[3] = _windowsDefaultMaterial;
+            else{
+                if (building.name == "Building_3")
+                    materials[4] = _windowsDefaultMaterial;
+                else 
+                    materials[3] = _windowsDefaultMaterial;
+            }
             
             building.materials = materials;
             foreach (var windowPointLight in _windowPointLights){

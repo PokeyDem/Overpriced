@@ -10993,7 +10993,7 @@ Transform:
   m_GameObject: {fileID: 1204415696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.12, y: 1.77, z: 7.241}
+  m_LocalPosition: {x: 21.04, y: 1.77, z: 7.241}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13832,7 +13832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionalLightObject: {fileID: 705507993}
-  _morningDirectionalColor: {r: 0.8862745, g: 0.7882353, b: 0.6392157, a: 1}
+  _morningDirectionalColor: {r: 1, g: 0.87058824, b: 0.6784314, a: 1}
   _morningDirectionalIntensity: 1.2
   _noonDirectionalColor: {r: 0.99215686, g: 0.94509804, b: 0.7921569, a: 1}
   _noonDirectionalIntensity: 1.2
