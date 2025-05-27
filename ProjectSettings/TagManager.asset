@@ -9,6 +9,7 @@ TagManager:
   - DisplayItemSlot
   - NPC
   - Item
+  - CityBuilding
   layers:
   - Default
   - TransparentFX

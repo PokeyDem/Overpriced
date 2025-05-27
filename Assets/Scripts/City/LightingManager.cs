@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -22,6 +23,11 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [SerializeField] private GameObject _lanternLeftPointLight;
     [SerializeField] private GameObject _lanternRightPointLight;
     
+    private List<MeshRenderer> _buildings = new List<MeshRenderer>();
+    [SerializeField] private Material _windowsDefaultMaterial;
+    [SerializeField] private Material _windowsWithLightOnMaterial;
+    [SerializeField] private GameObject[] _windowPointLights;
+    
     
   
 
@@ -30,12 +36,22 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     public new void Awake(){
         base.Awake();
         _directionalLight = _directionalLightObject.GetComponent<Light>();
-        SetMorningLighting();
+        _buildings = new List<MeshRenderer>();
     }
 
     private void Start(){
         _lanternLeft = GameObject.Find("LanternLeft").GetComponent<MeshRenderer>();
         _lanternRight = GameObject.Find("LanternRight").GetComponent<MeshRenderer>();
+        foreach (var building in GameObject.FindGameObjectsWithTag("CityBuilding")){
+            Debug.Log(building.name);
+            if (building.TryGetComponent(out MeshRenderer meshRenderer)){
+                Debug.Log("MeshRenderer found");
+                _buildings.Add(meshRenderer);
+            }
+            else
+                Debug.Log("Mesh renderer not found");
+        }
+        SetMorningLighting();
     }
 
     public void SetLighting(DayManager.PartOfDay partOfDay){
@@ -55,6 +71,8 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     private void SetMorningLighting(){
        _directionalLight.color = _morningDirectionalColor;
        _directionalLight.intensity = _morningDirectionalIntensity;
+       ChangeLanternsState(false);
+       ChangeBuildingsWindowsLightState(false);
     }
 
     private void SetNoonLighting(){
@@ -65,6 +83,8 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     private void SetEveningLighting(){
        _directionalLight.color = _eveningDirectionalColor;
        _directionalLight.intensity = _eveningDirectionalIntensity;
+       ChangeLanternsState(true);
+       ChangeBuildingsWindowsLightState(true);
     }
 
     private void ChangeLanternsState(bool turnOn){
@@ -83,5 +103,22 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
         
         _lanternLeft.materials = materials;
         _lanternRight.materials = materials;
+    }
+
+    private void ChangeBuildingsWindowsLightState(bool turnOn){
+        foreach (var building in _buildings){
+            Material[] materials = building.materials;
+
+            if (turnOn){
+                materials[3] = _windowsWithLightOnMaterial;
+            }
+            else
+                materials[3] = _windowsDefaultMaterial;
+            
+            building.materials = materials;
+            foreach (var windowPointLight in _windowPointLights){
+                windowPointLight.SetActive(turnOn);
+            }
+        }
     }
 }

@@ -30,6 +30,11 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
         partOfDayChange?.Invoke(currentPartOfDay.ToString());
     }
 
+    private void Update(){ //TODO for development purposes
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            NextPartOfTheDay();
+    }
+
     public DayData GetDayData(){
         return new DayData(dayCount, currentPartOfDay);
     }
@@ -50,9 +55,17 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     }
     
     public void NextPartOfTheDay() {
-        if (currentPartOfDay != PartOfDay.Noon) {
+        // if (currentPartOfDay != PartOfDay.Noon) {
+        //     currentPartOfDay++;
+        // }else {
+        //     currentPartOfDay = PartOfDay.Morning;
+        //     dayCount++;
+        //     dayChange.Invoke(dayCount);
+        // }
+
+        if (currentPartOfDay != PartOfDay.Evening)
             currentPartOfDay++;
-        }else {
+        else if (currentPartOfDay == PartOfDay.Evening){
             currentPartOfDay = PartOfDay.Morning;
             dayCount++;
             dayChange.Invoke(dayCount);
