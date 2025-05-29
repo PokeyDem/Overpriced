@@ -14,7 +14,7 @@ public class CameraSwitcher : SingletonDontDestroyOnLoad<CameraSwitcher>{
 
     private new void Awake(){
         base.Awake();
-        if (SceneManager.loadedSceneCount == 1) 
+        if (SceneManager.loadedSceneCount  < 2) 
             SceneManager.LoadScene("City_scene", LoadSceneMode.Additive);
         _shopCam.enabled = true;
         _cityCam.enabled = false;
