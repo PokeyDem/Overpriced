@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class NpcManager : MonoBehaviour
 {
     [SerializeField] List<NpcBehaviour> _npcPrefabs;
+    [SerializeField] private List<NPCDesiredItems> _npcDesiredItems;
     [SerializeField] private int _number;
     [SerializeField] ItemsDatabaseSO _itemsDatabase;
     [SerializeField] Transform _spawnPoint;
@@ -61,14 +61,16 @@ public class NpcManager : MonoBehaviour
         NpcBehaviour npcPrefab = _npcPrefabs[3];
 
         var npc=_objectPools[(int)npcPrefab.GetNpcType()].Get();
+        var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
         npc.transform.position = _spawnPoint.position;
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[3] );
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, desiredItems, _objectPools[3] );
         _npcsCount++;
     }
     private void SpawnNpc(NpcBehaviour npcPrefab)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, _objectPools[(int)npc.GetNpcType()]);
+        var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, desiredItems, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
 
@@ -77,7 +79,8 @@ public class NpcManager : MonoBehaviour
         AudioManager.PlayRandomDoorBellSound();
         NpcBehaviour npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        npc.Initialize(true,spawnPoint, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos, _objectPools[(int)npcType]);
+        var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
+        npc.Initialize(true,spawnPoint, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos, desiredItems, _objectPools[(int)npcType]);
     }
 
     public void DespawnNpc(NpcBehaviour npc){

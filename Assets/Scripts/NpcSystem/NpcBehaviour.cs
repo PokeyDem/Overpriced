@@ -23,6 +23,7 @@ public class NpcBehaviour : MonoBehaviour{
 
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
+    private List<ItemData> _desiredItems;
 
     public event Action Initialized;
     public event Action DecidingStarted;
@@ -33,6 +34,7 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField]private int _minChanceToBuy = 0;
 
     [SerializeField] private List<DisplaySlotController> _displaySlotsWithItems;
+    [SerializeField] private TextMeshProUGUI debug;
 
     private IObjectPool<NpcBehaviour> _pool;
 
@@ -41,7 +43,7 @@ public class NpcBehaviour : MonoBehaviour{
         _presenter=new NPCEmotePresenter(this,_updateText);
     }
 
-    public void Initialize(bool isInShop,Vector3 spawnPoint, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, List<Transform> counterPos, IObjectPool<NpcBehaviour> pool){
+    public void Initialize(bool isInShop,Vector3 spawnPoint, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, List<Transform> counterPos, List<ItemData> desiredItems, IObjectPool<NpcBehaviour> pool){
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
@@ -49,6 +51,7 @@ public class NpcBehaviour : MonoBehaviour{
         _isInShop = isInShop;
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
+        _desiredItems = desiredItems;
         _pool = pool;
 
         _agent = GetComponent<NavMeshAgent>();
@@ -114,6 +117,10 @@ public class NpcBehaviour : MonoBehaviour{
         //Queue<DisplaySlotController> displaySlotsWithItems = new Queue<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //foreach (var displaySlot in displaySlotsWithItems)
         //for (int i=0;i<displaySlotsWithItems.Count;i++)
+        var list = _desiredItems;
+        foreach (var obj in list) {
+            debug.text += obj.Name;
+        }
         while (_displaySlotsWithItems.Count > 0)
         {
             _itemIsDesired = false;
@@ -163,7 +170,7 @@ public class NpcBehaviour : MonoBehaviour{
             transform.LookAt(displaySlotController.transform.position);
             yield return new WaitForSeconds(0.2f);
             DecidingStarted?.Invoke();
-            _itemIsDesired = _desiredItemsSO.GetDesiredItems().Exists(i => i.ID == item.ID);
+            _itemIsDesired = _desiredItems.Exists(i => i.ID == item.ID);
             if (!_itemIsDesired)
             {
                 yield return new WaitForSeconds(2);

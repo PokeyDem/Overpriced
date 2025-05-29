@@ -69,7 +69,7 @@ public class BaseItemInfo
 public class ItemFamily{
     [SerializeField] private BaseItemInfo _info;
     public BaseItemInfo Info => _info;
-    [SerializeField] public ItemData[] ItemsVariants = new ItemData[6];
+    [SerializeField] public ItemData[] ItemsVariants;
 
     public void Init(int groupID) {
         Info.Init(groupID);
