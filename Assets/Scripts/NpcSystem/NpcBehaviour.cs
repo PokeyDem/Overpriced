@@ -56,11 +56,6 @@ public class NpcBehaviour : MonoBehaviour{
         _agent = GetComponent<NavMeshAgent>();
         float random = UnityEngine.Random.Range(100, 300);
         _agent.speed = random / 100;
-        //_agent.Warp(spawnPoint);
-        _agent.enabled = false;
-        //transform.position = spawnPoint;
-        //transform.rotation = Quaternion.identity;
-        _agent.enabled = true;
         _agent.Warp(spawnPoint);
         Initialized?.Invoke();
 
