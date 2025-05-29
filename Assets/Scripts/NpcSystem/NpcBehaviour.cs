@@ -34,7 +34,6 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField]private int _minChanceToBuy = 0;
 
     [SerializeField] private List<DisplaySlotController> _displaySlotsWithItems;
-    [SerializeField] private TextMeshProUGUI debug;
 
     private IObjectPool<NpcBehaviour> _pool;
 
@@ -59,10 +58,10 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.speed = random / 100;
         //_agent.Warp(spawnPoint);
         _agent.enabled = false;
-        transform.position = spawnPoint;
-        transform.rotation = Quaternion.identity;
+        //transform.position = spawnPoint;
+        //transform.rotation = Quaternion.identity;
         _agent.enabled = true;
-
+        _agent.Warp(spawnPoint);
         Initialized?.Invoke();
 
         if (!_isInShop)
@@ -117,10 +116,6 @@ public class NpcBehaviour : MonoBehaviour{
         //Queue<DisplaySlotController> displaySlotsWithItems = new Queue<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         //foreach (var displaySlot in displaySlotsWithItems)
         //for (int i=0;i<displaySlotsWithItems.Count;i++)
-        var list = _desiredItems;
-        foreach (var obj in list) {
-            debug.text += obj.Name;
-        }
         while (_displaySlotsWithItems.Count > 0)
         {
             _itemIsDesired = false;
