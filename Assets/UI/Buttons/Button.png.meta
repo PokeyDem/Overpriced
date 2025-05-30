@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 603a65f08a492434dad89f208f4f3fda
+guid: 3b92202e5c0056a43bea01506ec3129a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,8 +48,8 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 21
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 108, y: 61, z: 117, w: 55}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -175,22 +175,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HagglingSliderFill-export_0
+      name: Button_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 40
-        width: 96
-        height: 48
+        x: 32
+        y: 16
+        width: 192
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 20, y: 18, z: 19, w: 19}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 49, y: 46, z: 85, w: 45}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a65edac2ab7c7c4592ac39f6d77f937
-      internalID: 817220636
+      spriteID: bc5a66176e96e4447a1ffa5062eeb10f
+      internalID: 635833260
       vertices: []
       indices: 
       edges: []
@@ -199,14 +199,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HagglingSliderFill-export_0: 817220636
+      Button_0: 635833260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
