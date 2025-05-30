@@ -9270,7 +9270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: db3c06a76b372dd489185e06ec2d1e6d, type: 3}
+  m_Sprite: {fileID: 635833260, guid: 3b92202e5c0056a43bea01506ec3129a, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13663,7 +13663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1640915183
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17908,7 +17908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5190865834269585548, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5891971709487578594, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_ReferenceResolution.x
@@ -18044,7 +18044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8810648668481132385, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.47347346
       objectReference: {fileID: 0}
     - target: {fileID: 8810648668481132385, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18052,7 +18052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8810648668481132385, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.47347346
       objectReference: {fileID: 0}
     - target: {fileID: 8810648668481132385, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_AnchoredPosition.x
