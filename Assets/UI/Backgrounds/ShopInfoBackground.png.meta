@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -179,18 +179,39 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 48
+        y: 112
         width: 416
-        height: 160
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 107, y: 39, z: 113, w: 42}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 4c25d7e5472528b49ae9d6807a552c6e
       internalID: -2014323918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShopInfoBackground_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 384
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 100, y: 51, z: 121, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34ccda4d8c45bb142b7f70e71827c5ba
+      internalID: -1943780580
       vertices: []
       indices: 
       edges: []
@@ -207,6 +228,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       ShopInfoBackground_0: -2014323918
+      ShopInfoBackground_1: -1943780580
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
