@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ee97bfedce639ee4f80d421ebdcfc34f
+guid: b01fb8c2757b3b7418d4b1e298ef3a39
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -175,13 +175,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OpenClosedBackground_0
+      name: OpenClosedBackground 1_0
       rect:
         serializedVersion: 2
-        x: 188
-        y: 86
-        width: 139
-        height: 85
+        x: 296
+        y: 120
+        width: 144
+        height: 89
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,8 +189,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ea03aeb835639440a9524f665682223
-      internalID: -1096159260
+      spriteID: e57a0fbc00b002549ad9e3126bb5c43e
+      internalID: 1508188749
       vertices: []
       indices: 
       edges: []
@@ -198,7 +198,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 380d0f33c22862744bb25db9cd63c342
+    spriteID: 5a2c0e3fdf9105040aee0256320c654e
     internalID: 0
     vertices: []
     indices: 
@@ -206,8 +206,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OpenClosedBackground_0: -1096159260
-      OpenClosedBackground_1: -993938634
+      OpenClosedBackground 1_0: 1508188749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
