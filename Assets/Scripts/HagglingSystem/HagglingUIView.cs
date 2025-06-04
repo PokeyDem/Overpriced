@@ -39,7 +39,7 @@ public class HagglingUIView : MonoBehaviour
     }
     public void UpdateItemInfo(ItemData item)
     {
-        _itemDescField.text = new string("Item name:\n" + item.Name + "\nDescription:\n" + item.Description + "\nBase price:\n" + item.FinalPrice);
+        _itemDescField.text = new string(" "+item.Name + "\n\n" + item.Description);
         UpdatePriceField(item.FinalPrice);
         _resulField.text = "";
     }

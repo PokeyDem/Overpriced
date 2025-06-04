@@ -23,6 +23,7 @@ public class ExperienceManager : MonoBehaviour {
 
     public void Start() {
         levelUpEvent.Invoke(_level.ToString());
+        currentExpEvent?.Invoke(_currentExp / _nextLvlExp);
     }
 
     public ExperienceData GetExperienceData(){
@@ -55,4 +56,7 @@ public class ExperienceManager : MonoBehaviour {
     public double GetLevel() {
         return _level;
     }
+    public float GetCurrentExp() { return _currentExp; }
+    public int GetNextLvlExp() { return _nextLvlExp; }
+
 }
