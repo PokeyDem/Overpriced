@@ -1,10 +1,12 @@
-using System;
-using System.Collections.Generic;
 using DefaultNamespace;
 using ScriptableObjects;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 using Random = UnityEngine.Random;
 
@@ -12,6 +14,10 @@ namespace ManagerScripts {
     public class MerchantGuildManager : MonoBehaviour {
         [SerializeField] private MerchantGuildItemPoolSo itemPool;
         [SerializeField] private GameObject itemInfoPanel;
+        [SerializeField] private Image _itemIconImage;
+        [SerializeField] private TextMeshProUGUI _itemNameField;
+        [SerializeField] private TextMeshProUGUI _itemDescField;
+        [SerializeField] private TextMeshProUGUI _itemPriceField;
         [SerializeField] private GameObject itemSlotPrefab;
         [SerializeField] private GameObject itemGrid;
         [SerializeField] private TextMeshProUGUI buyCommunicat;
@@ -58,8 +64,12 @@ namespace ManagerScripts {
             ItemData currentItem = _selectedItemSlot.GetItem();
             
             if (currentItem != null) {
+                _itemIconImage.sprite = currentItem.PreviewImage;
+                _itemNameField.text = currentItem.Name;
+                _itemDescField.text = currentItem.Description;
+                _itemPriceField.text = "Price: " + currentItem.FinalPrice;
                 itemInfoPanel.SetActive(true);
-                itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
+                //itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
             }
             else {
                 itemInfoPanel.SetActive(false);

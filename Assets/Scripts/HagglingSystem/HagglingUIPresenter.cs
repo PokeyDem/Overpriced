@@ -36,6 +36,7 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.UpdateProcentField(_model.GetBasePrice(), _model.GetBasePrice());
         _view.UpdateAttemptsLeftField(_model.GetNrOfAttemptsLeft());
         _view.UpdateNpcOffer(_model.GetNpcOffer());
+        _view.UpdateResultField($"Hi, I'd like to buy this {_model.GetItem().Info.Name}.");
         _view.ToggleHaggleWindow(true);
         _view.ToggleAcceptDenyOfferWindow(false);
         _view.UpdateUIInteraction(true);
@@ -111,6 +112,6 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.ToggleHaggleWindow(false);
         _view.ToggleAcceptDenyOfferWindow(true);
         _view.TogglePriceInteraction(false);
-        _view.UpdateResultField("I've lost my patience. This is my last offer. Take it or stop wasting my time.", Color.yellow);
+        _view.UpdateResultField("I've lost my patience. This is my last offer. Decide now and move on.", Color.yellow);
     }
 }
