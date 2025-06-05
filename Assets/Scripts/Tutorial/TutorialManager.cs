@@ -25,10 +25,12 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     #endregion
     #region UITutorialTexts
     [Header("UITutorialTexts")]
-    [SerializeField] private GameObject _goToShopText;
+    [SerializeField] private GameObject _goOutsideText;
+    [SerializeField] private GameObject _goToGuildText;
     [SerializeField] private GameObject _chooseitemToBuyText;
     [SerializeField] private GameObject _buyItemsText;
     [SerializeField] private GameObject _exitGuildMerchantText;
+    [SerializeField] private GameObject _returnToShopText;
     [SerializeField] private GameObject _putItemOnDisplayText;
     [SerializeField] private GameObject _openShopText;
     [SerializeField] private GameObject _startHagglingText;
@@ -47,6 +49,8 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     private TutorialNextStepCommand _state08_Command;
     private TutorialNextStepCommand _state09_Command;
     private TutorialNextStepCommand _state10_Command;
+    private TutorialNextStepCommand _state11_Command;
+    private TutorialNextStepCommand _state12_Command;
     #endregion
     #region Properties
     public TutorialStateMachine StateMachine => _stateMachine;
@@ -61,10 +65,12 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     public Button SellButton => _sellButton;
 
 
-    public GameObject GoToShopText => _goToShopText;
+    public GameObject GoOutsideText => _goOutsideText;
+    public GameObject GoToGuildText => _goToGuildText;
     public GameObject ChooseitemToBuyText => _chooseitemToBuyText;
     public GameObject BuyItemsText => _buyItemsText;
     public GameObject ExitGuildMerchantText => _exitGuildMerchantText;
+    public GameObject ReturnToShopText => _returnToShopText;
     public GameObject PutItemOnDisplayText => _putItemOnDisplayText;
     public GameObject OpenShopText => _openShopText;
     public GameObject StartHagglingText => _startHagglingText;

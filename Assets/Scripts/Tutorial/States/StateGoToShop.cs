@@ -11,11 +11,11 @@ public class StateGoToShop : BaseTutorialState
     public override void Enter()
     {
         _tutorialManager.PlayerDisplayInteraction.enabled = false;
-        _tutorialManager.GoToShopText.SetActive(true);
+        _tutorialManager.GoOutsideText.SetActive(true);
     }
     public override void Exit()
     {
         _tutorialManager.PlayerDisplayInteraction.enabled = true;
-        _tutorialManager.GoToShopText.SetActive(false);
+        _tutorialManager.GoOutsideText.SetActive(false);
     }
 }
