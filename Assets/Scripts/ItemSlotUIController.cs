@@ -12,6 +12,7 @@ namespace DefaultNamespace {
         private int _quantity;
         private bool _isOutlineEnabled;
         private TextMeshProUGUI _rarityDisplay;
+        [SerializeField] Sprite _emptyItemSlot;
         
         private void Awake() {
             Initiate();
@@ -46,7 +47,7 @@ namespace DefaultNamespace {
         public ItemData RemoveItem() {
             ItemData tmpItem = _item;
             _item = null;
-            _image.sprite = null;
+            _image.sprite = _emptyItemSlot;
             _quantityDisplay.text = "";
             _rarityDisplay.text = "";
             return tmpItem;

@@ -53,10 +53,10 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable, ITutoriala
             if (!_nearestSlot)
             {
                 _inventoryManager.DisableInventory();
-                if (_playerControl.GetInteractable() == this as IInteractable)
+                /*if (_playerControl.GetInteractable() == this as IInteractable)
                 {
                     _playerControl.SetInteractable(null);
-                }
+                }*/
             }
         }
 
@@ -66,10 +66,11 @@ public class PlayerDisplayInteraction : MonoBehaviour, IInteractable, ITutoriala
             _lastNearestSlot = _nearestSlot;
             _nearestDisplaySlotController = _nearestSlot.GetComponent<DisplaySlotController>();
             _nearestDisplaySlotController.EnableMarker();
-            if (_playerControl.GetInteractable() != this as IInteractable && _playerControl.GetInteractable() != _inventoryManager as IInteractable)
+            /*if (_playerControl.GetInteractable() != this as IInteractable && _playerControl.GetInteractable() != _inventoryManager as IInteractable)
             {
                 _playerControl.SetInteractable(this);
-            }
+            }*/
+            EnableInventory();
         }
     }
     

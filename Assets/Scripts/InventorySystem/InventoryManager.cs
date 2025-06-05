@@ -9,13 +9,15 @@ using UnityEngine.UI;
 public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, IInteractable
 {
     [SerializeField] private Canvas _inventoryUI;
+    [SerializeField] private RectTransform _inventoryPanel;
     [SerializeField] private GameObject _itemInfoPanel;
     [SerializeField] private GameObject _itemSlotPrefab;
     [SerializeField] private GameObject _inventorySlotsContainer;
     [SerializeField] private MoneyManager _moneyManager; //todo delete when merchants guild is created
     [SerializeField] private RectTransform _contentPanelTransform;
     [SerializeField] private PlayerControl _playerControl;
-    
+    [SerializeField] private TextMeshProUGUI _foldButtonText;
+
     private List<GameObject> _inventorySlots;
     private Dictionary<int, int> _inventorySlotsDictionary; //<itemId, inventorySlotIndex>
     private Dictionary<ItemType, List<int>> _itemTypesDictionary; 
@@ -27,6 +29,9 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     private ItemType _categoryToSortBy = ItemType.All;
     private ItemType[] _itemTypes; 
     private int _itemTypeIndex = 0;
+
+    private float _speed = 300;
+    private bool _foldToggle = true;
 
     [SerializeField] private TextMeshProUGUI _itemCategoryText; //Text for the sort by category button
     
@@ -92,6 +97,26 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         if(_playerControl.GetInteractable() == this as IInteractable)
             _playerControl.SetInteractable(null);
     }
+    public void FoldUnfoldInventory()
+    {
+        if(_foldToggle)
+        {
+            MoveInventoryTowards(-300f);
+            _foldButtonText.text = "¡¡¡";
+        }
+        else
+        {
+            MoveInventoryTowards(-428f);
+            _foldButtonText.text = "^^^";
+        }
+        _foldToggle = !_foldToggle;
+    }
+    private void MoveInventoryTowards(float target1)
+    {
+        Vector2 offset = _inventoryPanel.anchoredPosition;
+        offset.y =  target1;
+        _inventoryPanel.anchoredPosition = offset;
+    }
 
     public void AddItemToDisplaySlot(){ //On AddButton click
         var inventorySlotItem = _selectedInventorySlot.GetItem();
@@ -134,13 +159,14 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         _selectedInventorySlot.EnableOutline();
 
         ItemData currentItem = _inventorySlots[selectedSlotId].GetComponent<ItemSlotUIController>().GetItem();
-        if (currentItem != null){
+        /*if (currentItem != null){
             _itemInfoPanel.SetActive(true);
             _itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
         }
         else{
             _itemInfoPanel.SetActive(false);
-        }
+        }*/
+        _playerControl.SetInteractable(this);
     }
 
     public string GetItemInfo(ItemData currentItemData){
@@ -270,6 +296,17 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
 
     public void Interact()
     {
+        var inventorySlotItem = _selectedInventorySlot.GetItem();
+
+        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() != null)
+        {
+            RemoveItemFromDisplaySlot();
+        }
+        else if (inventorySlotItem == null && _currentDisplayDisplaySlot.GetItem() != null)
+        {
+            RemoveItemFromDisplaySlot();
+            return;
+        }
         AddItemToDisplaySlot();
     }
 
