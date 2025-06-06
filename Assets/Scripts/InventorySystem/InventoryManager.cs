@@ -47,7 +47,6 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         AddSlots(DEFAULT_SLOT_COUNT);
         _itemCategoryText.text = ItemType.All.ToString();
     }
-
     private void ClearInventory(){
         foreach (var slot in _inventorySlots){
             if (slot.GetComponent<ItemSlotUIController>().GetItem() != null) 
@@ -60,6 +59,10 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
 
     public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
         _currentDisplayDisplaySlot = nearestDisplaySlot;
+        if (_currentDisplayDisplaySlot != null&&_playerControl.GetInteractable()!=null)
+        {
+            _playerControl.SetInteractable(this);
+        }
     }
 
     private void InitItemTypesDictionary(){
@@ -90,12 +93,16 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         SelectSlot(0);
         _selectedInventorySlot.EnableOutline();
         _playerControl.SetInteractable(this);
+        _playerControl.ScrollUp.AddListener(SelectPreviousSlot);
+        _playerControl.ScrollDown.AddListener(SelectNextSlot);
     }
 
     public void DisableInventory(){
         _inventoryUI.gameObject.SetActive(false);
-        if(_playerControl.GetInteractable() == this as IInteractable)
-            _playerControl.SetInteractable(null);
+        //if(_playerControl.GetInteractable() == this as IInteractable)
+        _playerControl.SetInteractable(null);
+        _playerControl.ScrollUp.AddListener(SelectPreviousSlot);
+        _playerControl.ScrollDown.AddListener(SelectNextSlot);
     }
     public void FoldUnfoldInventory()
     {
@@ -106,9 +113,10 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         }
         else
         {
-            MoveInventoryTowards(-428f);
+            MoveInventoryTowards(-425f);
             _foldButtonText.text = "^^^";
         }
+        SelectSlot(0);
         _foldToggle = !_foldToggle;
     }
     private void MoveInventoryTowards(float target1)
@@ -125,6 +133,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
             _currentDisplayDisplaySlot.PlaceItem(inventorySlotItem);
             RemoveItemFromInventory();
         }
+        _playerControl.SetInteractable(this);
     }
 
     public void RemoveItemFromInventory(){
@@ -168,7 +177,27 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         }*/
         _playerControl.SetInteractable(this);
     }
-
+    public void SelectNextSlot()
+    {
+        if (_selectedSlotId < 4)
+        {
+            SelectSlot(_selectedSlotId + 1);
+        } else
+        {
+            SelectSlot(0);
+        }
+    }
+    public void SelectPreviousSlot()
+    {
+        if (_selectedSlotId > 0)
+        {
+            SelectSlot(_selectedSlotId -1);
+        }
+        else
+        {
+            SelectSlot(4);
+        }
+    }
     public string GetItemInfo(ItemData currentItemData){
         return "Name: " + currentItemData.Name
             + "\nPrice: " + currentItemData.FinalPrice
@@ -182,6 +211,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         
         _currentDisplayDisplaySlot.RemoveItem();
         AddItemToInventory(item);
+        _playerControl.SetInteractable(this);
     }
 
     public void AddItemToInventory(ItemData item){
@@ -312,7 +342,14 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
 
     public string TriggerInteractPrompt()
     {
-        if (_selectedInventorySlot.GetItem() == null) { return "No Item Selected"; }
+        if (_selectedInventorySlot.GetItem() == null) 
+        { 
+            if(_currentDisplayDisplaySlot.GetItem() != null)
+            {
+                return $"Remove {_currentDisplayDisplaySlot.GetItem().Name} from Display";
+            }
+            return "No Item Selected";
+        }
         return $"Put {_selectedInventorySlot.GetItem().Name} on Display";
     }
 }

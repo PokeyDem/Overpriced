@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -22,6 +23,8 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
     [SerializeField] private bool _disableControls;
     [SerializeField] private InteractUI _interactUI;
 
+    public UnityEvent ScrollUp;
+    public UnityEvent ScrollDown;
 
     private new void Awake()
     {
@@ -138,5 +141,20 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
 
     public void EnableControl(){
         _disableControls = false;
+    }
+
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(context.ReadValue<Vector2>().y > 0)
+            {
+                ScrollUp?.Invoke();
+            }
+            else if (context.ReadValue<Vector2>().y <0)
+            {
+                ScrollDown?.Invoke();
+            }
+        }
     }
 }
