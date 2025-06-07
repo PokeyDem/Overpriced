@@ -23,44 +23,44 @@ MonoBehaviour:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 80afd8d58125cba40973b2607c38adee, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 1625777637ca1ab4cbd3968679977e78, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 3f95c42a23282564081bac3446b64802, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: f5833ed19d434784d9bc888f3ba78b38, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: c5abc4d7e0e33034cb6a195e9996e757, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
-        <Description>k__BackingField: 
+        <Description>k__BackingField: ' Newton''s friend'
       <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
-      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9f55f6cffb5b6004d9726cfad9981eb2, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: a4a9e21e605e6484fbeac3a6b95e06b4, type: 3}
   - _info:
       <Name>k__BackingField: Potion
       <ItemType>k__BackingField: 3
@@ -71,42 +71,42 @@ MonoBehaviour:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 1688171141804546824, guid: a3126ebb059961d4283249631848ee5a, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 6323be6d1e645984494b8e6b47a34f57, type: 3}
     - _info:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 3766737234778835120, guid: f8bb931a937a0ca469bc87d2a60b6fb4, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: fc924cb91fb541e42bece341b41412a5, type: 3}
     - _info:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 3766737234778835120, guid: 273e5b42762f6a54c803adf8f11e9f62, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 26d5b623051a6dc45bfd9801e037cc75, type: 3}
     - _info:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 3766737234778835120, guid: 62858a84878e77344ae530aea4494740, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: a7e93d4ab68d95244a1b2c50ef3e3906, type: 3}
     - _info:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 3766737234778835120, guid: 6e0fab31b6897ce4c97bec6f61866dd2, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 4c72850c171d0e747ac5d1e4f73df2cf, type: 3}
     - _info:
         <Name>k__BackingField: Potion
         <ItemType>k__BackingField: 3
         <BasePrice>k__BackingField: 50
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Magically infused liquid. Consume with moderation
       <Prefab>k__BackingField: {fileID: 3766737234778835120, guid: 4b76d994d97008a4bb3540cfc90fd472, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: a6d38344b9490a74aba6196c7d12dc6f, type: 3}
   - _info:
@@ -119,42 +119,42 @@ MonoBehaviour:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
-        <Description>k__BackingField: 
+        <Description>k__BackingField: Sharp metal stick. Stick good!
       <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8ecebbc141ac2384c962c692aa990bcd, type: 3}
   - _info:
@@ -167,41 +167,41 @@ MonoBehaviour:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 960616705410860333, guid: 5828de4731afd184e97c7702b9356768, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: b975f49adf87af74da36a13f79fd196e, type: 3}
     - _info:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 5301947763806725639, guid: 411a7413d115c3e4ab505b815a58af72, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 7520361dd206a774c85194b5d81d21fc, type: 3}
     - _info:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 6624726128274571513, guid: 458f1057d96ce97478056a7a4c4bf976, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 4ca21f45a0a9ea8428a0cb9b856e642d, type: 3}
     - _info:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 5973660856396735680, guid: 6a99c22e4c3ce5048a61c07a80ade559, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 1bcaed9caf64fcf479da17acf5c9d75e, type: 3}
     - _info:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 6964633870292682744, guid: 4a98bc9137b5a8b43bc548ce0f607c7f, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: cac11207a7afbec4cbd81dbe6276d8e8, type: 3}
     - _info:
         <Name>k__BackingField: Armor
         <ItemType>k__BackingField: 4
         <BasePrice>k__BackingField: 150
-        <Description>k__BackingField: 
+        <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 7616928403115575848, guid: 27e9ed486421c8c4f8c02e36ce315f2e, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: ce37eb17b27809d4c9217458ce3341f7, type: 3}
