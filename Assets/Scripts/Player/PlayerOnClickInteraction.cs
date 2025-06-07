@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerOnClickInteraction : MonoBehaviour{
     private IInteractibleOnClick _currentInteractible;
     private IInteractibleOnClick _previousInteractible;
+    public UnityEvent MouseInteraction;
     void Update(){
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -15,7 +17,11 @@ public class PlayerOnClickInteraction : MonoBehaviour{
 
         if (Input.GetMouseButtonDown(0)){
             if (_currentInteractible != null)
+            {
                 _currentInteractible.Interact();
+                MouseInteraction?.Invoke();
+            }
+
         }
       
             

@@ -7,12 +7,12 @@ public class StateOpenShop : BaseTutorialState
     }
     public override void Enter()
     {
-        _tutorialManager.MerchantGuildTrigger.isActive = false;
+        _tutorialManager.GoOutsideTrigger.isActive = false;
         _tutorialManager.OpenShopText.SetActive(true);
     }
     public override void Exit()
     {
-        _tutorialManager.MerchantGuildTrigger.isActive = true;
+        _tutorialManager.GoOutsideTrigger.isActive = true;
         _tutorialManager.OpenShopText.SetActive(false);
     }
 }

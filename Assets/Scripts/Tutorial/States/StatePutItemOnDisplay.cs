@@ -7,13 +7,13 @@ public class StatePutItemOnDisplay : BaseTutorialState
     }
     public override void Enter()
     {
-        _tutorialManager.MerchantGuildTrigger.isActive = false;
+        _tutorialManager.GoOutsideTrigger.isActive = false;
         _tutorialManager.OpenShopButton.interactable = false;
         _tutorialManager.PutItemOnDisplayText.SetActive(true);
     }
     public override void Exit()
     {
-        _tutorialManager.MerchantGuildTrigger.isActive = true;
+        _tutorialManager.GoOutsideTrigger.isActive = true;
         _tutorialManager.OpenShopButton.interactable = true;
         _tutorialManager.PutItemOnDisplayText.SetActive(false);
     }

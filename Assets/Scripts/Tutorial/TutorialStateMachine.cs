@@ -5,8 +5,10 @@ public class TutorialStateMachine
     public BaseTutorialState CurrentState {  get; private set; }
     public StateNothing stateNothing;
     public StateGoToShop stateGoToShop;
+    public StateEnterMerchantGuild stateEnterMerchantGuild;
     public StateBuyItems stateBuyItems;
     public StateExitMerchantGuild stateExitMerchantGuild;
+    public StateEnterShop stateEnterShop;
     public StatePutItemOnDisplay statePutItemOnDisplay;
     public StateOpenShop stateOpenShop;
     public StateWaitForBuyer stateWaitForBuyer;
@@ -20,8 +22,10 @@ public class TutorialStateMachine
     {
         stateNothing = new StateNothing(manager);
         stateGoToShop = new StateGoToShop(manager);
+        stateEnterMerchantGuild= new StateEnterMerchantGuild(manager);
         stateBuyItems = new StateBuyItems(manager);
         stateExitMerchantGuild = new StateExitMerchantGuild(manager);
+        stateEnterShop = new StateEnterShop(manager);
         statePutItemOnDisplay = new StatePutItemOnDisplay(manager);
         stateOpenShop = new StateOpenShop(manager);
         stateWaitForBuyer = new StateWaitForBuyer(manager);
