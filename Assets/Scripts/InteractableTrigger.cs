@@ -38,7 +38,7 @@ public class InteractableTrigger : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && Input.GetKey(KeyCode.E) && _interactable != null && _playerControl.GetInteractable()!=_interactable)
+        if (other.CompareTag("Player") && _interactable != null && _playerControl.GetInteractable()!=_interactable)
         {
             Debug.Log("Interact");
             _playerControl.SetInteractable(_interactable);

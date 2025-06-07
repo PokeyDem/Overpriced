@@ -59,7 +59,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
 
     public void SetNearestSlot(DisplaySlotController nearestDisplaySlot){
         _currentDisplayDisplaySlot = nearestDisplaySlot;
-        if (_currentDisplayDisplaySlot != null&&_playerControl.GetInteractable()!=null)
+        if (_currentDisplayDisplaySlot != null&&_inventoryUI.gameObject.activeSelf)
         {
             _playerControl.SetInteractable(this);
         }
@@ -98,11 +98,15 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     }
 
     public void DisableInventory(){
+        if ( !_inventoryUI.gameObject.activeSelf)
+        {
+            return;
+        }
         _inventoryUI.gameObject.SetActive(false);
         //if(_playerControl.GetInteractable() == this as IInteractable)
         _playerControl.SetInteractable(null);
-        _playerControl.ScrollUp.AddListener(SelectPreviousSlot);
-        _playerControl.ScrollDown.AddListener(SelectNextSlot);
+        _playerControl.ScrollUp.RemoveListener(SelectPreviousSlot);
+        _playerControl.ScrollDown.RemoveListener(SelectNextSlot);
     }
     public void FoldUnfoldInventory()
     {
