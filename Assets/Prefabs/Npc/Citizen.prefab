@@ -295,7 +295,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5939815, y: 0.7, z: 8.66766}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1935537024765400876}
@@ -391,13 +391,13 @@ MonoBehaviour:
   _toleranceDecimal: 0.3
   _NPCType: 1
   _itemToBuy:
-    <Name>k__BackingField: 
-    <ItemType>k__BackingField: 0
-    <ID>k__BackingField: 0
+    _info:
+      <Name>k__BackingField: 
+      <ItemType>k__BackingField: 0
+      <BasePrice>k__BackingField: 0
+      <Description>k__BackingField: 
     <Prefab>k__BackingField: {fileID: 0}
     <PreviewImage>k__BackingField: {fileID: 0}
-    <BasePrice>k__BackingField: 0
-    <Description>k__BackingField: 
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 78776df46d2cbe44ba3e1c07089c6859, type: 2}
   _updateText: {fileID: 7506852189580195177}

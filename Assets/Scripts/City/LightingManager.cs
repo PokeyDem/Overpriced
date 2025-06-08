@@ -14,34 +14,37 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [SerializeField] private Color _eveningDirectionalColor;
     [SerializeField] private float _eveningDirectionalIntensity;
 
-    private MeshRenderer _lanternLeft;
-    private MeshRenderer _lanternRight;
+    [SerializeField] private List<LanternBehaviour> _lanterns = new List<LanternBehaviour>();
     
     [SerializeField] private Material _lanternTurnedOnMaterial;
     [SerializeField] private Material _lanternTurnedOffMaterial;
-
-    [SerializeField] private GameObject _lanternLeftPointLight;
-    [SerializeField] private GameObject _lanternRightPointLight;
     
-    private List<MeshRenderer> _buildings = new List<MeshRenderer>();
+    [SerializeField] private List<MeshRenderer> _buildings = new List<MeshRenderer>();
     [SerializeField] private Material _windowsDefaultMaterial;
     [SerializeField] private Material _windowsWithLightOnMaterial;
     [SerializeField] private GameObject[] _windowPointLights;
-    
-    
-  
 
+    [SerializeField] private Light _seilingFrontLight;
+    [SerializeField] private Light _seilingBackLight;
+
+    [SerializeField] private Light _spotLightWindow;
+    [SerializeField] private Light _spotLightDoor;
+    
     private Light _directionalLight;
 
     public new void Awake(){
         base.Awake();
+        
         _directionalLight = _directionalLightObject.GetComponent<Light>();
         _buildings = new List<MeshRenderer>();
     }
 
     private void Start(){
-        _lanternLeft = GameObject.Find("LanternLeft").GetComponent<MeshRenderer>();
-        _lanternRight = GameObject.Find("LanternRight").GetComponent<MeshRenderer>();
+        
+        foreach (var lantern in GameObject.FindGameObjectsWithTag("Lantern")){
+            _lanterns.Add(lantern.GetComponent<LanternBehaviour>());
+        }
+        
         foreach (var building in GameObject.FindGameObjectsWithTag("CityBuilding")){
             Debug.Log(building.name);
             if (building.TryGetComponent(out MeshRenderer meshRenderer)){
@@ -71,6 +74,12 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     private void SetMorningLighting(){
        _directionalLight.color = _morningDirectionalColor;
        _directionalLight.intensity = _morningDirectionalIntensity;
+       
+       _seilingBackLight.gameObject.SetActive(true);
+       _seilingFrontLight.gameObject.SetActive(true);
+       _spotLightWindow.gameObject.SetActive(true);
+       _spotLightDoor.gameObject.SetActive(true);
+       
        ChangeLanternsState(false);
        ChangeBuildingsWindowsLightState(false);
     }
@@ -83,26 +92,20 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     private void SetEveningLighting(){
        _directionalLight.color = _eveningDirectionalColor;
        _directionalLight.intensity = _eveningDirectionalIntensity;
+       
+       _seilingBackLight.gameObject.SetActive(false);
+       _seilingFrontLight.gameObject.SetActive(false);
+       _spotLightWindow.gameObject.SetActive(false);
+       _spotLightDoor.gameObject.SetActive(false);
+       
        ChangeLanternsState(true);
        ChangeBuildingsWindowsLightState(true);
     }
 
     private void ChangeLanternsState(bool turnOn){
-        Material[] materials = _lanternLeft.materials;
-
-        if (turnOn){
-            materials[6] = _lanternTurnedOnMaterial;
-            _lanternLeftPointLight.SetActive(true);
-            _lanternRightPointLight.SetActive(true);
+        foreach (var lantern in _lanterns){
+            lantern.ChangeState(turnOn); 
         }
-        else{
-            materials[6] = _lanternTurnedOffMaterial;
-            _lanternLeftPointLight.SetActive(false);
-            _lanternRightPointLight.SetActive(false);
-        }
-        
-        _lanternLeft.materials = materials;
-        _lanternRight.materials = materials;
     }
 
     private void ChangeBuildingsWindowsLightState(bool turnOn){

@@ -212,8 +212,10 @@ public class PreplacedStructure{
     [field: SerializeField, Tooltip("Position on the grid(x,y)")] private Vector2Int _pos{ get; set;}
 
     [field: SerializeField, Tooltip("Prefab index in database")] public int _index{ get; private set; }
+    
 
     public Vector3Int GetPos(){
         return new Vector3Int(_pos.x, -1, _pos.y);
     }
+    
 }
