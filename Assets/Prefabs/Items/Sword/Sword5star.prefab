@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2004aaefb61ca164382cdc43ab82b437, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b9bc494141c21644a21c47c82475a8f, type: 2}
     - target: {fileID: 919132149155446097, guid: 2004aaefb61ca164382cdc43ab82b437, type: 3}
       propertyPath: m_Name
       value: Sword5star
