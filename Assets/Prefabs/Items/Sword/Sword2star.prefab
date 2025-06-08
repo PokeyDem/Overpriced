@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 61e74a42a5a9cac49905cf83f90480c2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d798cbf8d4807f46b201273173a085d, type: 2}
     - target: {fileID: 919132149155446097, guid: 61e74a42a5a9cac49905cf83f90480c2, type: 3}
       propertyPath: m_Name
       value: Sword2star
