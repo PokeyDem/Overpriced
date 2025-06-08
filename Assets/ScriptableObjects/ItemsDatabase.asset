@@ -120,42 +120,42 @@ MonoBehaviour:
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 0bbeba7ac58b7a4438467a171cb6ba57, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: e39ea79c51dc8f347837b69426883b13, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 3a3c78febc0fe29449bd605ccd515806, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 7671ec4e30a18ab4ab1f5fbb28b4e20a, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 13a27d6c4f6e0c548b31e1687b4a8bf2, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: d22262cfde46fee42bc61e3d79e0c246, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: bf7dee06579628f4cbba229d8c687a3a, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 81627af4b66674e4bae36f4c40c90f46, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 0a7da8f673b22df42a06c707a442e80b, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 2ba8ff4d7ac774c4fa1822187b7482b6, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 9a76565c63b3a3c44b5f3119d5a3d16e, type: 3}
     - _info:
         <Name>k__BackingField: Sword
         <ItemType>k__BackingField: 1
         <BasePrice>k__BackingField: 100
         <Description>k__BackingField: Sharp metal stick. Stick good!
-      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 8901f254550a7384aaab4549e308d0a7, type: 3}
+      <Prefab>k__BackingField: {fileID: 3148318684118207359, guid: 73be2ca6be60a4a428271e741b18fd71, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 53e15560510d4fe41940ba12e1dc8cbc, type: 3}
   - _info:
       <Name>k__BackingField: Armor
