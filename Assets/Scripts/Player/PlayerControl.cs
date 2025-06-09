@@ -111,7 +111,7 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
     }
     public void SetInteractable(IInteractable interactable) {
         _currentInteractable= interactable;
-        if(interactable != null)
+        if(interactable != null&&!_disableControls)
         {
             _interactUI.UpdateText(_currentInteractable.TriggerInteractPrompt());
             _interactUI.SetActive(true);

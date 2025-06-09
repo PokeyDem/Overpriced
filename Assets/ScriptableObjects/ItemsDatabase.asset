@@ -24,7 +24,7 @@ MonoBehaviour:
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
         <Description>k__BackingField: ' Newton''s friend'
-      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: b987a49d83b60d246a901a78845f27c8, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 80afd8d58125cba40973b2607c38adee, type: 3}
     - _info:
         <Name>k__BackingField: Apple
@@ -38,28 +38,28 @@ MonoBehaviour:
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
         <Description>k__BackingField: ' Newton''s friend'
-      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: d8068390c0381be44a5befd34c443fe0, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: 3f95c42a23282564081bac3446b64802, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
         <Description>k__BackingField: ' Newton''s friend'
-      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 054f0e01921270d4083b1099993f2019, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: f5833ed19d434784d9bc888f3ba78b38, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
         <Description>k__BackingField: ' Newton''s friend'
-      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 6117df2ee72da8f4385ce3f3b18ee148, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: c5abc4d7e0e33034cb6a195e9996e757, type: 3}
     - _info:
         <Name>k__BackingField: Apple
         <ItemType>k__BackingField: 2
         <BasePrice>k__BackingField: 25
         <Description>k__BackingField: ' Newton''s friend'
-      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 331426417fbbced42823e652614cf57a, type: 3}
+      <Prefab>k__BackingField: {fileID: 2161069898735506495, guid: 243155cb797a7024d8719778b57623d3, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: a4a9e21e605e6484fbeac3a6b95e06b4, type: 3}
   - _info:
       <Name>k__BackingField: Potion

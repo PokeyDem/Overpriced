@@ -20,6 +20,7 @@ public class NpcBehaviour : MonoBehaviour{
     private DisplaySlotController _displaySlotController;
     private List<Transform> _counterPos;
     private bool _itemIsDesired;
+    private Vector3 _target;
 
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
@@ -41,6 +42,16 @@ public class NpcBehaviour : MonoBehaviour{
     {
         _presenter=new NPCEmotePresenter(this,_updateText);
     }
+    private void Update()
+    {
+        if (_agent.hasPath)
+        {
+            FaceTarget(_agent.steeringTarget);
+        } else
+        {
+            FaceTarget(_target);
+        }
+    }
 
     public void Initialize(bool isInShop,Vector3 spawnPoint, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, DisplaySlotController displaySlotController, List<Transform> counterPos, List<ItemData> desiredItems, IObjectPool<NpcBehaviour> pool){
         _despawnPointPos = despawnPointPos;
@@ -54,7 +65,7 @@ public class NpcBehaviour : MonoBehaviour{
         _pool = pool;
 
         _agent = GetComponent<NavMeshAgent>();
-        float random = UnityEngine.Random.Range(100, 300);
+        float random = UnityEngine.Random.Range(100, 250);
         _agent.speed = random / 100;
         _agent.Warp(spawnPoint);
         Initialized?.Invoke();
@@ -82,7 +93,8 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.SetDestination(_windowPos.position+deviation);
         yield return new WaitUntil(() => !_agent.pathPending &&
                                     _agent.remainingDistance <= _agent.stoppingDistance);
-        StartCoroutine(LerpRotation( 90));
+        //StartCoroutine(LerpRotation( 90));
+        _target = _windowPos.position + deviation + new Vector3(0, 0, -1);
         yield return new WaitForSeconds(WaitRandomAmount(200, 600));
         if (DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems().Count != 0)
         {
@@ -153,6 +165,7 @@ public class NpcBehaviour : MonoBehaviour{
             }
             //_agent.speed = 2;
             _agent.SetDestination(displaySlotController.transform.position);
+            _target=displaySlotController.transform.position;
             //Debug.Log($"Going to: {displaySlotController.transform.position}, item: {item.Name}");
             yield return new WaitUntil(() => !_agent.pathPending &&
                                                 _agent.remainingDistance <= _agent.stoppingDistance);
@@ -199,6 +212,7 @@ public class NpcBehaviour : MonoBehaviour{
     {
         int currentPosInLine=-1;
         _agent.SetDestination(_counterPos[0].position);
+        _target = _counterPos[0].position;
         yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => _agent.remainingDistance < 2.5f);
         _agent.speed = 1.5f;
@@ -229,13 +243,14 @@ public class NpcBehaviour : MonoBehaviour{
             if (currentPosInLine == 0) {
                 yield return new WaitUntil(() => !_agent.pathPending &&
                                                  _agent.remainingDistance <= _agent.stoppingDistance);
-                StartCoroutine(LerpRotation(Vector3.Angle(transform.position, destination.position)));
+                //StartCoroutine(LerpRotation(Vector3.Angle(transform.position, destination.position)));
             }else if (currentPosInLine>0) {
                 yield return new WaitUntil(() => !NpcManager.counterTaken[currentPosInLine - 1]);//if in line wait till next in line is open
             }else {
                 yield return new WaitUntil(() => !NpcManager.counterTaken[_counterPos.Count-1]);//if not in line wait till last in line is open
             }
         }
+        _target = _counterPos[0].position + new Vector3(0, 0, -1);
     }
     private float WaitRandomAmount(int min,int max)//min and max in milliseconds
     {
@@ -290,13 +305,13 @@ public class NpcBehaviour : MonoBehaviour{
         _displaySlotController.isChosen = false;
         _displaySlotController.isOccupied = false;
         NpcManager.counterTaken[0] = false;
-        _agent.speed = 3.5f;
+        _agent.speed = 2.5f;
         _agent.SetDestination(_despawnInShop.position);
     }
 
     public void GoToExitWithoutItem()
     {
-        _agent.speed = 3.5f;
+        _agent.speed = 2.5f;
         _agent.SetDestination(_despawnInShop.position);
     }
 
@@ -319,5 +334,11 @@ public class NpcBehaviour : MonoBehaviour{
     public NavMeshAgent GetAgent()
     {
         return _agent;
+    }
+    void FaceTarget(Vector3 target)
+    {
+        Vector3 direction = (target - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
     }
 }
