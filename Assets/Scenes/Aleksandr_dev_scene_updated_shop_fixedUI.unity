@@ -563,7 +563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: money
-      value: 5000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: changeEvent.m_PersistentCalls.m_Calls.Array.size
@@ -13243,7 +13243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialManager: {fileID: 6466292884129364670}
-  Goal: 3500
+  Goal: 5000
   EndMessageComponentName: EndMessage
   WinMessageText: Congratulations! You reached the goal managed to save your business
   LoseMessageText: Well, seem like its time to pack up
@@ -21121,8 +21121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aac5de5d2a0d2b4db0757462cd5f29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayCount: 6
-  currentPartOfDay: 2
+  dayCount: 1
+  currentPartOfDay: 0
   partOfDayChange:
     m_PersistentCalls:
       m_Calls:
