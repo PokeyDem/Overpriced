@@ -9,6 +9,8 @@ public class MoneyManager : SingletonDontDestroyOnLoad<MoneyManager> {
     [SerializeField]private int money;
 
     public UnityEvent<string> changeEvent;
+    public UnityEvent<int> onEarnedEvent;
+    public UnityEvent<int> onSpendEvent;
 
     public MoneyData GetMoneyData(){
         return new MoneyData(money);
@@ -30,12 +32,14 @@ public class MoneyManager : SingletonDontDestroyOnLoad<MoneyManager> {
     public void PutMoney(int amount) {
         money += amount;
         changeEvent.Invoke(money.ToString());
+        onEarnedEvent.Invoke(amount);
     }
     
     public void ReduceMoney(int amount) {
         if (money >= amount) {
             money -= amount;
             changeEvent.Invoke(money.ToString());
+            onSpendEvent.Invoke(amount);
         }
     }
 
