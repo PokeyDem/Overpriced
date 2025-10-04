@@ -4,20 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MoneyManager : MonoBehaviour {
-
-    public static MoneyManager MoneyManagerInstance;
+public class MoneyManager : SingletonDontDestroyOnLoad<MoneyManager> {
     
     [SerializeField]private int money;
 
     public UnityEvent<string> changeEvent;
-    
-    public void Awake() {
-        if (MoneyManagerInstance == null) {
-            MoneyManagerInstance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
 
     public MoneyData GetMoneyData(){
         return new MoneyData(money);

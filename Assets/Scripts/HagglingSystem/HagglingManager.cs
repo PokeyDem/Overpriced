@@ -134,7 +134,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     public void SellItem(){
-        MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
+        MoneyManager.Instance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
         _npcBehaviour.GetDisplaySlotController().RemoveItem();

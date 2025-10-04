@@ -10,7 +10,7 @@ public class GameManager : SingletonDontDestroyOnLoad<GameManager>
     }
     private void Start()
     {
-        DayManager.DayManagerInstance.dayChange.AddListener(End);
+        DayManager.Instance.dayChange.AddListener(End);
     }
     private void End(int day)
     {

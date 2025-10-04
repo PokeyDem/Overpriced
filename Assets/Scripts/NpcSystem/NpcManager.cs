@@ -105,8 +105,8 @@ public class NpcManager : MonoBehaviour
     }
     public void InitializeNPCScenario()
     {
-        int day = DayManager.DayManagerInstance.GetDay();
-        DayManager.PartOfDay timeOfDay = DayManager.DayManagerInstance.GetPartOfDay();
+        int day = DayManager.Instance.GetDay();
+        DayManager.PartOfDay timeOfDay = DayManager.Instance.GetPartOfDay();
         StartCoroutine(SpawnNPCScenario(day, timeOfDay));
     }
     private IEnumerator SpawnNPCScenario(int day, DayManager.PartOfDay timeOfDay)

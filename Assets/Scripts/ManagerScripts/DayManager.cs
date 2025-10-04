@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
-    public static DayManager DayManagerInstance;
         
     [SerializeField] private int dayCount=1;
     [SerializeField] private PartOfDay currentPartOfDay=PartOfDay.Morning;
@@ -14,15 +13,6 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
         
     public enum PartOfDay {
         Morning=0, Noon=1, Evening=2
-    }
-    
-    // Start is called before the first frame update
-    public new void Awake() {
-        base.Awake();
-        if (DayManagerInstance == null) {
-            DayManagerInstance = this;
-            DontDestroyOnLoad(this);
-        }
     }
 
     public void Start() {
