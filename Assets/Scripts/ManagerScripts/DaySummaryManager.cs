@@ -7,13 +7,14 @@ public class DaySummaryManager : SingletonDontDestroyOnLoad<DaySummaryManager> {
 
     private int _moneyEarned;
     private int _moneySpend;
-    private Dictionary<NPCType, int> _npcCount;
-    private int GoldBalance => _moneyEarned - _moneySpend;
+    private Dictionary<NPCType, int> _npcCount = new Dictionary<NPCType, int>();
+    private int MoneyBalance => _moneyEarned - _moneySpend;
 
     [SerializeField] private TextMeshProUGUI dayCount;
     [SerializeField] private TextMeshProUGUI moneyEarned;
     [SerializeField] private TextMeshProUGUI moneySpend;
     [SerializeField] private TextMeshProUGUI moneyBalance;
+    [SerializeField] private TextMeshProUGUI npcCount;
 
     private void Awake() {
         base.Awake();
@@ -45,5 +46,18 @@ public class DaySummaryManager : SingletonDontDestroyOnLoad<DaySummaryManager> {
 
     public void TrackNPC(NPCType type) {
         _npcCount[type]++;
+    }
+
+    public void ShowDaySummary() {
+        int tmpNPCCount = 0;
+        foreach (var npcCountValue in _npcCount.Values) {
+            tmpNPCCount += npcCountValue;
+        }
+
+        npcCount.text = tmpNPCCount.ToString();
+        dayCount.text = DayManager.Instance.GetDay().ToString();
+        moneyEarned.text = "+" + _moneyEarned;
+        moneySpend.text = "-" + _moneySpend;
+        moneyBalance.text = MoneyBalance > 0 ? "+" + MoneyBalance : "" + MoneyBalance;
     }
 }
