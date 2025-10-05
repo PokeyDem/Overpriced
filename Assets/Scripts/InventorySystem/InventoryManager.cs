@@ -348,13 +348,16 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
 
     public string TriggerInteractPrompt()
     {
-        if (_currentDisplayDisplaySlot.isChosen)
+        if (_currentDisplayDisplaySlot != null)
         {
-            return $"Cant remove item chosen by an NPC";
-        }
-        if(_currentDisplayDisplaySlot.isOccupied)
-        {
-            return $"Cant remove item occupied by an NPC";
+            if (_currentDisplayDisplaySlot.isChosen)
+            {
+                return $"Cant remove item chosen by an NPC";
+            }
+            if (_currentDisplayDisplaySlot.isOccupied)
+            {
+                return $"Cant remove item occupied by an NPC";
+            }
         }
         if (_selectedInventorySlot.GetItem() == null) 
         { 
