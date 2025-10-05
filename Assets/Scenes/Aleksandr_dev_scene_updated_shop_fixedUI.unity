@@ -563,7 +563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: money
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: changeEvent.m_PersistentCalls.m_Calls.Array.size
