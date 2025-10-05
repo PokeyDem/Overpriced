@@ -331,21 +331,34 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     public void Interact()
     {
         var inventorySlotItem = _selectedInventorySlot.GetItem();
-
-        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() != null)
+        if (!_currentDisplayDisplaySlot.isOccupied || !_currentDisplayDisplaySlot.isChosen)
         {
-            RemoveItemFromDisplaySlot();
+            if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() != null)
+            {
+                RemoveItemFromDisplaySlot();
+            }
+            else if (inventorySlotItem == null && _currentDisplayDisplaySlot.GetItem() != null)
+            {
+                RemoveItemFromDisplaySlot();
+                return;
+            }
+            AddItemToDisplaySlot();
         }
-        else if (inventorySlotItem == null && _currentDisplayDisplaySlot.GetItem() != null)
-        {
-            RemoveItemFromDisplaySlot();
-            return;
-        }
-        AddItemToDisplaySlot();
     }
 
     public string TriggerInteractPrompt()
     {
+        if (_currentDisplayDisplaySlot != null)
+        {
+            if (_currentDisplayDisplaySlot.isChosen)
+            {
+                return $"Cant remove item chosen by an NPC";
+            }
+            if (_currentDisplayDisplaySlot.isOccupied)
+            {
+                return $"Cant remove item occupied by an NPC";
+            }
+        }
         if (_selectedInventorySlot.GetItem() == null) 
         { 
             if(_currentDisplayDisplaySlot.GetItem() != null)
