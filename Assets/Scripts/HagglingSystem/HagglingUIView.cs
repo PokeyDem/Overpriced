@@ -16,13 +16,13 @@ public class HagglingUIView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _procentField;
     [SerializeField] private TextMeshProUGUI _attemptsLeftField;
     [SerializeField] private TextMeshProUGUI _npcOffer;
+    [SerializeField] private Image _emoteImage;
 
     [SerializeField] private Slider _amountSlider;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button _sellButton;
     [SerializeField] private Button _acceptOfferButton;
     [SerializeField] private Button _denyOfferButton;
-    [SerializeField] private Color _baseLightColor;
 
     [SerializeField] private GameObject _haggleWindow;
     [SerializeField] private GameObject _acceptDenyWindow;
@@ -47,14 +47,8 @@ public class HagglingUIView : MonoBehaviour
         _itemDescField.text = item.Description;
         UpdatePriceField(item.FinalPrice);
     }
-    public void UpdateResultField(string text, Color color)
-    {
-        _resulField.color = color;
-        _resulField.text = text;
-    }
     public void UpdateResultField(string text)
     {
-        _resulField.color = _baseLightColor;
         _resulField.text = text;
     }
     public void UpdateSlider(int min, int max)
@@ -116,5 +110,9 @@ public class HagglingUIView : MonoBehaviour
     public void ToggleHaggleWindow(bool isActive)
     {
         _haggleWindow.SetActive(isActive);
+    }
+    public void SetEmote(Sprite emote)
+    {
+        _emoteImage.sprite = emote;
     }
 }
