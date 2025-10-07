@@ -563,7 +563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: money
-      value: 1500
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1250122242081541674, guid: d2bc018a2f8e31a469707e2bb83b0b38, type: 3}
       propertyPath: changeEvent.m_PersistentCalls.m_Calls.Array.size
@@ -2987,55 +2987,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
   m_PrefabInstance: {fileID: 1170737850}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &381223783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 381223785}
-  - component: {fileID: 381223784}
-  m_Layer: 16
-  m_Name: PostProcessing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &381223784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381223783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 4a15a727610f7dd419f980e8600d7d02, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
---- !u!4 &381223785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381223783}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2323556, y: -1.2288779, z: 0.079666935}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383360805
 GameObject:
   m_ObjectHideFlags: 0
@@ -10269,8 +10220,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  - component: {fileID: 963194230}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: ShopCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -10385,66 +10335,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &963194230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 963194228}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 65536
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 1
-  m_ShowCustomSorter: 1
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!1 &966774350
 GameObject:
   m_ObjectHideFlags: 0
@@ -13353,10 +13243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialManager: {fileID: 6466292884129364670}
-  Goal: 5000
-  EndMessageComponentName: EndMessage
-  WinMessageText: Congratulations! You reached the goal managed to save your business
-  LoseMessageText: Well, seem like its time to pack up
 --- !u!4 &1172684777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 540572555164026099, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
@@ -21248,18 +21134,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1172316443}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: End
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   dayChange:
     m_PersistentCalls:
       m_Calls:
@@ -24476,7 +24350,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
       propertyPath: _sellButton
@@ -24645,7 +24519,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6466292884129364669}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4579cf059e8ee00418a876ec92684720, type: 3}
   m_Name: 
@@ -24973,4 +24847,3 @@ SceneRoots:
   - {fileID: 782880105}
   - {fileID: 1779129571}
   - {fileID: 1637213098}
-  - {fileID: 381223785}
