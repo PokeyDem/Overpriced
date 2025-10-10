@@ -29,16 +29,16 @@ public class SaveSlot : MonoBehaviour{
         Debug.Log(_id);
         if (_id == 6)
             _textField.text = "QuickSave\n"
-                              + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
-                              + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n";
+                              + $"Day: {DayManager.Instance.GetDayData().DayCount}\n"
+                              + $"Money: {MoneyManager.Instance.GetMoneyData().Money}\n";
         else if (_id == 7)
             _textField.text = "AutoSave\n"
-                              + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
-                              + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n";
+                              + $"Day: {DayManager.Instance.GetDayData().DayCount}\n"
+                              + $"Money: {MoneyManager.Instance.GetMoneyData().Money}\n";
         else
             _textField.text = $"Save {_id}\n" 
-                          + $"Day: {DayManager.DayManagerInstance.GetDayData().DayCount}\n"
-                          + $"Money: {MoneyManager.MoneyManagerInstance.GetMoneyData().Money}\n"
+                          + $"Day: {DayManager.Instance.GetDayData().DayCount}\n"
+                          + $"Money: {MoneyManager.Instance.GetMoneyData().Money}\n"
                           + $"Save time: {DateTime.Now:HH:mm}\n"
                           + $"Save date: {DateTime.Now:dd-MM-yyyy}";
     }

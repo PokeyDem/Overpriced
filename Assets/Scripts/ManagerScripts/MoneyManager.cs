@@ -4,20 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MoneyManager : MonoBehaviour {
-
-    public static MoneyManager MoneyManagerInstance;
+public class MoneyManager : SingletonDontDestroyOnLoad<MoneyManager> {
     
     [SerializeField]private int money;
 
     public UnityEvent<string> changeEvent;
-    
-    public void Awake() {
-        if (MoneyManagerInstance == null) {
-            MoneyManagerInstance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
+    public UnityEvent<int> onEarnedEvent;
+    public UnityEvent<int> onSpendEvent;
 
     public MoneyData GetMoneyData(){
         return new MoneyData(money);
@@ -39,12 +32,14 @@ public class MoneyManager : MonoBehaviour {
     public void PutMoney(int amount) {
         money += amount;
         changeEvent.Invoke(money.ToString());
+        onEarnedEvent.Invoke(amount);
     }
     
     public void ReduceMoney(int amount) {
         if (money >= amount) {
             money -= amount;
             changeEvent.Invoke(money.ToString());
+            onSpendEvent.Invoke(amount);
         }
     }
 

@@ -28,6 +28,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     public UnityEvent<float> onItemSold;
     public UnityEvent ItemDenied;
     public UnityEvent AttemptsDepleted;
+    public UnityEvent<NPCType> onItemSoldNPCType;
 
 
     private float _toleranceDecimal;
@@ -134,9 +135,10 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     public void SellItem(){
-        MoneyManager.MoneyManagerInstance.PutMoney(_currentPrice);
+        MoneyManager.Instance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
+        onItemSoldNPCType?.Invoke(_npcBehaviour.GetNpcType());
         _npcBehaviour.GetDisplaySlotController().RemoveItem();
         StartCoroutine(EndHaggling(true));
     }
