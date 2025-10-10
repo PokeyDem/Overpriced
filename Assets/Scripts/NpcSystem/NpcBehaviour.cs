@@ -107,16 +107,11 @@ public class NpcBehaviour : MonoBehaviour{
         }
     }
 
-    private IEnumerator LerpRotation( float angle) {
-        float time = 0.0f;
-        while (time < 1) {
-            transform.Rotate(Vector3.up, angle * Time.deltaTime);
-            time += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+    public void StartBrowsing()
+    {
+        StartCoroutine(BrowseDisplays());
     }
-
-    public IEnumerator BrowseDisplays()
+    private IEnumerator BrowseDisplays()
     {
         //Debug.Log($"BrowseDisplays started");
         _displaySlotsWithItems = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
@@ -291,10 +286,6 @@ public class NpcBehaviour : MonoBehaviour{
     {
         return _toleranceDecimal;
     }
-    public void SetShopCheck(bool isInShop)
-    {
-        _isInShop = isInShop;
-    }
 
     public void GoToExit(bool itemSold)
     {
@@ -331,14 +322,14 @@ public class NpcBehaviour : MonoBehaviour{
             Destroy(gameObject);
         }
     }
-    public NavMeshAgent GetAgent()
-    {
-        return _agent;
-    }
     void FaceTarget(Vector3 target)
     {
         Vector3 direction = (target - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+    }
+    public void WarpNPC(Vector3 spawnPoint)
+    {
+        _agent.Warp(spawnPoint);
     }
 }
