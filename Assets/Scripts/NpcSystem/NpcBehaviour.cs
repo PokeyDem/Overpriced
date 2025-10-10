@@ -11,20 +11,22 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField] private int _tolerance;
     [SerializeField] private float _toleranceDecimal;
     [SerializeField] private NPCType _NPCType;
-    private NavMeshAgent _agent;
+    public NavMeshAgent _agent{ get; private set; }
     [SerializeField] private ItemData _itemToBuy; //Set by ChooseItem
-    private Transform _despawnPointPos;
-    private Transform _windowPos; 
-    private Transform _doorPos;
-    private Transform _despawnInShop;
-    private DisplaySlotController _displaySlotController;
-    private List<Transform> _counterPos;
+    public Transform _despawnPointPos { get; private set; }
+    public Transform _windowPos { get; private set; }
+    public Transform _doorPos { get; private set; }
+    public Transform _despawnInShop { get; private set; }
+    public DisplaySlotController _displaySlotController;
+    public List<Transform> _counterPos { get; private set; }
     private bool _itemIsDesired;
     private Vector3 _target;
 
     [SerializeField] private bool _isInShop;
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
     private List<ItemData> _desiredItems;
+
+    private NPCStateMachine _machine;
 
     public event Action Initialized;
     public event Action DecidingStarted;
@@ -44,6 +46,7 @@ public class NpcBehaviour : MonoBehaviour{
     }
     private void Update()
     {
+        _machine.Update();
         if (_agent.hasPath)
         {
             FaceTarget(_agent.steeringTarget);
@@ -70,6 +73,7 @@ public class NpcBehaviour : MonoBehaviour{
         _agent.Warp(spawnPoint);
         Initialized?.Invoke();
 
+        /*
         if (!_isInShop)
         {
             StartCoroutine(CheckItemsThroughWindow());
@@ -79,6 +83,9 @@ public class NpcBehaviour : MonoBehaviour{
             //Debug.Log("Spawned in shop");
             StartCoroutine(BrowseDisplays());
         }
+        */
+        _machine = new NPCStateMachine(this);
+        _machine.Initialize(new MoveToWindowState());
     }
 
 
@@ -331,5 +338,9 @@ public class NpcBehaviour : MonoBehaviour{
     public void WarpNPC(Vector3 spawnPoint)
     {
         _agent.Warp(spawnPoint);
+    }
+    public void Debg(string x)
+    {
+        Debug.Log(x);
     }
 }
