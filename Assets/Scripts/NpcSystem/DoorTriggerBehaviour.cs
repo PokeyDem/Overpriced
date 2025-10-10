@@ -6,8 +6,6 @@ using UnityEngine;
 public class DoorTriggerBeahviour : MonoBehaviour{
     [SerializeField] private Transform _doorSpawnPoint;
 
-    [SerializeField] private NpcManager _npcManager;
-
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPC")){
             NpcBehaviour npcBehaviour = other.gameObject.GetComponent<NpcBehaviour>();
