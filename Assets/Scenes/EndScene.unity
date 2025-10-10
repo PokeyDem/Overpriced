@@ -253,7 +253,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_sharedMaterial: {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -635,7 +636,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_sharedMaterial: {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -769,7 +771,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_sharedMaterial: {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1374,7 +1377,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_sharedMaterial: {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1592,7 +1596,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_sharedMaterial: {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4239437540442512437, guid: 6597ffc02d400fd4f9d4722197b4296f, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

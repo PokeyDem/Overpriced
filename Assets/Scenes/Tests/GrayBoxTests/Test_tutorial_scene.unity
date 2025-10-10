@@ -354,11 +354,6 @@ Transform:
   - {fileID: 2072193981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &44970691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1692634722046251843, guid: 5a3bb41f535d48240b5cb6230401e58f, type: 3}
-  m_PrefabInstance: {fileID: 8036663310093907343}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &44970695 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2228532357460196224, guid: 5a3bb41f535d48240b5cb6230401e58f, type: 3}
@@ -1807,7 +1802,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1910,23 +1906,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryUI: {fileID: 2031347625}
-  _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
-  _inventorySlots:
-  - {fileID: 44970691}
-  - {fileID: 392140672}
-  - {fileID: 666092834}
-  - {fileID: 909140645}
-  - {fileID: 159885029}
-  - {fileID: 589981262}
-  - {fileID: 1187280882}
-  - {fileID: 1011338315}
-  - {fileID: 1325358866}
-  - {fileID: 758384780}
-  - {fileID: 775617643}
-  - {fileID: 968923278}
-  - {fileID: 491932187}
-  - {fileID: 1259735626}
-  - {fileID: 177845392}
+  _inventoryPanel: {fileID: 0}
+  _itemInfoPanel: {fileID: 0}
+  _itemSlotPrefab: {fileID: 0}
+  _inventorySlotsContainer: {fileID: 0}
+  _moneyManager: {fileID: 0}
+  _contentPanelTransform: {fileID: 0}
+  _playerControl: {fileID: 0}
+  _foldButtonText: {fileID: 0}
+  _itemCategoryText: {fileID: 0}
 --- !u!4 &343164883
 Transform:
   m_ObjectHideFlags: 0
@@ -2155,7 +2143,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2289,7 +2278,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2425,7 +2415,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4152,7 +4143,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -5042,7 +5034,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: Player
   _hagglingManager: {fileID: 2072193982}
-  _text: {fileID: 0}
+  _playerTrigger: {fileID: 0}
+  readyToHaggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &678709540
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5111,7 +5106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5533,7 +5528,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tag: NPC
   _hagglingManager: {fileID: 2072193982}
-  _text: {fileID: 756000487}
+  _playerTrigger: {fileID: 0}
+  readyToHaggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &705871760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5602,7 +5600,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8289,6 +8287,7 @@ MonoBehaviour:
   _inputManager: {fileID: 1281258490}
   _grid: {fileID: 479809255}
   _objectsDatabase: {fileID: 11400000, guid: 2959d21b85ce06d4fb2c73f37f61aa12, type: 2}
+  _itemsDatabase: {fileID: 0}
   _gridVisualization: {fileID: 469016691}
   _uiPanel: {fileID: 2049242532}
   _previewSystem: {fileID: 1496632620}
@@ -8557,7 +8556,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -10185,7 +10185,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 6
+  _inertiaDecay: 2
   _rotationSpeed: 10
+  _disableControls: 0
+  _interactUI: {fileID: 0}
+  ScrollUp:
+    m_PersistentCalls:
+      m_Calls: []
+  ScrollDown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!136 &1403015339
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10229,7 +10238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10316,6 +10325,7 @@ MonoBehaviour:
   _interactionRange: 1.2
   _inventoryManager: {fileID: 343164882}
   _inputManager: {fileID: 1281258490}
+  _playerControl: {fileID: 0}
 --- !u!1 &1408135038
 GameObject:
   m_ObjectHideFlags: 0
@@ -10713,7 +10723,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5401a36fc154b4f48975bc4720583a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcPrefab: {fileID: 8701716767278798441, guid: f5d81a7b495a6e64080044b557b5c883, type: 3}
+  _npcPrefabs: []
+  _npcDesiredItems: []
   _number: 0
   _itemsDatabase: {fileID: 11400000, guid: 64a05e690a3fadc4285e6f410250d774, type: 2}
   _spawnPoint: {fileID: 1606980165}
@@ -10721,10 +10732,14 @@ MonoBehaviour:
   _windowPos: {fileID: 1296503725}
   _doorPos: {fileID: 970070229}
   _despawnInShop: {fileID: 2006348729}
-  _counterPos: {fileID: 1682874765}
+  _counterPos:
+  - {fileID: 0}
   _minDelay: 3
   _maxDelay: 5
   debugSpawn: 0
+  _dailyNpcSpawns: []
+  _DefaultCapacity: 20
+  _MaxSize: 100
 --- !u!1 &1495340801
 GameObject:
   m_ObjectHideFlags: 0
@@ -11535,7 +11550,7 @@ MonoBehaviour:
   m_OverrideTileSize: 1
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.04
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 06d4750bfa0f2de49868b2161c94cb01, type: 2}
   m_BuildHeightMesh: 0
@@ -12663,7 +12678,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -12798,7 +12814,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -13135,12 +13152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1267fd12d2bb94a4db3ed092a75f8a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ShopUI: {fileID: 1087023974}
-  _InventoryUI: {fileID: 2031347625}
-  _buttonsToDisable:
-  - {fileID: 586864211}
-  - {fileID: 1683629087}
-  - {fileID: 1737409576}
+  goOutsideEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  isActive: 0
 --- !u!1 &1843669940
 GameObject:
   m_ObjectHideFlags: 0
@@ -13311,7 +13326,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -14196,7 +14212,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -14330,7 +14347,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -14597,7 +14615,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -15433,10 +15452,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46109c952359bf2409a4eb2a009d3177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hagglingUI: {fileID: 446009661}
-  _counterField: {fileID: 1879821570}
-  _itemDescField: {fileID: 1955916074}
-  _resulField: {fileID: 1996841740}
+  _isPlayerReady: 0
+  _isNpcReady: 0
+  _nrOfAttemptsLeft: 3
+  _hagglingInProgress: 0
+  _npcOffer: 0
+  _playerControl: {fileID: 0}
+  HagglingInitiated:
+    m_PersistentCalls:
+      m_Calls: []
+  HagglingEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  PriceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  NrOfAttemptsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  UIDisabled:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemSold:
+    m_PersistentCalls:
+      m_Calls: []
+  onItemSold:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemDenied:
+    m_PersistentCalls:
+      m_Calls: []
+  AttemptsDepleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2108867008
 GameObject:
   m_ObjectHideFlags: 0

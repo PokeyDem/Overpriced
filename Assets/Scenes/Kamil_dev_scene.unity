@@ -2783,12 +2783,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryUI: {fileID: 1116002994}
+  _inventoryPanel: {fileID: 0}
   _itemInfoPanel: {fileID: 1990108292}
   _itemSlotPrefab: {fileID: 4196557659919706290, guid: 656a82443d4239e49be67ce3e518f078, type: 3}
   _inventorySlotsContainer: {fileID: 1507226815}
   _moneyManager: {fileID: 1346806260}
   _contentPanelTransform: {fileID: 1507226816}
   _playerControl: {fileID: 2060940701}
+  _foldButtonText: {fileID: 0}
   _itemCategoryText: {fileID: 862238873}
 --- !u!4 &343164883
 Transform:
@@ -3223,7 +3225,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3438,6 +3441,8 @@ MonoBehaviour:
   _cityUI: {fileID: 1303097679}
   _interactUI: {fileID: 1403951746}
   _merchantsGuildUI: {fileID: 541496400}
+  _buildingInfoPanel: {fileID: 0}
+  _buildingInfoPanelOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &396512339
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,7 +5078,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -5907,7 +5913,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -6184,7 +6191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6663,7 +6670,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9954,7 +9961,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -10482,6 +10490,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialManager: {fileID: 0}
+  Goal: 0
+  EndMessageComponentName: 
+  WinMessageText: 
+  LoseMessageText: 
 --- !u!1 &1201021037
 GameObject:
   m_ObjectHideFlags: 0
@@ -12362,7 +12374,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -13026,7 +13039,7 @@ MonoBehaviour:
   m_OverrideTileSize: 1
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: b926ad997cde7b749a55dc3dbc8f4b21, type: 2}
   m_BuildHeightMesh: 0
@@ -14169,7 +14182,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -14380,7 +14394,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_sharedMaterial: {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 3112004651602340311, guid: 4f1477f3eb8879c4e8995cf5d039cf1e, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -16177,6 +16192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097cf674b8ffbbc47bd266bbf7a3f2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MouseInteraction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2065283746
 GameObject:
   m_ObjectHideFlags: 0
