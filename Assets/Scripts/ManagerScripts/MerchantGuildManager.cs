@@ -105,7 +105,7 @@ namespace ManagerScripts {
                 buyCommunicat.text = "Out of stock";
                 return;
             }
-            if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.MoneyManagerInstance.GetCurrentMoney()) {
+            if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.Instance.GetCurrentMoney()) {
                 buyItemEvent.Invoke(_selectedItemSlot.GetItem());
                 buyItemEventTutorial?.Invoke();
                 spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().FinalPrice);

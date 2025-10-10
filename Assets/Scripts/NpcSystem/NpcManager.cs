@@ -74,15 +74,6 @@ public class NpcManager : MonoBehaviour
         _npcsCount++;
     }
 
-    public void SpawnNpcInsideShop(Vector3 spawnPoint, DisplaySlotController displaySlotController, NPCType npcType)
-    {
-        AudioManager.PlayRandomDoorBellSound();
-        NpcBehaviour npcPrefab = _npcPrefabs.Find(x => x.GetComponent<NpcBehaviour>().GetNpcType() == npcType);
-        var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
-        npc.Initialize(true,spawnPoint, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, displaySlotController, _counterPos, desiredItems, _objectPools[(int)npcType]);
-    }
-
     public void DespawnNpc(NpcBehaviour npc){
         npc.ReturnToPool();
         _npcsCount--;
@@ -105,8 +96,8 @@ public class NpcManager : MonoBehaviour
     }
     public void InitializeNPCScenario()
     {
-        int day = DayManager.DayManagerInstance.GetDay();
-        DayManager.PartOfDay timeOfDay = DayManager.DayManagerInstance.GetPartOfDay();
+        int day = DayManager.Instance.GetDay();
+        DayManager.PartOfDay timeOfDay = DayManager.Instance.GetPartOfDay();
         StartCoroutine(SpawnNPCScenario(day, timeOfDay));
     }
     private IEnumerator SpawnNPCScenario(int day, DayManager.PartOfDay timeOfDay)
