@@ -11,6 +11,11 @@ public class HagglingUIPresenter : MonoBehaviour
     [SerializeField] private Button _sellButton;
     [SerializeField] private Button _acceptOfferButton;
     [SerializeField] private Button _denyOfferButton;
+    [SerializeField] private Sprite _emoteHappy;
+    [SerializeField] private Sprite _emoteSad;
+    [SerializeField] private Sprite _emoteAngry; 
+    [SerializeField] private Sprite _emoteAnnoyed;
+    [SerializeField] private Sprite _emoteThinking;
 
     private void Awake()
     {
@@ -29,6 +34,7 @@ public class HagglingUIPresenter : MonoBehaviour
 
     private void OnHagglingInitiated()
     {
+        _view.SetEmote(_emoteThinking);
         _view.UpdateItemInfo(_model.GetItem());
         _view.UpdateSlider(0, _model.GetBasePrice() * _model.MaxPriceMultiplier);
         _view.UpdateSliderValue(_model.GetBasePrice());
@@ -49,11 +55,15 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.UpdateSliderValue(_model.GetCurrentPrice());
         _view.UpdateProcentField(_model.GetBasePrice(), _model.GetCurrentPrice());
     }
-    private void OnItemSold() =>
-        _view.UpdateResultField("A fair exchange, I’d say.", Color.green);
+    private void OnItemSold()
+    {
+        _view.SetEmote(_emoteHappy);
+        _view.UpdateResultField("A fair exchange, I’d say.");
+    }
     private void OnItemDenied() 
     {
-        _view.UpdateResultField("This is a waste of time. We’re done here.", Color.red);
+        _view.SetEmote(_emoteAngry);
+        _view.UpdateResultField("This is a waste of time. We’re done here.");
         _view.UpdateAttemptsLeftField(_model.GetNrOfAttemptsLeft());
     }
 
@@ -95,15 +105,18 @@ public class HagglingUIPresenter : MonoBehaviour
         float difference = percentageIncreaseDecimal - maxAcceptableMarkup;
         if (difference > maxAcceptableMarkup/2)
         {
-            _view.UpdateResultField("That price is outrageous!", Color.yellow);
+            _view.UpdateResultField("That price is outrageous!");
+            _view.SetEmote(_emoteAngry);
         }
         else if (difference > maxAcceptableMarkup / 3)
         {
-            _view.UpdateResultField("I won’t pay that much.", Color.yellow);
+            _view.UpdateResultField("I won’t pay that much.");
+            _view.SetEmote(_emoteAngry);
         }
         else if (difference > 0)
         {
-            _view.UpdateResultField("It’s slightly over my limit.", Color.yellow);
+            _view.UpdateResultField("It’s slightly over my limit.");
+            _view.SetEmote(_emoteAnnoyed);
         }
 
     }
@@ -112,6 +125,7 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.ToggleHaggleWindow(false);
         _view.ToggleAcceptDenyOfferWindow(true);
         _view.TogglePriceInteraction(false);
-        _view.UpdateResultField("I've lost my patience. This is my last offer. Decide now and move on.", Color.yellow);
+        _view.UpdateResultField("I've lost my patience. This is my last offer. Decide now and move on.");
+        _view.SetEmote(_emoteAnnoyed);
     }
 }

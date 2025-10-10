@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpdateText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private Image _image;
 
-    private void Awake()
+    public void UpdateImage(Sprite emote)
     {
-        _text.gameObject.SetActive(false);
+       _image.sprite = emote;
     }
-
-    public void UpdateTextMesh(string text, Color color)
+    public void UpdateImageAlpha(float value)
     {
-        _text.text = text;
-        _text.color = color;
-    }
-    public void SetActive(bool isActive)
-    {
-        _text.gameObject.SetActive(isActive);
+        Color c = _image.color;
+        c.a = value;
+        _image.color = c;
     }
 
 }
