@@ -24320,6 +24320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DaySummaryUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2183342076739079456, guid: 57cdce44426793d4ca8fefd010ad6df8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6262964293413776249, guid: 57cdce44426793d4ca8fefd010ad6df8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
