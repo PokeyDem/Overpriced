@@ -113,7 +113,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         if(_foldToggle)
         {
             MoveInventoryTowards(-300f);
-            _foldButtonText.text = "¡¡¡";
+            _foldButtonText.text = "ï¿½ï¿½ï¿½";
         }
         else
         {
@@ -133,9 +133,13 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     public void AddItemToDisplaySlot(){ //On AddButton click
         var inventorySlotItem = _selectedInventorySlot.GetItem();
         
-        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() == null){
+        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() == null && _currentDisplayDisplaySlot.IsBought){
             _currentDisplayDisplaySlot.PlaceItem(inventorySlotItem);
             RemoveItemFromInventory();
+        }
+
+        if (!_currentDisplayDisplaySlot.IsBought) {
+            _currentDisplayDisplaySlot.TryToBuy();
         }
         _playerControl.SetInteractable(this);
     }

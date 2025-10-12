@@ -2,9 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
+    [SerializeField] private GameObject priseUI;
+    [SerializeField] private bool isBought;
+    [SerializeField] private int prize;
+    public bool IsBought => isBought;
     private int _displayTypeID;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
@@ -12,6 +17,7 @@ public class DisplaySlotController : MonoBehaviour{
     public bool isOccupied=false;//by npc
     public bool isChosen=false;
     private Vector3 _position;
+    public UnityEvent<String> onTextUpdate;
 
 
     private void Update(){
@@ -20,29 +26,52 @@ public class DisplaySlotController : MonoBehaviour{
     }
 
     private void OnTriggerEnter(Collider other){
-        if (other.CompareTag("Player"))
-            _marker.SetActive(true);
+        if (other.CompareTag("Player")) {
+            if (isBought) {
+                _marker.SetActive(true);
+            }
+            else {
+                priseUI.SetActive(true);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other){
         if (other.CompareTag("Player")){
-            _marker.SetActive(false);
+            if (isBought) {
+                _marker.SetActive(false);
+            }
+            else {
+                priseUI.SetActive(false);
+            }
         }
     }
 
     private void Awake(){
         _marker.SetActive(false);
+        priseUI.SetActive(false);
+        onTextUpdate.Invoke(prize.ToString());
     }
 
     public void EnableMarker(){
-        _marker.SetActive(true);
+        if (isBought) {
+            _marker.SetActive(true);
+        }
+        else {
+            priseUI.SetActive(true);
+        }
     }
 
     public void DisableMarker(){
         _marker.SetActive(false);
+        priseUI.SetActive(false);
     }
 
     public void PlaceItem(ItemData item){
+        if (!isBought) {
+            return;
+        }
+
         if (_itemPrefab != null){
             Destroy(_itemPrefab);
         }
@@ -85,5 +114,13 @@ public class DisplaySlotController : MonoBehaviour{
 
     public Vector3 GetPosition(){
         return _position;
+    }
+
+    public void TryToBuy() {
+        MoneyManager moneyManager = MoneyManager.Instance;
+        if (moneyManager.GetCurrentMoney() >= prize) {
+            moneyManager.ReduceMoney(prize);
+            isBought = true;
+        }
     }
 }
