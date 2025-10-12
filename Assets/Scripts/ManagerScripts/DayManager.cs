@@ -21,11 +21,6 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
         partOfDayChange?.Invoke(currentPartOfDay.ToString());
     }
 
-    private void Update(){ //TODO for development purposes
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            NextPartOfTheDay();
-    }
-
     public DayData GetDayData(){
         return new DayData(dayCount, currentPartOfDay);
     }
