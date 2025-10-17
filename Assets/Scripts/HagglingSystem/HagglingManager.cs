@@ -17,6 +17,7 @@ public class HagglingManager : MonoBehaviour, IInteractable
     [SerializeField] private bool _hagglingInProgress = false;
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
+    private IMoodController _moodController;
 
     public UnityEvent HagglingInitiated;
     public UnityEvent HagglingEnded;
@@ -55,8 +56,9 @@ public class HagglingManager : MonoBehaviour, IInteractable
         }
     }
 
-    public void SetNpc(NPCBehaviorTree npcBehaviour){
+    public void SetNpc(NPCBehaviorTree npcBehaviour, IMoodController moodController){
         _npcBehaviour = npcBehaviour;
+        _moodController = moodController;
     }
     public void PriceChange()
     {
@@ -140,16 +142,18 @@ public class HagglingManager : MonoBehaviour, IInteractable
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
         onItemSoldNPCType?.Invoke(_npcBehaviour.GetNpcType());
         _npcBehaviour.DisplayTarget.RemoveItem();
-        StartCoroutine(EndHaggling(true));
+        _moodController.InvokeMoodChange(MoodType.Happy);
+        StartCoroutine(EndHaggling());
     }
 
     public void DenySell(){
         _nrOfAttemptsLeft = 0;
         ItemDenied?.Invoke();
-        StartCoroutine(EndHaggling(false));
+        _moodController.InvokeMoodChange(MoodType.Angry);
+        StartCoroutine(EndHaggling());
     }
 
-    private IEnumerator EndHaggling(bool itemSold){
+    private IEnumerator EndHaggling(){
         UIDisabled?.Invoke();
         yield return new WaitForSeconds(1);
         _npcBehaviour.IsHaggling = false;
