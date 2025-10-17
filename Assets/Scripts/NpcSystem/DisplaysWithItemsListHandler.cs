@@ -41,14 +41,12 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     }
     void Shuffle()
     {
-        int n = _displaySlotsWithItems.Count;
-        while (n > 1)
+        for (int i = _displaySlotsWithItems.Count - 1; i > 0; i--)
         {
-            n--;
-            int random = Random.Range(0, n+1);
-            DisplaySlotController value = _displaySlotsWithItems[random];
-            _displaySlotsWithItems[random] = _displaySlotsWithItems[n];
-            _displaySlotsWithItems[n] = value;
+            int randomIndex = Random.Range(0, i + 1);
+            var temp = _displaySlotsWithItems[i];
+            _displaySlotsWithItems[i] = _displaySlotsWithItems[randomIndex];
+            _displaySlotsWithItems[randomIndex] = temp;
         }
     }
 }
