@@ -47,8 +47,6 @@ public class DecidePurchaseLeaf : Node
     {
         bool isInterested = false;
         int chanceToBuy = 0;
-        Debug.Log(_desiredItems.Exists(i => i.ID == item.ID));
-        Debug.Log(item);
         if (_desiredItems.Exists(i => i.ID == item.ID))
         {
             chanceToBuy = 90;//Math.Max(_minChanceToBuy,60);
@@ -61,7 +59,6 @@ public class DecidePurchaseLeaf : Node
             isInterested = true;
         }
         else isInterested = false;
-        Debug.Log($"{isInterested} {random} {chanceToBuy}");
         return isInterested;
     }
 }

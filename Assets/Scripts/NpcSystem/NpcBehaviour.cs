@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
 
-public class NpcBehaviour : MonoBehaviour{
+public class NpcBehaviour : MonoBehaviour, IEmotable
+{
 
     [SerializeField] private int _tolerance;
     [SerializeField] private float _toleranceDecimal;
@@ -26,12 +27,12 @@ public class NpcBehaviour : MonoBehaviour{
     [SerializeField] private NPCDesiredItemsSO _desiredItemsSO;
     private List<ItemData> _desiredItems;
 
-    private NPCStateMachine _machine;
-
     public event Action Initialized;
     public event Action DecidingStarted;
     public event Action ItemRejected;
     public event Action ItemSelected;
+    public event Action<MoodType> MoodChanged;
+
     [SerializeField] private UpdateText _updateText;
     private NPCEmotePresenter _presenter;
     [SerializeField]private int _minChanceToBuy = 0;
@@ -46,7 +47,6 @@ public class NpcBehaviour : MonoBehaviour{
     }
     private void Update()
     {
-        _machine.Update();
         if (_agent.hasPath)
         {
             FaceTarget(_agent.steeringTarget);
@@ -84,8 +84,6 @@ public class NpcBehaviour : MonoBehaviour{
             StartCoroutine(BrowseDisplays());
         }
         */
-        _machine = new NPCStateMachine(this);
-        _machine.Initialize(new MoveToWindowState());
     }
 
 

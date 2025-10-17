@@ -61,6 +61,7 @@ public class ChooseItemToCheckLeaf : Node
                     }
                     else
                     {
+                        _targetContext.Target = displaySlotController.transform.position;
                         state = NodeState.RESTART;
                         return state;
                     }

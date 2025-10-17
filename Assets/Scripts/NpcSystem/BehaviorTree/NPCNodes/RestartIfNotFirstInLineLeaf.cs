@@ -19,7 +19,6 @@ public class RestartIfNotFirstInLineLeaf : Node
         Vector2 currentPosition=new Vector2(_agent.transform.position.x, _agent.transform.position.z);
         Vector2 targetPosition = new Vector2(_targetPosition.x, _targetPosition.z);
         float distance = Vector2.Distance(currentPosition, targetPosition);
-        Debug.Log(distance);
         if (distance<0.1f)
         {
             state = NodeState.SUCCESS;

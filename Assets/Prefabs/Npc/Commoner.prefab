@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b0abc21d056964ebe00a52d4d0219f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 0}
   _image: {fileID: 6853775456404096315}
 --- !u!1 &8701716767278798441
 GameObject:
@@ -219,6 +218,7 @@ GameObject:
   - component: {fileID: 524587001898824491}
   - component: {fileID: 3183812244519183345}
   - component: {fileID: 5196044724863255334}
+  - component: {fileID: 3549892726462087972}
   m_Layer: 12
   m_Name: Commoner
   m_TagString: NPC
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8701716767278798441}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
   m_Name: 
@@ -339,6 +339,7 @@ MonoBehaviour:
       <Description>k__BackingField: 
     <Prefab>k__BackingField: {fileID: 0}
     <PreviewImage>k__BackingField: {fileID: 0}
+  _displaySlotController: {fileID: 0}
   _isInShop: 0
   _desiredItemsSO: {fileID: 11400000, guid: 22bec05f58ee66a4b92b28e5e703ec1c, type: 2}
   _updateText: {fileID: 6237701578833367800}
@@ -366,6 +367,33 @@ NavMeshAgent:
   m_BaseOffset: 0.99999994
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &3549892726462087972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701716767278798441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1a9ee3722f1c041923ed0364845205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tolerance: 1
+  _toleranceDecimal: 0.2
+  _NPCType: 0
+  _desiredItems: []
+  _itemToBuy:
+    _info:
+      <Name>k__BackingField: 
+      <ItemType>k__BackingField: 0
+      <BasePrice>k__BackingField: 0
+      <Description>k__BackingField: 
+    <Prefab>k__BackingField: {fileID: 0}
+    <PreviewImage>k__BackingField: {fileID: 0}
+  _possibleDisplayChoices: []
+  _isHaggling: 0
+  _updateEmote: {fileID: 6237701578833367800}
 --- !u!1001 &5177396820065994034
 PrefabInstance:
   m_ObjectHideFlags: 0

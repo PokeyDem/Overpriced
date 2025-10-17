@@ -153,6 +153,8 @@ public class HagglingManager : MonoBehaviour, IInteractable
         UIDisabled?.Invoke();
         yield return new WaitForSeconds(1);
         _npcBehaviour.IsHaggling = false;
+        _npcBehaviour.DisplayTarget.isChosen = false;
+        _npcBehaviour.DisplayTarget.isOccupied = false;
         NpcManager.counterTaken[0] = false;
         HagglingEnded?.Invoke();
         _hagglingInProgress = false;
