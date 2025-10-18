@@ -364,7 +364,10 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
             }
         }
         if (_selectedInventorySlot.GetItem() == null) 
-        { 
+        {
+            if (!_currentDisplayDisplaySlot.IsBought) {
+                return $"Buy for {_currentDisplayDisplaySlot.Prize} gold";
+            }
             if(_currentDisplayDisplaySlot.GetItem() != null)
             {
                 return $"Remove {_currentDisplayDisplaySlot.GetItem().Name} from Display";

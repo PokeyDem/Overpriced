@@ -7,9 +7,14 @@ using UnityEngine.Events;
 public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
     [SerializeField] private GameObject priseUI;
+    [SerializeField] private GameObject display;
     [SerializeField] private bool isBought;
     [SerializeField] private int prize;
+    [SerializeField] private float hiddenAlpha = 0.6f;
+    public int Prize => prize;
     public bool IsBought => isBought;
+    private Collider _collider;
+    private Material[] _materials;
     private int _displayTypeID;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
@@ -18,6 +23,7 @@ public class DisplaySlotController : MonoBehaviour{
     public bool isChosen=false;
     private Vector3 _position;
     public UnityEvent<String> onTextUpdate;
+    
 
 
     private void Update(){
@@ -31,7 +37,9 @@ public class DisplaySlotController : MonoBehaviour{
                 _marker.SetActive(true);
             }
             else {
-                priseUI.SetActive(true);
+                if (ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+                    priseUI.SetActive(true);
+                }
             }
         }
     }
@@ -53,12 +61,26 @@ public class DisplaySlotController : MonoBehaviour{
         onTextUpdate.Invoke(prize.ToString());
     }
 
+    private void Start() {
+        if (!isBought) {
+            ShopStateManager.ShopStateManagerInstance.shopWosOpen.AddListener(HideDisplay);
+            ShopStateManager.ShopStateManagerInstance.shopWosClose.AddListener(ShowToBuy); 
+            _materials = display.GetComponent<MeshRenderer>().materials;
+            for (int i=0; i<_materials.Length;i++) {
+                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+            }
+            _collider = GetComponent<Collider>();
+        }
+    }
+
     public void EnableMarker(){
         if (isBought) {
             _marker.SetActive(true);
         }
         else {
-            priseUI.SetActive(true);
+            if (ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+                priseUI.SetActive(true);
+            }
         }
     }
 
@@ -117,10 +139,32 @@ public class DisplaySlotController : MonoBehaviour{
     }
 
     public void TryToBuy() {
+        if (!ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+            return;
+        }
         MoneyManager moneyManager = MoneyManager.Instance;
         if (moneyManager.GetCurrentMoney() >= prize) {
             moneyManager.ReduceMoney(prize);
             isBought = true;
+            for (int i=0; i<_materials.Length;i++) {
+                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,1);
+            }
+            ShopStateManager.ShopStateManagerInstance.shopWosOpen.RemoveListener(HideDisplay);
+            ShopStateManager.ShopStateManagerInstance.shopWosClose.RemoveListener(ShowToBuy);
+            _collider.enabled = true;
         }
+    }
+
+    private void HideDisplay() {
+        display.SetActive(false);
+        _collider.enabled = false;
+    }
+
+    private void ShowToBuy() {
+        display.SetActive(true);
+        for (int i=0; i<_materials.Length;i++) {
+            _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+        }
+        _collider.enabled = true;
     }
 }

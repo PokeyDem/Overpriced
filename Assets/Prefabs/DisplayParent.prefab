@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3006876253824462425
 Transform:
   m_ObjectHideFlags: 0
@@ -431,7 +431,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -504,8 +504,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _marker: {fileID: 4186020680990089367}
   priseUI: {fileID: 8750970233383047998}
+  display: {fileID: 4242119969669096929}
   isBought: 0
   prize: 10
+  hiddenAlpha: 0.6
   isOccupied: 0
   isChosen: 0
   onTextUpdate:
@@ -673,6 +675,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 25b687d8e7496d04cb18765ffe99b6c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c16adfd86fb5d74092a0fb06c8ae1ac, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 25b687d8e7496d04cb18765ffe99b6c4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 089ca0b62020b4d41a41f6e22c5390fd, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 25b687d8e7496d04cb18765ffe99b6c4, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7633b9e5b12db2443b7fc567613f551b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 25b687d8e7496d04cb18765ffe99b6c4, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6dba0b9b1e42ce4ab3a9f8613205017, type: 2}
     - target: {fileID: 919132149155446097, guid: 25b687d8e7496d04cb18765ffe99b6c4, type: 3}
       propertyPath: m_Name
       value: SingleDisplay_new
