@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class ReadyCheckerBehaviour : MonoBehaviour{
     [SerializeField] private string _tag;
     [SerializeField] private HagglingManager _hagglingManager;
-    //[SerializeField] private TextMeshPro _text;
     [SerializeField] private GameObject _playerTrigger;
     public UnityEvent readyToHaggle;
 
@@ -15,10 +14,9 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
       }
 
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
-            _hagglingManager.SetNpc(other.GetComponent<NPCBehaviorTree>(), other.GetComponent<NPCBehaviorTree>()); //changed order of methods
-            _hagglingManager.SetNpcReadiness(true);
+            NPCBehaviorTree npc = other.GetComponent<NPCBehaviorTree>();
+            _hagglingManager.SetNpc(npc, npc, npc.ToleranceDecimal, npc.GetNpcType(), npc, npc.GetLinePositionManager()); //changed order of methods
             _playerTrigger.SetActive(true);
-            //_text.gameObject.SetActive(true);
             readyToHaggle?.Invoke();
       }
    }
@@ -29,7 +27,6 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
             _hagglingManager.SetNpcReadiness(false);
             _playerTrigger.SetActive(false);
-            //_text.gameObject.SetActive(false);
       }
    }
 }

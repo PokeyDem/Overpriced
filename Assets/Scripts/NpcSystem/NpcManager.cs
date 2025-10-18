@@ -5,25 +5,25 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
-public class NpcManager : SingletonWithDestroy<NpcManager>
+public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
 {
-    public static List<bool> counterTaken = new List<bool>();
 
     #region Serialized Fields
-    [SerializeField] List<NPCBehaviorTree> _npcPrefabs;
+    [SerializeField] private List<NPCBehaviorTree> _npcPrefabs;
     [SerializeField] private List<NPCDesiredItems> _npcDesiredItems;
-    [SerializeField] Transform _spawnPoint;
-    [SerializeField] Transform _despawnPointPos;
-    [SerializeField] Transform _windowPos;
-    [SerializeField] Transform _doorPos;
-    [SerializeField] Transform _shopSpawnPoint;
+    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Transform _despawnPointPos;
+    [SerializeField] private Transform _windowPos;
+    [SerializeField] private Transform _doorPos;
+    [SerializeField] private Transform _shopSpawnPoint;
     [SerializeField] private Transform _despawnInShop;
     [SerializeField] private List<Transform> _counterPos;
-    [SerializeField] private bool debugSpawn;
     [SerializeField] private List<DailyNPCSpawns> _dailyNpcSpawns;
     #endregion
 
     private int _npcsCount;
+    private List<bool> _positionsInLineOccupancy = new List<bool>();
+
 
     #region Object Pooling Variables
     private List<IObjectPool<NPCBehaviorTree>> _objectPools;
@@ -38,7 +38,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>
         {
             for(int i=0; i< _counterPos.Count; i++)
             {
-                counterTaken.Add(false);
+                _positionsInLineOccupancy.Add(false);
             }
         }
         _objectPools=new List<IObjectPool<NPCBehaviorTree>>();
@@ -48,12 +48,6 @@ public class NpcManager : SingletonWithDestroy<NpcManager>
                             OnDestroyPooledObject, true, _DefaultCapacity, _MaxSize));
         }
     }
-
-    private void Update(){
-        if (Input.GetKeyDown(KeyCode.Space) && debugSpawn){
-            SpawnNpc();
-        }
-    }
     #region Methods
     public void InitializeNPCScenario()//used in ShopStateManager event
     {
@@ -61,24 +55,11 @@ public class NpcManager : SingletonWithDestroy<NpcManager>
         DayManager.PartOfDay timeOfDay = DayManager.Instance.GetPartOfDay();
         StartCoroutine(SpawnNPCScenario(day, timeOfDay));
     }
-    private void SpawnNpc(){
-        if (ShopStateManager.ShopStateManagerInstance.ShopIsClose() || _npcsCount > 0)
-        {
-            return;
-        }
-        NPCBehaviorTree npcPrefab = _npcPrefabs[0];
-
-        var npc=_objectPools[(int)npcPrefab.GetNpcType()].Get();
-        var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
-        npc.transform.position = _spawnPoint.position;
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos.position, _despawnInShop.position, _windowPos.position, _doorPos.position, _shopSpawnPoint.position, _counterPos.Select(t => t.position).ToList(), desiredItems, _objectPools[0] );
-        _npcsCount++;
-    }
     private void SpawnNpc(NPCBehaviorTree npcPrefab)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
         var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos.position, _despawnInShop.position, _windowPos.position, _doorPos.position, _shopSpawnPoint.position, _counterPos.Select(t => t.position).ToList(), desiredItems, _objectPools[(int)npc.GetNpcType()]);
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos.position, _despawnInShop.position, _windowPos.position, _doorPos.position, _shopSpawnPoint.position, _counterPos.Select(t => t.position).ToList(), desiredItems, this, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
     private IEnumerator SpawnNPCScenario(int day, DayManager.PartOfDay timeOfDay)
@@ -102,6 +83,15 @@ public class NpcManager : SingletonWithDestroy<NpcManager>
         }
         yield return new WaitUntil(() => _npcsCount == 0);
         ShopStateManager.ShopStateManagerInstance.CloseShop();
+    }
+    public bool GetPositionInLineOccupancy(int i)
+    {
+        return _positionsInLineOccupancy[i];
+    }
+
+    public void SetPositionInLineOccupancy(int i, bool isOccupied)
+    {
+        _positionsInLineOccupancy[i] = isOccupied;
     }
     #endregion
     #region Object Pooling Methods

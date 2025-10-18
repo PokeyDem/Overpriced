@@ -6,8 +6,12 @@ using UnityEngine.AI;
 using UnityEngine.Pool;
 public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodController, IDespawnable, IHasDisplayChoices, IHasDisplayTarget, IHaggler
 {
+    #region Serialized Fields
     [SerializeField] private float _toleranceDecimal;
     [SerializeField] private NPCType _NPCType;
+    #endregion
+
+    #region Private Variables
     private NavMeshAgent _agent;
     private Vector3 _despawnPointPos;
     private Vector3 _windowPos;
@@ -21,6 +25,9 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     private List<DisplaySlotController> _possibleDisplayChoices;
     private IObjectPool<NPCBehaviorTree> _pool;
     private bool _isHaggling;
+    #endregion
+
+    ILinePositionManager _linePositionManager;
 
     #region Properties
     public float ToleranceDecimal => _toleranceDecimal;
@@ -35,7 +42,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     public event Action<MoodType> MoodChanged;
     #endregion
 
-    #region 
+    #region UI stuff
     [SerializeField] private UpdateEmote _updateEmote;
     private NPCEmotePresenter _presenter;
     #endregion
@@ -60,7 +67,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         base.Update();
     }
 
-    public void Initialize(bool isInShop, Vector3 spawnPoint, Vector3 despawnPointPos, Vector3 despawnInShop, Vector3 windowPos, Vector3 doorPos, Vector3 shopSpawnPoint, List<Vector3> counterPos, List<ItemData> desiredItems, IObjectPool<NPCBehaviorTree> pool)
+    public void Initialize(bool isInShop, Vector3 spawnPoint, Vector3 despawnPointPos, Vector3 despawnInShop, Vector3 windowPos, Vector3 doorPos, Vector3 shopSpawnPoint, List<Vector3> counterPos, List<ItemData> desiredItems, ILinePositionManager linePositionManager, IObjectPool<NPCBehaviorTree> pool)
     {
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
@@ -69,6 +76,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
         _desiredItems = desiredItems;
+        _linePositionManager = linePositionManager;
         _pool = pool;
 
         _agent = GetComponent<NavMeshAgent>();
@@ -112,7 +120,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                                     new LoopSequence(new List<Node>
                                     {
                                         new WaitLeaf(0.1f),
-                                        new ChooseLinePositionLeaf(_counterPos,this),
+                                        new ChooseLinePositionLeaf(_counterPos, _linePositionManager,this),
                                         new WalkToTargetLeaf(this, _agent),
                                         new SetTargetLeaf(this,_counterPos[0]),
                                         new RestartIfNotFirstInLineLeaf(_agent, _counterPos[0])
@@ -197,4 +205,10 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     }
     #endregion
 
+    #region getters
+    public ILinePositionManager GetLinePositionManager()
+    {
+        return _linePositionManager;
+    }
+    #endregion
 }

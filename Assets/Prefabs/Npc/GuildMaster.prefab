@@ -214,7 +214,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7566539438369038167}
   - component: {fileID: 524587001898824491}
-  - component: {fileID: 5487315236244063943}
   - component: {fileID: 5196044724863255334}
   - component: {fileID: -5813645380820513688}
   m_Layer: 12
@@ -264,35 +263,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5487315236244063943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701716767278798441}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tolerance: 3
-  _toleranceDecimal: 0.4
-  _NPCType: 3
-  _itemToBuy:
-    _info:
-      <Name>k__BackingField: 
-      <ItemType>k__BackingField: 0
-      <BasePrice>k__BackingField: 0
-      <Description>k__BackingField: 
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-  _displaySlotController: {fileID: 0}
-  _isInShop: 0
-  _desiredItemsSO: {fileID: 11400000, guid: 3641346bb5d276848a17694654c13b1c, type: 2}
-  _updateText: {fileID: 6717595539465875463}
-  _minChanceToBuy: 0
-  _displaySlotsWithItems: []
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0

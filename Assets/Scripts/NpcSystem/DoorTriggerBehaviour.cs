@@ -8,7 +8,7 @@ public class DoorTriggerBeahviour : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("NPC")){
-            NpcBehaviour npcBehaviour = other.gameObject.GetComponent<NpcBehaviour>();
+            //NpcBehaviour npcBehaviour = other.gameObject.GetComponent<NpcBehaviour>();
             //npcBehaviour.ReturnToPool();
             //_npcManager.SpawnNpcInsideShop(_doorSpawnPoint.position, npcBehaviour.GetDisplaySlotController(), npcBehaviour.GetNpcType());
             //npcBehaviour.WarpNPC(_doorSpawnPoint.position);
