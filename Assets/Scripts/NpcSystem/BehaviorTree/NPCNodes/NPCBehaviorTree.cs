@@ -161,6 +161,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     #region methods
     public void Despawn()
     {
+        Reset();
         NpcManager.Instance.DespawnNpc(this);
     }
 
