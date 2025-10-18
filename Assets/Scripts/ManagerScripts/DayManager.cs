@@ -46,18 +46,9 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     }
     
     public void NextPartOfTheDay() {
-        // if (currentPartOfDay != PartOfDay.Noon) {
-        //     currentPartOfDay++;
-        // }else {
-        //     currentPartOfDay = PartOfDay.Morning;
-        //     dayCount++;
-        //     dayChange.Invoke(dayCount);
-        // }
-
         if (currentPartOfDay != PartOfDay.Evening)
             currentPartOfDay++;
         else if (currentPartOfDay == PartOfDay.Evening){
-            currentPartOfDay = PartOfDay.Morning;
             onEndOfDay?.Invoke();
             return;
             
@@ -67,6 +58,7 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     }
 
     public void EndDay() {
+        currentPartOfDay = PartOfDay.Morning;
         dayCount++;
         dayChange.Invoke(dayCount);
         partOfDayChange.Invoke(currentPartOfDay.ToString());

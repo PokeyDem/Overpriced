@@ -2,9 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private GameObject _marker;
+    [SerializeField] private GameObject priseUI;
+    [SerializeField] private GameObject display;
+    [SerializeField] private bool isBought;
+    [SerializeField] private int prize;
+    [SerializeField] private float hiddenAlpha = 0.6f;
+    public int Prize => prize;
+    public bool IsBought => isBought;
+    private Collider _collider;
+    private Material[] _materials;
     private int _displayTypeID;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
@@ -12,6 +22,8 @@ public class DisplaySlotController : MonoBehaviour{
     public bool isOccupied=false;//by npc
     public bool isChosen=false;
     private Vector3 _position;
+    public UnityEvent<String> onTextUpdate;
+    
 
 
     private void Update(){
@@ -20,29 +32,68 @@ public class DisplaySlotController : MonoBehaviour{
     }
 
     private void OnTriggerEnter(Collider other){
-        if (other.CompareTag("Player"))
-            _marker.SetActive(true);
+        if (other.CompareTag("Player")) {
+            if (isBought) {
+                _marker.SetActive(true);
+            }
+            else {
+                if (ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+                    priseUI.SetActive(true);
+                }
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other){
         if (other.CompareTag("Player")){
-            _marker.SetActive(false);
+            if (isBought) {
+                _marker.SetActive(false);
+            }
+            else {
+                priseUI.SetActive(false);
+            }
         }
     }
 
     private void Awake(){
         _marker.SetActive(false);
+        priseUI.SetActive(false);
+        onTextUpdate.Invoke(prize.ToString());
+    }
+
+    private void Start() {
+        if (!isBought) {
+            ShopStateManager.ShopStateManagerInstance.shopWosOpen.AddListener(HideDisplay);
+            ShopStateManager.ShopStateManagerInstance.shopWosClose.AddListener(ShowToBuy); 
+            _materials = display.GetComponent<MeshRenderer>().materials;
+            for (int i=0; i<_materials.Length;i++) {
+                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+            }
+            _collider = GetComponent<Collider>();
+        }
     }
 
     public void EnableMarker(){
-        _marker.SetActive(true);
+        if (isBought) {
+            _marker.SetActive(true);
+        }
+        else {
+            if (ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+                priseUI.SetActive(true);
+            }
+        }
     }
 
     public void DisableMarker(){
         _marker.SetActive(false);
+        priseUI.SetActive(false);
     }
 
     public void PlaceItem(ItemData item){
+        if (!isBought) {
+            return;
+        }
+
         if (_itemPrefab != null){
             Destroy(_itemPrefab);
         }
@@ -85,5 +136,35 @@ public class DisplaySlotController : MonoBehaviour{
 
     public Vector3 GetPosition(){
         return _position;
+    }
+
+    public void TryToBuy() {
+        if (!ShopStateManager.ShopStateManagerInstance.ShopIsClose()) {
+            return;
+        }
+        MoneyManager moneyManager = MoneyManager.Instance;
+        if (moneyManager.GetCurrentMoney() >= prize) {
+            moneyManager.ReduceMoney(prize);
+            isBought = true;
+            for (int i=0; i<_materials.Length;i++) {
+                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,1);
+            }
+            ShopStateManager.ShopStateManagerInstance.shopWosOpen.RemoveListener(HideDisplay);
+            ShopStateManager.ShopStateManagerInstance.shopWosClose.RemoveListener(ShowToBuy);
+            _collider.enabled = true;
+        }
+    }
+
+    private void HideDisplay() {
+        display.SetActive(false);
+        _collider.enabled = false;
+    }
+
+    private void ShowToBuy() {
+        display.SetActive(true);
+        for (int i=0; i<_materials.Length;i++) {
+            _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+        }
+        _collider.enabled = true;
     }
 }
