@@ -125,10 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 210470612072105106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b0abc21d056964ebe00a52d4d0219f, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a173573cb61d946bba293e96cd9df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 0}
+  _image: {fileID: 970544291285239303}
 --- !u!1 &4696807556454284177
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,20 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1a9ee3722f1c041923ed0364845205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tolerance: 3
   _toleranceDecimal: 0.4
   _NPCType: 3
-  _desiredItems: []
-  _itemToBuy:
-    _info:
-      <Name>k__BackingField: 
-      <ItemType>k__BackingField: 0
-      <BasePrice>k__BackingField: 0
-      <Description>k__BackingField: 
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-  _possibleDisplayChoices: []
-  _isHaggling: 0
   _updateEmote: {fileID: 6717595539465875463}
 --- !u!1001 &9093578537714101020
 PrefabInstance:
