@@ -33,7 +33,7 @@ public class NpcBehaviour : MonoBehaviour, IEmotable
     public event Action ItemSelected;
     public event Action<MoodType> MoodChanged;
 
-    [SerializeField] private UpdateText _updateText;
+    [SerializeField] private UpdateEmote _updateText;
     private NPCEmotePresenter _presenter;
     [SerializeField]private int _minChanceToBuy = 0;
 

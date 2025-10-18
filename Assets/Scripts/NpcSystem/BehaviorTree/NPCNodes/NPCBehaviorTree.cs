@@ -4,66 +4,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
-public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodController, IDespawnable, IHasDisplayChoices, IHasDisplayTarget, IHasItemToBuy, IHaggler
+public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodController, IDespawnable, IHasDisplayChoices, IHasDisplayTarget, IHaggler
 {
-    [SerializeField] private int _tolerance;
     [SerializeField] private float _toleranceDecimal;
     [SerializeField] private NPCType _NPCType;
     private NavMeshAgent _agent;
-    private Transform _despawnPointPos;
-    private Transform _windowPos;
-    private Transform _doorPos;
-    private Transform _despawnInShop;
-    private Transform _shopSpawnPoint;
-    [SerializeField] private List<ItemData> _desiredItems;
+    private Vector3 _despawnPointPos;
+    private Vector3 _windowPos;
+    private Vector3 _doorPos;
+    private Vector3 _despawnInShop;
+    private Vector3 _shopSpawnPoint;
     private List<Vector3> _counterPos;
     private Vector3 _target;
+    private List<ItemData> _desiredItems;
     private DisplaySlotController _displayTarget;
-    [SerializeField] private ItemData _itemToBuy;
-    [SerializeField] private List<DisplaySlotController> _possibleDisplayChoices;
-    private DisplaySlotController _displaySlotController;
-    private Dictionary<string, Vector3> _locations;
-    [SerializeField] private bool _isHaggling;
+    private List<DisplaySlotController> _possibleDisplayChoices;
+    private IObjectPool<NPCBehaviorTree> _pool;
+    private bool _isHaggling;
 
+    #region Properties
     public float ToleranceDecimal => _toleranceDecimal;
-    public NavMeshAgent Agent => _agent;
-    public Transform DespawnPointPos => _despawnPointPos;
-
-    public Transform WindowPos => _windowPos;
-
-    public Transform DoorPos => _doorPos;
-
-    public Transform DespawnInShop => _despawnInShop;
-
-    public Transform ShopSpawnPoint => _shopSpawnPoint;
-
     public List<ItemData> DesiredItems => _desiredItems;
-
     public Vector3 Target { get => _target; set => _target=value; }
     public DisplaySlotController DisplayTarget { get => _displayTarget; set => _displayTarget = value; }
-
     public List<DisplaySlotController> PossibleDisplayChoices { get => _possibleDisplayChoices; set => _possibleDisplayChoices = value; }
-
-    public DisplaySlotController DisplaySlotController { get => _displaySlotController; set => _displaySlotController = value; }
-    public ItemData ItemToBuy { get => _itemToBuy; set => _itemToBuy = value; }
-
-    public Dictionary<string, Vector3> Locations => _locations;
-
-    public List<Vector3> CounterPos => _counterPos;
-
     public bool IsHaggling { get => _isHaggling; set => _isHaggling = value; }
+    #endregion
 
-    public event Action Initialized;
-    public event Action DecidingStarted;
-    public event Action ItemRejected;
-    public event Action ItemSelected;
-
+    #region events
     public event Action<MoodType> MoodChanged;
+    #endregion
 
-    [SerializeField] private UpdateText _updateEmote;
+    #region 
+    [SerializeField] private UpdateEmote _updateEmote;
     private NPCEmotePresenter _presenter;
+    #endregion
 
-    private IObjectPool<NPCBehaviorTree> _pool;
 
     private void Awake()
     {
@@ -84,13 +60,12 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         base.Update();
     }
 
-    public void Initialize(bool isInShop, Vector3 spawnPoint, Transform despawnPointPos, Transform despawnInShop, Transform windowPos, Transform doorPos, Transform shopSpawnPoint, DisplaySlotController displaySlotController, List<Vector3> counterPos, List<ItemData> desiredItems, IObjectPool<NPCBehaviorTree> pool)
+    public void Initialize(bool isInShop, Vector3 spawnPoint, Vector3 despawnPointPos, Vector3 despawnInShop, Vector3 windowPos, Vector3 doorPos, Vector3 shopSpawnPoint, List<Vector3> counterPos, List<ItemData> desiredItems, IObjectPool<NPCBehaviorTree> pool)
     {
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
         _doorPos = doorPos;
         _shopSpawnPoint = shopSpawnPoint;
-        _displaySlotController = displaySlotController;
         _counterPos = counterPos;
         _despawnInShop = despawnInShop;
         _desiredItems = desiredItems;
@@ -100,22 +75,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         float random = UnityEngine.Random.Range(100, 250);
         _agent.speed = random / 100;
         _agent.Warp(spawnPoint);
-        //Initialized?.Invoke();
         MoodChanged?.Invoke(MoodType.None);
-    }
-    public void SetTarget(Vector3 target)
-    {
-        _target = target;
-    }
-    void FaceTarget(Vector3 target)
-    {
-        Vector3 direction = (target - transform.position).normalized;
-        direction.y = 0f;
-        if (direction.sqrMagnitude > 0.0001f)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
-        }
     }
     protected override Node SetupTree()
     {
@@ -124,8 +84,8 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
             new Selector(new List<Node> {
                 new Sequence(new List<Node>
                 {
-                    new SetTargetLeaf(this,_windowPos.position+GeneratePositionDeviation(-100,100,-10,60)),
-                    new WalkToTargetLeaf(this,Agent),
+                    new SetTargetLeaf(this,_windowPos+GeneratePositionDeviation(-100,100,-10,60)),
+                    new WalkToTargetLeaf(this,_agent),
                     new SetTargetLeaf(this,Target+new Vector3(0,0,-1)),
                     new WaitLeaf(GenerateRandomTime(200,500), this),
                     new Selector(new List<Node>
@@ -133,10 +93,10 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                         new Sequence(new List<Node>
                         {
                             new CheckIfShopHasItemsLeaf(),
-                            new SetTargetLeaf(this,_doorPos.position),
-                            new WalkToTargetLeaf(this, Agent),
-                            new SetTargetLeaf(this, _shopSpawnPoint.position),
-                            new WarpNode(this, Agent),
+                            new SetTargetLeaf(this,_doorPos),
+                            new WalkToTargetLeaf(this, _agent),
+                            new SetTargetLeaf(this, _shopSpawnPoint),
+                            new WarpNode(this, _agent),
                             new GeneratePossibleDisplayChoicesLeaf(this),
                             new Selector(new List<Node>
                             {
@@ -147,7 +107,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                                         new ChooseItemToCheckLeaf(this,this,this, this),
                                         new WalkToTargetLeaf(this, _agent),
                                         new WaitLeaf(GenerateRandomTime(300,600), this),
-                                        new DecidePurchaseLeaf(this, _desiredItems,this, this),
+                                        new DecidePurchaseLeaf(this, _desiredItems, this),
                                     }),
                                     new LoopSequence(new List<Node>
                                     {
@@ -161,18 +121,17 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                                     new StartHagglingLeaf(this),
                                     new WaitUntilHagglingEndLeaf(this),
                                     new ReturnStatusLeaf(NodeState.FAILURE),
-
                                 }),
                                 new Sequence(new List<Node>
                                 {
-                                    new SetTargetLeaf(this,_despawnInShop.position),
+                                    new SetTargetLeaf(this,_despawnInShop),
                                     new WalkToTargetLeaf(this, _agent),
                                     new DespawnLeaf(this),
                                 })
                             }),
                         }),
                         new Sequence(new List<Node> {
-                            new SetTargetLeaf(this,_despawnPointPos.position),
+                            new SetTargetLeaf(this,_despawnPointPos),
                             new WalkToTargetLeaf(this, _agent),
                             new DespawnLeaf(this),
                         }),
@@ -185,23 +144,6 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         return root;
     }
 
-
-    public NPCType GetNpcType()
-    {
-        return _NPCType;
-    }
-
-    public void ReturnToPool()
-    {
-        if (_pool != null)
-        {
-            _pool.Release(this);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     #region methods for Nodes
     private Vector3 GeneratePositionDeviation(float minX, float maxX, float minZ, float maxZ)
@@ -225,6 +167,32 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     public void InvokeMoodChange(MoodType moodType)
     {
         MoodChanged?.Invoke(moodType);
+    }
+    public NPCType GetNpcType()
+    {
+        return _NPCType;
+    }
+
+    public void ReturnToPool()
+    {
+        if (_pool != null)
+        {
+            _pool.Release(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    void FaceTarget(Vector3 target)
+    {
+        Vector3 direction = (target - transform.position).normalized;
+        direction.y = 0f;
+        if (direction.sqrMagnitude > 0.0001f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3);
+        }
     }
     #endregion
 

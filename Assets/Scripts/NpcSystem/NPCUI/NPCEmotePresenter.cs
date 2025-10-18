@@ -5,13 +5,13 @@ using UnityEngine;
 public class NPCEmotePresenter
 {
     private IEmotable _context;
-    private UpdateText _updateText;
+    private UpdateEmote _updateText;
     private Sprite _emoteHappy;
     private Sprite _emoteSad;
     private Sprite _emoteThinking;
     private Sprite _emoteAngry;
 
-    public NPCEmotePresenter(IEmotable context, UpdateText updateText)
+    public NPCEmotePresenter(IEmotable context, UpdateEmote updateText)
     {
         _context = context;
         _updateText = updateText;
