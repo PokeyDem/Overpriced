@@ -10,13 +10,14 @@ public class HagglingManager : MonoBehaviour, IInteractable
 {
     [SerializeField] private bool _isPlayerReady;
     [SerializeField] private bool _isNpcReady;
-    private NpcBehaviour _npcBehaviour;
+    private NPCBehaviorTree _npcBehaviour;
     private int _currentPrice;
     private int _basePrice;
     [SerializeField] private int _nrOfAttemptsLeft=3;
     [SerializeField] private bool _hagglingInProgress = false;
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
+    private IMoodController _moodController;
 
     public UnityEvent HagglingInitiated;
     public UnityEvent HagglingEnded;
@@ -55,8 +56,9 @@ public class HagglingManager : MonoBehaviour, IInteractable
         }
     }
 
-    public void SetNpc(NpcBehaviour npcBehaviour){
+    public void SetNpc(NPCBehaviorTree npcBehaviour, IMoodController moodController){
         _npcBehaviour = npcBehaviour;
+        _moodController = moodController;
     }
     public void PriceChange()
     {
@@ -77,18 +79,18 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
 
     public void StartHaggling(){
-        if(_npcBehaviour==null || _npcBehaviour.GetDisplaySlotController().GetItem()==null)
+        if(_npcBehaviour==null || _npcBehaviour.DisplayTarget.GetItem()==null)
         {
-            _npcBehaviour.GoToExitWithoutItem();
+            _npcBehaviour.IsHaggling=false;
             return;
         }
         _hagglingInProgress = true;
         _nrOfAttemptsLeft = 3;
-        _basePrice = _npcBehaviour.GetItemToBuy().FinalPrice;
+        _basePrice = _npcBehaviour.DisplayTarget.GetItem().FinalPrice;
         _currentPrice = _basePrice;
         _npcOffer = _basePrice;
 
-        _toleranceDecimal = _npcBehaviour.GetToleranceDecimal();
+        _toleranceDecimal = _npcBehaviour.ToleranceDecimal;
         _randomDeviation = Random.Range(350, 480);
         _randomDeviation = _randomDeviation / 100;
         _maxThreshold = (int)(_basePrice + _basePrice * _toleranceDecimal * _randomDeviation);
@@ -139,20 +141,25 @@ public class HagglingManager : MonoBehaviour, IInteractable
         ItemSold?.Invoke();
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
         onItemSoldNPCType?.Invoke(_npcBehaviour.GetNpcType());
-        _npcBehaviour.GetDisplaySlotController().RemoveItem();
-        StartCoroutine(EndHaggling(true));
+        _npcBehaviour.DisplayTarget.RemoveItem();
+        _moodController.InvokeMoodChange(MoodType.Happy);
+        StartCoroutine(EndHaggling());
     }
 
     public void DenySell(){
         _nrOfAttemptsLeft = 0;
         ItemDenied?.Invoke();
-        StartCoroutine(EndHaggling(false));
+        _moodController.InvokeMoodChange(MoodType.Angry);
+        StartCoroutine(EndHaggling());
     }
 
-    private IEnumerator EndHaggling(bool itemSold){
+    private IEnumerator EndHaggling(){
         UIDisabled?.Invoke();
         yield return new WaitForSeconds(1);
-        _npcBehaviour.GoToExit(itemSold);
+        _npcBehaviour.IsHaggling = false;
+        _npcBehaviour.DisplayTarget.isChosen = false;
+        _npcBehaviour.DisplayTarget.isOccupied = false;
+        NpcManager.counterTaken[0] = false;
         HagglingEnded?.Invoke();
         _hagglingInProgress = false;
         _playerControl.enabled = true;
@@ -180,13 +187,13 @@ public class HagglingManager : MonoBehaviour, IInteractable
     }
     public ItemData GetItem()
     {
-        return _npcBehaviour.GetItemToBuy();
+        return _npcBehaviour.DisplayTarget.GetItem();
     }
     public void SetCurrentPrice(int price)
     {
         _currentPrice = price;
     }
-    public NpcBehaviour GetNpc()
+    public NPCBehaviorTree GetNpc()
     {
         return _npcBehaviour;
     }

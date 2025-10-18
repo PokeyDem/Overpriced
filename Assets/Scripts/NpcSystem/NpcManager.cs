@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
-public class NpcManager : MonoBehaviour
+public class NpcManager : SingletonWithDestroy<NpcManager>
 {
-    [SerializeField] List<NpcBehaviour> _npcPrefabs;
+    [SerializeField] List<NPCBehaviorTree> _npcPrefabs;
     [SerializeField] private List<NPCDesiredItems> _npcDesiredItems;
     [SerializeField] private int _number;
     [SerializeField] ItemsDatabaseSO _itemsDatabase;
@@ -15,6 +17,7 @@ public class NpcManager : MonoBehaviour
     [SerializeField] Transform _despawnPointPos;
     [SerializeField] Transform _windowPos;
     [SerializeField] Transform _doorPos;
+    [SerializeField] Transform _shopSpawnPoint;
     [SerializeField] private Transform _despawnInShop;
     [SerializeField] private List<Transform> _counterPos;
     public static List<bool> counterTaken = new List<bool>();  
@@ -25,12 +28,13 @@ public class NpcManager : MonoBehaviour
     private int _npcsCount;
     private bool _spawnCoroutineChecker;
 
-    private List<IObjectPool<NpcBehaviour>> _objectPools;
+    private List<IObjectPool<NPCBehaviorTree>> _objectPools;
     [SerializeField] private int _DefaultCapacity = 20;
     [SerializeField] private int _MaxSize = 100;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         if (_counterPos.Count!=0)
         {
             for(int i=0; i< _counterPos.Count; i++)
@@ -38,13 +42,12 @@ public class NpcManager : MonoBehaviour
                 counterTaken.Add(false);
             }
         }
-        _objectPools=new List<IObjectPool<NpcBehaviour>>();
-        foreach(NpcBehaviour prefab in _npcPrefabs)
+        _objectPools=new List<IObjectPool<NPCBehaviorTree>>();
+        foreach(NPCBehaviorTree prefab in _npcPrefabs)
         {
-            _objectPools.Add(new ObjectPool<NpcBehaviour>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
+            _objectPools.Add(new ObjectPool<NPCBehaviorTree>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
                             OnDestroyPooledObject, true, _DefaultCapacity, _MaxSize));
         }
-
     }
 
     private void Update(){
@@ -58,23 +61,23 @@ public class NpcManager : MonoBehaviour
         {
             return;
         }
-        NpcBehaviour npcPrefab = _npcPrefabs[3];
+        NPCBehaviorTree npcPrefab = _npcPrefabs[3];
 
         var npc=_objectPools[(int)npcPrefab.GetNpcType()].Get();
         var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
         npc.transform.position = _spawnPoint.position;
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, desiredItems, _objectPools[3] );
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, _shopSpawnPoint, null, _counterPos.Select(t => t.position).ToList(), desiredItems, _objectPools[3] );
         _npcsCount++;
     }
-    private void SpawnNpc(NpcBehaviour npcPrefab)
+    private void SpawnNpc(NPCBehaviorTree npcPrefab)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
         var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, null, _counterPos, desiredItems, _objectPools[(int)npc.GetNpcType()]);
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos, _despawnInShop, _windowPos, _doorPos, _shopSpawnPoint, null, _counterPos.Select(t => t.position).ToList(), desiredItems, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
 
-    public void DespawnNpc(NpcBehaviour npc){
+    public void DespawnNpc(NPCBehaviorTree npc){
         npc.ReturnToPool();
         _npcsCount--;
     }
@@ -121,23 +124,23 @@ public class NpcManager : MonoBehaviour
         yield return new WaitUntil(() => _npcsCount == 0);
         ShopStateManager.ShopStateManagerInstance.CloseShop();
     }
-    public NpcBehaviour CreateNpc(NpcBehaviour prefab)
+    public NPCBehaviorTree CreateNpc(NPCBehaviorTree prefab)
     {
-        NpcBehaviour npcBehaviour = Instantiate(prefab,_spawnPoint.position,Quaternion.identity);
+        NPCBehaviorTree npcBehaviour = Instantiate(prefab,_spawnPoint.position,Quaternion.identity);
 
         return npcBehaviour;
     }
-    private void OnReleaseToPool(NpcBehaviour pooledObject)
+    private void OnReleaseToPool(NPCBehaviorTree pooledObject)
     {
         pooledObject.gameObject.SetActive(false);
     }
 
-    private void OnGetFromPool(NpcBehaviour pooledObject)
+    private void OnGetFromPool(NPCBehaviorTree pooledObject)
     {
         pooledObject.gameObject.SetActive(true);
     }
 
-    private void OnDestroyPooledObject(NpcBehaviour pooledObject)
+    private void OnDestroyPooledObject(NPCBehaviorTree pooledObject)
     {
         Destroy(pooledObject.gameObject);
     }
