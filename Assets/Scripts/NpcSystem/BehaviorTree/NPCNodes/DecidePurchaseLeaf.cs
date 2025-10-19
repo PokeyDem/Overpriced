@@ -9,13 +9,11 @@ public class DecidePurchaseLeaf : Node
     IHasDisplayTarget _displayTargetContext;
     List<ItemData> _desiredItems;
     IMoodController _moodController;
-    IHasItemToBuy _itemToBuyContext;
 
-    public DecidePurchaseLeaf(IHasDisplayTarget displayTargetContext, List<ItemData> desiredItems,IHasItemToBuy itemToBuyContext, IMoodController moodController)
+    public DecidePurchaseLeaf(IHasDisplayTarget displayTargetContext, List<ItemData> desiredItems, IMoodController moodController)
     {
         _displayTargetContext = displayTargetContext;
         _desiredItems = desiredItems;
-        _itemToBuyContext = itemToBuyContext;
         _moodController = moodController;
     }
 
@@ -25,8 +23,6 @@ public class DecidePurchaseLeaf : Node
         ItemData item = displayTarget.GetItem();
         if (IsInterestedInBuying(item))
         {
-            //Debug.Log($"Wants {item.Name}");
-            _itemToBuyContext.ItemToBuy = item;
             displayTarget.isOccupied = true;
             displayTarget.isChosen = true;
             _moodController.InvokeMoodChange(MoodType.Happy);
@@ -53,7 +49,6 @@ public class DecidePurchaseLeaf : Node
         }
         else chanceToBuy = 10;
         int random = UnityEngine.Random.Range(0, 100);
-        //Debug.Log($"Chance to buy: {chanceToBuy}, random: {random}");
         if (random < chanceToBuy)
         {
             isInterested = true;

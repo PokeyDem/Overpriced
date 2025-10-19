@@ -200,10 +200,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7850110762013062474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b0abc21d056964ebe00a52d4d0219f, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a173573cb61d946bba293e96cd9df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 0}
+  _image: {fileID: 3658304346418693047}
 --- !u!1 &8701716767278798441
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +216,6 @@ GameObject:
   - component: {fileID: 5187530694760140006}
   - component: {fileID: 5081294809896751061}
   - component: {fileID: 524587001898824491}
-  - component: {fileID: 6811596616763026621}
   - component: {fileID: 5196044724863255334}
   - component: {fileID: 5552109683193879099}
   m_Layer: 12
@@ -316,35 +315,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6811596616763026621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701716767278798441}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b669955e04d5a5d44967c78c742237fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tolerance: 2
-  _toleranceDecimal: 0.3
-  _NPCType: 1
-  _itemToBuy:
-    _info:
-      <Name>k__BackingField: 
-      <ItemType>k__BackingField: 0
-      <BasePrice>k__BackingField: 0
-      <Description>k__BackingField: 
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-  _displaySlotController: {fileID: 0}
-  _isInShop: 0
-  _desiredItemsSO: {fileID: 11400000, guid: 78776df46d2cbe44ba3e1c07089c6859, type: 2}
-  _updateText: {fileID: 7506852189580195177}
-  _minChanceToBuy: 0
-  _displaySlotsWithItems: []
 --- !u!195 &5196044724863255334
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -379,20 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1a9ee3722f1c041923ed0364845205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tolerance: 2
   _toleranceDecimal: 0.3
   _NPCType: 1
-  _desiredItems: []
-  _itemToBuy:
-    _info:
-      <Name>k__BackingField: 
-      <ItemType>k__BackingField: 0
-      <BasePrice>k__BackingField: 0
-      <Description>k__BackingField: 
-    <Prefab>k__BackingField: {fileID: 0}
-    <PreviewImage>k__BackingField: {fileID: 0}
-  _possibleDisplayChoices: []
-  _isHaggling: 0
   _updateEmote: {fileID: 7506852189580195177}
 --- !u!1001 &4444702782922565777
 PrefabInstance:

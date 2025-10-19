@@ -17,6 +17,10 @@ namespace BehaviorTree
                 _root.Evaluate();
             }
         }
+        protected void Reset()
+        {
+            _root = SetupTree();
+        }
         protected abstract Node SetupTree();
     }
 }

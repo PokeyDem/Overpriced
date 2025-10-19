@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpdateText : MonoBehaviour
+public class UpdateEmote : MonoBehaviour
 {
     [SerializeField] private Image _image;
 
