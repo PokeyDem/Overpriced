@@ -14,7 +14,7 @@ public class GeneratePossibleDisplayChoicesLeaf : Node
 
     public override NodeState Evaluate()
     {
-        _context.PossibleDisplayChoices = new List<DisplaySlotController>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
+        _context.PossibleDisplayChoices = new List<DisplayContext>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
         state =NodeState.SUCCESS;
         return state;
     }

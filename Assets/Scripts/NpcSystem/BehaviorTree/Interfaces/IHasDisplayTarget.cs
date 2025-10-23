@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHasDisplayTarget
 {
-    public DisplaySlotController DisplayTarget { get; set; }
+    public DisplayContext DisplayTarget { get; set; }
 }

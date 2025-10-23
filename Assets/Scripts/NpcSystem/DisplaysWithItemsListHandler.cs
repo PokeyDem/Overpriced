@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithItemsListHandler>
 {
-    [SerializeField] private List<DisplaySlotController> _displaySlotsWithItems= new List<DisplaySlotController>();
+    [SerializeField] private List<DisplayContext> _displaySlotsWithItems= new List<DisplayContext>();
 
     public UnityEvent itemPlaced;
 
@@ -14,19 +14,20 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
         base.Awake();
         _displaySlotsWithItems.Clear();
     }
-    public void AddDisplaySlotWithItem(DisplaySlotController displaySlot)
+    public void AddDisplaySlotWithItem(DisplayContext displaySlot)
     {
-        _displaySlotsWithItems.Add(displaySlot);
+        DisplayContext displaySlotContext =displaySlot;
+        _displaySlotsWithItems.Add(displaySlotContext);
         itemPlaced?.Invoke();
         //SwapLastWithRandom();
     }
 
-    public void RemoveDisplaySlotWithItem(DisplaySlotController displaySlot)
+    public void RemoveDisplaySlotWithItem(DisplayContext displaySlot)
     {
         _displaySlotsWithItems.Remove(displaySlot);
     }
 
-    public List<DisplaySlotController> GetDisplaySlotsWithItems()
+    public List<DisplayContext> GetDisplaySlotsWithItems()
     {
         Shuffle();
         return _displaySlotsWithItems;
@@ -35,7 +36,7 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     void SwapLastWithRandom()
     {
         int random = Random.Range(0, _displaySlotsWithItems.Count);
-        DisplaySlotController temp = _displaySlotsWithItems[random];
+        DisplayContext temp = _displaySlotsWithItems[random];
         _displaySlotsWithItems[random] = _displaySlotsWithItems[_displaySlotsWithItems.Count - 1];
         _displaySlotsWithItems[_displaySlotsWithItems.Count - 1] = temp;
     }

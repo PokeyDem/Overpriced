@@ -9,6 +9,7 @@ public class ChooseLinePositionLeaf : Node
     private int _currentPosInLine;
     IHasTarget _actor;
     ILinePositionManager _linePositionManager;
+    private int _targetPosInLine;
 
     public ChooseLinePositionLeaf(List<Vector3> counterPos, ILinePositionManager linePositionManager, IHasTarget actor)
     {
@@ -20,30 +21,29 @@ public class ChooseLinePositionLeaf : Node
 
     public override NodeState Evaluate()
     {
-        for (int i = 0; i < _counterPos.Count; i++)
+        if (_currentPosInLine == -1)
         {
-            if (_linePositionManager.GetPositionInLineOccupancy(i))
+            _targetPosInLine=_counterPos.Count-1;
+            if (!_linePositionManager.GetPositionInLineOccupancy(_counterPos.Count-1))//last
             {
-                if(_currentPosInLine==i)
-                {
-                    _actor.Target = _counterPos[i];
-                    break;
-                } else
-                    continue;
-            }
-            else
-            {
-                if (_currentPosInLine >= 0)
-                {
-                    _linePositionManager.SetPositionInLineOccupancy(_currentPosInLine, false);
-                }
-                _linePositionManager.SetPositionInLineOccupancy(i,true);
-                _currentPosInLine = i;
-                _actor.Target = _counterPos[i];
-                break;
+                _linePositionManager.SetPositionInLineOccupancy(_counterPos.Count - 1, true);
+                _currentPosInLine = _counterPos.Count - 1;
+                _actor.Target = _counterPos[_counterPos.Count - 1];
             }
         }
-        if(_currentPosInLine==-1)
+        else if (_currentPosInLine !=0)
+        {
+            _targetPosInLine = _currentPosInLine - 1;
+            if (!_linePositionManager.GetPositionInLineOccupancy(_currentPosInLine-1))
+            {
+                _linePositionManager.SetPositionInLineOccupancy(_currentPosInLine, false);
+                _currentPosInLine--;
+                _linePositionManager.SetPositionInLineOccupancy(_currentPosInLine, true);
+            }
+            _actor.Target = _counterPos[_currentPosInLine];
+        }
+
+        if (_currentPosInLine==-1)
         {
             state =NodeState.RESTART;
             return state;

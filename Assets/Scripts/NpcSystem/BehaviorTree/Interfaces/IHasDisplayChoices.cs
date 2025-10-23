@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHasDisplayChoices
 {
-    public List<DisplaySlotController> PossibleDisplayChoices { get; set; }
+    public List<DisplayContext> PossibleDisplayChoices { get; set; }
 }

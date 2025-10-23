@@ -1,3 +1,5 @@
+using DependencyInjection;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
-public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
+public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager, IDependencyProvider, INPCReadyToHaggleController
 {
 
     #region Serialized Fields
@@ -22,8 +24,11 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     #endregion
 
     private int _npcsCount;
+
+    [SerializeField]
     private List<bool> _positionsInLineOccupancy = new List<bool>();
 
+    public static event Action<IHaggler, IHasDisplayTarget, float, NPCType, IMoodController> OnNpcReadyToHaggle;
 
     #region Object Pooling Variables
     private List<IObjectPool<NPCBehaviorTree>> _objectPools;
@@ -34,21 +39,22 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     private new void Awake()
     {
         base.Awake();
-        if (_counterPos.Count!=0)
+        if (_counterPos.Count != 0)
         {
-            for(int i=0; i< _counterPos.Count; i++)
+            for (int i = 0; i < _counterPos.Count; i++)
             {
                 _positionsInLineOccupancy.Add(false);
             }
         }
-        _objectPools=new List<IObjectPool<NPCBehaviorTree>>();
-        foreach(NPCBehaviorTree prefab in _npcPrefabs)
+        _objectPools = new List<IObjectPool<NPCBehaviorTree>>();
+        foreach (NPCBehaviorTree prefab in _npcPrefabs)
         {
             _objectPools.Add(new ObjectPool<NPCBehaviorTree>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
                             OnDestroyPooledObject, true, _DefaultCapacity, _MaxSize));
         }
     }
     #region Methods
+
     public void InitializeNPCScenario()//used in ShopStateManager event
     {
         int day = DayManager.Instance.GetDay();
@@ -59,7 +65,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
         var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
-        npc.Initialize(false, _spawnPoint.position, _despawnPointPos.position, _despawnInShop.position, _windowPos.position, _doorPos.position, _shopSpawnPoint.position, _counterPos.Select(t => t.position).ToList(), desiredItems, this, _objectPools[(int)npc.GetNpcType()]);
+        npc.Initialize(false, _spawnPoint.position, _despawnPointPos.position, _despawnInShop.position, _windowPos.position, _doorPos.position, _shopSpawnPoint.position, _counterPos.Select(t => t.position).ToList(), desiredItems, this, this, _objectPools[(int)npc.GetNpcType()]);
         _npcsCount++;
     }
     private IEnumerator SpawnNPCScenario(int day, DayManager.PartOfDay timeOfDay)
@@ -97,7 +103,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     #region Object Pooling Methods
     public NPCBehaviorTree CreateNpc(NPCBehaviorTree prefab)
     {
-        NPCBehaviorTree npcBehaviour = Instantiate(prefab,_spawnPoint.position,Quaternion.identity);
+        NPCBehaviorTree npcBehaviour = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
 
         return npcBehaviour;
     }
@@ -120,5 +126,11 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     {
         Destroy(pooledObject.gameObject);
     }
+
+    public void NotifyNPCReadyToHaggle(IHaggler haggler, IHasDisplayTarget displayTargetActor, float toleranceDecimal, NPCType npcType, IMoodController moodController)
+    {
+        OnNpcReadyToHaggle?.Invoke(haggler, displayTargetActor, toleranceDecimal, npcType, moodController);
+    }
     #endregion
+
 }
