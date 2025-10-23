@@ -14008,7 +14008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df7a075d302e384ebc967486defd7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _displaySlotsWithItems: []
   itemPlaced:
     m_PersistentCalls:
       m_Calls: []
@@ -14213,6 +14212,14 @@ PrefabInstance:
       propertyPath: _model
       value: 
       objectReference: {fileID: 2072193982}
+    - target: {fileID: -1927598453062842994, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
+      propertyPath: _emoteAngry
+      value: 
+      objectReference: {fileID: 21300000, guid: e8829ad1a330bb043a5e3523acfbd963, type: 3}
+    - target: {fileID: -1927598453062842994, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
+      propertyPath: _emoteAngrier
+      value: 
+      objectReference: {fileID: 21300000, guid: ff5581d034979c44cb7f3ef0dbda5ad4, type: 3}
     - target: {fileID: 29470375633142160, guid: ba1a8c1ec6203cd4f990125ff4f27a09, type: 3}
       propertyPath: m_IsActive
       value: 0

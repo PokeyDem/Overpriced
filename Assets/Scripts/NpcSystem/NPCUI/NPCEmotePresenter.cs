@@ -10,6 +10,7 @@ public class NPCEmotePresenter
     private Sprite _emoteSad;
     private Sprite _emoteThinking;
     private Sprite _emoteAngry;
+    private Sprite _emoteAngrier;
 
     public NPCEmotePresenter(IEmotable context, UpdateEmote updateText)
     {
@@ -26,30 +27,8 @@ public class NPCEmotePresenter
         _emoteSad = Resources.Load<Sprite>("UI/Emotes/Emote_Sad");
         _emoteThinking = Resources.Load<Sprite>("UI/Emotes/Emote_Thinking");
         _emoteAngry = Resources.Load<Sprite>("UI/Emotes/Emote_Angry");
+        _emoteAngrier = Resources.Load<Sprite>("UI/Emotes/Emote_Angrier");
     }
-
-    private void OnInitialized()
-    {
-        _updateText.UpdateImageAlpha(0);
-    }
-
-    private void OnDecidingStarted()
-        {
-            _updateText.UpdateImage(_emoteThinking);
-            _updateText.UpdateImageAlpha(1);
-        }
-        
-
-
-    private void OnItemSelected()
-    {
-        _updateText.UpdateImage(_emoteHappy);
-        _updateText.UpdateImageAlpha(1);
-    }
-     
-
-    private void OnItemRejected() =>
-        _updateText.UpdateImage(_emoteSad);
 
     private void OnMoodChanged(MoodType mood)
     {
@@ -72,6 +51,10 @@ public class NPCEmotePresenter
                 break;
             case MoodType.Angry:
                 _updateText.UpdateImage(_emoteAngry);
+                _updateText.UpdateImageAlpha(1);
+                break;
+            case MoodType.Angrier:
+                _updateText.UpdateImage(_emoteAngrier);
                 _updateText.UpdateImageAlpha(1);
                 break;
         }

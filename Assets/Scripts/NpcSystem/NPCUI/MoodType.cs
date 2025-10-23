@@ -1,5 +1,5 @@
 
 public enum MoodType
 {
-    None, Happy, Sad, Thinking, Annoyed, Angry
+    None, Happy, Sad, Thinking, Annoyed, Angry, Angrier
 }

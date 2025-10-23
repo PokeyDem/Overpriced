@@ -172,7 +172,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public void DenySell(){
         _nrOfAttemptsLeft = 0;
         ItemDenied?.Invoke();
-        _moodController.InvokeMoodChange(MoodType.Angry);
+        _moodController.InvokeMoodChange(MoodType.Angrier);
         StartCoroutine(EndHaggling());
     }
 

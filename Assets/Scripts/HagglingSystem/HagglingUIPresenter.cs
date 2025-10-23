@@ -16,6 +16,7 @@ public class HagglingUIPresenter : MonoBehaviour
     [SerializeField] private Sprite _emoteAngry; 
     [SerializeField] private Sprite _emoteAnnoyed;
     [SerializeField] private Sprite _emoteThinking;
+    [SerializeField] private Sprite _emoteAngrier;
 
     private void Awake()
     {
@@ -27,7 +28,6 @@ public class HagglingUIPresenter : MonoBehaviour
         _model.NrOfAttemptsChanged.AddListener(OnNrOfAttemptsChanged);
         _model.UIDisabled.AddListener(OnUIDisabled);
         _model.AttemptsDepleted.AddListener(OnAttemptsDepleted);
-
         _acceptOfferButton.onClick.AddListener(_model.SellItem);
         _denyOfferButton.onClick.AddListener(_model.DenySell);
     }
@@ -62,7 +62,7 @@ public class HagglingUIPresenter : MonoBehaviour
     }
     private void OnItemDenied() 
     {
-        _view.SetEmote(_emoteAngry);
+        _view.SetEmote(_emoteAngrier);
         _view.UpdateResultField("This is a waste of time. We’re done here.");
         _view.UpdateAttemptsLeftField(_model.GetNrOfAttemptsLeft());
     }
@@ -106,7 +106,7 @@ public class HagglingUIPresenter : MonoBehaviour
         if (difference > maxAcceptableMarkup/2)
         {
             _view.UpdateResultField("That price is outrageous!");
-            _view.SetEmote(_emoteAngry);
+            _view.SetEmote(_emoteAngrier);
         }
         else if (difference > maxAcceptableMarkup / 3)
         {
@@ -126,6 +126,6 @@ public class HagglingUIPresenter : MonoBehaviour
         _view.ToggleAcceptDenyOfferWindow(true);
         _view.TogglePriceInteraction(false);
         _view.UpdateResultField("I've lost my patience. This is my last offer. Decide now and move on.");
-        _view.SetEmote(_emoteAnnoyed);
+        _view.SetEmote(_emoteAngry);
     }
 }
