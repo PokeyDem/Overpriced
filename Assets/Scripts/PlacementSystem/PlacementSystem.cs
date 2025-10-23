@@ -140,7 +140,7 @@ public class PlacementSystem : MonoBehaviour{
                 itemIds.Add(displayController.GetItemId());
             }
             
-            pos = display.GetPosition();
+            pos = display.Position;
             displayData.Add(new DisplayData(display.GetDisplayTypeId(), pos.x, pos.y, pos.z, itemIds));
         }
 

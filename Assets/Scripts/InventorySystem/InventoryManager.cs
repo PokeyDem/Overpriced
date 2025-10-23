@@ -133,7 +133,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     public void AddItemToDisplaySlot(){ //On AddButton click
         var inventorySlotItem = _selectedInventorySlot.GetItem();
         
-        if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() == null && _currentDisplayDisplaySlot.IsBought){
+        if (inventorySlotItem != null && _currentDisplayDisplaySlot.ItemData == null && _currentDisplayDisplaySlot.IsBought){
             _currentDisplayDisplaySlot.PlaceItem(inventorySlotItem);
             RemoveItemFromInventory();
         }
@@ -213,7 +213,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
             + "\nDescription: " + currentItemData.Description;
     }
     public void RemoveItemFromDisplaySlot(){
-        ItemData item = _currentDisplayDisplaySlot.GetItem();
+        ItemData item = _currentDisplayDisplaySlot.ItemData;
         
         if (item == null) return;
         
@@ -337,11 +337,11 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         var inventorySlotItem = _selectedInventorySlot.GetItem();
         if (!_currentDisplayDisplaySlot.isOccupied || !_currentDisplayDisplaySlot.isChosen)
         {
-            if (inventorySlotItem != null && _currentDisplayDisplaySlot.GetItem() != null)
+            if (inventorySlotItem != null && _currentDisplayDisplaySlot.ItemData != null)
             {
                 RemoveItemFromDisplaySlot();
             }
-            else if (inventorySlotItem == null && _currentDisplayDisplaySlot.GetItem() != null)
+            else if (inventorySlotItem == null && _currentDisplayDisplaySlot.ItemData != null)
             {
                 RemoveItemFromDisplaySlot();
                 return;
@@ -368,9 +368,9 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
             if (!_currentDisplayDisplaySlot.IsBought) {
                 return $"Buy for {_currentDisplayDisplaySlot.Prize} gold";
             }
-            if(_currentDisplayDisplaySlot.GetItem() != null)
+            if(_currentDisplayDisplaySlot.ItemData != null)
             {
-                return $"Remove {_currentDisplayDisplaySlot.GetItem().Name} from Display";
+                return $"Remove {_currentDisplayDisplaySlot.ItemData.Name} from Display";
             }
             return "No Item Selected";
         }

@@ -15,7 +15,7 @@ public class ReadyCheckerBehaviour : MonoBehaviour{
 
       if (_tag.Equals("NPC") && other.CompareTag("NPC")){
             NPCBehaviorTree npc = other.GetComponent<NPCBehaviorTree>();
-            _hagglingManager.SetNpc(npc, npc, npc.ToleranceDecimal, npc.GetNpcType(), npc, npc.GetLinePositionManager()); //changed order of methods
+            //_hagglingManager.SetNpc(npc, npc, npc.ToleranceDecimal, npc.GetNpcType(), npc); //changed order of methods
             _playerTrigger.SetActive(true);
             readyToHaggle?.Invoke();
       }

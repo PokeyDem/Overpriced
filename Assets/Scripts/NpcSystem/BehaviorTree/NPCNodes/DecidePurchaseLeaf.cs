@@ -19,12 +19,12 @@ public class DecidePurchaseLeaf : Node
 
     public override NodeState Evaluate()
     {
-        DisplaySlotController displayTarget = _displayTargetContext.DisplayTarget;
-        ItemData item = displayTarget.GetItem();
+        DisplayContext displayTarget = _displayTargetContext.DisplayTarget;
+        ItemData item = displayTarget.Info.ItemData;
         if (IsInterestedInBuying(item))
         {
-            displayTarget.isOccupied = true;
-            displayTarget.isChosen = true;
+            displayTarget.Flags.IsOccupied = true;
+            displayTarget.Flags.IsChosen = true;
             _moodController.InvokeMoodChange(MoodType.Happy);
             state=NodeState.SUCCESS;
             return state;
@@ -32,7 +32,7 @@ public class DecidePurchaseLeaf : Node
         }
         else
         {
-            displayTarget.isOccupied = false;
+            displayTarget.Flags.IsOccupied = false;
             _moodController.InvokeMoodChange(MoodType.Sad);
             state = NodeState.RESTART;
             return state;

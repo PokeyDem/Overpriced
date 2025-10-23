@@ -1,4 +1,5 @@
 using BehaviorTree;
+using DependencyInjection;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,20 +22,20 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     private List<Vector3> _counterPos;
     private Vector3 _target;
     private List<ItemData> _desiredItems;
-    private DisplaySlotController _displayTarget;
-    private List<DisplaySlotController> _possibleDisplayChoices;
+    private DisplayContext _displayTarget;
+    private List<DisplayContext> _possibleDisplayChoices;
     private IObjectPool<NPCBehaviorTree> _pool;
     private bool _isHaggling;
     #endregion
 
     ILinePositionManager _linePositionManager;
 
+    INPCReadyToHaggleController _readyToHaggleController;
+
     #region Properties
-    public float ToleranceDecimal => _toleranceDecimal;
-    public List<ItemData> DesiredItems => _desiredItems;
     public Vector3 Target { get => _target; set => _target=value; }
-    public DisplaySlotController DisplayTarget { get => _displayTarget; set => _displayTarget = value; }
-    public List<DisplaySlotController> PossibleDisplayChoices { get => _possibleDisplayChoices; set => _possibleDisplayChoices = value; }
+    public DisplayContext DisplayTarget { get => _displayTarget; set => _displayTarget = value; }
+    public List<DisplayContext> PossibleDisplayChoices { get => _possibleDisplayChoices; set => _possibleDisplayChoices = value; }
     public bool IsHaggling { get => _isHaggling; set => _isHaggling = value; }
     #endregion
 
@@ -67,7 +68,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         base.Update();
     }
 
-    public void Initialize(bool isInShop, Vector3 spawnPoint, Vector3 despawnPointPos, Vector3 despawnInShop, Vector3 windowPos, Vector3 doorPos, Vector3 shopSpawnPoint, List<Vector3> counterPos, List<ItemData> desiredItems, ILinePositionManager linePositionManager, IObjectPool<NPCBehaviorTree> pool)
+    public void Initialize(bool isInShop, Vector3 spawnPoint, Vector3 despawnPointPos, Vector3 despawnInShop, Vector3 windowPos, Vector3 doorPos, Vector3 shopSpawnPoint, List<Vector3> counterPos, List<ItemData> desiredItems, ILinePositionManager linePositionManager,INPCReadyToHaggleController readyToHaggleController, IObjectPool<NPCBehaviorTree> pool)
     {
         _despawnPointPos = despawnPointPos;
         _windowPos = windowPos;
@@ -77,6 +78,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
         _despawnInShop = despawnInShop;
         _desiredItems = desiredItems;
         _linePositionManager = linePositionManager;
+        _readyToHaggleController = readyToHaggleController;
         _pool = pool;
 
         _agent = GetComponent<NavMeshAgent>();
@@ -93,7 +95,8 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                 new Sequence(new List<Node>
                 {
                     new SetTargetLeaf(this,_windowPos+GeneratePositionDeviation(-100,100,-10,60)),
-                    new WalkToTargetLeaf(this,_agent),
+                    new StartWalkToTargetLeaf(this,_agent),
+                    new WaitUntilWalkingOverLeaf(_agent),
                     new SetTargetLeaf(this,Target+new Vector3(0,0,-1)),
                     new WaitLeaf(GenerateRandomTime(200,500), this),
                     new Selector(new List<Node>
@@ -102,7 +105,8 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                         {
                             new CheckIfShopHasItemsLeaf(),
                             new SetTargetLeaf(this,_doorPos),
-                            new WalkToTargetLeaf(this, _agent),
+                            new StartWalkToTargetLeaf(this, _agent),
+                            new WaitUntilWalkingOverLeaf(_agent),
                             new SetTargetLeaf(this, _shopSpawnPoint),
                             new WarpNode(this, _agent),
                             new GeneratePossibleDisplayChoicesLeaf(this),
@@ -113,7 +117,8 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                                     {
                                         new WaitLeaf(0.1f),
                                         new ChooseItemToCheckLeaf(this,this,this, this),
-                                        new WalkToTargetLeaf(this, _agent),
+                                        new StartWalkToTargetLeaf(this, _agent),
+                                        new WaitUntilWalkingOverLeaf(_agent),
                                         new WaitLeaf(GenerateRandomTime(300,600), this),
                                         new DecidePurchaseLeaf(this, _desiredItems, this),
                                     }),
@@ -121,26 +126,30 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
                                     {
                                         new WaitLeaf(0.1f),
                                         new ChooseLinePositionLeaf(_counterPos, _linePositionManager,this),
-                                        new WalkToTargetLeaf(this, _agent),
+                                        new StartWalkToTargetLeaf(this, _agent),
                                         new SetTargetLeaf(this,_counterPos[0]),
-                                        new RestartIfNotFirstInLineLeaf(_agent, _counterPos[0])
+                                        new RestartIfNotFirstInLineLeaf(_agent, _counterPos[0]),
                                     }),
                                     new SetTargetLeaf(this,_counterPos[0] + new Vector3(0, 0, -1)),
+                                    new SendNPCDataToHaggleLeaf(this,this,_toleranceDecimal,_NPCType,this,_readyToHaggleController),
                                     new StartHagglingLeaf(this),
                                     new WaitUntilHagglingEndLeaf(this),
-                                    new ReturnStatusLeaf(NodeState.FAILURE),
+                                    new ReleaseFirstPositionInLineOccupancy(_linePositionManager),
+                                    new ReturnStatusLeaf(NodeState.FAILURE),//failure to go to despawn
                                 }),
                                 new Sequence(new List<Node>
                                 {
                                     new SetTargetLeaf(this,_despawnInShop),
-                                    new WalkToTargetLeaf(this, _agent),
+                                    new StartWalkToTargetLeaf(this, _agent),
+                                    new WaitUntilWalkingOverLeaf(_agent),
                                     new DespawnLeaf(this),
                                 })
                             }),
                         }),
                         new Sequence(new List<Node> {
                             new SetTargetLeaf(this,_despawnPointPos),
-                            new WalkToTargetLeaf(this, _agent),
+                            new StartWalkToTargetLeaf(this, _agent),
+                            new WaitUntilWalkingOverLeaf(_agent),
                             new DespawnLeaf(this),
                         }),
 

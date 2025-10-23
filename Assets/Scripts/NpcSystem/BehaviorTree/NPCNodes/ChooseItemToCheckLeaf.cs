@@ -20,7 +20,7 @@ public class ChooseItemToCheckLeaf : Node
 
     public override NodeState Evaluate()
     {
-        List<DisplaySlotController> possibleDisplayChoices = new List<DisplaySlotController>(_displayChoicesContext.PossibleDisplayChoices);
+        List<DisplayContext> possibleDisplayChoices = new List<DisplayContext>(_displayChoicesContext.PossibleDisplayChoices);
         if (possibleDisplayChoices == null || possibleDisplayChoices.Count ==0)
         {
             _moodController.InvokeMoodChange(MoodType.Sad);
@@ -31,49 +31,49 @@ public class ChooseItemToCheckLeaf : Node
         while (possibleDisplayChoices.Count > 0)
         {
             _displayTargetContext.DisplayTarget = null;
-            DisplaySlotController displaySlotController = possibleDisplayChoices[0];
+            DisplayContext displayContext = possibleDisplayChoices[0];
             possibleDisplayChoices.RemoveAt(0);
-            ItemData item = displaySlotController.GetItem();
-            if (item == null || displaySlotController == null)
+            ItemData item = displayContext.Info.ItemData;
+            if (item == null || displayContext == null)
             {
                 continue;
             }
-            if (displaySlotController.isChosen)
+            if (displayContext.Flags.IsChosen)
             {
                 continue;
             }
-            if (!displaySlotController.isOccupied)
+            if (!displayContext.Flags.IsOccupied)
             {
-                displaySlotController.isOccupied = true;
+                displayContext.Flags.IsOccupied = true;
             }
             else
             {
-                if (possibleDisplayChoices.Find(ds => !ds.isOccupied) != null)
+                if (possibleDisplayChoices.Find(ds => !ds.Flags.IsOccupied) != null)
                 {
-                    possibleDisplayChoices.Add(displaySlotController);
+                    possibleDisplayChoices.Add(displayContext);
                     continue;
                 }
                 else
                 {
-                    if (!displaySlotController.isOccupied || displaySlotController.isChosen)
+                    if (!displayContext.Flags.IsOccupied || displayContext.Flags.IsChosen)
                     {
                         
                     }
                     else
                     {
-                        _targetContext.Target = displaySlotController.transform.position;
+                        _targetContext.Target = displayContext.Info.Position;
                         state = NodeState.RESTART;
                         return state;
                     }
                 }
             }
 
-            if (displaySlotController.isChosen)
+            if (displayContext.Flags.IsChosen)
             {
                 continue;
             }
-            _targetContext.Target=displaySlotController.transform.position;//SUCCESS
-            _displayTargetContext.DisplayTarget = displaySlotController;
+            _targetContext.Target=displayContext.Info.Position;//SUCCESS
+            _displayTargetContext.DisplayTarget = displayContext;
             _displayChoicesContext.PossibleDisplayChoices = possibleDisplayChoices;
             break;
         }

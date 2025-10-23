@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DisplaySlotController : MonoBehaviour{
+public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDisplayFlagController, IDisplayEditor
+{
     [SerializeField] private GameObject _marker;
     [SerializeField] private GameObject priseUI;
     [SerializeField] private GameObject display;
@@ -13,6 +14,7 @@ public class DisplaySlotController : MonoBehaviour{
     [SerializeField] private float hiddenAlpha = 0.6f;
     public int Prize => prize;
     public bool IsBought => isBought;
+
     private Collider _collider;
     private Material[] _materials;
     private int _displayTypeID;
@@ -23,7 +25,12 @@ public class DisplaySlotController : MonoBehaviour{
     public bool isChosen=false;
     private Vector3 _position;
     public UnityEvent<String> onTextUpdate;
-    
+
+
+    public Vector3 Position => transform.position;
+    public ItemData ItemData => _item;
+    public bool IsOccupied { get => isOccupied; set => isOccupied=value; }
+    public bool IsChosen { get => isChosen; set => isChosen = value; }
 
 
     private void Update(){
@@ -101,14 +108,22 @@ public class DisplaySlotController : MonoBehaviour{
         _item = item;
         isChosen = false;
         isOccupied = false;
-        DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(this);
+
+        IDisplayInfoProvider info = this;
+        IDisplayFlagController flags = this;
+        IDisplayEditor editor = this;
+        DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(new DisplayContext(info,flags,editor));
     }
 
     public void RemoveItem(){
         Destroy(_itemPrefab);
         _itemPrefab = null;
         _item = null;
-        DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(this);
+
+        IDisplayInfoProvider info = this;
+        IDisplayFlagController flags = this;
+        IDisplayEditor editor = this;
+        DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(new DisplayContext(info, flags,editor));
     }
 
     public int GetItemId(){
@@ -117,10 +132,10 @@ public class DisplaySlotController : MonoBehaviour{
         }
         return _item.ID;
     }
-    public ItemData GetItem()
-    {
-        return _item;
-    }
+    //public ItemData GetItem()
+    //{
+    //    return _item;
+    //}
 
     public void SetDisplayTypeId(int id){
         _displayTypeID = id;
@@ -132,10 +147,6 @@ public class DisplaySlotController : MonoBehaviour{
 
     public void SetPosition(Vector3 position){
         _position = position;
-    }
-
-    public Vector3 GetPosition(){
-        return _position;
     }
 
     public void TryToBuy() {
