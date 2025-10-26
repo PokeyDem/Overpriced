@@ -18,11 +18,6 @@ public class NPCEmotePresenter
         _updateText = updateText;
         _context.MoodChanged += OnMoodChanged;
 
-
-        //_npcBehaviour.Initialized += OnInitialized;
-        //_npcBehaviour.DecidingStarted += OnDecidingStarted;
-        //_npcBehaviour.ItemSelected += OnItemSelected;
-        //_npcBehaviour.ItemRejected += OnItemRejected;
         _emoteHappy = Resources.Load<Sprite>("UI/Emotes/Emote_Happy");
         _emoteSad = Resources.Load<Sprite>("UI/Emotes/Emote_Sad");
         _emoteThinking = Resources.Load<Sprite>("UI/Emotes/Emote_Thinking");

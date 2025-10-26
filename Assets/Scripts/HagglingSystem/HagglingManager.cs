@@ -11,9 +11,7 @@ using Random = UnityEngine.Random;
 
 public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDependencyProvider
 {
-    [SerializeField] private bool _isPlayerReady;
     [SerializeField] private bool _isNpcReady;
-    //private NPCBehaviorTree _npcBehaviour;
     private int _currentPrice;
     private int _basePrice;
     [SerializeField] private int _nrOfAttemptsLeft=3;
@@ -61,9 +59,6 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public readonly int MaxPriceMultiplier = 3;
 
 
-    public void SetPlayerReadiness(bool isPlayerReady){
-        _isPlayerReady = isPlayerReady;
-    }
 
     public void SetNpcReadiness(bool isNpcReady){
         _isNpcReady = isNpcReady;
@@ -103,11 +98,6 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     }
 
     public void StartHaggling(){
-        //if(_npcBehaviour==null || _displayTargetActor.DisplayTarget.GetItem()==null)
-        //{
-        //    _haggler.IsHaggling=false;
-        //    return;
-        //}
         _hagglingInProgress = true;
         _nrOfAttemptsLeft = 3;
         _basePrice = _displayTargetActor.DisplayTarget.Info.ItemData.FinalPrice;
@@ -118,7 +108,6 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         _randomDeviation = _randomDeviation / 100;
         _maxThreshold = (int)(_basePrice + _basePrice * _toleranceDecimal * _randomDeviation);
         float random = Random.value;
-        //float bias = random * random;
         _maxAcceptableMarkup = Mathf.Lerp(_toleranceDecimal, _toleranceDecimal * 2.5f, random);
         _playerControl.enabled = false;
         HagglingInitiated?.Invoke();
@@ -214,10 +203,6 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     {
         _currentPrice = price;
     }
-    //public NPCBehaviorTree GetNpc()
-    //{
-    //    return _npcBehaviour;
-    //}
     public int GetNrOfAttemptsLeft()
     {
         return _nrOfAttemptsLeft;
