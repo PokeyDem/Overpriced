@@ -4,16 +4,28 @@ using UnityEngine;
 
 
 public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
+    [Header("General light sources")]
     [SerializeField] private GameObject _directionalLightObject;
+    [SerializeField] private Light _seilingFrontLight;
+    [SerializeField] private Light _seilingBackLight;
+    [SerializeField] private GameObject[] _windowPointLights;
+
+    [SerializeField] private Light _spotLightWindow;
+    [SerializeField] private Light _spotLightDoor;
+    
+    [Header("Morning lighting")]
     [SerializeField] private Color _morningDirectionalColor;
     [SerializeField] private float _morningDirectionalIntensity;
     
+    [Header("Noon lighting")]
     [SerializeField] private Color _noonDirectionalColor;
     [SerializeField] private float _noonDirectionalIntensity;
     
+    [Header("Evening lighting")]
     [SerializeField] private Color _eveningDirectionalColor;
     [SerializeField] private float _eveningDirectionalIntensity;
 
+    [Header("Switchable light sources")]
     [SerializeField] private List<LanternBehaviour> _lanterns = new List<LanternBehaviour>();
     
     [SerializeField] private Material _lanternTurnedOnMaterial;
@@ -22,15 +34,9 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [SerializeField] private List<MeshRenderer> _buildings = new List<MeshRenderer>();
     [SerializeField] private Material _windowsDefaultMaterial;
     [SerializeField] private Material _windowsWithLightOnMaterial;
-    [SerializeField] private GameObject[] _windowPointLights;
-
-    [SerializeField] private Light _seilingFrontLight;
-    [SerializeField] private Light _seilingBackLight;
-
-    [SerializeField] private Light _spotLightWindow;
-    [SerializeField] private Light _spotLightDoor;
     
     private Light _directionalLight;
+    private DayManager.PartOfDay _partOfDayLighting;
 
     public new void Awake(){
         base.Awake();
@@ -70,7 +76,27 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
                 break;
         }
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_partOfDayLighting == DayManager.PartOfDay.Evening)
+            {
+                SetMorningLighting();
+                _partOfDayLighting = DayManager.PartOfDay.Morning;
+            }else if (_partOfDayLighting == DayManager.PartOfDay.Morning)
+            {
+                SetNoonLighting();
+                _partOfDayLighting = DayManager.PartOfDay.Noon;
+            }else if (_partOfDayLighting == DayManager.PartOfDay.Noon)
+            {
+                SetEveningLighting();
+                _partOfDayLighting = DayManager.PartOfDay.Evening;
+            }
+        }
+    }
+
     private void SetMorningLighting(){
        _directionalLight.color = _morningDirectionalColor;
        _directionalLight.intensity = _morningDirectionalIntensity;
