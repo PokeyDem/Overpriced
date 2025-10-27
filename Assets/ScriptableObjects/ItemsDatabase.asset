@@ -205,3 +205,51 @@ MonoBehaviour:
         <Description>k__BackingField: This will help you live longer*
       <Prefab>k__BackingField: {fileID: 7616928403115575848, guid: 27e9ed486421c8c4f8c02e36ce315f2e, type: 3}
       <PreviewImage>k__BackingField: {fileID: 21300000, guid: ce37eb17b27809d4c9217458ce3341f7, type: 3}
+  - _info:
+      <Name>k__BackingField: Antivenom
+      <ItemType>k__BackingField: 3
+      <BasePrice>k__BackingField: 350
+      <Description>k__BackingField: It is just holy wather
+    ItemsVariants:
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 7616928403115575848, guid: 878764e48337c154d965caf89f4ac1bc, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 8fa0f5180b1d46c47a605db6183f4fe8, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 5301947763806725639, guid: f09f15156cbe06647bb51736bcc66329, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: c495064a2548bc74e9e7a30a0b479a15, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 960616705410860333, guid: db1950e495ffbcb488502f5a539e4aaf, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 3f93094e37096f94f9a70b023aa9b73d, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 6964633870292682744, guid: cc15ab7960068ee45bbb06483777ab18, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 61f6ac7aecfd1954d878db77e96c045e, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 5973660856396735680, guid: 8621eae859bed0946a8317b4d8f0a47b, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: 4608e31e4d6878c4293d08d7196be07a, type: 3}
+    - _info:
+        <Name>k__BackingField: Armor
+        <ItemType>k__BackingField: 4
+        <BasePrice>k__BackingField: 150
+        <Description>k__BackingField: This will help you live longer*
+      <Prefab>k__BackingField: {fileID: 6624726128274571513, guid: a7d88ca1c0d37554b9de39901617c8dc, type: 3}
+      <PreviewImage>k__BackingField: {fileID: 21300000, guid: a8a8d9f560715594f8d8392de834279c, type: 3}
