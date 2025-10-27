@@ -10732,6 +10732,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4574306325036215740, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5320324382074570290, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
       propertyPath: m_Range
       value: 0.6
@@ -10755,6 +10759,10 @@ PrefabInstance:
     - target: {fileID: 7641154651509722855, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
       propertyPath: m_Name
       value: Candles (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641154651509722855, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -11322,6 +11330,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5291017598777928456, guid: 4527edaeec1850142955109d5884a5bd, type: 3}
   m_PrefabInstance: {fileID: 431476674}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &669500596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7606964447620956789, guid: 4527edaeec1850142955109d5884a5bd, type: 3}
+  m_PrefabInstance: {fileID: 431476674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e31d315a5fb8d429f79db23180dcce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &676723965
 GameObject:
   m_ObjectHideFlags: 0
@@ -12633,7 +12652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &733249151
 Camera:
   m_ObjectHideFlags: 0
@@ -17669,6 +17688,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5291017598777928456, guid: 4527edaeec1850142955109d5884a5bd, type: 3}
   m_PrefabInstance: {fileID: 1141954515}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1128110297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7606964447620956789, guid: 4527edaeec1850142955109d5884a5bd, type: 3}
+  m_PrefabInstance: {fileID: 1141954515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e31d315a5fb8d429f79db23180dcce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1128251464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 540572555164026099, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
@@ -23744,25 +23774,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576eb9090eca4b042822abc27fe084c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directionalLightObject: {fileID: 705507993}
-  _seilingFrontLight: {fileID: 1638025473}
-  _seilingBackLight: {fileID: 1860641451}
-  _windowPointLights:
-  - {fileID: 0}
-  _spotLightWindow: {fileID: 911650239}
-  _spotLightDoor: {fileID: 728656234}
-  _morningDirectionalColor: {r: 1, g: 0.87058824, b: 0.6784314, a: 1}
-  _morningDirectionalIntensity: 3.5
-  _noonDirectionalColor: {r: 0.99215686, g: 0.94509804, b: 0.7921569, a: 1}
-  _noonDirectionalIntensity: 2
-  _eveningDirectionalColor: {r: 0.8784314, g: 0.69803923, b: 0.5294118, a: 0}
-  _eveningDirectionalIntensity: 0
-  _lanterns: []
-  _lanternTurnedOnMaterial: {fileID: 2100000, guid: 27974b7490af9504086cfa2c79344760, type: 2}
-  _lanternTurnedOffMaterial: {fileID: 2100000, guid: 774642c156c80e5479bfd8dd3e2bbb6c, type: 2}
-  _buildings: []
-  _windowsDefaultMaterial: {fileID: 2100000, guid: ba2a1308b90d291449e0fa7aadb892d3, type: 2}
-  _windowsWithLightOnMaterial: {fileID: 2100000, guid: 27974b7490af9504086cfa2c79344760, type: 2}
+  directionalLightObject: {fileID: 705507993}
+  seilingFrontLight: {fileID: 1638025473}
+  seilingBackLight: {fileID: 1860641451}
+  windowPointLights: []
+  duration: 2
+  spotLightWindow: {fileID: 911650239}
+  spotLightDoor: {fileID: 728656234}
+  morningDirectionalColor: {r: 1, g: 0.9529412, b: 0.88235295, a: 1}
+  morningDirectionalIntensity: 3.5
+  noonDirectionalColor: {r: 0.96862745, g: 0.8, b: 0.54901963, a: 1}
+  noonDirectionalIntensity: 3
+  seilingFrontNoonLightIntensity: 7.6
+  seilingBackNoonLightIntensity: 6
+  eveningDirectionalColor: {r: 0.72156864, g: 0.6156863, b: 0.45490196, a: 1}
+  eveningDirectionalIntensity: 0.8
+  seilingFrontEveningLightIntensity: 2.6
+  seilingBackEveningLightIntensity: 1.6
+  lanterns:
+  - {fileID: 1128110297}
+  - {fileID: 669500596}
+  lanternTurnedOnMaterial: {fileID: 2100000, guid: 27974b7490af9504086cfa2c79344760, type: 2}
+  lanternTurnedOffMaterial: {fileID: 2100000, guid: 774642c156c80e5479bfd8dd3e2bbb6c, type: 2}
+  buildings: []
+  windowsDefaultMaterial: {fileID: 2100000, guid: ba2a1308b90d291449e0fa7aadb892d3, type: 2}
+  windowsWithLightOnMaterial: {fileID: 2100000, guid: 27974b7490af9504086cfa2c79344760, type: 2}
+  _fireplaceLight: {fileID: 286513619}
+  _fireplaceParticles: {fileID: 245339477}
+  _fireplaceLightDistortion: {fileID: 286513617}
 --- !u!1 &1672081104
 GameObject:
   m_ObjectHideFlags: 0
@@ -28237,7 +28276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46109c952359bf2409a4eb2a009d3177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPlayerReady: 0
   _isNpcReady: 0
   _nrOfAttemptsLeft: 3
   _hagglingInProgress: 0
@@ -29173,6 +29211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4574306325036215740, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5320324382074570290, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
       propertyPath: m_Type
       value: 2
@@ -29208,6 +29250,10 @@ PrefabInstance:
     - target: {fileID: 7641154651509722855, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
       propertyPath: m_Name
       value: Candles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641154651509722855, guid: 15540bbb51dadc94696d6b72825f5bc2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
