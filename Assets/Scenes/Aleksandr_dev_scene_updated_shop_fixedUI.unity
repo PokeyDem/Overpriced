@@ -251,6 +251,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 2788750539759971147, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: previewMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b0035fdf686bcd4ab39b3a90ceaf7f7, type: 2}
+    - target: {fileID: 3058710763046640474, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: Price
+      objectReference: {fileID: 0}
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.75
@@ -290,6 +298,10 @@ PrefabInstance:
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471504749436838553, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: CoinIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4080261629171514356, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_Name
@@ -18413,6 +18425,14 @@ PrefabInstance:
       propertyPath: prize
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 2788750539759971147, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: previewMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b0035fdf686bcd4ab39b3a90ceaf7f7, type: 2}
+    - target: {fileID: 3058710763046640474, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: Price
+      objectReference: {fileID: 0}
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.75
@@ -18452,6 +18472,10 @@ PrefabInstance:
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471504749436838553, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: CoinIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4080261629171514356, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_Name
@@ -22150,6 +22174,14 @@ PrefabInstance:
       propertyPath: prize
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2788750539759971147, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: previewMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b0035fdf686bcd4ab39b3a90ceaf7f7, type: 2}
+    - target: {fileID: 3058710763046640474, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: Price
+      objectReference: {fileID: 0}
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.75
@@ -22189,6 +22221,10 @@ PrefabInstance:
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471504749436838553, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: CoinIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4080261629171514356, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_Name
@@ -28874,6 +28910,14 @@ PrefabInstance:
       propertyPath: prize
       value: 350
       objectReference: {fileID: 0}
+    - target: {fileID: 2788750539759971147, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: previewMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b0035fdf686bcd4ab39b3a90ceaf7f7, type: 2}
+    - target: {fileID: 3058710763046640474, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: Price
+      objectReference: {fileID: 0}
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.75
@@ -28913,6 +28957,10 @@ PrefabInstance:
     - target: {fileID: 3432542137319960032, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471504749436838553, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
+      propertyPath: m_Name
+      value: CoinIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4080261629171514356, guid: 3ac13b316c4cacc47a25d17fa6434587, type: 3}
       propertyPath: m_Name
