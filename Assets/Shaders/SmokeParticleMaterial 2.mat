@@ -64,7 +64,7 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _Intense: 25.66
-    - _Intensity: 3.51
+    - _Intensity: 4.9
     - _QueueControl: 1
     - _QueueOffset: 0
     - _SrcBlend: 5
