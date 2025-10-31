@@ -14,6 +14,8 @@ public class FireplaceLightDistortion : MonoBehaviour
    private Light _fireLight;
    private float _timeOffset;
 
+   private bool _isPlaying;
+
    void Start()
    {
       if (_fireLight == null)
@@ -23,9 +25,17 @@ public class FireplaceLightDistortion : MonoBehaviour
 
    void Update()
    {
-      float time = Time.time * flickerSpeed + _timeOffset;
+      if (_isPlaying)
+      {
+         float time = Time.time * flickerSpeed + _timeOffset;
       
-      float noise = Mathf.PerlinNoise(time, 0.0f);
-      _fireLight.intensity = intensityBase + noise * intensityAmplitude;
+         float noise = Mathf.PerlinNoise(time, 0.0f);
+         _fireLight.intensity = intensityBase + noise * intensityAmplitude;
+      }
+   }
+
+   public void ChangeLanternsState(bool state)
+   {
+      _isPlaying = state;
    }
 }

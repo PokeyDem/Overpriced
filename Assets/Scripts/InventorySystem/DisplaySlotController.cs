@@ -12,11 +12,13 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
     [SerializeField] private bool isBought;
     [SerializeField] private int prize;
     [SerializeField] private float hiddenAlpha = 0.6f;
+    [SerializeField] private Material previewMaterial;
     public int Prize => prize;
     public bool IsBought => isBought;
 
     private Collider _collider;
     private Material[] _materials;
+    private Material[] _baseMaterials;
     private int _displayTypeID;
     private float _rotationSpeed = 45f;
     private GameObject _itemPrefab;
@@ -68,14 +70,17 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
         onTextUpdate.Invoke(prize.ToString());
     }
 
-    private void Start() {
+    private void Start()
+    {
+        _baseMaterials = display.GetComponent<MeshRenderer>().materials;
         if (!isBought) {
             ShopStateManager.ShopStateManagerInstance.shopWosOpen.AddListener(HideDisplay);
             ShopStateManager.ShopStateManagerInstance.shopWosClose.AddListener(ShowToBuy); 
             _materials = display.GetComponent<MeshRenderer>().materials;
             for (int i=0; i<_materials.Length;i++) {
-                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+                _materials[i] = previewMaterial;
             }
+            display.GetComponent<MeshRenderer>().materials = _materials;
             _collider = GetComponent<Collider>();
         }
     }
@@ -158,8 +163,9 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
             moneyManager.ReduceMoney(prize);
             isBought = true;
             for (int i=0; i<_materials.Length;i++) {
-                _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,1);
+                _materials[i] = _baseMaterials[i];
             }
+            display.GetComponent<MeshRenderer>().materials = _materials;
             ShopStateManager.ShopStateManagerInstance.shopWosOpen.RemoveListener(HideDisplay);
             ShopStateManager.ShopStateManagerInstance.shopWosClose.RemoveListener(ShowToBuy);
             _collider.enabled = true;
@@ -174,8 +180,9 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
     private void ShowToBuy() {
         display.SetActive(true);
         for (int i=0; i<_materials.Length;i++) {
-            _materials[i].color = new Color(_materials[i].color.r,_materials[i].color.g,_materials[i].color.b,hiddenAlpha);
+            _materials[i] = previewMaterial;
         }
+        display.GetComponent<MeshRenderer>().materials = _materials;
         _collider.enabled = true;
     }
 }

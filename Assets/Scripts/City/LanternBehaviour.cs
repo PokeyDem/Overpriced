@@ -13,15 +13,19 @@ public class LanternBehaviour : MonoBehaviour, Ilight
     private MeshRenderer _meshRenderer;
     private Light _lightSource;
 
-    private void Awake(){
+
+    private void Awake()
+    {
         _lightSource = gameObject.GetComponentInChildren<Light>();
         _meshRenderer = gameObject.GetComponent<MeshRenderer>();
     }
-    
 
     public void ChangeState(bool state){
-        if (_isChangingMaterial){
+        if (_isChangingMaterial)
+        {
+                
             Material[] materials = _meshRenderer.materials;
+            
 
             if (state)
                 materials[_materialIndex] = _turnedOnMaterial;
@@ -44,6 +48,9 @@ public class LanternBehaviour : MonoBehaviour, Ilight
     }
 
     public void TurnOff(){
-        _lightSource.gameObject.SetActive(false);
+        if (_lightSource)
+            _lightSource.gameObject.SetActive(false);
+        else
+            Debug.Log("Light source not found: " + gameObject.name);
     }
 }
