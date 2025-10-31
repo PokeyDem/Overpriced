@@ -18,6 +18,8 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
     [Header("Morning lighting")]
     [SerializeField] private Color morningDirectionalColor;
     [SerializeField] private float morningDirectionalIntensity;
+    [SerializeField] private float spotLightDoorIntensity;
+    [SerializeField] private float spotLightWindowIntensity;
     private float seilingFrontMorningLightIntensity;
     private float seilingBackMorningLightIntensity;
     
@@ -158,6 +160,9 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
        StartCoroutine(SmoothIntensityTransition(seilingBackLight, seilingBackMorningLightIntensity, 0));
        StartCoroutine(SmoothIntensityTransition(seilingFrontLight, seilingFrontMorningLightIntensity, 0));
        
+       StartCoroutine(SmoothIntensityTransition(spotLightDoor, spotLightDoorIntensity, 0));
+       StartCoroutine(SmoothIntensityTransition(spotLightWindow, spotLightWindowIntensity, 0));
+       
        ChangeLanternsState(false);
        ChangeBuildingWindowsLightState(false);
     }
@@ -203,15 +208,17 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
         
         targetLight.color = targetColor;
     }
-
-    
     
 
     private void SetNoonLighting(){
         StartCoroutine(SmoothIntensityTransition(_directionalLight, noonDirectionalIntensity, 0));
         StartCoroutine(SmoothColorTransition(_directionalLight, noonDirectionalColor));
+        
         StartCoroutine(SmoothIntensityTransition(seilingBackLight, seilingBackNoonLightIntensity, 0));
         StartCoroutine(SmoothIntensityTransition(seilingFrontLight, seilingFrontNoonLightIntensity, 0));
+        
+        StartCoroutine(SmoothIntensityTransition(spotLightDoor, spotLightDoor.intensity * 0.5f, 0));
+        StartCoroutine(SmoothIntensityTransition(spotLightWindow, spotLightWindow.intensity * 0.5f, 0));
     }
 
     private void SetEveningLighting(){
@@ -222,6 +229,9 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
        
        StartCoroutine(SmoothIntensityTransition(seilingBackLight, seilingBackEveningLightIntensity, 0));
        StartCoroutine(SmoothIntensityTransition(seilingFrontLight, seilingFrontEveningLightIntensity, 0));
+       
+       StartCoroutine(SmoothIntensityTransition(spotLightDoor, spotLightDoor.intensity * 0.5f, 0));
+       StartCoroutine(SmoothIntensityTransition(spotLightWindow, spotLightWindow.intensity * 0.5f, 0));
        
        ChangeLanternsState(true);
        ChangeBuildingWindowsLightState(true);
