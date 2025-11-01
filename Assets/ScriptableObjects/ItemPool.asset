@@ -264,6 +264,11 @@ MonoBehaviour:
       <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 40
+    - <ItemType>k__BackingField: 5
+      rarity: 0
+      <Amount>k__BackingField: 4
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 40
   - <DayItemPool>k__BackingField:
     - <ItemType>k__BackingField: 1
       rarity: 0
@@ -362,6 +367,16 @@ MonoBehaviour:
       <Probability>k__BackingField: 50
     - <ItemType>k__BackingField: 4
       rarity: 5
+      <Amount>k__BackingField: 3
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 45
+    - <ItemType>k__BackingField: 5
+      rarity: 0
+      <Amount>k__BackingField: 3
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 45
+    - <ItemType>k__BackingField: 5
+      rarity: 1
       <Amount>k__BackingField: 3
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 45
@@ -486,6 +501,36 @@ MonoBehaviour:
       <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 69
+    - <ItemType>k__BackingField: 5
+      rarity: 0
+      <Amount>k__BackingField: 3
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 29
+    - <ItemType>k__BackingField: 5
+      rarity: 1
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 69
+    - <ItemType>k__BackingField: 5
+      rarity: 2
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 0
+      <Probability>k__BackingField: 39
+    - <ItemType>k__BackingField: 5
+      rarity: 3
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 39
+    - <ItemType>k__BackingField: 5
+      rarity: 4
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 25
+    - <ItemType>k__BackingField: 5
+      rarity: 5
+      <Amount>k__BackingField: 2
+      <IsNotGuaranteed>k__BackingField: 1
+      <Probability>k__BackingField: 14
   - <DayItemPool>k__BackingField:
     - <ItemType>k__BackingField: 3
       rarity: 0
