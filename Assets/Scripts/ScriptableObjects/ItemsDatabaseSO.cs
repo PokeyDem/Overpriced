@@ -116,5 +116,6 @@ public enum ItemType{
     Weapon,
     Food,
     Potion,
-    Armor
+    Armor,
+    Medicine
 }
