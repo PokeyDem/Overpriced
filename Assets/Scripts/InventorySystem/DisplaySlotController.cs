@@ -72,8 +72,8 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
 
     private void Start()
     {
-        _baseMaterials = display.GetComponent<MeshRenderer>().materials;
         if (!isBought) {
+            _baseMaterials = display.GetComponent<MeshRenderer>().materials;
             ShopStateManager.ShopStateManagerInstance.shopWosOpen.AddListener(HideDisplay);
             ShopStateManager.ShopStateManagerInstance.shopWosClose.AddListener(ShowToBuy); 
             _materials = display.GetComponent<MeshRenderer>().materials;
