@@ -113,12 +113,13 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         if(_foldToggle)
         {
             MoveInventoryTowards(-300f);
-            _foldButtonText.text = "���";
+            _foldButtonText.transform.Rotate(0, 0, 180);
         }
         else
         {
             MoveInventoryTowards(-425f);
             _foldButtonText.text = "^^^";
+            _foldButtonText.transform.Rotate(0, 0, 180);
         }
         SelectSlot(0);
         _foldToggle = !_foldToggle;
@@ -335,7 +336,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
     public void Interact()
     {
         var inventorySlotItem = _selectedInventorySlot.GetItem();
-        if (!_currentDisplayDisplaySlot.isOccupied || !_currentDisplayDisplaySlot.isChosen)
+        if (!_currentDisplayDisplaySlot.isOccupied && !_currentDisplayDisplaySlot.isChosen)
         {
             if (inventorySlotItem != null && _currentDisplayDisplaySlot.ItemData != null)
             {
