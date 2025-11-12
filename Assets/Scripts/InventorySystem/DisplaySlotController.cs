@@ -16,6 +16,7 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
     public int Prize => prize;
     public bool IsBought => isBought;
 
+    private DisplayContext _displayContext;
     private Collider _collider;
     private Material[] _materials;
     private Material[] _baseMaterials;
@@ -113,22 +114,18 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
         _item = item;
         isChosen = false;
         isOccupied = false;
-
         IDisplayInfoProvider info = this;
         IDisplayFlagController flags = this;
         IDisplayEditor editor = this;
-        DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(new DisplayContext(info,flags,editor));
+        _displayContext = new DisplayContext(info, flags, editor);
+        DisplaysWithItemsListHandler.Instance.AddDisplaySlotWithItem(_displayContext);
     }
 
     public void RemoveItem(){
         Destroy(_itemPrefab);
         _itemPrefab = null;
         _item = null;
-
-        IDisplayInfoProvider info = this;
-        IDisplayFlagController flags = this;
-        IDisplayEditor editor = this;
-        DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(new DisplayContext(info, flags,editor));
+        DisplaysWithItemsListHandler.Instance.RemoveDisplaySlotWithItem(_displayContext);
     }
 
     public int GetItemId(){

@@ -8,11 +8,17 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     [SerializeField] private List<DisplayContext> _displaySlotsWithItems= new List<DisplayContext>();
 
     public UnityEvent itemPlaced;
+    public UnityEvent listEmpty;
 
     private new void Awake()
     {
         base.Awake();
         _displaySlotsWithItems.Clear();
+        listEmpty?.Invoke();
+    }
+    private void Start()
+    {
+        listEmpty?.Invoke();
     }
     public void AddDisplaySlotWithItem(DisplayContext displaySlot)
     {
@@ -25,6 +31,10 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     public void RemoveDisplaySlotWithItem(DisplayContext displaySlot)
     {
         _displaySlotsWithItems.Remove(displaySlot);
+        if (_displaySlotsWithItems != null || _displaySlotsWithItems.Count == 0)
+        {
+            listEmpty?.Invoke();
+        }
     }
 
     public List<DisplayContext> GetDisplaySlotsWithItems()
@@ -49,5 +59,9 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
             _displaySlotsWithItems[i] = _displaySlotsWithItems[randomIndex];
             _displaySlotsWithItems[randomIndex] = temp;
         }
+    }
+    public void CheckListEmpty()
+    {
+        listEmpty?.Invoke();
     }
 }
