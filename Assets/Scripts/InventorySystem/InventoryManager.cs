@@ -95,6 +95,8 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         _playerControl.SetInteractable(this);
         _playerControl.ScrollUp.AddListener(SelectPreviousSlot);
         _playerControl.ScrollDown.AddListener(SelectNextSlot);
+        _playerControl.Numbers.AddListener(SelectSlot);
+
     }
 
     public void DisableInventory(){
@@ -107,6 +109,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         _playerControl.SetInteractable(null);
         _playerControl.ScrollUp.RemoveListener(SelectPreviousSlot);
         _playerControl.ScrollDown.RemoveListener(SelectNextSlot);
+        _playerControl.Numbers.RemoveListener(SelectSlot);
     }
     public void FoldUnfoldInventory()
     {

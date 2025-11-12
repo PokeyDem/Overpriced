@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerInputs.IPlayerActions
 {
@@ -25,6 +26,7 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
 
     public UnityEvent ScrollUp;
     public UnityEvent ScrollDown;
+    public UnityEvent<int> Numbers;
 
     private new void Awake()
     {
@@ -154,6 +156,18 @@ public class PlayerControl : SingletonDontDestroyOnLoad<PlayerControl>, PlayerIn
             else if (context.ReadValue<Vector2>().y <0)
             {
                 ScrollDown?.Invoke();
+            }
+        }
+    }
+
+    public void OnNumbers(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            string keyName = context.control.name;
+            if (int.TryParse(keyName, out int number))
+            {
+                Numbers?.Invoke(number-1);
             }
         }
     }
