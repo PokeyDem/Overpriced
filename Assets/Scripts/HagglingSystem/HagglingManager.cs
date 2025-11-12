@@ -173,6 +173,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         _displayTargetActor.DisplayTarget.Flags.IsOccupied = false;
         HagglingEnded?.Invoke();
         _hagglingInProgress = false;
+        _isNpcReady = false;
         _playerControl.enabled = true;
     }
    

@@ -27,7 +27,6 @@ public class ChooseItemToCheckLeaf : Node
             state = NodeState.FAILURE;
             return state;
         }
-
         while (possibleDisplayChoices.Count > 0)
         {
             _displayTargetContext.DisplayTarget = null;
@@ -51,33 +50,27 @@ public class ChooseItemToCheckLeaf : Node
                 if (possibleDisplayChoices.Find(ds => !ds.Flags.IsOccupied) != null)
                 {
                     possibleDisplayChoices.Add(displayContext);
-                    continue;
                 }
-                else
-                {
-                    if (!displayContext.Flags.IsOccupied || displayContext.Flags.IsChosen)
-                    {
-                        
-                    }
-                    else
-                    {
-                        _targetContext.Target = displayContext.Info.Position;
-                        state = NodeState.RESTART;
-                        return state;
-                    }
-                }
+                continue;
+                //if (displayContext.Flags.IsChosen)
+                //{
+                //    continue;
+                //}
+                //else
+                //{
+                //    //_displayChoicesContext.PossibleDisplayChoices = possibleDisplayChoices;
+                //    //_targetContext.Target = displayContext.Info.Position;
+                //    //state = NodeState.RESTART;
+                //    //return state;
+                //}
             }
 
-            if (displayContext.Flags.IsChosen)
-            {
-                continue;
-            }
-            _targetContext.Target=displayContext.Info.Position;//SUCCESS
+            _targetContext.Target = displayContext.Info.Position;//SUCCESS
             _displayTargetContext.DisplayTarget = displayContext;
-            _displayChoicesContext.PossibleDisplayChoices = possibleDisplayChoices;
             break;
         }
-        if(_displayTargetContext.DisplayTarget==null)
+        _displayChoicesContext.PossibleDisplayChoices = new List<DisplayContext>(possibleDisplayChoices);
+        if (_displayTargetContext.DisplayTarget==null)
         {
             _moodController.InvokeMoodChange(MoodType.Sad);
             state = NodeState.FAILURE;
