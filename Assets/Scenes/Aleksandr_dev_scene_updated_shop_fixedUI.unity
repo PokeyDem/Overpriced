@@ -17535,6 +17535,7 @@ GameObject:
   - component: {fileID: 1147939979}
   - component: {fileID: 1147939978}
   - component: {fileID: 1147939977}
+  - component: {fileID: 1147939982}
   m_Layer: 0
   m_Name: OpenShopButton
   m_TagString: Untagged
@@ -17683,6 +17684,19 @@ RectTransform:
   m_AnchoredPosition: {x: 1563.1, y: -784.9}
   m_SizeDelta: {x: 220, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1147939982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147939976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58390017d11c497429da8fde3bdb4ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1147939978}
 --- !u!1 &1148417158
 GameObject:
   m_ObjectHideFlags: 0
@@ -18568,6 +18582,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPlaced:
+    m_PersistentCalls:
+      m_Calls: []
+  listEmpty:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1206169173
