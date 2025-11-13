@@ -82,7 +82,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
             for (int i = 0; i < npcGroupSpawn.SpawnCount; i++)
             {
                 SpawnNpc(_npcPrefabs[(int)npcGroupSpawn.NpcType]);
-                float random = Random.Range(50, 1000);
+                float random = Random.Range(50, 600);
                 random /= 100;
                 yield return new WaitForSeconds(random);
             }
