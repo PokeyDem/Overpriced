@@ -51,17 +51,17 @@ public class NPCDummySpawner : SingletonWithDestroy<NPCDummySpawner>
                     npcPrefab = _npcPrefabs[0];
                     break;
             }
-            //SpawnNpc(npcPrefab);
             StartCoroutine(SpawnMultiple(npcPrefab));
-            _interval = Random.Range(300, 600) / 100;
+            _interval = Random.Range(300, 400) / 100;
             timer = 0f;
         }
     }
 
-    private void SpawnNpc(NPCDummyBehavior npcPrefab)
+    private void SpawnNpc(NPCDummyBehavior npcPrefab, Vector3 spawnpoint, Vector3 despawnpoint, float speed)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
-        npc.Initialize(_spawnPoint.position+GeneratePositionDeviation(-10,60), _despawnPointPos.position, _objectPools[(int)npc.GetNpcType()]);
+
+        npc.Initialize(spawnpoint, despawnpoint, speed, _objectPools[(int)npc.GetNpcType()]);
     }
 
     public NPCDummyBehavior CreateNpc(NPCDummyBehavior prefab)
@@ -99,17 +99,37 @@ public class NPCDummySpawner : SingletonWithDestroy<NPCDummySpawner>
         int rand = Random.Range(0, 100);
 
         int result;
-        if (rand < 60)      
+        if (rand < 75)      
             result = 1;
-        else if (rand < 90) 
+        else if (rand < 95) 
             result = 2;
         else                 
             result = 3;
         if (npcPrefab.GetNpcType() == NPCType.GuildMaster) result = 1;
-        for (int i = 0; i < result; i++)
+        Vector3 spawnpoint = new Vector3(0, 0, 0);
+        Vector3 despawnpoint = new Vector3(0, 0, 0);
+        float deviationZ = 0;
+        switch (Random.Range(0, 100))
         {
-            SpawnNpc(npcPrefab);
-            yield return new WaitForSeconds(0.2f);
+            case >= 50:
+                deviationZ = -0.4f;
+                spawnpoint = _spawnPoint.position + new Vector3(0,0,0.6f);
+                despawnpoint = _despawnPointPos.position + new Vector3(0, 0, 0.6f);
+                break;
+            default:
+                deviationZ = 0.4f;
+                despawnpoint = _spawnPoint.position + new Vector3(0, 0, -0.1f);
+                spawnpoint = _despawnPointPos.position + new Vector3(0, 0, -0.1f);
+                break;
+        }
+        float speed = Random.Range(80, 150);
+        Vector3 deviation = new Vector3(0, 0, 0);
+        for (int i = 1; i <= result; i++)
+        {
+            SpawnNpc(npcPrefab,spawnpoint+deviation,despawnpoint+deviation, speed);
+            int value = (i % 2 == 0) ? 1 : -1;
+            deviation = new Vector3(0, 0, deviationZ * (value));
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }

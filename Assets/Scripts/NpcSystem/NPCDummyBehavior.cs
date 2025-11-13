@@ -10,13 +10,13 @@ public class NPCDummyBehavior : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private NPCType _NPCType;
 
-    public void Initialize(Vector3 spawnPointPos, Vector3 despawnPointPos, IObjectPool<NPCDummyBehavior> pool)
+    public void Initialize(Vector3 spawnPointPos, Vector3 despawnPointPos, float speed, IObjectPool<NPCDummyBehavior> pool)
     {
         _pool = pool;
         _agent = GetComponent<NavMeshAgent>();
-        float random = Random.Range(80, 150);
-        _agent.speed = random / 100;
+        _agent.speed = speed / 100;
         _agent.Warp(spawnPointPos);
+        _agent.transform.LookAt(despawnPointPos);
         _agent.SetDestination(despawnPointPos);
         StartCoroutine(WaitUntilArrived());
     }
