@@ -11657,7 +11657,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 992506148183454073}
   _despawnPointPos: {fileID: 6500047566320184890}
   _npcPrefabs:
-  - {fileID: 443341469367118796, guid: 2b361a2776c34ef4090979c3a97cc82c, type: 3}
+  - {fileID: -1445218009154286741, guid: 9c347ef86046a4146adec831eaf31bdb, type: 3}
   - {fileID: -6709836011409677688, guid: 1d3d18369a21de842be5da7aee84729f, type: 3}
   - {fileID: 443341469367118796, guid: 2b361a2776c34ef4090979c3a97cc82c, type: 3}
   - {fileID: -4701055616174870684, guid: 60f30ac5f7535f34fb7fbd99bbb588f2, type: 3}
