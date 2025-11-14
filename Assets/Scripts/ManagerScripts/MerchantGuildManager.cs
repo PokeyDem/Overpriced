@@ -21,6 +21,8 @@ namespace ManagerScripts {
         [SerializeField] private GameObject itemSlotPrefab;
         [SerializeField] private GameObject itemGrid;
         [SerializeField] private TextMeshProUGUI buyCommunicat;
+        [SerializeField] private TextPopup _buyPopup;
+        [SerializeField] private MoneyPopup _moneyPopup;
         public UnityEvent<ItemData> buyItemEvent;
         public UnityEvent buyItemEventTutorial;
         public UnityEvent<int> spendMoneyEvent;
@@ -103,9 +105,12 @@ namespace ManagerScripts {
             }
             if (_selectedItemSlot.GetItemQuantity() <= 0) {
                 buyCommunicat.text = "Out of stock";
+                _buyPopup.SpawnPopup($"{_selectedItemSlot.GetItem().Name} is out of stock");
                 return;
             }
             if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.Instance.GetCurrentMoney()) {
+                _buyPopup.SpawnPopup($"You bought: {_selectedItemSlot.GetItem().Name}");
+                _moneyPopup.SpawnMoneyPopup(_selectedItemSlot.GetItem().FinalPrice*-1);
                 buyItemEvent.Invoke(_selectedItemSlot.GetItem());
                 buyItemEventTutorial?.Invoke();
                 spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().FinalPrice);
@@ -113,8 +118,11 @@ namespace ManagerScripts {
             }else {
                 if (Random.Range(1, 1000) == 1) {
                     buyCommunicat.text = "How sad you are too poor to buy this";
-                }else {
+                    _buyPopup.SpawnPopup($"{_selectedItemSlot.GetItem().Name} is too expensive for you");
+                }
+                else {
                     buyCommunicat.text = "Not enough money";
+                    _buyPopup.SpawnPopup($"Not enough money for: {_selectedItemSlot.GetItem().Name}");
                 }
             }
         }

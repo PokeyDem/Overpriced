@@ -18,6 +18,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     [SerializeField] private bool _hagglingInProgress = false;
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
+    [SerializeField] private MoneyPopup _moneyPopup;
 
 
     public UnityEvent HagglingInitiated;
@@ -150,6 +151,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
 
     public void SellItem(){
         MoneyManager.Instance.PutMoney(_currentPrice);
+        _moneyPopup.SpawnMoneyPopup(_currentPrice);
         ItemSold?.Invoke();
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);
         onItemSoldNPCType?.Invoke(_npcType);
