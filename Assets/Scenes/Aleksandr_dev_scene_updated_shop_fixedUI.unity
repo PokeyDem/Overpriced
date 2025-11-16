@@ -10225,6 +10225,7 @@ Transform:
   - {fileID: 395924612}
   - {fileID: 1666657416}
   - {fileID: 490358775}
+  - {fileID: 1196703451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &572674504
@@ -18605,6 +18606,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3df7e72065014094a9c9ab0ff6a4b8da, type: 3}
   m_PrefabInstance: {fileID: 1172001658}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1196703450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1196703451}
+  - component: {fileID: 1196703452}
+  m_Layer: 0
+  m_Name: RandomEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1196703451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196703450}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 565410483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1196703452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196703450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7607a850102949a3b73524e0bde6dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomEvents:
+  - eventName: Market bubble - Food
+    eventDescription: Price of Food goes up by 50%
+    modifier: 1.5
+    itemType: 2
+  - eventName: Market crash - Food
+    eventDescription: Price of Food goes down by 50%
+    modifier: 0.5
+    itemType: 2
 --- !u!1 &1197801392
 GameObject:
   m_ObjectHideFlags: 0
@@ -26378,6 +26432,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ManagerScripts.MerchantGuildManager, Assembly-CSharp
         m_MethodName: RestockOffer
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1196703452}
+        m_TargetAssemblyTypeName: ManagerScripts.RandomEventManager, Assembly-CSharp
+        m_MethodName: runEvents
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using ScriptableObjects;
 using UnityEngine;
 using Random = System.Random;
@@ -10,6 +11,7 @@ namespace ManagerScripts
         private int currentEventChance = 5;
         private bool isEventRunning = false;
         private Random rng = new Random();
+        [SerializeField] 
         private List<RandomEvent> randomEvents = new List<RandomEvent>();
         private RandomEvent currentEvent = null;
 
@@ -18,6 +20,7 @@ namespace ManagerScripts
             if (getIsEventRunning())
             {
                 setCurrentEventChance(5);
+                currentEvent = null;
             }
             else
             {
