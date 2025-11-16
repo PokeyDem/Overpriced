@@ -18659,6 +18659,38 @@ MonoBehaviour:
     eventDescription: Price of Food goes down by 50%
     modifier: 0.5
     itemType: 2
+  - eventName: Market bubble - Weapons
+    eventDescription: Price of Weapons goes up by 50%
+    modifier: 1.5
+    itemType: 1
+  - eventName: Market crash - Weapons
+    eventDescription: Price of Weapons goes down by 50%
+    modifier: 0.5
+    itemType: 2
+  - eventName: Market bubble - Potions
+    eventDescription: Price of Potions goes up by 50%
+    modifier: 1.5
+    itemType: 3
+  - eventName: Market crash - Potions
+    eventDescription: Price of Potions goes down by 50%
+    modifier: 0.5
+    itemType: 3
+  - eventName: Market bubble - Armor
+    eventDescription: Price of Armor goes up by 50%
+    modifier: 1.5
+    itemType: 4
+  - eventName: Market crash - Armor
+    eventDescription: Price of Armor goes down by 50%
+    modifier: 0.5
+    itemType: 4
+  - eventName: Market bubble - Medicine
+    eventDescription: Price of Medicine goes up by 50%
+    modifier: 1.5
+    itemType: 5
+  - eventName: Market crash - Medicine
+    eventDescription: Price of Medicine goes down by 50%
+    modifier: 0.5
+    itemType: 5
 --- !u!1 &1197801392
 GameObject:
   m_ObjectHideFlags: 0
