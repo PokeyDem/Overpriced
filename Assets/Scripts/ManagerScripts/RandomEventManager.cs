@@ -1,15 +1,19 @@
-using System;
+using System.Collections.Generic;
+using ScriptableObjects;
+using UnityEngine;
+using Random = System.Random;
 
 namespace ManagerScripts
 {
-    public class RandomEventManager
+    public class RandomEventManager : MonoBehaviour
     {
         private int currentEventChance = 5;
         private bool isEventRunning = false;
         private Random rng = new Random();
-        
+        private List<RandomEvent> randomEvents = new List<RandomEvent>();
+        private RandomEvent currentEvent = null;
 
-        public void Start()
+        public void runEvents()
         {
             if (getIsEventRunning())
             {
@@ -20,6 +24,7 @@ namespace ManagerScripts
                 if (currentEventChance > getRandom().Next(1, 100))
                 {
                     //activate a random event here
+                    currentEvent = randomEvents[getRandom().Next(0,randomEvents.Count)];
                     setIsEventRunning(true);
                 }
                 else IncreaseEventChance();
