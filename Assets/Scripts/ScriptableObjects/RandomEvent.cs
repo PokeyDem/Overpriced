@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace ScriptableObjects
-{
+
     [Serializable]
     public class RandomEvent
     {
@@ -11,4 +10,3 @@ namespace ScriptableObjects
         [field:SerializeField] public float modifier;
         [field:SerializeField] public ItemType itemType;
     }
-}
