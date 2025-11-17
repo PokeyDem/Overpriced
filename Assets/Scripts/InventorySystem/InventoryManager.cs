@@ -88,7 +88,6 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         if (_inventoryUI.gameObject.activeSelf)
             return;
         
-        AudioManager.PlaySound(SoundType.INTERACT, 0.2f);
         _inventoryUI.gameObject.SetActive(true);
         SelectSlot(0);
         _selectedInventorySlot.EnableOutline();

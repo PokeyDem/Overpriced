@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7790512165438165991}
   - component: {fileID: 3533854209037204443}
   - component: {fileID: 1628321032760532549}
-  - component: {fileID: 5097380304061944782}
   - component: {fileID: 8488229924204345326}
   - component: {fileID: 3988333725163156813}
   m_Layer: 9
@@ -189,20 +188,12 @@ MonoBehaviour:
   _rotationSpeed: 12
   _disableControls: 0
   _interactUI: {fileID: 0}
---- !u!114 &5097380304061944782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2767833666904975226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de7dffd9e6a5c44489742c9a8fd0a727, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stepInterval: 0.35
-  _cooldownTime: 0.35
+  ScrollUp:
+    m_PersistentCalls:
+      m_Calls: []
+  ScrollDown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8488229924204345326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,13 +306,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e0980ea6895c8504a9ad7743d0767b0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8976100949385326971}
   m_SourcePrefab: {fileID: 100100000, guid: e0980ea6895c8504a9ad7743d0767b0b, type: 3}
 --- !u!4 &1284836456741497155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e0980ea6895c8504a9ad7743d0767b0b, type: 3}
   m_PrefabInstance: {fileID: 1611759313090580136}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1918383219078345721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e0980ea6895c8504a9ad7743d0767b0b, type: 3}
+  m_PrefabInstance: {fileID: 1611759313090580136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8976100949385326971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918383219078345721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7dffd9e6a5c44489742c9a8fd0a727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stepInterval: 0.35
+  _cooldownTime: 0.35
 --- !u!95 &5130878878120784697 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e0980ea6895c8504a9ad7743d0767b0b, type: 3}
