@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = System.Random;
 
 namespace ManagerScripts
@@ -14,6 +15,9 @@ namespace ManagerScripts
         [SerializeField] 
         private List<RandomEvent> randomEvents = new List<RandomEvent>();
         private RandomEvent currentEvent = null;
+        public UnityEvent<RandomEvent> OnEventRaised;
+        public UnityEvent<string> OnEventRaisedDescription;
+        public UnityEvent OnEventCleared;
 
         public void runEvents()
         {
@@ -21,14 +25,19 @@ namespace ManagerScripts
             {
                 setCurrentEventChance(5);
                 currentEvent = null;
+                setIsEventRunning(false);
+                OnEventCleared?.Invoke();
+                Debug.Log("event none");
             }
             else
             {
-                if (currentEventChance > getRandom().Next(1, 100))
-                {
+                if (currentEventChance > getRandom().Next(1, 100)) {
                     //activate a random event here
                     currentEvent = randomEvents[getRandom().Next(0,randomEvents.Count)];
                     setIsEventRunning(true);
+                    OnEventRaised?.Invoke(currentEvent);
+                    OnEventRaisedDescription?.Invoke(currentEvent.eventDescription);
+                    Debug.Log("event " + currentEvent.eventDescription);
                 }
                 else IncreaseEventChance();
             }

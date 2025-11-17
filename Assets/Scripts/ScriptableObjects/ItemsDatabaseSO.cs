@@ -51,6 +51,22 @@ public class ItemsDatabaseSO : ScriptableObject{
             _itemsDataFamilys[i].Init(i);
         }
     }
+
+    public void ImplementEvent(RandomEvent randomEvent) {
+        foreach (var itemFamily in _itemsDataFamilys) {
+            if (itemFamily.Info.ItemType.Equals(randomEvent.itemType)) {
+                itemFamily.Info.priceModifier = randomEvent.modifier;
+            }else {
+                itemFamily.Info.priceModifier =  1;
+            }
+        }
+    }
+
+    public void ClearEvents(){
+        foreach (var itemFamily in _itemsDataFamilys) {
+            itemFamily.Info.priceModifier =  1;
+        }
+    }
 }
 [Serializable]
 public class BaseItemInfo
@@ -60,9 +76,10 @@ public class BaseItemInfo
     [field: SerializeField] public ItemType ItemType { get; private set; }
     [field: SerializeField] public int BasePrice { get; private set; }
     [field: SerializeField] public string Description { get; private set; }
-    public void Init(int groupID)
-    {
+    public float priceModifier;
+    public void Init(int groupID) {
         ID= groupID;
+        priceModifier = 1;
     }
 }
 [Serializable]
@@ -89,6 +106,7 @@ public class ItemData
         [field: SerializeField] public Sprite PreviewImage { get; private set; }
         public int Rarity{ get; private set; }
         public int BasePrice => Info.BasePrice;
+        public float PriceModifier => Info.priceModifier;
         public ItemType ItemType => Info.ItemType;
         public string Name {
             get {
@@ -102,7 +120,7 @@ public class ItemData
 
         public string Description => Info.Description;
         public int ID => Info.ID * 10 + Rarity;
-        public int FinalPrice =>  BasePrice + (int)(BasePrice / 100.0 * 20 * Rarity);//TODO move price increase percentage to config
+        public int FinalPrice =>  (int)((BasePrice + (BasePrice / 100.0 * 20 * Rarity)) * PriceModifier);//TODO move price increase percentage to config
 
         public void Init(BaseItemInfo info, int rarity) {
             
