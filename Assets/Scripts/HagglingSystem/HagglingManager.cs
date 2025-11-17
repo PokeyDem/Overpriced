@@ -149,6 +149,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     }
 
     public void SellItem(){
+        AudioManager.PlayCashRegisterSfx();
         MoneyManager.Instance.PutMoney(_currentPrice);
         ItemSold?.Invoke();
         onItemSold?.Invoke(_currentPrice*_toleranceDecimal);

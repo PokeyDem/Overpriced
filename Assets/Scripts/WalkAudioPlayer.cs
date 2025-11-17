@@ -11,25 +11,9 @@ public class WalkAudioPlayer : MonoBehaviour{
     
     private float _stepTimer;
     private float _cooldownTimer;
-    private void Awake(){
-        _playerControl = GetComponent<PlayerControl>();
-    }
 
-    private void Update(){
-        _cooldownTimer -= Time.deltaTime;
-        if (_playerControl.IsMoving()){
-            
-            _stepTimer -= Time.deltaTime;
-            
-            if (_stepTimer <= 0 && _cooldownTimer <= 0){
-                
-                AudioManager.PlaySound(SoundType.WALK);
-                _stepTimer = _stepInterval;
-                _cooldownTimer = _cooldownTime;
-            }
-        }
-        else{
-            _stepTimer = 0;
-        }
+    public void PlayFootstepSfx()
+    {
+        AudioManager.PlayRandomWalkSound();
     }
 }

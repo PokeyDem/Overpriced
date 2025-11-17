@@ -109,6 +109,7 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
         if (_itemPrefab != null){
             Destroy(_itemPrefab);
         }
+        AudioManager.PlayItemPlacementSfx();
         _itemPrefab = Instantiate(item.Prefab, _marker.transform.position, Quaternion.identity);
         _item = item;
         isChosen = false;
