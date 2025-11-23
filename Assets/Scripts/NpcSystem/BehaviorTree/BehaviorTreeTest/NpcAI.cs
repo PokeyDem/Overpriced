@@ -241,7 +241,7 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
     public void Despawn()
     {
         Reset();
-        NpcManager.Instance.DespawnNpc(this);
+        //NpcManager.Instance.DespawnNpc(this);
     }
 
     public void InvokeMoodChange(MoodType moodType)
