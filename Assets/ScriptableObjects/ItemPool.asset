@@ -96,10 +96,10 @@ MonoBehaviour:
       rarity: 3
       <Amount>k__BackingField: 3
       <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 40
+      <Probability>k__BackingField: 90
     - <ItemType>k__BackingField: 1
-      rarity: 4
-      <Amount>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 0
       <Probability>k__BackingField: 20
     - <ItemType>k__BackingField: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
     - <ItemType>k__BackingField: 3
       rarity: 5
       <Amount>k__BackingField: 2
-      <IsNotGuaranteed>k__BackingField: 0
+      <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 20
     - <ItemType>k__BackingField: 1
       rarity: 3
