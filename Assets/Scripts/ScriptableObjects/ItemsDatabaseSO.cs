@@ -121,7 +121,7 @@ public class ItemData
 
         public string Description => Info.Description;
         public int ID => Info.ID * 10 + Rarity;
-        public int FinalPrice =>  (int)((BasePrice + ((BasePrice * 20 / 100.0) * (Rarity+(1/4)*math.pow(Rarity,2)))) * PriceModifier);//TODO move price increase percentage to config
+        public int FinalPrice =>  (int)((BasePrice + ((BasePrice * 20 / 100.0) * (Rarity+((1/4)*math.pow(Rarity,2))))) * PriceModifier);//TODO move price increase percentage to config
 
         public void Init(BaseItemInfo info, int rarity) {
             
