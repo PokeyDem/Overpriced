@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -120,7 +121,7 @@ public class ItemData
 
         public string Description => Info.Description;
         public int ID => Info.ID * 10 + Rarity;
-        public int FinalPrice =>  (int)((BasePrice + (BasePrice / 100.0 * 20 * Rarity)) * PriceModifier);//TODO move price increase percentage to config
+        public int FinalPrice =>  (int)((BasePrice + ((BasePrice * 20 / 100.0) * (Rarity+(1/4)*math.pow(Rarity,2)))) * PriceModifier);//TODO move price increase percentage to config
 
         public void Init(BaseItemInfo info, int rarity) {
             
