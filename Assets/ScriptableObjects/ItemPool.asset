@@ -96,10 +96,10 @@ MonoBehaviour:
       rarity: 3
       <Amount>k__BackingField: 3
       <IsNotGuaranteed>k__BackingField: 0
-      <Probability>k__BackingField: 40
+      <Probability>k__BackingField: 90
     - <ItemType>k__BackingField: 1
-      rarity: 4
-      <Amount>k__BackingField: 1
+      rarity: 2
+      <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 0
       <Probability>k__BackingField: 20
     - <ItemType>k__BackingField: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
     - <ItemType>k__BackingField: 3
       rarity: 5
       <Amount>k__BackingField: 2
-      <IsNotGuaranteed>k__BackingField: 0
+      <IsNotGuaranteed>k__BackingField: 1
       <Probability>k__BackingField: 20
     - <ItemType>k__BackingField: 1
       rarity: 3
@@ -132,22 +132,22 @@ MonoBehaviour:
       rarity: 1
       <Amount>k__BackingField: 5
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 60
+      <Probability>k__BackingField: 70
     - <ItemType>k__BackingField: 1
       rarity: 2
       <Amount>k__BackingField: 4
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 50
+      <Probability>k__BackingField: 80
     - <ItemType>k__BackingField: 1
       rarity: 3
       <Amount>k__BackingField: 3
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 20
+      <Probability>k__BackingField: 40
     - <ItemType>k__BackingField: 1
       rarity: 4
       <Amount>k__BackingField: 2
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 20
+      <Probability>k__BackingField: 30
     - <ItemType>k__BackingField: 1
       rarity: 5
       <Amount>k__BackingField: 1
@@ -161,7 +161,7 @@ MonoBehaviour:
     - <ItemType>k__BackingField: 4
       rarity: 1
       <Amount>k__BackingField: 5
-      <IsNotGuaranteed>k__BackingField: 1
+      <IsNotGuaranteed>k__BackingField: 0
       <Probability>k__BackingField: 80
     - <ItemType>k__BackingField: 2
       rarity: 2
@@ -172,12 +172,12 @@ MonoBehaviour:
       rarity: 3
       <Amount>k__BackingField: 6
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 40
+      <Probability>k__BackingField: 60
     - <ItemType>k__BackingField: 2
       rarity: 4
       <Amount>k__BackingField: 4
       <IsNotGuaranteed>k__BackingField: 1
-      <Probability>k__BackingField: 20
+      <Probability>k__BackingField: 30
     - <ItemType>k__BackingField: 3
       rarity: 4
       <Amount>k__BackingField: 2
