@@ -14,11 +14,11 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     {
         base.Awake();
         _displaySlotsWithItems.Clear();
-        listEmpty?.Invoke();
+        CheckListEmpty();
     }
     private void Start()
     {
-        listEmpty?.Invoke();
+        CheckListEmpty();
     }
     public void AddDisplaySlotWithItem(DisplayContext displaySlot)
     {
@@ -31,10 +31,7 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     public void RemoveDisplaySlotWithItem(DisplayContext displaySlot)
     {
         _displaySlotsWithItems.Remove(displaySlot);
-        if (_displaySlotsWithItems != null || _displaySlotsWithItems.Count == 0)
-        {
-            listEmpty?.Invoke();
-        }
+        CheckListEmpty();
     }
 
     public List<DisplayContext> GetDisplaySlotsWithItems()
@@ -62,6 +59,9 @@ public class DisplaysWithItemsListHandler : SingletonWithDestroy<DisplaysWithIte
     }
     public void CheckListEmpty()
     {
-        listEmpty?.Invoke();
+        if (_displaySlotsWithItems != null && _displaySlotsWithItems.Count == 0)
+        {
+            listEmpty?.Invoke();
+        }
     }
 }

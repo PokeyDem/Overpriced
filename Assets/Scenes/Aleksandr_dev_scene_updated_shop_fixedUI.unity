@@ -15502,6 +15502,10 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 7391320403997151285, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
+      propertyPath: m_text
+      value: Overpriced
+      objectReference: {fileID: 0}
     - target: {fileID: 7964128472790244042, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
       propertyPath: m_fontAsset
       value: 

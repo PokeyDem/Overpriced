@@ -9,8 +9,9 @@ namespace ManagerScripts
 {
     public class RandomEventManager : MonoBehaviour
     {
-        private int currentEventChance = 5;
+        private int currentEventChance = 25;
         private bool isEventRunning = false;
+        private int isFirstRun = 0;
         private Random rng = new Random();
         [SerializeField] 
         private List<RandomEvent> randomEvents = new List<RandomEvent>();
@@ -21,31 +22,38 @@ namespace ManagerScripts
 
         public void runEvents()
         {
-            if (getIsEventRunning())
+            if (isFirstRun == 0)
             {
-                setCurrentEventChance(5);
-                currentEvent = null;
-                setIsEventRunning(false);
-                OnEventCleared?.Invoke();
-                Debug.Log("event none");
+                isFirstRun++;
             }
             else
             {
-                if (currentEventChance > getRandom().Next(1, 100)) {
-                    //activate a random event here
-                    currentEvent = randomEvents[getRandom().Next(0,randomEvents.Count)];
-                    setIsEventRunning(true);
-                    OnEventRaised?.Invoke(currentEvent);
-                    OnEventRaisedDescription?.Invoke(currentEvent.eventDescription);
-                    Debug.Log("event " + currentEvent.eventDescription);
+                if (getIsEventRunning())
+                {
+                    setCurrentEventChance(25);
+                    currentEvent = null;
+                    setIsEventRunning(false);
+                    OnEventCleared?.Invoke();
+                    Debug.Log("event none");
                 }
-                else IncreaseEventChance();
+                else
+                {
+                    if (currentEventChance > getRandom().Next(1, 100)) {
+                        //activate a random event here
+                        currentEvent = randomEvents[getRandom().Next(0,randomEvents.Count)];
+                        setIsEventRunning(true);
+                        OnEventRaised?.Invoke(currentEvent);
+                        OnEventRaisedDescription?.Invoke(currentEvent.eventDescription);
+                        Debug.Log("event " + currentEvent.eventDescription);
+                    }
+                    else IncreaseEventChance();
+                }
             }
         }
         
         public void IncreaseEventChance()
         {
-            setCurrentEventChance(getCurrentEventChance() + 50);
+            setCurrentEventChance(getCurrentEventChance() + 42);
         }
 
         public int getCurrentEventChance()
