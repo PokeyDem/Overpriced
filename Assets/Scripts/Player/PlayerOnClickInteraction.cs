@@ -13,8 +13,7 @@ public class PlayerOnClickInteraction : MonoBehaviour{
         if (Physics.Raycast(ray, out RaycastHit hit)){
            _currentInteractible= hit.collider.gameObject.GetComponent<IInteractibleOnClick>();
         }
-
-
+        
         if (Input.GetMouseButtonDown(0)){
             if (_currentInteractible != null)
             {
@@ -23,8 +22,7 @@ public class PlayerOnClickInteraction : MonoBehaviour{
             }
 
         }
-      
-            
+        
         if (_currentInteractible != _previousInteractible){
 
             if (_previousInteractible != null){
@@ -41,7 +39,6 @@ public class PlayerOnClickInteraction : MonoBehaviour{
                 UIManager.Instance.SetBuildingInfo(_currentInteractible.GetBuildingDescription());
             }
         }
-        
 
         _previousInteractible = _currentInteractible;
     }

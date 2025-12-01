@@ -10,6 +10,7 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
     [SerializeField] private GameObject _merchantsGuildUI;
     [SerializeField] private GameObject _buildingInfoPanel;
     [SerializeField] private Vector3 _buildingInfoPanelOffset;
+    [SerializeField] private List<TextMeshProUGUI> _mainMenuButtonsText;
 
     private new void Awake(){
         base.Awake();
@@ -52,11 +53,11 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
         EnableInteractUI();
     }
     
-    private void DisableHUD(){
+    public void DisableHUD(){
         _hud.SetActive(false);
     }
 
-    private void EnableHUD(){
+    public void EnableHUD(){
         _hud.SetActive(true);
     }
 
@@ -74,6 +75,22 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
 
     private void DisableInteractUI(){
         _interactUI.SetActive(false);
+    }
+
+    public void HideMainMenuButtons()
+    {
+        foreach (var buttonText in _mainMenuButtonsText)
+        {
+            buttonText.gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowMainMenuButtons()
+    {
+        foreach (var buttonText in _mainMenuButtonsText)
+        {
+            buttonText.gameObject.SetActive(true);
+        }
     }
 
 
