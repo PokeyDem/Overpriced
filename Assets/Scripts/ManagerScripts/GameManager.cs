@@ -1,4 +1,5 @@
 
+using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonDontDestroyOnLoad<GameManager>
@@ -11,6 +12,7 @@ public class GameManager : SingletonDontDestroyOnLoad<GameManager>
     private void Start()
     {
         DayManager.Instance.dayChange.AddListener(End);
+        MainMenuManager.Instance.SwitchToMainMenu();
     }
     private void End(int day)
     {

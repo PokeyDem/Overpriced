@@ -11,6 +11,8 @@ TagManager:
   - Item
   - CityBuilding
   - Lantern
+  - HoverableObject
+  - InteractableButton
   layers:
   - Default
   - TransparentFX
@@ -29,7 +31,7 @@ TagManager:
   - Background
   - Metallic
   - PostProcessing
-  - 
+  - InteractableButtons
   - 
   - 
   - 

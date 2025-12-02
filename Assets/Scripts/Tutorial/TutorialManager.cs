@@ -119,6 +119,12 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
         _tutorialDone=true;
         this.gameObject.SetActive(false);
     }
+
+    public void EnableTutorial()
+    {
+        _tutorialDone=false;
+        gameObject.SetActive(true);
+    }
     public void SetCurrentCommand(TutorialNextStepCommand command)
     {
         _currentCommand.RemoveNextListener();
