@@ -19,6 +19,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
     [SerializeField] private MoneyPopup _moneyPopup;
+    private bool _generalToleranceBuff=false;
 
 
     public UnityEvent HagglingInitiated;
@@ -38,7 +39,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     private float _randomDeviation;
     private float _maxThreshold;
     private float _maxAcceptableMarkup;
-
+    
 
     private IHasDisplayTarget _displayTargetActor;
     private IMoodController _moodController;
@@ -77,6 +78,10 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         _displayTargetActor = displayTargetActor;
         _moodController = moodController;
         _toleranceDecimal=toleranceDecimal;
+        if (_generalToleranceBuff)
+        {
+            _toleranceDecimal *= 1.1f;
+        }
         _npcType = npcType;
         SetNpcReadiness(true);
     }
@@ -220,5 +225,8 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         return _maxAcceptableMarkup;
     }
 
+    public void BuffGeneralTolerance() {
+        _generalToleranceBuff = true;
+    }
 
 }
