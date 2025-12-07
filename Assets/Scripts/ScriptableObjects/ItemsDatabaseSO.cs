@@ -70,8 +70,7 @@ public class ItemsDatabaseSO : ScriptableObject{
     }
 
     public void ApplyTalent() {
-        foreach (var itemFamily in _itemsDataFamilys)
-        {
+        foreach (var itemFamily in _itemsDataFamilys) {
             itemFamily.Info.sellPriceModifier = 0.9f;
         }
     }

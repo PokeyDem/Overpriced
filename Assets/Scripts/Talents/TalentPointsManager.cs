@@ -15,6 +15,7 @@ public class TalentPointsManager : SingletonDontDestroyOnLoad<TalentPointsManage
     public bool HasSkillPoints => skillPoints > 0;
 
     private void Awake() {
+        base.Awake();
         OnSkillPointsChanged?.Invoke(skillPoints.ToString());
     }
 

@@ -39,9 +39,12 @@ public class TalentChoice : MonoBehaviour
 
     private void Unlock(Talent talent) {
         if (TalentPointsManager.Instance.HasSkillPoints){
+            TalentPointsManager.Instance.UseSkillPoint();
             CanBeUnlock = false;
             IsUnlock =  true;
             talent.OnUnlock?.Invoke();
+            buttonA.interactable = false;
+            buttonB.interactable = false;
         }
         
     }
