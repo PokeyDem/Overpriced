@@ -15,6 +15,7 @@ public class TalentChoice : MonoBehaviour
     [SerializeField] private Button buttonB;
     [SerializeField] private Talent talentB;
     [SerializeField] private TalentChoice predecessor;
+    public UnityEvent OnUnlock;
     public bool IsUnlock  { get; private set; } = false;
     public bool CanBeUnlock { get; private set; }  = true;
 
@@ -25,6 +26,7 @@ public class TalentChoice : MonoBehaviour
         if (predecessor!=null && !predecessor.IsUnlock) {
             buttonA.interactable = false;
             buttonB.interactable = false;
+            CanBeUnlock = false;
         }
     }
 
@@ -38,7 +40,7 @@ public class TalentChoice : MonoBehaviour
     }
 
     private void Unlock(Talent talent) {
-        if (TalentPointsManager.Instance.HasSkillPoints){
+        if (CanBeUnlock && TalentPointsManager.Instance.HasSkillPoints){
             TalentPointsManager.Instance.UseSkillPoint();
             CanBeUnlock = false;
             IsUnlock =  true;
@@ -46,7 +48,12 @@ public class TalentChoice : MonoBehaviour
             buttonA.interactable = false;
             buttonB.interactable = false;
         }
-        
+    }
+
+    private void Activate() {
+        buttonA.interactable = true;
+        buttonB.interactable = true;
+        CanBeUnlock = true;
     }
 
 }
