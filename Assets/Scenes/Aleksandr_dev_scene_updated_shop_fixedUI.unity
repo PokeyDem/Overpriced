@@ -2093,6 +2093,17 @@ Transform:
   - {fileID: 286513616}
   m_Father: {fileID: 712134710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161375194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 642159433491272279, guid: 337380f8caf87c14db8c7d59e7990223, type: 3}
+  m_PrefabInstance: {fileID: 6254454210579204114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &165777401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13811,6 +13822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: d0d62cfe7f6f3994ebc026400ad2d7fc, type: 2}
   volumeSlider: {fileID: 2089332941}
+  qualityDropdown: {fileID: 161375194}
 --- !u!1 &774392234
 GameObject:
   m_ObjectHideFlags: 0
