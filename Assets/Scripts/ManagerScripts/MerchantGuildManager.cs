@@ -84,7 +84,7 @@ namespace ManagerScripts {
                 _itemIconImage.sprite = currentItem.PreviewImage;
                 _itemNameField.text = currentItem.Name;
                 _itemDescField.text = currentItem.Description;
-                _itemPriceField.text = "Price: " + currentItem.FinalPrice;
+                _itemPriceField.text = "Price: " + currentItem.SellPrice;
                 itemInfoPanel.SetActive(true);
                 //itemInfoPanel.GetComponentInChildren<TextMeshProUGUI>().text = GetItemInfo(currentItem);
             }
@@ -124,12 +124,12 @@ namespace ManagerScripts {
                 _buyPopup.SpawnPopup($"{_selectedItemSlot.GetItem().Name} is out of stock");
                 return;
             }
-            if (_selectedItemSlot.GetItem().FinalPrice <= MoneyManager.Instance.GetCurrentMoney()) {
+            if (_selectedItemSlot.GetItem().SellPrice <= MoneyManager.Instance.GetCurrentMoney()) {
                 _buyPopup.SpawnPopup($"You bought: {_selectedItemSlot.GetItem().Name}");
-                _moneyPopup.SpawnMoneyPopup(_selectedItemSlot.GetItem().FinalPrice*-1);
+                _moneyPopup.SpawnMoneyPopup(_selectedItemSlot.GetItem().SellPrice*-1);
                 buyItemEvent.Invoke(_selectedItemSlot.GetItem());
                 buyItemEventTutorial?.Invoke();
-                spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().FinalPrice);
+                spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().SellPrice);
                 _selectedItemSlot.DecreaseQuantity();
             }else {
                 if (Random.Range(1, 1000) == 1) {

@@ -19,6 +19,13 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     [SerializeField] private int _npcOffer = 0;
     [SerializeField] private PlayerControl _playerControl;
     [SerializeField] private MoneyPopup _moneyPopup;
+    private bool _generalToleranceBuff=false;
+    private bool _generalToleranceBuff2=false;
+    private bool _commonerToleranceBuff=false;
+    private bool _citizenToleranceBuff=false;
+    private bool _aristocratToleranceBuff=false;
+    private bool _guildMasterToleranceBuff=false;
+    private bool _lucySellRoll;
 
 
     public UnityEvent HagglingInitiated;
@@ -38,7 +45,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     private float _randomDeviation;
     private float _maxThreshold;
     private float _maxAcceptableMarkup;
-
+    
 
     private IHasDisplayTarget _displayTargetActor;
     private IMoodController _moodController;
@@ -77,7 +84,19 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         _displayTargetActor = displayTargetActor;
         _moodController = moodController;
         _toleranceDecimal=toleranceDecimal;
+        if (_generalToleranceBuff) {
+            _toleranceDecimal *= 1.1f;
+        }
+        if (_generalToleranceBuff) {
+            _toleranceDecimal *= 1.2f;
+        }
         _npcType = npcType;
+        if ((_commonerToleranceBuff && npcType==NPCType.Commoner) || 
+            (_citizenToleranceBuff && npcType==NPCType.Citizen) ||
+            (_aristocratToleranceBuff && npcType==NPCType.Aristocrat) ||
+            (_guildMasterToleranceBuff && npcType==NPCType.GuildMaster)) {
+            _toleranceDecimal *= 1.2f;
+        }
         SetNpcReadiness(true);
     }
     public void PriceChange()
@@ -135,6 +154,10 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
                 _nrOfAttemptsLeft--;
                 _npcOffer = (int)(_basePrice + Mathf.Round(_basePrice* _maxAcceptableMarkup/6 * (3-_nrOfAttemptsLeft)));
                 NrOfAttemptsChanged?.Invoke();
+            }
+            else if (_lucySellRoll && Random.Range(0, 100) <= 20)
+            {
+                SellItem();
             }
             else{
                 _nrOfAttemptsLeft--;
@@ -220,5 +243,32 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
         return _maxAcceptableMarkup;
     }
 
+    public void BuffGeneralTolerance() {
+        _generalToleranceBuff = true;
+    }
+    
+    public void BuffGeneralTolerance2() {
+        _generalToleranceBuff2 = true;
+    }
+
+    public void BuffCommonerTolerance() {
+        _commonerToleranceBuff = true;
+    }
+    
+    public void BuffCitizenTolerance() {
+        _citizenToleranceBuff = true;
+    }
+    
+    public void BuffAristocratTolerance() {
+        _aristocratToleranceBuff = true;
+    }
+    
+    public void BuffGuildMasterTolerance() {
+        _guildMasterToleranceBuff = true;
+    }
+
+    public void BuffLucySellRoll() {
+        _lucySellRoll = true;
+    }
 
 }
