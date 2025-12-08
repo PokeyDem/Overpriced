@@ -92,6 +92,4 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
             buttonText.gameObject.SetActive(true);
         }
     }
-
-
 }
