@@ -15943,7 +15943,7 @@ PrefabInstance:
     - target: {fileID: 3218471272708073041, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 635497688}
     - target: {fileID: 3218471272708073041, guid: ed11048b94ff64b49817f2f378b8c331, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume
