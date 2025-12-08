@@ -1,12 +1,21 @@
 
+using UnityEditor;
 using UnityEngine;
 
 public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 {
     private bool _isInSubMenu = false;
+    private bool _isInMainMenu = true;
+    private bool _firstGameStarted = false;
     
     public void SwitchToMainMenu()
     {
+        if (!_firstGameStarted)
+            PauseMenuManager.Instance.DisablePausing();
+        
+        //Disable trigger switching
+        CameraController.Instance.ChangeTriggerSwitchState(false);
+        
         //Disable player control
         PlayerControl.Instance.DisableControl();
         
@@ -26,6 +35,8 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void SwitchToGame()
     {
+        CameraController.Instance.ChangeTriggerSwitchState(true);
+        
         PlayerControl.Instance.EnableControl();
         
         UIManager.Instance.EnableHUD();
@@ -37,26 +48,60 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         CameraController.Instance.SwitchToShop();
         
         UIManager.Instance.HideMainMenuButtons();
+        _isInSubMenu = false;
     }
 
-    public void OnTestButtonPress(GameObject button)
+    private void OpenDrawer()
     {
-        MainMenuAnimationManager.Instance.PressButton(button.transform);
         MainMenuAnimationManager.Instance.OpenDrawer();
         CameraController.Instance.SwitchToCashRegisterDrawer();
         _isInSubMenu = true;
     }
 
-    public void OnNewGameButtonPress()
+    private void PressButton(GameObject button)
+    {
+        MainMenuAnimationManager.Instance.PressButton(button.transform);
+    }
+
+    public void OnNewGameButtonPress(GameObject button)
     {
         if (_isInSubMenu) return;
-        SwitchToGame();
+
+        if (!_firstGameStarted)
+        {
+            PressButton(button);
+            SwitchToGame();
+            _firstGameStarted = true;
+            PauseMenuManager.Instance.EnablePausing();
+        }
+        else
+        {
+            PressButton(button);
+            GameManager.Instance.ReloadGame();
+            SwitchToGame();
+            _isInMainMenu = false; 
+        }
+    }
+
+    public void BlankShot(GameObject button) // For test purposes
+    {
+        PressButton(button);
     }
 
     public void OnSettingButtonPress(GameObject button)
     {
         if (_isInSubMenu) return;
-        OnTestButtonPress(button);
+        PressButton(button);
+        OpenDrawer();
+        MainMenuUIManager.Instance.ShowSettingsUI();
+    }
+
+    public void OnCreditsButtonPress(GameObject button)
+    {
+        if (_isInSubMenu) return;
+        PressButton(button);
+        OpenDrawer();
+        MainMenuUIManager.Instance.ShowCreditsUI();
     }
 
     public void OnDrawerHandleClick()
@@ -64,6 +109,17 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         MainMenuAnimationManager.Instance.CloseDrawer();
         CameraController.Instance.SwitchToCashRegister();
         _isInSubMenu = false;
+    }
+
+    public void OnExitButtonPress(GameObject button)
+    {
+        if (_isInSubMenu) return;
+        PressButton(button);
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 
     public bool IsInSubMenu()

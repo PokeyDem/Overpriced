@@ -25,8 +25,7 @@ public class SaveSlot : MonoBehaviour{
         return _id;
     }
 
-    public void SetSaveInfo(){ //TODO refactor this later
-        Debug.Log(_id);
+    public void SetSaveInfo(){
         if (_id == 6)
             _textField.text = "QuickSave\n"
                               + $"Day: {DayManager.Instance.GetDayData().DayCount}\n"

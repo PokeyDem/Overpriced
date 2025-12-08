@@ -6,7 +6,7 @@ namespace UI
   {
     public void Interact()
     {
-      MainMenuManager.Instance.OnNewGameButtonPress();
+      MainMenuManager.Instance.OnNewGameButtonPress(gameObject);
     }
   }
 }

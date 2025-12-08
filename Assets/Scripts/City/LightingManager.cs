@@ -133,6 +133,7 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
 
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_partOfDayLighting == DayManager.PartOfDay.Evening)
@@ -149,6 +150,7 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
                 _partOfDayLighting = DayManager.PartOfDay.Evening;
             }
         }
+        #endif
     }
 
     private void SetMorningLighting(){

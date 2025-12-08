@@ -82,4 +82,11 @@ public class ExperienceManager : MonoBehaviour {
     public float GetCurrentExp() { return _currentExp; }
     public int GetNextLvlExp() { return _nextLvlExp; }
 
+    public void ResetLevel()
+    {
+        _level = 1;
+        _currentExp = 0;
+        levelUpEvent.Invoke(_level.ToString());
+    }
+
 }

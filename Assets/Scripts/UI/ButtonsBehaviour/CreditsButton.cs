@@ -6,6 +6,6 @@ public class CreditsButton : MonoBehaviour, IInteractableMenuButton
 {
     public void Interact()
     {
-        MainMenuManager.Instance.OnSettingButtonPress(gameObject);
+        MainMenuManager.Instance.OnCreditsButtonPress(gameObject);
     }
 }

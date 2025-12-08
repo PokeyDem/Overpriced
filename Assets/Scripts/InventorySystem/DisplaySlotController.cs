@@ -86,6 +86,21 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
         }
     }
 
+    // private void SetUpPurchasableDisplay()
+    // {
+    //     if (!isBought) {
+    //         _baseMaterials = display.GetComponent<MeshRenderer>().materials;
+    //         ShopStateManager.ShopStateManagerInstance.shopWosOpen.AddListener(HideDisplay);
+    //         ShopStateManager.ShopStateManagerInstance.shopWosClose.AddListener(ShowToBuy); 
+    //         _materials = display.GetComponent<MeshRenderer>().materials;
+    //         for (int i=0; i<_materials.Length;i++) {
+    //             _materials[i] = previewMaterial;
+    //         }
+    //         display.GetComponent<MeshRenderer>().materials = _materials;
+    //         _collider = GetComponent<Collider>();
+    //     }
+    // }
+
     public void EnableMarker(){
         if (isBought) {
             _marker.SetActive(true);
@@ -182,5 +197,11 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
         }
         display.GetComponent<MeshRenderer>().materials = _materials;
         _collider.enabled = true;
+    }
+
+    public void ResetPurchasableDisplay()
+    {
+        isBought = false;
+        ShowToBuy();
     }
 }

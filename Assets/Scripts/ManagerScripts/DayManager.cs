@@ -75,6 +75,12 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
         dayCount++;
         currentPartOfDay = PartOfDay.Morning;
         dayChange.Invoke(dayCount);
-    } 
+    }
+
+    public void Reset()
+    {
+        dayCount = 1;
+        currentPartOfDay = PartOfDay.Morning;
+    }
 
 }

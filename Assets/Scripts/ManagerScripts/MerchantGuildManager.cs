@@ -11,7 +11,7 @@ using Button = UnityEngine.UI.Button;
 using Random = UnityEngine.Random;
 
 namespace ManagerScripts {
-    public class MerchantGuildManager : MonoBehaviour {
+    public class MerchantGuildManager : SingletonWithDestroy<MerchantGuildManager> {
         [SerializeField] private MerchantGuildItemPoolSo itemPool;
         [SerializeField] private GameObject itemInfoPanel;
         [SerializeField] private Image _itemIconImage;
@@ -29,7 +29,8 @@ namespace ManagerScripts {
         private List<GameObject> _shopPositions;
         private ItemSlotUIController _selectedItemSlot;
 
-        public void Awake() {
+        public new void Awake() {
+            base.Awake();
             _shopPositions = new List<GameObject>();
             buyCommunicat.text = "";
         }
@@ -53,6 +54,20 @@ namespace ManagerScripts {
                 slot.GetComponentInChildren<Button>().onClick.AddListener(() => SelectSlot(slotIndex));
             }
 
+        }
+
+        private void ClearShopPositions()
+        {
+            foreach (var itemSlot in _shopPositions)
+            {
+                itemSlot.GetComponent<ItemSlotUIController>().RemoveItem();
+            }
+        }
+
+        public void ResetShop()
+        {
+            ClearShopPositions();
+            AddShopPositions(1);
         }
 
         public void SelectSlot(int selectedSlotId) {
@@ -88,7 +103,8 @@ namespace ManagerScripts {
         private int FindExistingItem(ItemData item) {
             int counter = 0;
             foreach (var itemSlot in _shopPositions) {
-                if (itemSlot.GetComponent<ItemSlotUIController>().GetItem().ID == item.ID) {
+                ItemSlotUIController slot = itemSlot.GetComponentInChildren<ItemSlotUIController>();
+                if (slot.GetItem() != null && slot.GetItem().ID == item.ID) {
                     return counter;
                 }
 

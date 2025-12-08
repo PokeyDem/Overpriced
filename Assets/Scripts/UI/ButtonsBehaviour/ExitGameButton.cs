@@ -6,6 +6,6 @@ public class ExitGameButton : MonoBehaviour, IInteractableMenuButton
 {
     public void Interact()
     {
-        MainMenuManager.Instance.OnSettingButtonPress(gameObject);
+        MainMenuManager.Instance.OnExitButtonPress(gameObject);
     }
 }

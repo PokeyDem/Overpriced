@@ -15,10 +15,10 @@ public class CameraController : SingletonWithDestroy<CameraController> {
     private Vector3 _targetPos;
     private Quaternion _targetRotation;
     private bool _isInAction;
+    private bool _triggerSwitchEnabled;
 
     private new void Awake(){
         base.Awake();
-        _targetPos = _gridPos;
     }
 
     private void Update(){
@@ -41,15 +41,21 @@ public class CameraController : SingletonWithDestroy<CameraController> {
     }
 
     private void OnTriggerEnter(Collider other){
-        if (other.CompareTag("Player")){
-            SwitchToShop();
+        if (_triggerSwitchEnabled)
+        {
+            if (other.CompareTag("Player")){
+                SwitchToShop();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other){
-        if (other.CompareTag("Player")){
-            _targetPos = _gridPos;
-            _isInAction = true;
+        if (_triggerSwitchEnabled)
+        {
+            if (other.CompareTag("Player")){
+                _targetPos = _gridPos;
+                _isInAction = true;
+            }
         }
     }
 
@@ -71,5 +77,10 @@ public class CameraController : SingletonWithDestroy<CameraController> {
     {
         _targetRotation = _drawerRot;
         _isInAction = true;
+    }
+
+    public void ChangeTriggerSwitchState(bool newState)
+    {
+        _triggerSwitchEnabled = newState;
     }
 }

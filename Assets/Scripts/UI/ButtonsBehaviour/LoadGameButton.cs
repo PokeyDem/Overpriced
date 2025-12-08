@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadGameButton : MonoBehaviour
+public class LoadGameButton : MonoBehaviour, IInteractableMenuButton
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Interact()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        MainMenuManager.Instance.BlankShot(gameObject);
     }
 }

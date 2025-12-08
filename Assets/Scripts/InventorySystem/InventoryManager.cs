@@ -47,7 +47,7 @@ public class InventoryManager : SingletonDontDestroyOnLoad<InventoryManager>, II
         AddSlots(DEFAULT_SLOT_COUNT);
         _itemCategoryText.text = ItemType.All.ToString();
     }
-    private void ClearInventory(){
+    public void ClearInventory(){
         foreach (var slot in _inventorySlots){
             if (slot.GetComponent<ItemSlotUIController>().GetItem() != null) 
                 slot.GetComponent<ItemSlotUIController>().RemoveItem();
