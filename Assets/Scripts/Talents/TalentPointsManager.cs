@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class TalentPointsManager : SingletonDontDestroyOnLoad<TalentPointsManager>
 {
     
-    [SerializeField] private int skillPoints=0;
+    [SerializeField] private int skillPoints=-1;
     [SerializeField] private UnityEvent<string> OnSkillPointsChanged;
     public bool HasSkillPoints => skillPoints > 0;
 

@@ -543,6 +543,82 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1690766950}
     m_Modifications:
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: predecessor
+      value: 
+      objectReference: {fileID: 1946959744}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 41b38223f11fed841b91bc0824d33a6f, type: 3}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.name
+      value: General Tolerance Buff
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7862d254f9c0f5e4b88cf90289de7f61, type: 3}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.name
+      value: 20% chance to sell overprized item
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffGeneralTolerance2
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffLucySellRoll
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 516669859148488700, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1534215171533301320, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
       propertyPath: talentA.name
       value: 10% Merchant guild price reduction
@@ -623,6 +699,106 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: abaf40ee826d8b54785e34e6df4946ce, type: 3}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.name
+      value: General Tolerance Buff
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: bf6e7da3224ede741b99644610067382, type: 3}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.name
+      value: 10% Merchant Guild discount
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 682738673}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 7df7ddb82b1dcfd4899982cfc714df8b, type: 2}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffGeneralTolerance
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplyTalent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TalentChoice, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ItemsDatabaseSO, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5958942278230905753, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -670,6 +846,166 @@ PrefabInstance:
     - target: {fileID: 6400960293418892373, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
       propertyPath: talentSo.description
       value: Lets go gambling
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: predecessor
+      value: 
+      objectReference: {fileID: 1512858814}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: cc02c1473567ac64c90fa343a8abd886, type: 3}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.name
+      value: Commoner easier to haggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: d9088d15c49738741bd6a4762c5d4a14, type: 3}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.name
+      value: Citizen easier to haggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffCommonerTolerance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffCitizenTolerance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: predecessor
+      value: 
+      objectReference: {fileID: 682738673}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a63672f4cd5176e49a0434697a3fb844, type: 3}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.name
+      value: Aristrocrate easier to haggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: c3a51b21d23f50c49984e781ac84d3a3, type: 3}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.name
+      value: Guild Master easier to haggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2072193982}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffAristocratTolerance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuffGuildMasterTolerance
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HagglingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentA.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+      propertyPath: talentB.OnUnlock.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -11898,6 +12234,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactableGameObject: {fileID: 2072193980}
   _playerControl: {fileID: 2060940701}
+--- !u!114 &682738673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8177275689338787557, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+  m_PrefabInstance: {fileID: 75236437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18329ed6e89f7c949b8536008921113b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &686289394
 GameObject:
   m_ObjectHideFlags: 0
@@ -16160,7 +16507,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1936332915}
   m_Father: {fileID: 1474144700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -23184,6 +23532,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4367800696584673179, guid: f0f3d4709694a7d4eb3d86fb991d0526, type: 3}
+      propertyPath: skillPoints
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367800696584673179, guid: f0f3d4709694a7d4eb3d86fb991d0526, type: 3}
       propertyPath: talentButtons.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -23777,7 +24129,6 @@ RectTransform:
   m_Children:
   - {fileID: 883904683}
   - {fileID: 949582277}
-  - {fileID: 1936332915}
   - {fileID: 1306610802}
   - {fileID: 944552322}
   - {fileID: 885661312}
@@ -23917,6 +24268,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 843052775}
   m_SourcePrefab: {fileID: 100100000, guid: f3a2fe72676a26d41887713fe9578e06, type: 3}
+--- !u!114 &1512858814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2827488317870799924, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+  m_PrefabInstance: {fileID: 75236437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18329ed6e89f7c949b8536008921113b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1527477945
 GameObject:
   m_ObjectHideFlags: 0
@@ -28270,18 +28632,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936332914}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2032479793}
   - {fileID: 1994571371}
-  m_Father: {fileID: 1474144700}
+  m_Father: {fileID: 949582277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -153.2, y: 0.70000076}
+  m_AnchoredPosition: {x: -0.19999695, y: -5.1999626}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936332916
@@ -28310,6 +28672,17 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1946959744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8304060694784080582, guid: 6b9c44f64dada8c4da5491f0743f65a3, type: 3}
+  m_PrefabInstance: {fileID: 75236437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18329ed6e89f7c949b8536008921113b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1947892076
 GameObject:
   m_ObjectHideFlags: 0
