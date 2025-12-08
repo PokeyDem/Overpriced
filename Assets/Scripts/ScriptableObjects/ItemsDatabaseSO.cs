@@ -68,6 +68,12 @@ public class ItemsDatabaseSO : ScriptableObject{
             itemFamily.Info.priceModifier =  1;
         }
     }
+
+    public void ApplyTalent() {
+        foreach (var itemFamily in _itemsDataFamilys) {
+            itemFamily.Info.sellPriceModifier = 0.9f;
+        }
+    }
 }
 [Serializable]
 public class BaseItemInfo
@@ -78,9 +84,11 @@ public class BaseItemInfo
     [field: SerializeField] public int BasePrice { get; private set; }
     [field: SerializeField] public string Description { get; private set; }
     public float priceModifier;
+    public float sellPriceModifier;
     public void Init(int groupID) {
         ID= groupID;
         priceModifier = 1;
+        sellPriceModifier = 1;
     }
 }
 [Serializable]
@@ -108,6 +116,7 @@ public class ItemData
         public int Rarity{ get; private set; }
         public int BasePrice => Info.BasePrice;
         public float PriceModifier => Info.priceModifier;
+        public float SellPriceModifier => Info.sellPriceModifier;
         public ItemType ItemType => Info.ItemType;
         public string Name {
             get {
@@ -122,7 +131,8 @@ public class ItemData
         public string Description => Info.Description;
         public int ID => Info.ID * 10 + Rarity;
         public int FinalPrice =>  (int)((BasePrice + ((BasePrice * 20.0 / 100.0) * (Rarity+((1.0/4.0)*Math.Pow(Rarity,2.0))))) * PriceModifier);//TODO move price increase percentage to config
-
+        public int SellPrice => (int)((BasePrice + ((BasePrice * 20.0 / 100.0) * (Rarity+((1.0/4.0)*Math.Pow(Rarity,2.0))))) * PriceModifier * SellPriceModifier);
+        
         public void Init(BaseItemInfo info, int rarity) {
             
             _info = info;
