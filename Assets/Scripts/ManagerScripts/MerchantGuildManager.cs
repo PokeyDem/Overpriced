@@ -67,6 +67,10 @@ namespace ManagerScripts {
         public void ResetShop()
         {
             ClearShopPositions();
+            foreach (var position in _shopPositions){
+                    Destroy(position);
+            }
+            _shopPositions.Clear();
             AddShopPositions(1);
         }
 

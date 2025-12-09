@@ -18276,6 +18276,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3245128051256282874, guid: f0f3d4709694a7d4eb3d86fb991d0526, type: 3}
   m_PrefabInstance: {fileID: 1378536753}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1082597953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4367800696584673179, guid: f0f3d4709694a7d4eb3d86fb991d0526, type: 3}
+  m_PrefabInstance: {fileID: 1378536753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe46e8a86f986624390287c1b5eda914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1084845392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2183342076739079456, guid: 57cdce44426793d4ca8fefd010ad6df8, type: 3}
@@ -31369,7 +31380,7 @@ PrefabInstance:
     - target: {fileID: 7441627990209729258, guid: 39610f17139469049befa495eeb0d80b, type: 3}
       propertyPath: levelUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1082597953}
     - target: {fileID: 7441627990209729258, guid: 39610f17139469049befa495eeb0d80b, type: 3}
       propertyPath: currentExpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -31714,7 +31725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 231130803776244348, guid: 7b1fb4cea6872184d86d193d7a3cd3d1, type: 3}
       propertyPath: _sellButton
@@ -31883,7 +31894,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6466292884129364669}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4579cf059e8ee00418a876ec92684720, type: 3}
   m_Name: 
