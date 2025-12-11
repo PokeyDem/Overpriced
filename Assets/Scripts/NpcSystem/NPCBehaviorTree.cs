@@ -179,7 +179,7 @@ public class NPCBehaviorTree : BehaviorTree.Tree, IHasTarget, IEmotable, IMoodCo
     public void Despawn()
     {
         Reset();
-        NpcManager.Instance.DespawnNpc(this);
+        //NpcManager.Instance.DespawnNpc(this);
     }
 
     public void InvokeMoodChange(MoodType moodType)

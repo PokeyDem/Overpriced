@@ -11,7 +11,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
 {
 
     #region Serialized Fields
-    [SerializeField] private List<NPCBehaviorTree> _npcPrefabs;
+    [SerializeField] private List<NpcAI> _npcPrefabs;
     [SerializeField] private List<NPCDesiredItems> _npcDesiredItems;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _despawnPointPos;
@@ -31,7 +31,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     public static event Action<IHaggler, IHasDisplayTarget, float, NPCType, IMoodController> OnNpcReadyToHaggle;
 
     #region Object Pooling Variables
-    private List<IObjectPool<NPCBehaviorTree>> _objectPools;
+    private List<IObjectPool<NpcAI>> _objectPools;
     [SerializeField] private int _DefaultCapacity = 20;
     [SerializeField] private int _MaxSize = 100;
     #endregion
@@ -46,10 +46,10 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
                 _positionsInLineOccupancy.Add(false);
             }
         }
-        _objectPools = new List<IObjectPool<NPCBehaviorTree>>();
-        foreach (NPCBehaviorTree prefab in _npcPrefabs)
+        _objectPools = new List<IObjectPool<NpcAI>>();
+        foreach (NpcAI prefab in _npcPrefabs)
         {
-            _objectPools.Add(new ObjectPool<NPCBehaviorTree>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
+            _objectPools.Add(new ObjectPool<NpcAI>(() => CreateNpc(prefab), OnGetFromPool, OnReleaseToPool,
                             OnDestroyPooledObject, true, _DefaultCapacity, _MaxSize));
         }
     }
@@ -61,7 +61,7 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
         DayManager.PartOfDay timeOfDay = DayManager.Instance.GetPartOfDay();
         StartCoroutine(SpawnNPCScenario(day, timeOfDay));
     }
-    private void SpawnNpc(NPCBehaviorTree npcPrefab)
+    private void SpawnNpc(NpcAI npcPrefab)
     {
         var npc = _objectPools[(int)npcPrefab.GetNpcType()].Get();
         var desiredItems = _npcDesiredItems[(int)npcPrefab.GetNpcType()].GetDesiredItems();
@@ -101,28 +101,28 @@ public class NpcManager : SingletonWithDestroy<NpcManager>, ILinePositionManager
     }
     #endregion
     #region Object Pooling Methods
-    public NPCBehaviorTree CreateNpc(NPCBehaviorTree prefab)
+    public NpcAI CreateNpc(NpcAI prefab)
     {
-        NPCBehaviorTree npcBehaviour = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
+        NpcAI npcBehaviour = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
 
         return npcBehaviour;
     }
-    public void DespawnNpc(NPCBehaviorTree npc)
+    public void DespawnNpc(NpcAI npc)
     {
         npc.ReturnToPool();
         _npcsCount--;
     }
-    private void OnReleaseToPool(NPCBehaviorTree pooledObject)
+    private void OnReleaseToPool(NpcAI pooledObject)
     {
         pooledObject.gameObject.SetActive(false);
     }
 
-    private void OnGetFromPool(NPCBehaviorTree pooledObject)
+    private void OnGetFromPool(NpcAI pooledObject)
     {
         pooledObject.gameObject.SetActive(true);
     }
 
-    private void OnDestroyPooledObject(NPCBehaviorTree pooledObject)
+    private void OnDestroyPooledObject(NpcAI pooledObject)
     {
         Destroy(pooledObject.gameObject);
     }
