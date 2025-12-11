@@ -25,6 +25,7 @@ namespace ManagerScripts {
         [SerializeField] private MoneyPopup _moneyPopup;
         public UnityEvent<ItemData> buyItemEvent;
         public UnityEvent buyItemEventTutorial;
+        public UnityEvent allMoneySpentTutorial;
         public UnityEvent<int> spendMoneyEvent;
         private List<GameObject> _shopPositions;
         private ItemSlotUIController _selectedItemSlot;
@@ -135,6 +136,10 @@ namespace ManagerScripts {
                 buyItemEventTutorial?.Invoke();
                 spendMoneyEvent.Invoke(_selectedItemSlot.GetItem().SellPrice);
                 _selectedItemSlot.DecreaseQuantity();
+                if (MoneyManager.Instance.GetCurrentMoney()<50)
+                {
+                    allMoneySpentTutorial?.Invoke();
+                }
             }else {
                 if (Random.Range(1, 1000) == 1) {
                     buyCommunicat.text = "How sad you are too poor to buy this";

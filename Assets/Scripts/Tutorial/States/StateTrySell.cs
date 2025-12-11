@@ -9,10 +9,14 @@ public class StateTrySell : BaseTutorialState
     }
     public override void Enter()
     {
+        _tutorialManager.AmountSlider.enabled = false;
+        _tutorialManager.InputField.enabled = false;
         _tutorialManager.TryToSellText.SetActive(true);
     }
     public override void Exit()
     {
+        _tutorialManager.AmountSlider.enabled = true;
+        _tutorialManager.InputField.enabled = true;
         _tutorialManager.TryToSellText.SetActive(false);
     }
 }

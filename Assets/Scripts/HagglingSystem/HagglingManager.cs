@@ -39,6 +39,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public UnityEvent ItemDenied;
     public UnityEvent AttemptsDepleted;
     public UnityEvent<NPCType> onItemSoldNPCType;
+    public UnityEvent MarkupTutorial;
 
 
     private float _toleranceDecimal;
@@ -102,6 +103,7 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public void PriceChange()
     {
         PriceChanged?.Invoke();
+
     }
     public void IncreaseCounter(){
         if (_currentPrice < _basePrice * 2){
@@ -136,7 +138,6 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public void TryToSell(){
         int markupPoints = (int)Mathf.Floor(((float)_currentPrice / _basePrice * 100 - 100) / 10);
         float percentageIncreaseDecimal = (float)_currentPrice / _basePrice - 1f;
-
 
         if (percentageIncreaseDecimal <= _toleranceDecimal)
         {
@@ -229,6 +230,11 @@ public class HagglingManager : MonoBehaviour, IInteractable, INPCDataUser, IDepe
     public void SetCurrentPrice(int price)
     {
         _currentPrice = price;
+        double procent = ((double)_currentPrice / _basePrice) * 100;
+        if (procent < 155 && procent > 150)
+        {
+            MarkupTutorial?.Invoke();
+        }
     }
     public int GetNrOfAttemptsLeft()
     {

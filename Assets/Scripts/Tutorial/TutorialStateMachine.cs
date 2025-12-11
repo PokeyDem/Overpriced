@@ -7,6 +7,7 @@ public class TutorialStateMachine
     public StateGoToShop stateGoToShop;
     public StateEnterMerchantGuild stateEnterMerchantGuild;
     public StateBuyItems stateBuyItems;
+    public StateSpendAllMoney stateSpendAllMoney;
     public StateExitMerchantGuild stateExitMerchantGuild;
     public StateEnterShop stateEnterShop;
     public StatePutItemOnDisplay statePutItemOnDisplay;
@@ -14,6 +15,7 @@ public class TutorialStateMachine
     public StateWaitForBuyer stateWaitForBuyer;
     public StateStartHaggling stateStartHaggling;
     public StateChangePriceValue stateChangePriceValue;
+    public StateChangePriceValue2 stateChangePriceValue2;
     public StateTrySell stateTrySell;
     public StateEnd stateEnd;
 
@@ -24,6 +26,7 @@ public class TutorialStateMachine
         stateGoToShop = new StateGoToShop(manager);
         stateEnterMerchantGuild= new StateEnterMerchantGuild(manager);
         stateBuyItems = new StateBuyItems(manager);
+        stateSpendAllMoney = new StateSpendAllMoney(manager);
         stateExitMerchantGuild = new StateExitMerchantGuild(manager);
         stateEnterShop = new StateEnterShop(manager);
         statePutItemOnDisplay = new StatePutItemOnDisplay(manager);
