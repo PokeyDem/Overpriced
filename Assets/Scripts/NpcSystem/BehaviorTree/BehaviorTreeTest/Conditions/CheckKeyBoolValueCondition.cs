@@ -2,13 +2,15 @@ using UnityEngine;
 
 namespace BehaviorTreeTest
 {
-    public class KeyReturnsTrueCondition : BTNode
+    public class CheckKeyBoolValueCondition : BTNode
     {
         private string _key;
+        private bool _targetValue;
 
-        public KeyReturnsTrueCondition(string key)
+        public CheckKeyBoolValueCondition(string key, bool targetValue)
         {
             this._key = key;
+            this._targetValue = targetValue;
         }
 
         protected override NodeState OnUpdate()
@@ -16,17 +18,14 @@ namespace BehaviorTreeTest
             bool? value = Blackboard.Get<bool?>(_key, null);
             if (value == null) 
             {
-                Debug.Log($"{_key} is null");
                 return NodeState.Failure;
             }
-            if (value == true)
+            if (value == _targetValue)
             {
-                Debug.Log($"{_key} is true");
                 return NodeState.Success;
             } 
             else
             {
-                Debug.Log($"{_key} is false");
                 return NodeState.Failure;
             }
         }

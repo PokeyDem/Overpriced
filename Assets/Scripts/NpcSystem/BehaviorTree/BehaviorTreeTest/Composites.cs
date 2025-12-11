@@ -49,7 +49,10 @@ namespace BehaviorTreeTest
             {
                 var result = _children[_index].Tick();
                 if (result != NodeState.Success)
+                {
+                    _index = 0;
                     return result;
+                }
                 _index++;
             }
             return NodeState.Success;
@@ -75,7 +78,10 @@ namespace BehaviorTreeTest
             {
                 var result = _children[_index].Tick();
                 if (result != NodeState.Failure)
+                {
+                    _index = 0;
                     return result;
+                }
                 _index++;
             }
             return NodeState.Failure;

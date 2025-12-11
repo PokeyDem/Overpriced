@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
+using static UnityEngine.Rendering.DebugUI;
 
 public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDespawnable, IHasDisplayChoices, IHasDisplayTarget, IHaggler
 {
@@ -37,9 +38,12 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
 
     #region Properties
     public Vector3 Target { get => _target; set => _target=value; }
-    public List<DisplayContext> PossibleDisplayChoices { get => _possibleDisplayChoices; set => _possibleDisplayChoices=value; }
+    public List<DisplayContext> PossibleDisplayChoices
+    {
+        get => _possibleDisplayChoices; set => _possibleDisplayChoices=value; }
     public DisplayContext DisplayTarget { get => _displayTarget; set => _displayTarget=value; }
-    public bool IsHaggling { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool IsHaggling { get => _isHaggling; set { _blackboard.Set("isHaggling", value); _isHaggling = value; } }
+
     #endregion
 
     #region events
@@ -95,43 +99,45 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
         {
             new Sequence(_blackboard, new List<BTNode>
             {
-                new KeyReturnsTrueCondition("isOutside"),
+                new CheckKeyBoolValueCondition("isOutside",true),
                 new Selector(_blackboard, new List<BTNode>
                 {
                     new Sequence(_blackboard, new List<BTNode>
                     {
-                        new KeyReturnsTrueCondition("isAtDoor"),
+                        new CheckKeyBoolValueCondition("isAtDoor",true),
                         new WarpAgentAction(_agent, _shopSpawnPoint),
-                        new SetKeyAction<bool>("isOutside",true)
+                        new SetKeyAction<bool>("isOutside",false)
                     }),
                     new Selector(_blackboard, new List<BTNode>
                     {
                         new Sequence(_blackboard, new List<BTNode>
                         {
-                            new KeyReturnsTrueCondition("checkedWindow"),
+                            new CheckKeyBoolValueCondition("checkedWindow",true),
+                            new SetMoodAction(this, MoodType.None),
                             new Selector (_blackboard, new List<BTNode>
                             {
                                 new Sequence (_blackboard, new List<BTNode>
                                 {
-                                    new KeyReturnsTrueCondition("shopEmpty"),
+                                    new CheckKeyBoolValueCondition("shopEmpty",true),
                                     new Selector(_blackboard, new List<BTNode>
                                     {
                                         new Sequence(_blackboard, new List<BTNode>
                                         {
-                                            new KeyReturnsTrueCondition("isAtDespawnPointOutside"),
+                                            new CheckKeyBoolValueCondition("isAtDespawnPointOutside",true),
                                             new DespawnAction(this)
                                         }),
                                         new Sequence(_blackboard, new List<BTNode>
                                         {
                                             new WalkToTargetAction(_agent,_despawnPointPos),
-                                            new SetKeyAction<bool>("isAtDespawnPointOutside",true),
+                                            new SetKeyAction<bool>("isAtDespawnPointOutside", true)
                                         }),
                                     })
                                 }),
+
                                 new Sequence(_blackboard, new List<BTNode>
                                 {
                                     new WalkToTargetAction(_agent,_doorPos),
-                                    new SetKeyAction<bool>("isAtDoor",true)
+                                    new SetKeyAction<bool>("isAtDoor", true)
                                 })
                             })
                         }),
@@ -139,16 +145,18 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
                         {
                             new Sequence(_blackboard, new List<BTNode>
                             {
-                                new KeyReturnsTrueCondition("isAtWindow"),
-                                new WaitAction(2f),
+                                new CheckKeyBoolValueCondition("isAtWindow",true),
+                                new SetMoodAction(this, MoodType.Thinking),
+                                new SetLookTargetAction(this, _windowPos+new Vector3(0,0,-1)),
+                                new WaitAction(GenerateRandomTime(200,500)),
                                 new CheckShopHasItemsAction(),
                                 new SetKeyAction<bool>("checkedWindow",true)
                             }),
                             new Sequence(_blackboard, new List<BTNode>
-                            {
-                                new WalkToTargetAction(_agent,_windowPos),
-                                new SetKeyAction<bool>("isAtWindow",true)
-                            })
+                                {
+                                    new WalkToTargetAction(_agent,_windowPos),
+                                    new SetKeyAction<bool>("isAtWindow", true)
+                                })
                         })
                     })
                 })
@@ -157,60 +165,81 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
             {
                 new Sequence(_blackboard, new List<BTNode>
                 {
-                    new KeyReturnsTrueCondition("isAtDespawnPointInside"),
+                    new CheckKeyBoolValueCondition("isAtDespawnPointInside",true),
                     new DespawnAction(this)
                 }),
-                new Selector(_blackboard, new List<BTNode> 
+                new Selector(_blackboard, new List<BTNode>
                 {
                     new Sequence(_blackboard, new List<BTNode>
                     {
-                        new KeyReturnsTrueCondition("hagglingEnded"),
-                        new WalkToTargetAction(_agent,_despawnInShop),
-                        new SetKeyAction<bool>("isAtDespawnPointInside",true)
+                        new CheckKeyBoolValueCondition("hagglingEnded",true),
+                        new WalkToTargetAction(_agent, _despawnInShop),
+                        new SetKeyAction<bool>("isAtDespawnPointInside", true)
                     }),
                     new Selector (_blackboard, new List<BTNode>
                     {
                         new Sequence(_blackboard, new List<BTNode>
                         {
-                            new KeyReturnsTrueCondition("hagglingStarted"),
-                            new WaitAction(0.1f)
+                            new CheckKeyBoolValueCondition("hagglingStarted",true),
+                            new WaitAction(0.1f),
+                            new WaitUntilKeyReturnsValueAction("isHaggling",false),
+                            new ReleaseFirstPositionInLineOccupancyAction(_linePositionManager),
+                            new SetKeyAction<bool>("hagglingEnded",true)
                         }),
                         new Selector (_blackboard, new List<BTNode>
                         {
                             new Sequence(_blackboard, new List<BTNode>
                             {
-                                new KeyReturnsTrueCondition("isFirstInLine"),
+                                new IsAtLocationCondition(_agent, _counterPos[0],0.01f),
+                                new StartHagglingAction(this,this,_toleranceDecimal,_NPCType,this,_readyToHaggleController),
+                                new SetLookTargetAction(this, _counterPos[0]+new Vector3(0,0,-1)),
                                 new SetKeyAction<bool>("hagglingStarted",true)
                             }),
                             new Selector (_blackboard, new List<BTNode>
                             {
                                 new Sequence(_blackboard, new List<BTNode>
                                 {
-                                    new KeyReturnsTrueCondition("choseItemToBuy"),
-                                    //get in line action -- should be split into more actions
+                                    new CheckKeyBoolValueCondition("choseItemToBuy",true),
                                     new Sequence(_blackboard, new List<BTNode>
                                     {
                                         new WaitAction(0.1f),
-                                        //choose position in line action
-                                        //walk to the position action
-                                        //set at position in line action
+                                        new ChoosePositionInLineAsTargetAction(_counterPos, this, _linePositionManager),
+                                        new WalkToTargetAction(_agent, this),
+                                        new SetLookTargetAction(this, _counterPos[0]),
                                     }),
                                 }),
                                 new Selector (_blackboard, new List<BTNode>
                                 {
                                     new Sequence(_blackboard, new List<BTNode>
                                     {
-                                        new KeyReturnsTrueCondition("browsingStarted"),
-                                        //browse items action -- should be split into more actions: choose item from list, walk to that item, wait, decide to buy, if chose set chose, else repeat
-                                        new Sequence(_blackboard, new List<BTNode> //somewhere here if list empty, go to despawn(could make set haggling ended)
+                                        new CheckKeyBoolValueCondition("browsingStarted",true),
+                                        new Selector(_blackboard, new List<BTNode>
                                         {
-                                            new WaitAction(0.1f),
-                                            //choose item from list action
-                                            //walk to the display
-                                            //wait 3 to 6 sec
-                                            //decide to buy
-                                            //(will repeat if anything here fails)
-                                        })
+                                            new Sequence(_blackboard, new List<BTNode>
+                                            {
+                                                new CheckKeyBoolValueCondition("isAtDisplay",true),
+                                                new SetMoodAction(this, MoodType.Thinking),
+                                                new WaitAction(GenerateRandomTime(300,600)),
+                                                new SetMoodAction(this, MoodType.None),
+                                                new SetKeyAction<bool>("isAtDisplay", false),
+                                                new DecidePurchaseAction(this,_desiredItems,this),
+                                            }),
+                                            new Selector(_blackboard, new List<BTNode>
+                                            {
+                                                new Sequence(_blackboard, new List<BTNode>
+                                                {
+                                                    new CheckKeyBoolValueCondition("hasTarget",true),
+                                                    new WalkToTargetAction(_agent,this),
+                                                    new SetKeyAction<bool>("hasTarget", false),
+                                                    new SetKeyAction<bool>("isAtDisplay", true),
+                                                }),
+                                                new Sequence(_blackboard, new List<BTNode>
+                                                {
+                                                    new WaitAction(0.1f),
+                                                    new ChooseDisplayToCheckAsTargetAction(this,this,this,this),//sets "hagglingEnded" to true if no items in list
+                                                })
+                                            })
+                                        }),
                                     }),
                                     new Sequence(_blackboard, new List<BTNode>
                                     {
@@ -241,7 +270,7 @@ public class NpcAI : MonoBehaviour, IHasTarget, IEmotable, IMoodController, IDes
     public void Despawn()
     {
         Reset();
-        //NpcManager.Instance.DespawnNpc(this);
+        NpcManager.Instance.DespawnNpc(this);
     }
 
     public void InvokeMoodChange(MoodType moodType)

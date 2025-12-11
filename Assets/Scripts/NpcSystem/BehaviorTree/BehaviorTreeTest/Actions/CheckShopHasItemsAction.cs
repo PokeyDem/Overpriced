@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BehaviorTreeTest;
 
-public class CheckShopHasItemsAction : BTNode
+namespace BehaviorTreeTest
 {
-    protected override NodeState OnUpdate()
+    public class CheckShopHasItemsAction : BTNode
     {
-        if (DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems().Count == 0)
+        protected override NodeState OnUpdate()
         {
-            Blackboard.Set("shopEmpty", true);
-        } else Blackboard.Set("shopEmpty", false);
-        return NodeState.Success;
+            if (DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems().Count == 0)
+            {
+                Blackboard.Set("shopEmpty", true);
+            } else Blackboard.Set("shopEmpty", false);
+            return NodeState.Success;
+        }
     }
-
 }

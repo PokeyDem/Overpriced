@@ -1,35 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using BehaviorTreeTest;
-
-public class WaitUntilKeyReturnsTrueAction : BTNode
+namespace BehaviorTreeTest 
 {
-    private string _key;
-
-    public WaitUntilKeyReturnsTrueAction(string key)
+    public class WaitUntilKeyReturnsValueAction : BTNode
     {
-        _key = key;
-    }
+        private string _key;
+        private bool _value;
 
-    protected override NodeState OnUpdate()
-    {
-        bool? value = Blackboard.Get<bool?>(_key, null);
-        if (value == null)
+        public WaitUntilKeyReturnsValueAction(string key, bool value)
         {
-            Debug.Log($"{_key} is null, waiting for True");
-            return NodeState.Running;
+            _key = key;
+            _value = value;
         }
-        if (value == true)
-        {
-            Debug.Log($"{_key} is true");
-            return NodeState.Success;
-        }
-        else
-        {
-            Debug.Log($"{_key} is false, waiting for True");
-            return NodeState.Running;
-        }
-    }
 
+        protected override NodeState OnUpdate()
+        {
+            bool? value = Blackboard.Get<bool?>(_key, null);
+            if (value == null)
+            {
+                return NodeState.Running;
+            }
+            if (value == _value)
+            {
+                return NodeState.Success;
+            }
+            else
+            {
+                return NodeState.Running;
+            }
+        }
+
+    }
 }

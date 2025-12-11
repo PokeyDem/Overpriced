@@ -1,20 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using BehaviorTreeTest;
-
-public class GeneratePossibleItemChoicesAction : BTNode
+namespace BehaviorTreeTest
 {
-    IHasDisplayChoices _context;
-    public GeneratePossibleItemChoicesAction(IHasDisplayChoices context)
+    public class GeneratePossibleItemChoicesAction : BTNode
     {
-        _context = context;
-    }
+        IHasDisplayChoices _context;
+        public GeneratePossibleItemChoicesAction(IHasDisplayChoices context)
+        {
+            _context = context;
+        }
 
 
-    protected override NodeState OnUpdate()
-    {
-        _context.PossibleDisplayChoices = new List<DisplayContext>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
-        return NodeState.Success;
+        protected override NodeState OnUpdate()
+        {
+            _context.PossibleDisplayChoices = new List<DisplayContext>(DisplaysWithItemsListHandler.Instance.GetDisplaySlotsWithItems());
+            return NodeState.Success;
+        }
     }
 }

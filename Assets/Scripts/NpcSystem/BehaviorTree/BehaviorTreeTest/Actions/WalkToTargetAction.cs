@@ -7,24 +7,38 @@ public class WalkToTargetAction : BTNode
 {
     private NavMeshAgent _agent;
     private Vector3 _target;
+    private IHasTarget _targetContext;
     public WalkToTargetAction(NavMeshAgent agent, Vector3 target)
     {
         _agent = agent;
         _target = target;
     }
+    public WalkToTargetAction(NavMeshAgent agent, IHasTarget targetContext)
+    {
+        _agent = agent;
+        _targetContext = targetContext;
+    }
     protected override void OnStart()
     {
+        if (_targetContext != null)
+        {
+            _target = _targetContext.Target;
+        }
         _agent.SetDestination(_target);
-        Debug.Log($"Started walking to {_target}");
     }
     protected override NodeState OnUpdate()
     {
+        if (_targetContext != null)
+        {
+            if( _targetContext.Target != _target)
+            {
+                OnStart();
+            }
+        }
         if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
-            Debug.Log($"at {_target}");
             return NodeState.Success;
         }
-        //Debug.Log($"Walking to {_target}, position: {_agent.transform.position}");
         return NodeState.Running;
     }
 }
