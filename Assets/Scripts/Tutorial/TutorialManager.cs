@@ -27,6 +27,8 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     [SerializeField] private Button _sellButton;
     [SerializeField] private Slider _amountSlider;
     [SerializeField] private TMP_InputField _inputField;
+    [SerializeField] private DayManager _dayManager;
+    [SerializeField] private Button _talentButton;
     #endregion
     #region UITutorialTexts
     [Header("UITutorialTexts")]
@@ -42,10 +44,19 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     [SerializeField] private GameObject _returnToShopText;
     [SerializeField] private GameObject _putItemOnDisplayText;
     [SerializeField] private GameObject _openShopText;
+    [SerializeField] private GameObject _dayPhaseConsumeOpenShop;
+    [SerializeField] private GameObject _npcTypeInfoText;
     [SerializeField] private GameObject _startHagglingText;
     [SerializeField] private GameObject _changePriceValueText;
     [SerializeField] private GameObject _changePriceValueText2;
+    [SerializeField] private GameObject _toleranceText1;
+    [SerializeField] private GameObject _toleranceText2;
+    [SerializeField] private GameObject _chancesLeftText;
+    [SerializeField] private GameObject _hintText1;
+    [SerializeField] private GameObject _hintText2;
     [SerializeField] private GameObject _tryToSellText;
+    [SerializeField] private GameObject _buyDisplayText;
+    [SerializeField] private GameObject _talentText;
     #endregion
 
     #region Tutorial Step Commands
@@ -64,6 +75,9 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     private TutorialNextStepCommand _state13_Command;
     private TutorialNextStepCommand _state14_Command;
     private TutorialNextStepCommand _state15_Command;
+    private TutorialNextStepCommand _state16_Command;
+    private TutorialNextStepCommand _state17_Command;
+    private TutorialNextStepCommand _state18_Command;
     #endregion
     #region Properties
     public TutorialStateMachine StateMachine => _stateMachine;
@@ -80,6 +94,8 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     public Button SellButton => _sellButton;
     public Slider AmountSlider => _amountSlider;
     public TMP_InputField InputField => _inputField;
+    public DayManager DayManager => _dayManager;
+    public Button TalentButton => _talentButton;
 
 
     public GameObject GoOutsideText => _goOutsideText;
@@ -94,10 +110,19 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
     public GameObject ReturnToShopText => _returnToShopText;
     public GameObject PutItemOnDisplayText => _putItemOnDisplayText;
     public GameObject OpenShopText => _openShopText;
+    public GameObject DayPhaseConsumeOpenShop => _dayPhaseConsumeOpenShop;
+    public GameObject NpcTypeInfoText => _npcTypeInfoText;
     public GameObject StartHagglingText => _startHagglingText;
     public GameObject ChangePriceValueText => _changePriceValueText;
     public GameObject ChangePriceValueText2 => _changePriceValueText2;
+    public GameObject ToleranceText1 => _toleranceText1;
+    public GameObject ToleranceText2 => _toleranceText2;
+    public GameObject ChancesLeftText => _chancesLeftText;
+    public GameObject HintText1 => _hintText1;
+    public GameObject HintText2 => _hintText2;
     public GameObject TryToSellText => _tryToSellText;
+    public GameObject BuyDisplayText => _buyDisplayText;
+    public GameObject TalentText => _talentText;
     #endregion
     private new void Awake()
     {
@@ -116,11 +141,15 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
         _state06_Command = new TutorialNextStepCommand(_state05_Command, _goBackToShopButton.onClick, _stateMachine.stateEnterShop, _stateMachine);
         _state07_Command = new TutorialNextStepCommand(_state06_Command, DisplaysWithItemsListHandler.Instance.itemPlaced, _stateMachine.statePutItemOnDisplay, _stateMachine);
         _state08_Command = new TutorialNextStepCommand(_state07_Command, OpenShopButton.onClick, _stateMachine.stateOpenShop, _stateMachine);
-        _state09_Command = new TutorialNextStepCommand(_state08_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.stateWaitForBuyer, _stateMachine);
+        _state09_Command = new TutorialNextStepCommand(_state08_Command, NpcReadyToHaggleTrigger.readyToHaggle, _stateMachine.stateNpcTypeInfo, _stateMachine);
         _state10_Command = new TutorialNextStepCommand(_state09_Command, HagglingManager.HagglingInitiated, _stateMachine.stateStartHaggling, _stateMachine);
         _state11_Command = new TutorialNextStepCommand(_state10_Command, HagglingManager.MarkupTutorial, _stateMachine.stateChangePriceValue, _stateMachine);
         _state12_Command = new TutorialNextStepCommand(_state11_Command, SellButton.onClick, _stateMachine.stateTrySell, _stateMachine);
-        _state13_Command = new TutorialNextStepCommand(_state12_Command, null, _stateMachine.stateEnd, _stateMachine);
+        _state13_Command = new TutorialNextStepCommand(_state12_Command, SellButton.onClick, _stateMachine.stateToleranceAndHintsInfo, _stateMachine);
+        _state14_Command = new TutorialNextStepCommand(_state13_Command, DayManager.partOfDayChangeTutorial, _stateMachine.stateNothing, _stateMachine);
+        _state15_Command = new TutorialNextStepCommand(_state14_Command, TalentButton.onClick, _stateMachine.stateTalentsInfo, _stateMachine);
+        _state16_Command = new TutorialNextStepCommand(_state15_Command, OpenShopButton.onClick, _stateMachine.stateBuyDisplays, _stateMachine);
+        _state17_Command = new TutorialNextStepCommand(_state16_Command, null, _stateMachine.stateEnd, _stateMachine);
 
         Initialize();
     }

@@ -10,6 +10,7 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
     [SerializeField] private PartOfDay currentPartOfDay=PartOfDay.Morning;
     public UnityEvent<string> partOfDayChange;
     public UnityEvent<int> dayChange;
+    public UnityEvent partOfDayChangeTutorial;
     public UnityEvent onEndOfDay;
         
     public enum PartOfDay {
@@ -49,6 +50,7 @@ public class DayManager : SingletonDontDestroyOnLoad<DayManager>{
             
         }
         partOfDayChange.Invoke(currentPartOfDay.ToString());
+        partOfDayChangeTutorial?.Invoke();
         LightingManager.Instance.SetLighting(currentPartOfDay);
     }
 

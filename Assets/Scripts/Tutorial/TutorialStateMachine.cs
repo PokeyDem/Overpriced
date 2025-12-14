@@ -13,10 +13,14 @@ public class TutorialStateMachine
     public StatePutItemOnDisplay statePutItemOnDisplay;
     public StateOpenShop stateOpenShop;
     public StateWaitForBuyer stateWaitForBuyer;
+    public StateNpcTypeInfo stateNpcTypeInfo;
     public StateStartHaggling stateStartHaggling;
     public StateChangePriceValue stateChangePriceValue;
     public StateChangePriceValue2 stateChangePriceValue2;
     public StateTrySell stateTrySell;
+    public StateToleranceAndHintsInfo stateToleranceAndHintsInfo;
+    public StateBuyDisplays stateBuyDisplays;
+    public StateTalentsInfo stateTalentsInfo;
     public StateEnd stateEnd;
 
     public event Action<BaseTutorialState> StateChanged;
@@ -32,9 +36,13 @@ public class TutorialStateMachine
         statePutItemOnDisplay = new StatePutItemOnDisplay(manager);
         stateOpenShop = new StateOpenShop(manager);
         stateWaitForBuyer = new StateWaitForBuyer(manager);
+        stateNpcTypeInfo = new StateNpcTypeInfo(manager);
         stateStartHaggling = new StateStartHaggling(manager);
         stateChangePriceValue = new StateChangePriceValue(manager);
         stateTrySell = new StateTrySell(manager);
+        stateToleranceAndHintsInfo = new StateToleranceAndHintsInfo(manager);
+        stateBuyDisplays = new StateBuyDisplays(manager);
+        stateTalentsInfo = new StateTalentsInfo(manager);
         stateEnd = new StateEnd(manager);
     }
     public void Initialize(BaseTutorialState state)
