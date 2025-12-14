@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : SingletonDontDestroyOnLoad<UIManager>{
+public class UIManager : SingletonDontDestroyOnLoad<UIManager>
+{
     [SerializeField] private GameObject _hud;
     [SerializeField] private GameObject _cityUI;
     [SerializeField] private GameObject _interactUI;
