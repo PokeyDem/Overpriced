@@ -14,6 +14,6 @@ public class WalkAudioPlayer : MonoBehaviour{
 
     public void PlayFootstepSfx()
     {
-        AudioManager.PlayRandomWalkSound();
+        AudioManager.PlayRandomStepSound();
     }
 }

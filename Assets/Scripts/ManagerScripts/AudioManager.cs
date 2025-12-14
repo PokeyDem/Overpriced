@@ -13,7 +13,7 @@ public class AudioManager : SingletonDontDestroyOnLoad<AudioManager>{
         base.Awake();
     }
     
-    public static void PlayRandomWalkSound(){
+    public static void PlayRandomStepSound(){
         if (Instance.stepsList.Length == 0) return;
         int index = Random.Range(0, Instance.stepsList.Length);
         Instance.stepsAudioSource.PlayOneShot(Instance.stepsList[index], 0.1f);
