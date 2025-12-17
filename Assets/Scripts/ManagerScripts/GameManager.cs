@@ -11,7 +11,9 @@ public class GameManager : SingletonDontDestroyOnLoad<GameManager>
     [SerializeField] private Transform player;
     [SerializeField] private Vector3 initialPlayerPosition;
     [SerializeField] private Quaternion initialPlayerRotation;
+    [SerializeField] private float _goalAmount;
     public TutorialManager tutorialManager;
+    private bool hasWon;
     private new void Awake()
     {
         base.Awake();
@@ -23,9 +25,10 @@ public class GameManager : SingletonDontDestroyOnLoad<GameManager>
     }
     private void End(int day)
     {
+        hasWon = MoneyManager.Instance.GetCurrentMoney() >= _goalAmount;
         if (day > 7)
         {
-            SceneManager.LoadScene("EndScene");
+            EndSceneManager.Instance.StartEndScene();
         }
     }
 
@@ -46,6 +49,11 @@ public class GameManager : SingletonDontDestroyOnLoad<GameManager>
     {
         player.transform.position =  initialPlayerPosition;
         player.transform.rotation = initialPlayerRotation;
+    }
+
+    public bool HasWon()
+    {
+        return hasWon;
     }
     
 }

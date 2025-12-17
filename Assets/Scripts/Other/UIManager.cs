@@ -12,6 +12,9 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>
     [SerializeField] private GameObject _buildingInfoPanel;
     [SerializeField] private Vector3 _buildingInfoPanelOffset;
     [SerializeField] private List<TextMeshProUGUI> _mainMenuButtonsText;
+    [SerializeField] private GameObject _endScreenMainMenuButton;
+    [SerializeField] private GameObject _endScreenWinText;
+    [SerializeField] private GameObject _endScreenLoseText;
 
     private new void Awake(){
         base.Awake();
@@ -92,5 +95,24 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>
         {
             buttonText.gameObject.SetActive(true);
         }
+    }
+
+    public void ShowEndScreenUIElements(bool hasWon)
+    {
+        _endScreenMainMenuButton.SetActive(true);
+        
+        if (hasWon)
+            _endScreenWinText.SetActive(true);
+        else
+            _endScreenLoseText.SetActive(true);
+    }
+
+    public void HideEndScreenUIElements()
+    {
+        _endScreenMainMenuButton.SetActive(false);
+        
+        _endScreenWinText.SetActive(false);
+    
+        _endScreenLoseText.SetActive(false);
     }
 }
