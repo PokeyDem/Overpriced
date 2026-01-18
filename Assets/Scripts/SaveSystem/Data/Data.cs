@@ -13,17 +13,24 @@ public class PlayerData{
 }
 
 public class DisplayData{
-    public int displayId;
-    public float x, y, z;
-    public List<int> itemsID;
+    public List<int> itemIDs;
 
-    public DisplayData(int _displayId, float posX, float posY, float posZ, List<int> _itemsID){
-        displayId = _displayId;
-        x = posX;
-        y = posY;
-        z = posZ;
-        itemsID = _itemsID;
+    public DisplayData(List<int> itemIDs){
+        this.itemIDs = itemIDs;
     }
+}
+
+public class PurchasableDisplayData
+{
+    public List<int> itemIDs;
+    public List<bool> isBought;
+
+    public PurchasableDisplayData(List<bool> isBought, List<int> itemIDs)
+    {
+        this.itemIDs = itemIDs;
+        this.isBought = isBought;
+    }
+
 }
 
 public class InventoryData{
@@ -36,25 +43,26 @@ public class InventoryData{
 
 public class SaveData{
     public PlayerData PlayerData;
-    public List<DisplayData> DisplayData;
+    public DisplayData DisplayData;
+    public PurchasableDisplayData PurchasableDisplayData;
     public InventoryData InventoryData;
     public DayData DayData;
     public ShopStateData ShopStateData;
     public MoneyData MoneyData;
     public ExperienceData ExperienceData;
-    public SaveSlotsData SaveSlotsData;
 
-    public SaveData(PlayerData playerData, List<DisplayData> displayData, 
+    public SaveData(PlayerData playerData, 
         InventoryData inventoryData, DayData dayData,
         ShopStateData shopStateData, MoneyData moneyData,
-        ExperienceData experienceData){
+        ExperienceData experienceData, DisplayData displayData, PurchasableDisplayData purchasableDisplayData){
         PlayerData = playerData;
-        DisplayData = displayData;
         InventoryData = inventoryData;
         DayData = dayData;
         ShopStateData = shopStateData;
         MoneyData = moneyData;
         ExperienceData = experienceData;
+        DisplayData = displayData;
+        PurchasableDisplayData = purchasableDisplayData;
     }
 }
 

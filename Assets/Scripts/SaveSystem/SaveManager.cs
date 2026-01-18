@@ -24,24 +24,21 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         base.Awake();
     }
 
-    private void Start(){
-        LoadSlotsInfo();
-    }
-
     public void SaveGameToFile(string path){
         PlayerData playerData = player.GetPlayerData();
-        List<DisplayData> displayData = placementSystem.GetDisplayData();
+        DisplayData displayData = DisplaysManager.Instance.GetDisplaysData();
+        PurchasableDisplayData purchasableDisplayData = DisplaysManager.Instance.GetPurchasableDisplayData();
         InventoryData inventoryData = inventoryManager.GetInventoryData();
         DayData dayData = dayManager.GetDayData();
         ShopStateData shopStateData = shopStateManager.GetShopStateData();
         MoneyData moneyData = moneyManager.GetMoneyData();
         ExperienceData experienceData = experienceManager.GetExperienceData();
         
-        SaveData saveData = new SaveData(playerData, displayData, 
-            inventoryData, dayData, shopStateData, moneyData, experienceData);
+        
+        SaveData saveData = new SaveData(playerData,
+            inventoryData, dayData, shopStateData, moneyData, experienceData, displayData, purchasableDisplayData);
         
         _dataService.SaveData(path, saveData, true);
-        SaveSlotsInfo();
     }
 
     public void LoadGameFromFile(string path){
@@ -50,7 +47,7 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         
         SaveData saveData = _dataService.LoadData<SaveData>(path, true);
         player.LoadPlayer(saveData.PlayerData);
-        placementSystem.LoadDisplayData(saveData.DisplayData);
+        DisplaysManager.Instance.LoadDisplaysData(saveData.DisplayData, saveData.PurchasableDisplayData);
         
         List<ItemData> itemDataList = new List<ItemData>();
         foreach (var item in saveData.InventoryData.InventoryItemsData) {

@@ -118,7 +118,7 @@ public class DisplaySlotController : MonoBehaviour, IDisplayInfoProvider, IDispl
     }
 
     public void PlaceItem(ItemData item){
-        if (!isBought) {
+        if (!isBought || item == null) {
             return;
         }
 

@@ -96,6 +96,22 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         MainMenuUIManager.Instance.ShowSettingsUI();
     }
 
+    public void OnSaveGameButtonPress(GameObject button)
+    {
+        if (_isInSubMenu) return;
+        PressButton(button);
+        SaveManager.Instance.SaveGameInTemporarySlot();
+        MainMenuAnimationManager.Instance.RotateHandleWithoutRelatedAction(true);
+    }
+
+    public void OnLoadGameButtonPress(GameObject button)
+    {
+        if (_isInSubMenu) return;
+        PressButton(button);
+        SaveManager.Instance.LoadGameFromTemporarySlot();
+        MainMenuAnimationManager.Instance.RotateHandleWithoutRelatedAction(false);
+    }
+
     public void OnCreditsButtonPress(GameObject button)
     {
         if (_isInSubMenu) return;

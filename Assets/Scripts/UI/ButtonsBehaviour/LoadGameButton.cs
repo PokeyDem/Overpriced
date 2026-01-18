@@ -6,6 +6,6 @@ public class LoadGameButton : MonoBehaviour, IInteractableMenuButton
 {
     public void Interact()
     {
-        MainMenuManager.Instance.BlankShot(gameObject);
+        MainMenuManager.Instance.OnLoadGameButtonPress(gameObject);
     }
 }

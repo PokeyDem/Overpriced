@@ -129,82 +129,82 @@ public class PlacementSystem : MonoBehaviour{
         }
     }
 
-    public List<DisplayData> GetDisplayData(){
-        List<DisplayData> displayData = new List<DisplayData>();
-        Vector3 pos;
-        foreach (DisplaySlotController display in _placedObjects){
-            DisplaySlotController[] slots = display.transform.parent.GetComponentsInChildren<DisplaySlotController>();
-            List<int> itemIds = new List<int>();
+    // public List<DisplayData> GetDisplayData(){
+    //     List<DisplayData> displayData = new List<DisplayData>();
+    //     Vector3 pos;
+    //     foreach (DisplaySlotController display in _placedObjects){
+    //         DisplaySlotController[] slots = display.transform.parent.GetComponentsInChildren<DisplaySlotController>();
+    //         List<int> itemIds = new List<int>();
+    //
+    //         foreach (var displayController in slots){
+    //             itemIds.Add(displayController.GetItemId());
+    //         }
+    //         
+    //         pos = display.Position;
+    //         displayData.Add(new DisplayData(display.GetDisplayTypeId(), pos.x, pos.y, pos.z, itemIds));
+    //     }
+    //
+    //     return displayData;
+    // }
 
-            foreach (var displayController in slots){
-                itemIds.Add(displayController.GetItemId());
-            }
-            
-            pos = display.Position;
-            displayData.Add(new DisplayData(display.GetDisplayTypeId(), pos.x, pos.y, pos.z, itemIds));
-        }
-
-        return displayData;
-    }
-
-    public void LoadDisplayData(List<DisplayData> displayData){
-        _placedObjects.Clear();
-        _objectsData.ClearPlacedObjects();
-        _objectsData.ShowData();
-        
-
-        foreach (var display in GameObject.FindGameObjectsWithTag("Display")){
-            Destroy(display);
-        }
-
-        foreach (var item in GameObject.FindGameObjectsWithTag("Item")){
-            Destroy(item);
-        }
-        
-        foreach (DisplayData data in displayData){
-            GameObject gameObject = Instantiate(_objectsDatabase._objectsData[data.displayId].Prefab);
-            gameObject.transform.position = _grid.CellToWorld(new Vector3Int(Mathf.RoundToInt(data.x),
-                Mathf.RoundToInt(data.y),
-                Mathf.RoundToInt(data.z -0.5f)));
-        
-            _placedObjects.Add(gameObject.GetComponentInChildren<DisplaySlotController>());
-            _placedObjects[_placedObjects.Count - 1].SetDisplayTypeId(data.displayId);
-            _placedObjects[_placedObjects.Count - 1].SetPosition(gameObject.transform.position);
-
-            List<int> itemsId = data.itemsID;
-            DisplaySlotController[] displaySlotControllers = _placedObjects[_placedObjects.Count - 1].gameObject
-                .transform.parent.GetComponentsInChildren<DisplaySlotController>();
-            
-            if (itemsId.Count > 1){
-                int counter = 0;
-                
-                for (int i = 0; i < displaySlotControllers.Length; i++){
-                    if (itemsId[i] != -1) 
-                        displaySlotControllers[i].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[i]));
-                }
-                
-               
-            }
-            else if (itemsId.Count == 1){ 
-                if (itemsId[0] != -1) 
-                    displaySlotControllers[0].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[0]));
-            }
-                
-
-            // if (data.itemID != -1){
-            //     _placedObjects[_placedObjects.Count - 1].PlaceItem(_itemsDatabase._itemsData[data.itemID].Prefab, data.itemID);
-            // }
-        
-            GridData selectedData = _objectsData;
-            selectedData.AddObjectAt(new Vector3Int(    Mathf.RoundToInt(data.x),
-                    Mathf.RoundToInt(data.y),
-                    Mathf.RoundToInt(data.z)), 
-                _objectsDatabase._objectsData[data.displayId].Size,
-                _objectsDatabase._objectsData[data.displayId].ID, 
-                _placedObjects.Count - 1);
-            
-        }
-    }
+    // public void LoadDisplayData(List<DisplayData> displayData){
+    //     _placedObjects.Clear();
+    //     _objectsData.ClearPlacedObjects();
+    //     _objectsData.ShowData();
+    //     
+    //
+    //     foreach (var display in GameObject.FindGameObjectsWithTag("Display")){
+    //         Destroy(display);
+    //     }
+    //
+    //     foreach (var item in GameObject.FindGameObjectsWithTag("Item")){
+    //         Destroy(item);
+    //     }
+    //     
+    //     foreach (DisplayData data in displayData){
+    //         GameObject gameObject = Instantiate(_objectsDatabase._objectsData[data.displayId].Prefab);
+    //         gameObject.transform.position = _grid.CellToWorld(new Vector3Int(Mathf.RoundToInt(data.x),
+    //             Mathf.RoundToInt(data.y),
+    //             Mathf.RoundToInt(data.z -0.5f)));
+    //     
+    //         _placedObjects.Add(gameObject.GetComponentInChildren<DisplaySlotController>());
+    //         _placedObjects[_placedObjects.Count - 1].SetDisplayTypeId(data.displayId);
+    //         _placedObjects[_placedObjects.Count - 1].SetPosition(gameObject.transform.position);
+    //
+    //         List<int> itemsId = data.itemsID;
+    //         DisplaySlotController[] displaySlotControllers = _placedObjects[_placedObjects.Count - 1].gameObject
+    //             .transform.parent.GetComponentsInChildren<DisplaySlotController>();
+    //         
+    //         if (itemsId.Count > 1){
+    //             int counter = 0;
+    //             
+    //             for (int i = 0; i < displaySlotControllers.Length; i++){
+    //                 if (itemsId[i] != -1) 
+    //                     displaySlotControllers[i].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[i]));
+    //             }
+    //             
+    //            
+    //         }
+    //         else if (itemsId.Count == 1){ 
+    //             if (itemsId[0] != -1) 
+    //                 displaySlotControllers[0].PlaceItem(_itemsDatabase.Find(data =>data.ID==itemsId[0]));
+    //         }
+    //             
+    //
+    //         // if (data.itemID != -1){
+    //         //     _placedObjects[_placedObjects.Count - 1].PlaceItem(_itemsDatabase._itemsData[data.itemID].Prefab, data.itemID);
+    //         // }
+    //     
+    //         GridData selectedData = _objectsData;
+    //         selectedData.AddObjectAt(new Vector3Int(    Mathf.RoundToInt(data.x),
+    //                 Mathf.RoundToInt(data.y),
+    //                 Mathf.RoundToInt(data.z)), 
+    //             _objectsDatabase._objectsData[data.displayId].Size,
+    //             _objectsDatabase._objectsData[data.displayId].ID, 
+    //             _placedObjects.Count - 1);
+    //         
+    //     }
+    // }
 }
 
 [Serializable]

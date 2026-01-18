@@ -56,4 +56,9 @@ public class MainMenuAnimationManager : SingletonDontDestroyOnLoad<MainMenuAnima
         // handle.DORotate(new Vector3(rotationDegree, handle.eulerAngles.y, handle.eulerAngles.z), drawerOpeningDuration, RotateMode.LocalAxisAdd);
         handle.DOLocalRotate(new Vector3(rotationDegree, 0, 0), drawerOpeningDuration, RotateMode.LocalAxisAdd);
     }
+
+    public void RotateHandleWithoutRelatedAction(bool clockwise)
+    {
+        RotateHandle(clockwise ? -handleRotationDegree : handleRotationDegree);
+    }
 }
