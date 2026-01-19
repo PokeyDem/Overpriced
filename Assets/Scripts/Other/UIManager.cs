@@ -15,6 +15,7 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>
     [SerializeField] private GameObject _endScreenMainMenuButton;
     [SerializeField] private GameObject _endScreenWinText;
     [SerializeField] private GameObject _endScreenLoseText;
+    [SerializeField] private GameObject _tutorialHudUI;
 
     private new void Awake(){
         base.Awake();
@@ -59,10 +60,12 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>
     
     public void DisableHUD(){
         _hud.SetActive(false);
+        DisableTutorialUI();
     }
 
     public void EnableHUD(){
         _hud.SetActive(true);
+        EnableTutorialUI();
     }
 
     private void DisableCityUI(){
@@ -114,5 +117,15 @@ public class UIManager : SingletonDontDestroyOnLoad<UIManager>
         _endScreenWinText.SetActive(false);
     
         _endScreenLoseText.SetActive(false);
+    }
+
+    private void DisableTutorialUI()
+    {
+        _tutorialHudUI.SetActive(false);
+    }
+
+    private void EnableTutorialUI()
+    {
+        _tutorialHudUI.SetActive(true);
     }
 }

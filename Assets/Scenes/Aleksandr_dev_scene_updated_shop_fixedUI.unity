@@ -10322,6 +10322,7 @@ MonoBehaviour:
   _endScreenMainMenuButton: {fileID: 1367925991}
   _endScreenWinText: {fileID: 217059612}
   _endScreenLoseText: {fileID: 528547616}
+  _tutorialHudUI: {fileID: 383360805}
 --- !u!1 &396203523
 GameObject:
   m_ObjectHideFlags: 0

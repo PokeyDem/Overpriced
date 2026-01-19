@@ -30,8 +30,6 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         //Switch camera
         CameraController.Instance.SwitchToCashRegister();
         
-        //Disable Tutorial UI
-        TutorialManager.Instance.DisableTutorial();
         
         UIManager.Instance.ShowMainMenuButtons();
         _isInMainMenu = true;
@@ -53,8 +51,6 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         CameraController.Instance.SwitchToShop();
         
         UIManager.Instance.HideMainMenuButtons();
-        
-        TutorialManager.Instance.EnableTutorial();
         
         _isInSubMenu = false;
         _isInMainMenu = false;
