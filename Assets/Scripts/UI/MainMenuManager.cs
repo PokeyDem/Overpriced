@@ -30,7 +30,12 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         //Switch camera
         CameraController.Instance.SwitchToCashRegister();
         
+        //Disable Tutorial UI
+        TutorialManager.Instance.DisableTutorial();
+        
         UIManager.Instance.ShowMainMenuButtons();
+        _isInMainMenu = true;
+
     }
 
     public void SwitchToGame()
@@ -48,7 +53,11 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
         CameraController.Instance.SwitchToShop();
         
         UIManager.Instance.HideMainMenuButtons();
+        
+        TutorialManager.Instance.EnableTutorial();
+        
         _isInSubMenu = false;
+        _isInMainMenu = false;
     }
 
     private void OpenDrawer()
@@ -65,7 +74,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnNewGameButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
 
         if (!_firstGameStarted)
         {
@@ -90,7 +99,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnSettingButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
         PressButton(button);
         OpenDrawer();
         MainMenuUIManager.Instance.ShowSettingsUI();
@@ -98,7 +107,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnSaveGameButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
         PressButton(button);
         SaveManager.Instance.SaveGameInTemporarySlot();
         MainMenuAnimationManager.Instance.RotateHandleWithoutRelatedAction(true);
@@ -106,7 +115,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnLoadGameButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
         PressButton(button);
         SaveManager.Instance.LoadGameFromTemporarySlot();
         MainMenuAnimationManager.Instance.RotateHandleWithoutRelatedAction(false);
@@ -114,7 +123,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnCreditsButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
         PressButton(button);
         OpenDrawer();
         MainMenuUIManager.Instance.ShowCreditsUI();
@@ -129,7 +138,7 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
 
     public void OnExitButtonPress(GameObject button)
     {
-        if (_isInSubMenu) return;
+        if (_isInSubMenu || !_isInMainMenu) return;
         PressButton(button);
         #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
@@ -141,5 +150,10 @@ public class MainMenuManager : SingletonDontDestroyOnLoad<MainMenuManager>
     public bool IsInSubMenu()
     {
         return _isInSubMenu;
+    }
+
+    public void SetIsInMainMenu(bool isInMainMenu)
+    {
+        _isInMainMenu =  isInMainMenu;
     }
 }

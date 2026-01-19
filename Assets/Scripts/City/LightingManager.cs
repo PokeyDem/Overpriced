@@ -268,4 +268,25 @@ public class LightingManager : SingletonDontDestroyOnLoad<LightingManager>{
             }
         }
     }
+
+    public LightingData GetLightingData()
+    {
+        return new LightingData(_partOfDayLighting);
+    }
+
+    public void LoadLighting(LightingData data)
+    {
+        switch (data.dayPart)
+        {
+            case DayManager.PartOfDay.Evening:
+                SetEveningLighting();
+                break;
+            case  DayManager.PartOfDay.Noon:
+                SetNoonLighting();
+                break;
+            case DayManager.PartOfDay.Morning:
+                SetMorningLighting();
+                break;
+        }
+    }
 }

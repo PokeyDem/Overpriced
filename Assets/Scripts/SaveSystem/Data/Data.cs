@@ -41,6 +41,28 @@ public class InventoryData{
     }
 }
 
+public class LightingData
+{
+    public DayManager.PartOfDay dayPart;
+
+    public LightingData(DayManager.PartOfDay dayPart)
+    {
+        this.dayPart = dayPart;
+    }
+}
+
+public class TutorialData
+{
+    public bool isDone;
+    public TutorialNextStepCommand currentCommand;
+
+    public TutorialData(bool isDone, TutorialNextStepCommand currentCommand)
+    {
+        this.isDone = isDone;
+        this.currentCommand = currentCommand;
+    }
+}
+
 public class SaveData{
     public PlayerData PlayerData;
     public DisplayData DisplayData;
@@ -50,11 +72,13 @@ public class SaveData{
     public ShopStateData ShopStateData;
     public MoneyData MoneyData;
     public ExperienceData ExperienceData;
+    public LightingData LightingData;
+    public TutorialData TutorialData;
 
     public SaveData(PlayerData playerData, 
         InventoryData inventoryData, DayData dayData,
         ShopStateData shopStateData, MoneyData moneyData,
-        ExperienceData experienceData, DisplayData displayData, PurchasableDisplayData purchasableDisplayData){
+        ExperienceData experienceData, DisplayData displayData, PurchasableDisplayData purchasableDisplayData, LightingData lightingData, TutorialData tutorialData){
         PlayerData = playerData;
         InventoryData = inventoryData;
         DayData = dayData;
@@ -63,6 +87,8 @@ public class SaveData{
         ExperienceData = experienceData;
         DisplayData = displayData;
         PurchasableDisplayData = purchasableDisplayData;
+        LightingData = lightingData;
+        TutorialData = tutorialData;
     }
 }
 

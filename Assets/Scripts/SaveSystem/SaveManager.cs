@@ -33,10 +33,11 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         ShopStateData shopStateData = shopStateManager.GetShopStateData();
         MoneyData moneyData = moneyManager.GetMoneyData();
         ExperienceData experienceData = experienceManager.GetExperienceData();
-        
+        LightingData lightingData = LightingManager.Instance.GetLightingData();
+        TutorialData tutorialData = TutorialManager.Instance.GetTutorialData();
         
         SaveData saveData = new SaveData(playerData,
-            inventoryData, dayData, shopStateData, moneyData, experienceData, displayData, purchasableDisplayData);
+            inventoryData, dayData, shopStateData, moneyData, experienceData, displayData, purchasableDisplayData, lightingData, tutorialData);
         
         _dataService.SaveData(path, saveData, true);
     }
@@ -59,6 +60,8 @@ public class SaveManager : SingletonDontDestroyOnLoad<SaveManager>
         shopStateManager.LoadShopState(saveData.ShopStateData);
         moneyManager.LoadMoneyData(saveData.MoneyData);
         experienceManager.LoadExperienceData(saveData.ExperienceData);
+        LightingManager.Instance.LoadLighting(saveData.LightingData);
+        TutorialManager.Instance.LoadTutorialData(saveData.TutorialData);
         PauseMenuManager.Instance.Resume();
     }
 

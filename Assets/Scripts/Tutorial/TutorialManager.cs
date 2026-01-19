@@ -179,4 +179,22 @@ public class TutorialManager : SingletonWithDestroy<TutorialManager>
         _currentCommand = command;
         _currentCommand.Execute();
     }
+
+    public TutorialData GetTutorialData()
+    {
+        return new TutorialData(_tutorialDone, _currentCommand);
+    }
+
+    public void LoadTutorialData(TutorialData data)
+    {
+        if (data.isDone)
+        {
+            DisableTutorial();
+        }
+        else
+        {
+            SetCurrentCommand(data.currentCommand);
+        }
+            
+    }
 }
