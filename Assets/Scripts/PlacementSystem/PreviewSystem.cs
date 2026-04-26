@@ -1,19 +1,19 @@
 using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour{
-     [SerializeField] private GameObject _cellIndicator;
+     [SerializeField] private GameObject cellIndicator;
      private GameObject _previewObject;
 
-     [SerializeField] private Material _previewMaterialPrefab;
-     private Material previewMaterialInstance;
+     [SerializeField] private Material previewMaterialPrefab;
+     private Material _previewMaterialInstance;
 
      private Renderer _cellIndicatorRenderer;
 
      private void Start(){
-         previewMaterialInstance = new Material(_previewMaterialPrefab);
-         _cellIndicator.SetActive(false);
-         _cellIndicatorRenderer = _cellIndicator.GetComponentInChildren<Renderer>();
-         Physics.IgnoreLayerCollision(8, 9, true);
+         _previewMaterialInstance = new Material(previewMaterialPrefab);
+         cellIndicator.SetActive(false);
+         _cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
+         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Preview"), LayerMask.NameToLayer("Player"), true);
      }
 
      public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size){
@@ -21,7 +21,7 @@ public class PreviewSystem : MonoBehaviour{
          _previewObject.layer = 8;
          PreparePreview();
          PrepareCursor(size);
-         _cellIndicator.SetActive(true);
+         cellIndicator.SetActive(true);
      }
 
      private void PreparePreview(){
@@ -30,7 +30,7 @@ public class PreviewSystem : MonoBehaviour{
              Material[] materials = renderer.materials;
 
              for (int i = 0; i < materials.Length; i++){
-                 materials[i] = previewMaterialInstance;
+                 materials[i] = _previewMaterialInstance;
              }
 
              renderer.materials = materials;
@@ -43,18 +43,18 @@ public class PreviewSystem : MonoBehaviour{
 
      private void PrepareCursor(Vector2Int size){
          if (size.x > 0 && size.y > 0){
-             _cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
+             cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
              _cellIndicatorRenderer.material.mainTextureScale = size;
          }
      }
 
      public void StopShowingPreview(){
-         _cellIndicator.SetActive(false);
+         cellIndicator.SetActive(false);
          Destroy(_previewObject);
      }
 
      public void UpdatePosition(Vector3 position, bool validity){
-         _cellIndicator.transform.position = position;
+         cellIndicator.transform.position = position;
          _previewObject.transform.position = position;
          ApplyFeedback(validity);
      }
@@ -63,7 +63,7 @@ public class PreviewSystem : MonoBehaviour{
          Color color = validity ? Color.white : Color.red;
          _cellIndicatorRenderer.material.color = color;
          color.a = 0.5f;
-         previewMaterialInstance.color = color;
+         _previewMaterialInstance.color = color;
      }
     
 }
