@@ -35,7 +35,7 @@ public class GridData{
     }
 
     public void ClearPlacedObjects(){
-        _placedObjects = new Dictionary<Vector3Int, PlacementData>();
+        _placedObjects.Clear();
     }
     
     public bool CanPlaceObjectAt(Vector3Int gridPosition, Vector2Int objectSize, Vector3Int playerPosition){

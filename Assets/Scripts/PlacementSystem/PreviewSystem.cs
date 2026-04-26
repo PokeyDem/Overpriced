@@ -18,7 +18,7 @@ public class PreviewSystem : MonoBehaviour{
 
      public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size){
          _previewObject = Instantiate(prefab);
-         _previewObject.layer = 8;
+         _previewObject.layer = LayerMask.NameToLayer("Preview");
          PreparePreview();
          PrepareCursor(size);
          cellIndicator.SetActive(true);
@@ -37,7 +37,7 @@ public class PreviewSystem : MonoBehaviour{
          }
          Collider[] colliders = _previewObject.GetComponentsInChildren<Collider>();
          foreach (var collider in colliders){
-             collider.gameObject.layer = 8;
+             collider.gameObject.layer = LayerMask.NameToLayer("Preview");
          }
      }
 

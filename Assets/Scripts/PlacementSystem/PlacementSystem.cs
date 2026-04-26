@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour{
-    [SerializeField] InputManager inputManager;
-    [SerializeField] Grid grid;
-    [SerializeField] ObjectsDatabaseSO objectsDatabase;
-    [SerializeField] ItemsDatabaseSO itemsDatabase;
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private Grid grid;
+    [SerializeField] private ObjectsDatabaseSO objectsDatabase;
+    [SerializeField] private ItemsDatabaseSO itemsDatabase;
     [SerializeField] private GameObject gridVisualization;
     [SerializeField] private Canvas uiPanel;
-    [SerializeField] PreviewSystem previewSystem;
+    [SerializeField] private PreviewSystem previewSystem;
     [SerializeField] private GameObject player;
     [SerializeField] private List<PreplacedStructure> preplacedStructures = new List<PreplacedStructure>();
     
@@ -136,9 +136,10 @@ public class PreplacedStructure{
 
     [field: SerializeField, Tooltip("Prefab index in database")] public int Index{ get; private set; }
     
+    [field:SerializeField, Tooltip("Elevation level on the Y axis")] private int gridElevation = -1;
 
     public Vector3Int GetPos(){
-        return new Vector3Int(Pos.x, -1, Pos.y);
+        return new Vector3Int(Pos.x, gridElevation, Pos.y);
     }
     
 }
